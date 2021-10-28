@@ -1,0 +1,55 @@
+buildscript {
+	ext {
+		springVersion = "2.5.6"
+		boot = "org.springframework.boot"
+		lombok = "org.projectlombok:lombok"
+		mybatisVersion = "2.2.0"
+	}
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath("$boot:spring-boot-gradle-plugin:$springVersion")
+	}
+}
+
+allprojects {
+	group = 'com'
+	version = '0.0.1-SNAPSHOT'
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: boot
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'idea'
+	apply plugin: 'war'
+
+	repositories {
+		mavenCentral()
+	}
+
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	dependencies {
+		implementation "$boot:spring-boot-starter-web"
+
+		implementation "$boot:spring-boot-starter-thymeleaf"
+		developmentOnly "$boot:spring-boot-devtools"
+
+		runtimeOnly 'mysql:mysql-connector-java' // maria DB 넣기
+
+		compileOnly lombok
+		annotationProcessor lombok
+
+//		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+		testImplementation "$boot:spring-boot-starter-test"
+	}
+
+    test {
+		useJUnitPlatform()
+	}
+}
