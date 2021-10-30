@@ -1,4 +1,4 @@
 package com.triplan.domain;
 
-public class ItemFlightVO {
+public class FlightVO {
 }
