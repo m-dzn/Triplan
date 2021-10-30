@@ -1,0 +1,22 @@
+server:
+  port: 8081
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/testdb?serverTimezone=UTC&characterEncoding=UTF-8
+    username: triplan
+    password: 1234
+
+  thymeleaf:
+    cache: false
+
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
