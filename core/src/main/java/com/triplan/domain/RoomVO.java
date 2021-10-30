@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 @Setter
 public class RoomVO {
 
+    private int room_id;
     private int item_id;
     private int number_of_person;
     private int max_person;
