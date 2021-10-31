@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8083
 
 spring:
   config:
@@ -8,9 +8,9 @@ spring:
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/triplan?serverTimezone=UTC&characterEncoding=UTF-8
-    username: triplan
-    password: 1234
+    url:
+    username:
+    password:
 
   thymeleaf:
     cache: false
