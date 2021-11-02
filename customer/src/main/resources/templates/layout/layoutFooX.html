@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--head-->
+<th:block th:replace="fragment/head :: head"/>
+
+<body>
+<div style="width: 1280px; margin: 0 auto;"><!--div로 태그 잡으면 width값이 안 먹힘, 일단 main으로 쓰고 추후에 해결하기-->
+        <!--헤더-->
+        <th:block th:replace="fragment/header :: header">
+        </th:block>
+
+        <!--메인-->
+        <main>
+                <th:block layout:fragment="content">
+                  <!--이 안에 메인 내용이 들어감-->
+                </th:block>
+        </main>
+
+        <!--푸터-->
+<!--        <th:block th:replace="fragment/footer :: footer"/>-->
+</div>
+<!--여기는 메인이랑 푸터가 안에 들어가있음-->
+<!--공통 스크립트-->
+<th:block th:replace="fragment/script :: boot_js"/>
+
+</body>
+</html>
