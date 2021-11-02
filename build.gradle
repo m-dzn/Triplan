@@ -36,9 +36,9 @@ subprojects {
 
 	dependencies {
 		implementation "$boot:spring-boot-starter-web"
-
 		implementation "$boot:spring-boot-starter-thymeleaf"
 		developmentOnly "$boot:spring-boot-devtools"
+		implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
 
 		runtimeOnly 'mysql:mysql-connector-java' // maria DB 넣기
 

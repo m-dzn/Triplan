@@ -1,0 +1,24 @@
+<button type="button" class="btn btn-primary bg-red" th:fragment="red (var)">
+    <th:block th:text="${var}"></th:block>
+</button>
+<button type="button" class="btn btn-primary bg-blue" th:fragment="blue (var)">
+    <th:block th:text="${var}"></th:block>
+</button>
+
+<a      th:fragment="solid(text)"
+        th:text="${text}"
+        class="col-auto btn btn-primary"
+        id="button_solid"
+        href="#"
+        role="button"
+></a
+>
+
+<a      th:fragment="outline(text)"
+        th:text="${text}"
+        class="col-auto btn btn-primary"
+        id="button_outline"
+        href="#"
+        role="button"
+></a
+>
