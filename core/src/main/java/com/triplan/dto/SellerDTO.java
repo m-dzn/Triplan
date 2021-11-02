@@ -1,6 +1,7 @@
 package com.triplan.dto;
 
 import com.triplan.domain.SellerVO;
+import com.triplan.enumclass.ProductGroup;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,7 +13,7 @@ public class SellerDTO {
 
     private Long sellerId;
     private Long memberId;
-    private String productGroup;
+    private ProductGroup productGroup;
     private String businessLicenseNumber;
     private String businessName;
     private String tel;
@@ -22,7 +23,7 @@ public class SellerDTO {
     private String email;
     private String sellerImg;
     private String businessAccount;
-    private String personalOrCompany;
+    private boolean personalOrCompany;
 
     public static SellerDTO of (SellerVO sellerVO) {
         SellerDTO dto = new SellerDTO();
@@ -38,7 +39,7 @@ public class SellerDTO {
         dto.setEmail(sellerVO.getEmail());
         dto.setSellerImg(sellerVO.getSellerImg());
         dto.setBusinessAccount(sellerVO.getBusinessAccount());
-        dto.setPersonalOrCompany(sellerVO.getPersonalOrCompany());
+        dto.setPersonalOrCompany(sellerVO.isPersonalOrCompany());
         return dto;
     }
 

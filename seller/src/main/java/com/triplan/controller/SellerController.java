@@ -13,27 +13,27 @@ public class SellerController { // http://localhost:8181/members
     private final SellerService sellerService;
 
     // POST, GET, PUT (PATCH), DELETE
-    @PostMapping // POST http://localhost:8181/members -> CREATE
-    public String register(@RequestBody SellerDTO sellerDTO) { // HTTP Body 정보를 매핑
+    @PostMapping
+    public String register(@RequestBody SellerDTO sellerDTO) {
         sellerService.register(sellerDTO);
-        return "멤버 추가 성공";
+        return "판매자 추가 성공";
     }
 
-    @GetMapping("/{sellerId}") // POST http://localhost:8181/members/1 -> READ
+    @GetMapping("/{sellerId}")
     public SellerDTO getSeller(@PathVariable Long sellerId) {
         return sellerService.getSeller(sellerId);
     }
 
-    @PutMapping("/{sellerId}") // PUT http://localhost:8181/members/1 -> UPDATE
+    @PutMapping("/{sellerId}")
     public String update(@PathVariable Long sellerId, @RequestBody SellerDTO sellerDTO) {
         sellerService.update(sellerId, sellerDTO);
-        return "멤버 수정 성공";
+        return "판매자 수정 성공";
     }
 
-    @DeleteMapping("/{sellerId}") // DELETE http://localhost:8181/members/1 -> DELETE
+    @DeleteMapping("/{sellerId}")
     public String delete(@PathVariable Long sellerId) {
         sellerService.delete(sellerId);
-        return "멤버 삭제 성공";
+        return "판매자 삭제 성공";
     }
 
 }

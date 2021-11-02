@@ -1,5 +1,6 @@
 package com.triplan.domain;
 
+import com.triplan.enumclass.ProductGroup;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import lombok.ToString;
 public class SellerVO {
     private Long sellerId;
     private Long memberId;
-    private String productGroup;
+    private ProductGroup productGroup;
     private String businessLicenseNumber;
     private String businessName;
     private String tel;
@@ -22,5 +23,5 @@ public class SellerVO {
     private String email;
     private String sellerImg;
     private String businessAccount;
-    private String personalOrCompany;
+    private boolean personalOrCompany;
 }
