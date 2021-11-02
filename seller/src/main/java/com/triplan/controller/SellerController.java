@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/sellers")
 @RequiredArgsConstructor
-public class SellerController { // http://localhost:8181/members
+public class SellerController {
 
     private final SellerService sellerService;
 
-    // POST, GET, PUT (PATCH), DELETE
     @PostMapping
     public String register(@RequestBody SellerDTO sellerDTO) {
         sellerService.register(sellerDTO);

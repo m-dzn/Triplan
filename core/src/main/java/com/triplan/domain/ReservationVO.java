@@ -25,7 +25,7 @@ public class ReservationVO {
     private String name;
     private String phone;
     private Type type;
-    private boolean usage;
+    private boolean usage1;
     private Date completeAt;
     private boolean paymentUsage;
     private Date createdAt;

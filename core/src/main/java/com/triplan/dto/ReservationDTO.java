@@ -25,7 +25,7 @@ public class ReservationDTO {
     private String name;
     private String phone;
     private Type type;
-    private boolean usage;
+    private boolean usage1;
     private Date completeAt;
     private boolean paymentUsage;
     private Date createdAt;
@@ -45,7 +45,7 @@ public class ReservationDTO {
         dto.setName(reservationVO.getName());
         dto.setPhone(reservationVO.getPhone());
         dto.setType(reservationVO.getType());
-        dto.setUsage(reservationVO.isUsage());
+        dto.setUsage1(reservationVO.isUsage1());
         dto.setCompleteAt(reservationVO.getCompleteAt());
         dto.setPaymentUsage(reservationVO.isPaymentUsage());
         dto.setCreatedAt(reservationVO.getCreatedAt());
@@ -67,7 +67,7 @@ public class ReservationDTO {
                 .name(name)
                 .phone(phone)
                 .type(type)
-                .usage(usage)
+                .usage1(usage1)
                 .completeAt(completeAt)
                 .paymentUsage(paymentUsage)
                 .createdAt(createdAt)
