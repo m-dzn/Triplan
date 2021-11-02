@@ -13,7 +13,3 @@ public enum Type{
 
     private String explain;
 }
-
-
-
-
