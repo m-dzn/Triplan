@@ -1,6 +1,8 @@
 <div class="card" id="card" th:fragment="card(text)">
     <img src="img/서면.jpg" class="card-img-top" id="card-img" style="height: 240px;" alt="...">
     <div class="card-body d-flex justify-content-center align-items-center">
+        <div class="row">
         <h5 class="card-title" style="text-align: center;" th:text="${text}"></h5>
+        </div>
     </div>
 </div>

@@ -6,6 +6,8 @@
 <div layout:fragment="content">
     <section class="sec-mag">
         <th:block th:replace="fragment/title :: title_2('인기 카테고리')"></th:block>
+        <th:block th:replace="fragment/heart :: heart"></th:block>
+        <th:block th:replace="fragment/starPoint :: star_2"></th:block>
         <div class="d-flex">
             <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>
             <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>
