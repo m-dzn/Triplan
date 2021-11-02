@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface RoomMapper {
     
     void roomInsert(RoomVO roomVO);
-    RoomVO roomSelect(int room_id);
+    RoomVO roomSelect(int roomId);
     void roomUpdate(RoomVO roomVO);
-    void roomDelete(int room_id);
+    void roomDelete(int roomId);
 
 }
