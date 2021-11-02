@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.MemberMapper">
+
+    <insert id="insert">
+        INSERT INTO member(email,password,nickname,state,created_at,updated_at,deleted_at,email_confirm,
+                                point,account,grade,profile_img,gender,birthday,mobile,address,sns_info)
+        values (#{email},#{password},#{nickname},#{state},#{createdAt},#{updatedAt},#{deletedAt},#{emailConfirm},#{point},
+                #{account},#{grade},#{profileImg},#{gender},#{birthday},#{mobile},#{address},#{snsInfo})
+    </insert>
+
+    <select id="select" resultType="com.triplan.domain.MemberVO">
+        SELECT * FROM member where member_id=${memberId}
+    </select>
+
+    <update id="update">
+        update member
+        set member_id=#{memberId},email=#{email},password=#{password},nickname=#{nickname},state=#{state},created_at=#{createdAt},
+                    updated_at=#{updatedAt},deleted_at=#{deletedAt},email_confirm=#{emailConfirm},point=#{point},account=#{account},
+                    grade=#{grade},profile_img=#{profileImg},gender=#{gender},birthday=#{birthday},mobile=#{mobile},address=#{address},
+                    sns_info=#{snsInfo}
+        where member_id=#{memberId}
+    </update>
+
+    <delete id="delete">
+        delete from member where member_id=#{memberId}
+    </delete>
+</mapper>
