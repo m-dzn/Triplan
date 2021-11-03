@@ -11,13 +11,13 @@ import java.sql.Timestamp;
 @Setter
 public class RoomVO {
 
-    private int roomId;
-    private int itemId;
-    private int numberOfPerson;
-    private int maxPerson;
+    private Integer roomId;
+    private Integer itemId;
+    private Integer numberOfPerson;
+    private Integer maxPerson;
     private String name;
     private String img;
     private Timestamp resDate;
-    private int addPerson;
+    private Integer addPerson;
 
 }

@@ -5,8 +5,8 @@ import com.triplan.domain.RoomVO;
 public interface RoomService {
 
     void roomInsert(RoomVO roomVO);
-    RoomVO roomSelect(int roomId);
+    RoomVO roomSelect(Integer roomId);
     void roomUpdate(RoomVO roomVO);
-    void roomDelete(int roomId);
+    void roomDelete(Integer roomId);
 
 }

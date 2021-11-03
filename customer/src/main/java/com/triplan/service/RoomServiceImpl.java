@@ -17,7 +17,7 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public RoomVO roomSelect(int roomId) {
+    public RoomVO roomSelect(Integer roomId) {
         return roomMapper.roomSelect(roomId);
     }
 
@@ -27,7 +27,7 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public void roomDelete(int roomId) {
+    public void roomDelete(Integer roomId) {
         roomMapper.roomDelete(roomId);
     }
 }

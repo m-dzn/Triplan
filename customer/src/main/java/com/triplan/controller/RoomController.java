@@ -19,19 +19,19 @@ public class RoomController {
     }
 
     @GetMapping("/{roomId}")
-    public RoomVO roomSelect(@PathVariable int roomId) {
+    public RoomVO roomSelect(@PathVariable Integer roomId) {
         return roomService.roomSelect(roomId);
     }
 
     @PutMapping("/{roomId}")
-    public String roomUpdate(@PathVariable int roomId, @RequestBody RoomVO roomVO) {
+    public String roomUpdate(@PathVariable Integer roomId, @RequestBody RoomVO roomVO) {
         roomVO.setRoomId(roomId);
         roomService.roomUpdate(roomVO);
         return "room update succeed";
     }
 
     @DeleteMapping("/{roomId}")
-    public String roomDelete(@PathVariable int roomId) {
+    public String roomDelete(@PathVariable Integer roomId) {
         roomService.roomDelete(roomId);
         return "room delete succeed";
     }
