@@ -65,6 +65,7 @@
 
 .tit-win-mag{ /*마이페이지 같이 네모 구역 여러 개로 나눠지는 곳에서 사용 할 타이틀*/
     padding-top: calc(var(--unit)*24);
+    padding-bottom: calc(var(--unit)*16);
     padding-left: calc(var(--unit)*32);
 }
 
