@@ -73,6 +73,7 @@ a:hover {
 #myp-mod{
   margin-bottom: calc(var(--unit)*16);
 }
+
 #product_img{
   height: calc(var(--unit)*96);
   width: calc(var(--unit)*96);
