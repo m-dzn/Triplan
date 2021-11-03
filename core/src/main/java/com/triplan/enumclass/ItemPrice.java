@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ItemPrice {
-    adult(0,"성인"),
+    adult(0,"성인"), //대문자 처리??
     teenager(1,"청소년"),
     child(2,"소인");
 
