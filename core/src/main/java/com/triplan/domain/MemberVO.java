@@ -19,11 +19,11 @@ public class MemberVO {
     private String email;
     private String password;
     private String nickname;
-    private String state;
+    private State state;
     private Date createdAt;
     private Date updatedAt;
     private Date deletedAt;
-    private String emailConfirm;
+    private Boolean emailConfirm;
     private Integer point;
     private String account;
     private MemberGrade grade;
@@ -39,15 +39,10 @@ public class MemberVO {
         MemberVO vo = new MemberVO();
         vo.setGrade(MemberGrade.BRONZE);
         vo.setGender(Gender.FEMALE);
+        vo.setState(State.UNREGISTER);
 
 
-        System.out.println(vo.getGrade());
-        System.out.println(vo.getGrade().getCode());
 
-
-        System.out.println(vo.getGender());
-        System.out.println(vo.getGender().getCode());
-        System.out.println(vo.getGender().getExplain());
 
 
     }
