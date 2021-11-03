@@ -27,14 +27,7 @@ public class FlightVO {
         flightVO.setPassengerType(PassengerType.ADULT);
         flightVO.setSeatClass(SeatClass.ECONOMY);
 
-        System.out.println(flightVO.getFlightType());
-        System.out.println(flightVO.getFlightType().getExplain());
-        System.out.println();
-        System.out.println(flightVO.getPassengerType());
-        System.out.println(flightVO.getPassengerType().getPerson());
-        System.out.println();
-        System.out.println(flightVO.getSeatClass());
-        System.out.println(flightVO.getSeatClass().getSit());
+
 
     }
 }
