@@ -73,7 +73,12 @@ a:hover {
 #myp-mod{
   margin-bottom: calc(var(--unit)*16);
 }
+#product_img{
+  height: calc(var(--unit)*96);
+  width: calc(var(--unit)*96);
+}
 
+/* 좋아요 버튼 */
 [id="heart"] {
   position: absolute;
   left: -100vw;
@@ -87,7 +92,6 @@ a:hover {
   transition: color 0.2s ease-in-out;
 }
 
-/* 좋아요 버튼 */
 [for="heart"]:hover {
   color: grey;
 }
