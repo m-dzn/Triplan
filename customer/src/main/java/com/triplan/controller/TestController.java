@@ -37,4 +37,9 @@ public class TestController {
     public String join() {
         return "join";
     }
+
+    @GetMapping({"/pay"})
+    public String pay() {
+        return "pay";
+    }
 }

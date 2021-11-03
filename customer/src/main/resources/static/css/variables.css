@@ -15,7 +15,7 @@
     font-size: calc(var(--unit)*40);
     font-weight: bold;
 }
-.txt-2{
+.txt-2{/*섹션 타이틀 등 큰 제목(ex:인기 카테고리, 결제, 장바구니)*/
     font-size: calc(var(--unit)*32);
     font-weight: bold;
 }
@@ -24,9 +24,12 @@
     font-weight: bold;
 }
 .txt-4{
+    font-size: calc(var(--unit)*20);
+}
+.txt-5{/*일반적인 본문 내용*/
     font-size: calc(var(--unit)*16);
 }
-.txt-5{
+.txt-6{/*비밀번호 찾기 등 소기능*/
     font-size: calc(var(--unit)*14);
 }
 
@@ -67,6 +70,10 @@
 
 .foo-mag{
     margin-top: calc(var(--unit)*168);
+}
+
+.win-mag{
+    margin-bottom: calc(var(--unit)*16);
 }
 
 .full{
