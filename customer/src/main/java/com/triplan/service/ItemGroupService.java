@@ -13,5 +13,5 @@ public interface ItemGroupService {
 
     void deleteItemGroup(int num);
 
-    List<ItemGroupVO> getjoin(int num);
+    ItemGroupVO getjoin(int num);
 }

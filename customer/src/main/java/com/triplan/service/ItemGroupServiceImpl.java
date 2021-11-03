@@ -35,7 +35,7 @@ public class ItemGroupServiceImpl implements ItemGroupService{
     }
 
     @Override
-    public List<ItemGroupVO> getjoin(int num) {
+    public ItemGroupVO getjoin(int num) {
         return itemGroupMapper.getList(num);
     }
 }

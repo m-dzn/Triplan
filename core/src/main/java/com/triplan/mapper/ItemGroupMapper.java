@@ -15,5 +15,5 @@ public interface ItemGroupMapper {
 
     void delete(int num);
 
-    List<ItemGroupVO> getList(int num);
+    ItemGroupVO getList(int num);
 }

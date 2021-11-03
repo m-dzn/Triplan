@@ -26,8 +26,9 @@
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
     
-        <collection property="itemGroupId" ofType="item" javaType="java.util.List">
+        <collection property="itemvo" ofType="item">
             <id property="itemGroupId" column="item_group_id"/>
+            <result property="itemId" column="item_id"/>
             <result property="location" column="location"/>
             <result property="startDay" column="start_day"/>
             <result property="endDay" column="end_day"/>
@@ -100,7 +101,7 @@
     </insert>
 
     <select id="read" resultType="com.triplan.domain.ItemGroupVO">
-        SELECT * FROM item_group
+        SELECT item_group_id FROM item_group
          WHERE item_group_id = #{num}
 
     </select>

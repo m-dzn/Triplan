@@ -30,8 +30,8 @@ public class ItemGroupController {
     }
 
     @GetMapping("/join/{num}")
-    public List<ItemGroupVO> joinItem(@PathVariable int num){
-        List<ItemGroupVO> ig = itemGroupService.getjoin(num);
+    public ItemGroupVO joinItem(@PathVariable int num){
+        ItemGroupVO ig = itemGroupService.getjoin(num);
         return ig;
     }
 

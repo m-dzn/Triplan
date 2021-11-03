@@ -39,4 +39,5 @@ public class ItemGroupVO {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
+    private List<ItemVO> itemvo;
 }
