@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
+
+body{
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
 /* css */
 #button_solid {
   /* 배경색이 있는 버튼 */
@@ -75,6 +81,11 @@ a:hover {
 }
 
 #product_img{
+  height: calc(var(--unit)*96);
+  width: calc(var(--unit)*96);
+}
+
+#product_img2{
   height: calc(var(--unit)*96);
   width: calc(var(--unit)*96);
 }
