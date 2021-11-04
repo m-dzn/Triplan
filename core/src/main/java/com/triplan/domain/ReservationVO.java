@@ -20,7 +20,6 @@ public class ReservationVO {
     private String coupon;
     private String name;
     private String phone;
-    private Type type;
     private boolean usage1;
     private Date completeAt;
     private boolean paymentUsage;
