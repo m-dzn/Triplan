@@ -1,14 +1,12 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
-  config:
-    activate:
-      on-profile: local
+  profiles: local
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/jspdb?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3308/testdb?serverTimezone=Asia/Seoul
     username: root
     password: 1234
 
