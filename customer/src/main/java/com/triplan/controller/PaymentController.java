@@ -20,18 +20,18 @@ public class PaymentController {
     }
 
     @GetMapping("/{paymentId}")
-    public PaymentVO read(@PathVariable int paymentId){
+    public PaymentVO read(@PathVariable Integer paymentId){
         return paymentService.read(paymentId);
     }
 
     @PutMapping("/{paymentId}")
-    public String update(@PathVariable int paymentId, @RequestBody PaymentVO paymentVO){
+    public String update(@PathVariable Integer paymentId, @RequestBody PaymentVO paymentVO){
         paymentService.update(paymentId, paymentVO);
         return "결제정보수정";
     }
 
     @DeleteMapping("/{paymentId}")
-    public String delete(@PathVariable int paymentId){
+    public String delete(@PathVariable Integer paymentId){
         paymentService.delete(paymentId);
         return "결제정보삭제";
     }

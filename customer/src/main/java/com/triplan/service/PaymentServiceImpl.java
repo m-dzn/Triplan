@@ -17,18 +17,18 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentVO read(int paymentId) {
+    public PaymentVO read(Integer paymentId) {
         return paymentMapper.read(paymentId);
     }
 
     @Override
-    public void update(int paymentId, PaymentVO paymentVO) {
+    public void update(Integer paymentId, PaymentVO paymentVO) {
         paymentVO.setPaymentId(paymentId);
         paymentMapper.update(paymentVO);
     }
 
     @Override
-    public void delete(int paymentId) {
+    public void delete(Integer paymentId) {
         paymentMapper.delete(paymentId);
     }
 

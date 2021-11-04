@@ -10,15 +10,15 @@ import java.time.LocalDateTime;
 @Data
 public class PaymentVO {
 
-    private int paymentId;
+    private Integer paymentId;
 
-    private int resId;
+    private Integer resId;
 
     private PaymentState state;
 
     private PaymentType type;
 
-    private int price;
+    private Integer price;
 
     private Timestamp paymentDeadline;
 
@@ -28,11 +28,11 @@ public class PaymentVO {
 
     public static void main(String[] arg){
 
-      PaymentVO vo = new PaymentVO();
-      vo.setState(PaymentState.PaymentFailed);
+        PaymentVO vo = new PaymentVO();
+        vo.setState(PaymentState.PaymentFailed);
 
-      System.out.println(vo.getState());
-      System.out.println(vo.getState().getExplain());
+        System.out.println(vo.getState());
+        System.out.println(vo.getState().getExplain());
     }
 
 

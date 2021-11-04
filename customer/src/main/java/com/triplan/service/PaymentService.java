@@ -7,10 +7,10 @@ public interface PaymentService {
 
     void create(PaymentVO paymentVO);
 
-    PaymentVO read(int paymentId);
+    PaymentVO read(Integer paymentId);
 
-    void update(int paymentId, PaymentVO paymentVO);
+    void update(Integer paymentId, PaymentVO paymentVO);
 
-    void delete(int paymentId);
+    void delete(Integer paymentId);
 
 }
