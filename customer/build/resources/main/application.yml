@@ -1,0 +1,3 @@
+mybatis:
+  type-aliases-package: com.triplan.domain
+  mapper-locations: classpath:mapper/**/*.xml

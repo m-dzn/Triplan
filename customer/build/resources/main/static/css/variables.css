@@ -1,0 +1,60 @@
+/* 변수 */
+:root {
+    --unit: 0.0625rem;
+
+    --signature: #6ec4fa;
+    --sub: #ffffff;
+
+    /*
+    변수 설정 시 px로 입력하지 마시고 아래 공식으로 작성해주세요
+    calc(var(--unit)*원하는 픽셀)
+    */
+}
+
+.txt-1{
+    font-size: calc(var(--unit)*40);
+    font-weight: bold;
+}
+.txt-2{
+    font-size: calc(var(--unit)*32);
+    font-weight: bold;
+}
+.txt-3{
+    font-size: calc(var(--unit)*24);
+    font-weight: bold;
+}
+.txt-4{
+    font-size: calc(var(--unit)*16);
+}
+.txt-5{
+    font-size: calc(var(--unit)*12);
+}
+
+.sec-mag{
+    margin-top: calc(var(--unit)*56);    /*경호형:72*/
+    margin-left: calc(var(--unit)*32);
+    margin-bottom: calc(var(--unit)*88);    /*경호형:88*/
+}
+
+.tit-mag{
+    margin-bottom: calc(var(--unit)*32);
+}
+
+.tit-win-mag{ /*마이페이지 같이 네모 구역 여러 개로 나눠지는 곳에서 사용 할 타이틀*/
+    padding-top: calc(var(--unit)*24);
+    padding-left: calc(var(--unit)*32);
+}
+
+.foo-mag{
+    margin-top: calc(var(--unit)*168);
+}
+
+.full{
+    width: 100%;
+    height: 100%;
+}
+
+.pro-pho{
+    width: calc(var(--unit)*120);
+    height: calc(var(--unit)*120);
+}

@@ -1,0 +1,68 @@
+<!-- navbar 묶음 -->
+<nav class="navbar navbar-expand-lg navbar-light" th:fragment="navbar">
+    <!--
+    navbar : 네비게이션 바임을 명시
+    navbar-expand-(화면크기) : 화면크기가 얼만큼 줄어들면 햄버거 버튼으로 치환될지 설정
+    navber-(색) : 네비게이션 바의 배경색을 설정
+    -->
+    <div class="container-fluid d-flex justify-content-lg-center">
+        <!--
+        container-fluid : 부모 요소의 너비만큼 꽉 채움
+        d-(flex&다른 것) : 디스플레이의 속성
+        justify-content-(화면크기 * 제외 가능)-(정렬) : 플렉스 자식 요소가 어느 화면크기에서 어떻게 정렬될지 설정
+        -->
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+                class="collapse navbar-collapse"
+                id="navbarSupportedContent"
+                style="flex-grow: 0;"
+        >
+            <!-- button~div : nav에서 설정한 화면크기보다 작아졌을 시에 햄버거 버튼이 활성화되기 위한 설정 -->
+            <ul
+                    class="col-auto p-0 navbar-nav d-flex justify-content-center"
+            >
+                <!-- ul : 하위에 넣을 li들의 부모요소(묶음) -->
+
+                <!-- 이제 이 사이에 li 프래그먼트를 들고 와 메뉴를 하나씩 추가해주면 됨 -->
+            </ul>
+    </div>
+</nav>
+
+<!-- navbar에 넣을 요소들-->
+<!-- * 메뉴명 옆에 화살표 만들려면 style태그에 .dropdown-toggle::after {display:inline-block} 넣어줘야 함 -->
+
+<!-- 드롭다운 메뉴 아이템 -->
+<!-- 메뉴 시작 -->
+<li class="nav-item dropdown mx-5">
+    <a
+            class="nav-link dropdown-toggle p-2"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+    >
+        여기에텍스트넣는매개변수만들어주기!
+    </a>
+    <!--드롭다운메뉴-->
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="#" th:fragment="dropdown_item">드롭다운메뉴매개변수만들어주기</a></li>
+    </ul>
+    <!--드롭다운메뉴 끝-->
+</li>
+<!--메뉴 끝-->
+
+<!--일반 메뉴 아이템-->
+<li class="nav-item" th:fragment="menu_item">
+    <a class="nav-link" href="#">텍스트 매개변수 만들기</a>
+</li>

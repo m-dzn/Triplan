@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <div class="row sec-mag">
+        <section class="col-7">
+            <div class="border bg-white rounded-3 border-2  tit-win-mag win-mag"><!--네모구역-->
+                <th:block th:replace="fragment/title :: title_2('상품 정보')"></th:block>
+                <img src="img/광안리.jpg" id="product_img">
+            </div>
+            <div class="border bg-white rounded-3 border-2  tit-win-mag win-mag"><!--예약자 정보-->
+                <label></label>
+            </div>
+        </section>
+        <section class="col-5">
+            <div class="border bg-white rounded-3 border-2  tit-win-mag win-mag">
+                <th:block th:replace="fragment/title :: title_2('예약자 정보')"></th:block>
+<div class="row col-11">
+                <label>이름
+                    <input  type="text" class="form-control" id="name"></input>
+                </label>
+            </div>
+            <div class="row">
+                <label>연락처
+                    <input  type="text" class="form-control" id="phone"></input>
+                </label></div>
+            </div>
+            <div class="border bg-white rounded-3 border-2  tit-win-mag win-mag">
+                <th:block th:replace="fragment/title :: title_2('결제 수단')"></th:block>
+            </div>
+        </section>
+    </div>
+</div>
+</html>

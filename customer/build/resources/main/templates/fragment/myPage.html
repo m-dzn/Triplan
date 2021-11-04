@@ -1,0 +1,22 @@
+<div    th:fragment="mypage_top"
+        class="border bg-white rounded-3 border-2 d-flex flex-column align-items-center justify-content-center p-5 mb-3 full">
+
+    <img src="img/광안리.jpg" class="rounded-circle pro-pho" alt="...">
+    연동SNS :
+
+</div>
+
+<div    th:fragment="mypage_bottom"
+        class="border bg-white rounded-3 border-2">
+
+</div>
+
+<div    th:fragment="modify"
+        class="border bg-white rounded-3 border-2">
+
+    <th:block th:replace="fragment/title :: title_2('프로필 관리')"></th:block>
+    이름<br>
+    생년월일<br>
+    주소<br>
+
+</div>
