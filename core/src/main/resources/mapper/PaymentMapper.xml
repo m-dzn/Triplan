@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.PaymentMapper">
+
+    <insert id="insert">
+        INSERT INTO payment_table (payment_id, res_id, state, type, price, created_at)
+        VALUES (#{paymentId}, #{resId}, #{state}, #{type}, #{price}, #{createdAt})
+    </insert>
+
+    <select id="read" resultType="com.triplan.domain.PaymentVO">
+        SELECT * FROM payment_table
+        WHERE payment_id = ${paymentId}
+    </select>
+
+    <update id="update">
+        UPDATE payment_table SET
+        res_id=#{resId},
+        state=#{state},
+        type=#{type},
+        price=#{price},
+        created_at=#{createdAt}
+        WHERE payment_id = ${paymentId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM payment_table WHERE payment_id = ${paymentId}
+    </delete>
+
+</mapper>
+
+
+
+
