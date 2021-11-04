@@ -35,6 +35,7 @@ subprojects {
 	targetCompatibility = 1.8
 
 	dependencies {
+		implementation "$boot:spring-boot-starter-data-jdbc"
 		implementation "$boot:spring-boot-starter-web"
 
 		implementation "$boot:spring-boot-starter-thymeleaf"

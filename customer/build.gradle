@@ -1,3 +1,7 @@
 dependencies {
     implementation project(':triplan-core')
 }
+
+repositories {
+    mavenCentral()
+}

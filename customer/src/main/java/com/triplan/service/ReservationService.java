@@ -6,11 +6,8 @@ import com.triplan.dto.ReservationDTO;
 public interface ReservationService {
 
     void register(ReservationDTO reservationDTO);
-
-    ReservationDTO getReservation(Long resId);
-
-    void update(Long reservationId, ReservationDTO reservationDTO);
-
-    void delete(Long resId);
-
+    ReservationDTO getReservation(Integer resId);
+    void update(Integer reservationId, ReservationDTO reservationDTO);
+    void delete(Integer resId);
+    Integer reserve(ReservationDTO reservationDTO);
 }
