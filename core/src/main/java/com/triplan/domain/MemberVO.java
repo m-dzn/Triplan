@@ -11,8 +11,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-
-
 public class MemberVO {
 
     private Integer memberId;
@@ -33,22 +31,5 @@ public class MemberVO {
     private String mobile;
     private String address;
     private String  snsInfo;
-
-
-    public static void main(String[] args){
-        MemberVO vo = new MemberVO();
-        vo.setGrade(MemberGrade.BRONZE);
-        vo.setGender(Gender.FEMALE);
-
-
-        System.out.println(vo.getGrade());
-        System.out.println(vo.getGrade().getCode());
-
-
-        System.out.println(vo.getGender());
-        System.out.println(vo.getGender().getCode());
-        System.out.println(vo.getGender().getExplain());
-
-
-    }
+    
 }
