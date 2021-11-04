@@ -1,45 +1,24 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package com.triplan.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@Controller // 매핑시켜 줄 주소 이름
 public class TestController {
-    public TestController() {
+
+    @GetMapping("/pay")
+    public String pay(){
+
+        return "pay"; // 매핑시켜 줄 html파일 -> @RequestMapping에 입력된 주소를 입력하면 연결 될 파일
     }
 
-    @GetMapping({"/warning"})
-    public String warning() {
-        return "warning";
+    @GetMapping("/member_withdraw")
+    public String member_withdraw(){
+
+        return "member_withdraw"; // 매핑시켜 줄 html파일 -> @RequestMapping에 입력된 주소를 입력하면 연결 될 파일
     }
 
-    @GetMapping({"/main"})
-    public String main() {
-        return "main";
-    }
 
-    @GetMapping({"/mypage"})
-    public String mypage() {
-        return "mypage";
-    }
-
-    @GetMapping({"/login"})
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping({"/join"})
-    public String join() {
-        return "join";
-    }
-
-    @GetMapping({"/pay"})
-    public String pay() {
-        return "pay";
-    }
 }

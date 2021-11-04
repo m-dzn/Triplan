@@ -26,27 +26,21 @@
                     </div>
                 </div>
                 <div class="row" id="myp-mod">
-                    <label for="birth" class="col-2 col-form-label">생년월일</label>
+                    <label for="name" class="col-2 col-form-label">닉네임</label>
                     <div class="col-9">
-                        <input type="date" class="form-control" id="birth">
-                    </div>
-                </div>
-                <div class="row" id="myp-mod">
-                    <label for="address" class="col-2 col-form-label">주소</label>
-                    <div class="col-9">
-                        <input type="text" class="form-control" id="address">
+                        <input type="text" class="form-control" id="nickname">
                     </div>
                 </div>
                 <div class="row" id="myp-mod">
                     <label for="tel" class="col-2 col-form-label">연락처</label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="tel">
+                        <input type="text" class="form-control" id="mobile">
                     </div>
                 </div>
                 <div class="row" id="myp-mod">
-                    <label for="email" class="col-2 col-form-label">이메일</label>
+                    <label for="birth" class="col-2 col-form-label">생년월일</label>
                     <div class="col-9">
-                        <input type="email" class="form-control" id="email">
+                        <input type="date" class="form-control" id="birthday">
                     </div>
                 </div>
                 <div class="row" id="myp-mod">
@@ -78,7 +72,7 @@
                         </div>
                     </div>
                 </div><!--sns연동 묶음 div-->
-                <div class="row col-11 pt-4 pb-3 d-flex justify-content-between m-0">
+                <div class="row col-11 pt-4 d-flex justify-content-between m-0">
                     <a class="col-auto txt-5 txt-gray txt-normal" href="#">회원 탈퇴</a>
                     <th:block th:replace="fragment/button :: solid(저장)"></th:block>
                 </div>
