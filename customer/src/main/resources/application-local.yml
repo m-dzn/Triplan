@@ -8,9 +8,9 @@ spring:
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url:
-    username:
-    password:
+    url: jdbc:mysql://localhost:3306/triplan?serverTimezone=Asia/Seoul
+    username: triplan
+    password: 1234
 
   thymeleaf:
     cache: false

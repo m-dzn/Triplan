@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.ItemMapper">
+
+    <insert id="itemInsert">
+        insert into item(item_group_id, location, start_day, end_day,
+                        price, type, total_stock, total_sales_count,
+                        introduce, detail_img, discount_price, item_name)
+        values (#{itemGroupId}, #{location}, #{startDay}, #{endDay},
+                #{price}, #{type}, #{totalStock}, #{totalSalesCount},
+                #{introduce}, #{detailImg}, #{discountPrice}, #{itemName})
+    </insert>
+
+    <select id="itemGet" resultType="com.triplan.domain.ItemVO">
+        select * from item where item_id = #{itemId}
+    </select>
+
+    <update id="itemUpdate">
+        update item
+        set item_group_id = #{itemGroupId}, location = #{location},
+            start_day = #{startDay}, end_day = #{endDay}, price = #{price},
+            type = #{type}, total_stock = #{totalStock}, total_sales_count = #{totalSalesCount},
+            introduce = #{introduce}, detail_img = #{detailImg},
+            discount_price = #{discountPrice}, item_name = #{itemName}
+        where item_id = #{itemId}
+    </update>
+
+    <delete id="itemDelete">
+        delete from item where item_id = #{itemId}
+    </delete>
+</mapper>

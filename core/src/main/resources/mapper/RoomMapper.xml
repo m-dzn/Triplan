@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.RoomMapper">
+
+    <insert id="roomInsert">
+        INSERT INTO room(item_id, number_of_person, max_person, name, img, res_date, add_person)
+        VALUES (#{itemId}, #{numberOfPerson}, #{maxPerson}, #{name}, #{img}, #{resDate}, #{addPerson})
+    </insert>
+
+    <select id="roomSelect" resultType="com.triplan.domain.RoomVO">
+        SELECT *
+        FROM room
+        WHERE room_id = #{roomId}
+    </select>
+
+    <update id="roomUpdate">
+        UPDATE room
+        SET item_id = #{itemId},
+            number_of_person = #{numberOfPerson},
+            max_person = #{maxPerson},
+            name = #{name},
+            img = #{img},
+            res_date = #{resDate},
+            add_person = #{addPerson}
+        WHERE room_id = #{roomId}
+    </update>
+
+    <delete id="roomDelete">
+        DELETE FROM room
+        WHERE room_id = #{roomId}
+    </delete>
+
+</mapper>
