@@ -5,7 +5,6 @@ import com.triplan.enumclass.PaymentType;
 import lombok.Data;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Data
 public class PaymentVO {
@@ -22,18 +21,8 @@ public class PaymentVO {
 
     private Timestamp paymentDeadline;
 
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
     private Timestamp updatedAt;
-
-    public static void main(String[] arg){
-
-        PaymentVO vo = new PaymentVO();
-        vo.setState(PaymentState.PaymentFailed);
-
-        System.out.println(vo.getState());
-        System.out.println(vo.getState().getExplain());
-    }
-
 
 }
