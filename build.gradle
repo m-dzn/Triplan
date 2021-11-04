@@ -47,6 +47,9 @@ subprojects {
 
 //		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 		testImplementation "$boot:spring-boot-starter-test"
+
+		implementation "org.springframework.boot:spring-boot-devtools"
+		implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
 	}
 
     test {
