@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.ReviewMapper">
+
+    <insert id="reviewInsert">
+        insert into review (review_id,member_id,item_id,content,created_at,updated_at,review_grade)
+        values (#{reviewId},#{memberId},#{itemId},#{content},#{createdAt},#{updatedAt},#{reviewGrade})
+    </insert>
+
+    <select id="reviewRead" resultType="com.triplan.domain.ReviewVO">
+        select * from review where review_id=${reviewId}
+    </select>
+
+    <update id="reviewUpdate">
+        update review set member_id=#{memberId},item_id=#{itemId},content=#{content},
+                            created_at=#{createdAt},updated_at=#{updatedAt},review_grade=#{reviewGrade}
+        where review_id=#{reviewId}
+    </update>
+
+    <delete id="reviewDelete">
+        delete from review where review_id=#{reviewId}
+    </delete>
+</mapper>
