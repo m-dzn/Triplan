@@ -13,7 +13,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PutMapping("/{memberId}")
-    public String update(@PathVariable Integer memberId, @RequestBody MemberVO memberVO){
+    public String updateBasicInfo(@PathVariable Integer memberId, @RequestBody MemberVO memberVO){
         memberService.update(memberId, memberVO);
         return "회원 정보 수정";
     }
