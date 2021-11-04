@@ -19,18 +19,18 @@ public class SellerController {
     }
 
     @GetMapping("/{sellerId}")
-    public SellerDTO getSeller(@PathVariable Long sellerId) {
+    public SellerDTO getSeller(@PathVariable Integer sellerId) {
         return sellerService.getSeller(sellerId);
     }
 
     @PutMapping("/{sellerId}")
-    public String update(@PathVariable Long sellerId, @RequestBody SellerDTO sellerDTO) {
+    public String update(@PathVariable Integer sellerId, @RequestBody SellerDTO sellerDTO) {
         sellerService.update(sellerId, sellerDTO);
         return "판매자 수정 성공";
     }
 
     @DeleteMapping("/{sellerId}")
-    public String delete(@PathVariable Long sellerId) {
+    public String delete(@PathVariable Integer sellerId) {
         sellerService.delete(sellerId);
         return "판매자 삭제 성공";
     }

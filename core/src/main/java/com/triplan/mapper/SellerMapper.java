@@ -9,10 +9,10 @@ public interface SellerMapper {
 
     void insert(SellerVO sellerVO);
 
-    SellerVO read(Long seller_id);
+    SellerVO read(Integer seller_id);
 
     void update(SellerDTO sellerDTO);
 
-    void delete(Long seller_id);
+    void delete(Integer seller_id);
 
 }

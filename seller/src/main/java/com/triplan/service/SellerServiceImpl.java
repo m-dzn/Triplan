@@ -20,19 +20,19 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public SellerDTO getSeller(Long sellerId) {
+    public SellerDTO getSeller(Integer sellerId) {
         SellerVO sellerVO = sellerMapper.read(sellerId);
         return SellerDTO.of(sellerVO);
     }
 
     @Override
-    public void update(Long sellerId, SellerDTO sellerDTO) {
+    public void update(Integer sellerId, SellerDTO sellerDTO) {
         sellerDTO.setSellerId(sellerId);
         sellerMapper.update(sellerDTO);
     }
 
     @Override
-    public void delete(Long sellerId) {
+    public void delete(Integer sellerId) {
         sellerMapper.delete(sellerId);
     }
 

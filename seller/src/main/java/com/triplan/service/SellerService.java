@@ -6,10 +6,10 @@ public interface SellerService {
 
     void register(SellerDTO sellerDTO);
 
-    SellerDTO getSeller(Long sellerId);
+    SellerDTO getSeller(Integer sellerId);
 
-    void update(Long sellerId, SellerDTO sellerDTO);
+    void update(Integer sellerId, SellerDTO sellerDTO);
 
-    void delete(Long sellerId);
+    void delete(Integer sellerId);
 
 }
