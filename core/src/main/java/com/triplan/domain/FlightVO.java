@@ -20,14 +20,5 @@ public class FlightVO {
     private String airline;
     private String baggage;
     private String seatNumber;
-
-    public static void main(String[] args) {
-        FlightVO flightVO = new FlightVO();
-        flightVO.setFlightType(FlightType.ONE_WAY);
-        flightVO.setPassengerType(PassengerType.ADULT);
-        flightVO.setSeatClass(SeatClass.ECONOMY);
-
-
-
-    }
+    
 }
