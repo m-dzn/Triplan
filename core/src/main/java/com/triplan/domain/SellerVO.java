@@ -2,15 +2,9 @@ package com.triplan.domain;
 
 import com.triplan.enumclass.PersonalOrCompany;
 import com.triplan.enumclass.ProductGroup;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@ToString
-@Builder
+@Data
 public class SellerVO {
     private Integer sellerId;
     private Integer memberId;

@@ -1,14 +1,14 @@
 package com.triplan.service;
 
-import com.triplan.dto.SellerDTO;
+import com.triplan.domain.SellerVO;
 
 public interface SellerService {
 
-    void register(SellerDTO sellerDTO);
+    void register(SellerVO sellerVO);
 
-    SellerDTO getSeller(Integer sellerId);
+    SellerVO getSeller(Integer sellerId);
 
-    void update(Integer sellerId, SellerDTO sellerDTO);
+    void update(Integer sellerId, SellerVO sellerVO);
 
     void delete(Integer sellerId);
 

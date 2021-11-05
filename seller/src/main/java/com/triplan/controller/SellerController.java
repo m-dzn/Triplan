@@ -1,6 +1,6 @@
 package com.triplan.controller;
 
-import com.triplan.dto.SellerDTO;
+import com.triplan.domain.SellerVO;
 import com.triplan.service.SellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,19 +13,19 @@ public class SellerController {
     private final SellerService sellerService;
 
     @PostMapping
-    public String register(@RequestBody SellerDTO sellerDTO) {
-        sellerService.register(sellerDTO);
+    public String register(@RequestBody SellerVO sellerVO) {
+        sellerService.register(sellerVO);
         return "판매자 추가 성공";
     }
 
     @GetMapping("/{sellerId}")
-    public SellerDTO getSeller(@PathVariable Integer sellerId) {
+    public SellerVO getSeller(@PathVariable Integer sellerId) {
         return sellerService.getSeller(sellerId);
     }
 
     @PutMapping("/{sellerId}")
-    public String update(@PathVariable Integer sellerId, @RequestBody SellerDTO sellerDTO) {
-        sellerService.update(sellerId, sellerDTO);
+    public String update(@PathVariable Integer sellerId, @RequestBody SellerVO sellerVO) {
+        sellerService.update(sellerId, sellerVO);
         return "판매자 수정 성공";
     }
 
