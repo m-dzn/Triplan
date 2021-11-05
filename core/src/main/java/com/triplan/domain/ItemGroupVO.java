@@ -14,8 +14,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Component
-@Alias("item_group")
 public class ItemGroupVO {
 
     private Integer itemGroupId;
