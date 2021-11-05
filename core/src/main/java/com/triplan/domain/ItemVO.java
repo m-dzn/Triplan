@@ -3,19 +3,10 @@ package com.triplan.domain;
 import com.triplan.enumclass.ItemPrice;
 import com.triplan.enumclass.ItemType;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
-import org.apache.ibatis.type.Alias;
-import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 
-@Getter
-@Setter
-@Log4j2
-@Component
-@Alias("item")
+@Data
 public class ItemVO {
     private int itemId;
     private int itemGroupId;
