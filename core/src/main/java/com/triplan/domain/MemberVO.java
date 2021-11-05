@@ -1,13 +1,9 @@
 package com.triplan.domain;
 
-
-
 import com.triplan.enumclass.Gender;
 import com.triplan.enumclass.MemberGrade;
 import com.triplan.enumclass.State;
 import lombok.Data;
-
-
 import java.util.Date;
 
 @Data
