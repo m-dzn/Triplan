@@ -4,14 +4,16 @@ package com.triplan.controller;
 import com.triplan.domain.ReviewVO;
 import com.triplan.service.ReviewService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
 @RequestMapping("/review")
 @RequiredArgsConstructor
 public class ReviewController {
+
+
     private final ReviewService reviewService;
 
     @PostMapping("/reviewInsert")
@@ -37,5 +39,10 @@ public class ReviewController {
         reviewService.reviewDelete(reviewId);
         return "정보 삭제 완료";
     }
+
+
+
+
+
 
 }

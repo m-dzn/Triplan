@@ -5,8 +5,8 @@
 <mapper namespace="com.triplan.mapper.ReviewMapper">
 
     <insert id="reviewInsert">
-        insert into review (review_id,member_id,item_id,content,created_at,updated_at,review_grade)
-        values (#{reviewId},#{memberId},#{itemId},#{content},#{createdAt},#{updatedAt},#{reviewGrade})
+        insert into review (review_id,member_id,item_id,content,created_at,updated_at,review_score)
+        values (#{reviewId},#{memberId},#{itemId},#{content},#{createdAt},#{updatedAt},#{reviewScore})
     </insert>
 
     <select id="reviewRead" resultType="com.triplan.domain.ReviewVO">
@@ -15,7 +15,7 @@
 
     <update id="reviewUpdate">
         update review set member_id=#{memberId},item_id=#{itemId},content=#{content},
-                            created_at=#{createdAt},updated_at=#{updatedAt},review_grade=#{reviewGrade}
+                            created_at=#{createdAt},updated_at=#{updatedAt},review_score=#{reviewScore}
         where review_id=#{reviewId}
     </update>
 
