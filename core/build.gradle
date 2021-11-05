@@ -1,5 +1,6 @@
 dependencies {
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatisVersion"
+    implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
 }
 
 war.enabled(true)

@@ -20,6 +20,7 @@ public class FlightController {
 
     @GetMapping("/{flightId}")
     public FlightVO flightSelect(@PathVariable int flightId) {
+
         return flightService.flightSelect(flightId);
     }
 
