@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.SellerMapper">
+     <insert id="insert">
+        INSERT INTO seller (seller_id, business_license_number, business_name, tel, owner_name, email, business_account, private_business, zip_code, address, address_detail, seller_img, member_id)
+        VALUES (#{sellerId}, #{businessLicenseNumber}, #{businessName}, #{tel}, #{ownerName}, #{email}, #{businessAccount}, #{privateBusiness}, #{zipCode}, #{address}, #{addressDetail}, #{sellerImg}, #{memberId}
+         )
+    </insert>
+
+    <select id="read" resultType="SellerVO">
+        SELECT *
+        FROM seller
+        WHERE seller_id = #{sellerId}
+    </select>
+
+    <update id="update">
+        UPDATE seller
+        SET
+        seller_id = #{sellerId},
+        business_license_number = #{businessLicenseNumber},
+        business_name = #{businessName},
+        tel = #{tel},
+        owner_name = #{ownerName},
+        email = #{email},
+        business_account = #{businessAccount},
+        private_business = #{privateBusiness},
+        zip_code = #{zipCode},
+        address = #{address},
+        address_detail = #{addressDetail},
+        seller_img = #{sellerImg},
+        member_id = #{memberId}
+        WHERE seller_id = #{sellerId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM seller
+        WHERE seller_id = #{sellerId}
+    </delete>
+
+</mapper>
