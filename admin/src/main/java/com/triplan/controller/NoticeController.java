@@ -1,39 +1,26 @@
 package com.triplan.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.triplan.domain.NoticeVO;
-import com.triplan.service.NoticeService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
-@RestController
-@RequiredArgsConstructor
+@Controller
 @RequestMapping("/notice")
 public class NoticeController {
 
-    private final NoticeService noticeService;
+    @GetMapping
+    public String noticePage() {
+        return "notice";
+    }
 
-    @PostMapping
-    public String noticeInsert(@RequestBody NoticeVO noticeVO){
-        noticeService.noticeInsert(noticeVO);
-        return "공지사항 입력 완료";
-    }
-    @GetMapping("/{noticeId}")
-    public NoticeVO noticeSelect(@PathVariable int noticeId){
-        NoticeVO noticeVO = noticeService.noticeSelect(noticeId);
-        return noticeVO;
-    }
-    @PutMapping("/{noticeId}")
-    public String noticeUpdate(@PathVariable int noticeId, @RequestBody NoticeVO noticeVO){
-        noticeVO.setNoticeId(noticeId);
-        noticeService.noticeUpdate(noticeVO);
-        return "공지사항 수정 완료";
-    }
-    @DeleteMapping("/{noticeId}")
-    public String noticeDelete(@PathVariable int noticeId){
-        noticeService.noticeDelete(noticeId);
-        return "공지사항 삭제 완료";
-    }
+    @GetMapping("/content")
+    public String noticeContent() { return "notice_content"; }
+
+    @GetMapping("/update")
+    public String noticeUpdate() { return  "notice_update"; }
+
+    @GetMapping("/write")
+    public String noticeWrite() { return "notice_write"; }
 
 
 }
