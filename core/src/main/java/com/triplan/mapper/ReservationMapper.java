@@ -7,9 +7,12 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ReservationMapper {
 
-    void insert(ReservationVO reservationVO);
-    ReservationVO read(Integer resId);
+    Integer insert(ReservationVO reservationVO);
+
+    ReservationVO select(Integer resId);
+
     void update(ReservationDTO reservationDTO);
+
     void delete(Integer resId);
-    Integer reserve(ReservationVO reservationVO);
+
 }

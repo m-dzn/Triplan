@@ -3,6 +3,7 @@ package com.triplan.service;
 import com.triplan.domain.ReservationVO;
 import com.triplan.dto.ReservationDTO;
 import com.triplan.mapper.ReservationMapper;
+import com.triplan.service.inf.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public ReservationDTO getReservation(Integer resId) {
-        ReservationVO reservationVO = reservationMapper.read(resId);
+        ReservationVO reservationVO = reservationMapper.select(resId);
         return ReservationDTO.of(reservationVO);
     }
 
@@ -39,7 +40,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Integer reserve(ReservationDTO reservationDTO) {
         ReservationVO reservationVO = reservationDTO.toVO();
-        Integer result = reservationMapper.reserve(reservationVO);
+        Integer result = reservationMapper.insert(reservationVO);
         return result;
     }
 

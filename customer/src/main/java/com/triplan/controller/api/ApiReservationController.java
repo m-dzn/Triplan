@@ -1,19 +1,14 @@
-package com.triplan.controller;
+package com.triplan.controller.api;
 
-import com.triplan.domain.MemberVO;
 import com.triplan.dto.ReservationDTO;
-import com.triplan.service.ReservationService;
+import com.triplan.service.inf.ReservationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpRequest;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestController
-@RequestMapping("/res")
+@RequestMapping("/api/res")
 @RequiredArgsConstructor
-public class ReservationController {
+public class ApiReservationController {
 
     private final ReservationService reservationService;
 
@@ -39,10 +34,5 @@ public class ReservationController {
         reservationService.delete(resId);
         return "예약 삭제 성공";
     }
-
-
-
-
-
 
 }

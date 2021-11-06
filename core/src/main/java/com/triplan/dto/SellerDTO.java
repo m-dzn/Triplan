@@ -1,7 +1,6 @@
 package com.triplan.dto;
 
 import com.triplan.domain.SellerVO;
-import com.triplan.enumclass.ProductGroup;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,53 +10,55 @@ import lombok.ToString;
 @ToString
 public class SellerDTO {
 
-    private Long sellerId;
-    private Long memberId;
-    private ProductGroup productGroup;
+    private Integer sellerId;
     private String businessLicenseNumber;
     private String businessName;
     private String tel;
     private String ownerName;
-    private String address;
-    private String zipCode;
     private String email;
-    private String sellerImg;
     private String businessAccount;
-    private boolean personalOrCompany;
+    private Boolean privateBusiness;
+    private String zipCode;
+    private String address;
+    private String addressDetail;
+    private String sellerImg;
+    private Integer memberId;
 
     public static SellerDTO of (SellerVO sellerVO) {
         SellerDTO dto = new SellerDTO();
         dto.setSellerId(sellerVO.getSellerId());
-        dto.setMemberId(sellerVO.getMemberId());
-        dto.setProductGroup(sellerVO.getProductGroup());
         dto.setBusinessLicenseNumber(sellerVO.getBusinessLicenseNumber());
         dto.setBusinessName(sellerVO.getBusinessName());
         dto.setTel(sellerVO.getTel());
         dto.setOwnerName(sellerVO.getOwnerName());
-        dto.setAddress(sellerVO.getAddress());
-        dto.setZipCode(sellerVO.getZipCode());
         dto.setEmail(sellerVO.getEmail());
-        dto.setSellerImg(sellerVO.getSellerImg());
         dto.setBusinessAccount(sellerVO.getBusinessAccount());
-        dto.setPersonalOrCompany(sellerVO.isPersonalOrCompany());
+        dto.setPrivateBusiness(sellerVO.getPrivateBusiness());
+        dto.setZipCode(sellerVO.getZipCode());
+        dto.setAddress(sellerVO.getAddress());
+        dto.setPrivateBusiness(sellerVO.getPrivateBusiness());
+        dto.setSellerImg(sellerVO.getSellerImg());
+        dto.setMemberId(sellerVO.getMemberId());
+
         return dto;
     }
 
     public SellerVO toVO() {
         return SellerVO.builder()
                 .sellerId(sellerId)
-                .memberId(memberId)
-                .productGroup(productGroup)
                 .businessLicenseNumber(businessLicenseNumber)
                 .businessName(businessName)
                 .tel(tel)
                 .ownerName(ownerName)
-                .address(address)
-                .zipCode(zipCode)
                 .email(email)
-                .sellerImg(sellerImg)
                 .businessAccount(businessAccount)
-                .personalOrCompany(personalOrCompany)
+                .privateBusiness(privateBusiness)
+                .zipCode(zipCode)
+                .address(address)
+                .addressDetail(addressDetail)
+                .sellerImg(sellerImg)
+                .memberId(memberId)
                 .build();
     }
+
 }

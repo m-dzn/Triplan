@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ReservationVO extends BaseVO {
 
     // 식별자 필드
-    private Long resId;
+    private Integer resId;
 
     // 필수 입력 필드 : Default 없는 NOT NULL 필드
     private ItemCategory itemCategory;
@@ -30,6 +30,6 @@ public class ReservationVO extends BaseVO {
     private Long totalDiscountPrice;
 
     // 외래키
-    private Long memberId;
+    private Integer memberId;
 
 }
