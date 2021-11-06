@@ -1,28 +1,35 @@
 package com.triplan.domain;
 
-import com.triplan.enumclass.ResType;
+import com.triplan.enumclass.ItemCategory;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @ToString
+@NoArgsConstructor
 @Builder
-public class ReservationVO {
-    private Integer resId;
-    private Integer memberId;
-    private Integer itemId;
-    private Integer totalPrice;
-    private Integer discountPrice;
-    private Integer finalPrice;
-    private LocalDateTime resDate;
-    private Integer numberOfPerson;
-    private String coupon;
+@AllArgsConstructor
+public class ReservationVO extends BaseVO {
+
+    // 식별자 필드
+    private Long resId;
+
+    // 필수 입력 필드 : Default 없는 NOT NULL 필드
+    private ItemCategory itemCategory;
+    private Long totalPrice;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private String name;
     private String phone;
-    private ResType type;
-    private boolean used;
-    private LocalDateTime completeAt;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
+    // Default 값이 있는 NOT NULL 필드
+
+    // Nullable 필드
+    private Long totalDiscountPrice;
+
+    // 외래키
+    private Long memberId;
+
 }

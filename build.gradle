@@ -3,7 +3,7 @@ buildscript {
 		springVersion = "2.5.6"
 		boot = "org.springframework.boot"
 		lombok = "org.projectlombok:lombok"
-		mybatisVersion = "2.2.0"
+		mybatisStarterVersion = "2.2.0"
 	}
 
 	repositories {
@@ -35,19 +35,23 @@ subprojects {
 	targetCompatibility = 1.8
 
 	dependencies {
-		implementation "$boot:spring-boot-starter-data-jdbc"
 		implementation "$boot:spring-boot-starter-web"
+//		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
-		implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+		// 타임리프 관련 의존성
 		implementation "$boot:spring-boot-starter-thymeleaf"
 		developmentOnly "$boot:spring-boot-devtools"
 
-		runtimeOnly 'mysql:mysql-connector-java' // maria DB 넣기
+		// DB 관련 의존성
+		runtimeOnly "com.h2database:h2"
+//		runtimeOnly 'mysql:mysql-connector-java'
+		implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatisStarterVersion"
 
+		// 롬복 : 보일러플레이트 코드 자동 생성 라이브러리
 		compileOnly lombok
 		annotationProcessor lombok
 
-//		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+		// 테스트 도구 : JUnit5
 		testImplementation "$boot:spring-boot-starter-test"
 	}
 

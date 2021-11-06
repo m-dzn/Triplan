@@ -1,40 +1,39 @@
-package com.triplan.controller;
+package com.triplan.controller.api;
 
 
 import com.triplan.domain.ItemVO;
-import com.triplan.service.ItemService;
+import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/items")
+@RequestMapping("/api/items")
 @RestController
 @RequiredArgsConstructor
-public class itemController {
+public class ApiItemController {
 
     @Autowired
     private final ItemService itemService;
 
-    @PostMapping()
+    @PostMapping
     public String itemSave(@RequestBody ItemVO itemVO) {
         itemService.itemSave(itemVO);
         return "create 성공";
     }
 
     @GetMapping("/{itemId}")
-    public String itemRead(@PathVariable int itemId){
-        itemService.itemRead(itemId);
-        return "read 성공";
+    public ItemVO itemRead(@PathVariable Integer itemId){
+        return itemService.itemRead(itemId);
     }
     
     @PutMapping("/{itemId}")
-    public String itemModify(@PathVariable int itemId, @RequestBody ItemVO itemVO){
+    public String itemModify(@PathVariable Integer itemId, @RequestBody ItemVO itemVO){
         itemService.itemModify(itemId, itemVO);
         return "update 성공";
     }
     
     @DeleteMapping("/{itemId}")
-    public String itemRemove(@PathVariable int itemId){
+    public String itemRemove(@PathVariable Integer itemId){
         itemService.itemRemove(itemId);
         return "delete 성공";
     }

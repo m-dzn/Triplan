@@ -1,7 +1,6 @@
 package com.triplan.service;
 
 import com.triplan.domain.SellerVO;
-import com.triplan.dto.SellerDTO;
 import com.triplan.mapper.SellerMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,25 +13,23 @@ public class SellerServiceImpl implements SellerService {
     private final SellerMapper sellerMapper;
 
     @Transactional
-    public void register(SellerDTO sellerDTO) {
-        SellerVO sellerVO = sellerDTO.toVO();
+    public void register(SellerVO sellerVO) {
         sellerMapper.insert(sellerVO);
     }
 
     @Override
-    public SellerDTO getSeller(Long sellerId) {
-        SellerVO sellerVO = sellerMapper.read(sellerId);
-        return SellerDTO.of(sellerVO);
+    public SellerVO getSeller(Integer sellerId) {
+        return sellerMapper.read(sellerId);
     }
 
     @Override
-    public void update(Long sellerId, SellerDTO sellerDTO) {
-        sellerDTO.setSellerId(sellerId);
-        sellerMapper.update(sellerDTO);
+    public void update(Integer sellerId, SellerVO sellerVO) {
+        sellerVO.setSellerId(sellerId);
+        sellerMapper.update(sellerVO);
     }
 
     @Override
-    public void delete(Long sellerId) {
+    public void delete(Integer sellerId) {
         sellerMapper.delete(sellerId);
     }
 

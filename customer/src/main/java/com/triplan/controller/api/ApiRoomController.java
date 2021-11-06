@@ -1,14 +1,14 @@
-package com.triplan.controller;
+package com.triplan.controller.api;
 
 import com.triplan.domain.RoomVO;
-import com.triplan.service.RoomService;
+import com.triplan.service.inf.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/rooms")
-public class RoomController {
+public class ApiRoomController {
 
     private final RoomService roomService;
 

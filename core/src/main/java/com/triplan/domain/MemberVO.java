@@ -1,35 +1,41 @@
 package com.triplan.domain;
 
-import lombok.Builder;
+import com.triplan.enumclass.MemberGrade;
+import com.triplan.enumclass.MemberState;
+import com.triplan.enumclass.SNSProvider;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @ToString
-@Builder
-public class MemberVO {
-    private Long member_id;
+@NoArgsConstructor
+public class MemberVO extends BaseVO {
+
+    // 식별자 필드
+    private Integer memberId;
+
+    // 필수 입력 필드 : Default 없는 NOT NULL 필드
     private String email;
     private String password;
     private String nickname;
-    private String state;
-    private Date created_at;
-    private Date updated_at;
-    private Date deleted_at;
-    private String email_confirm;
-    private Long point;
+
+    // Default 값이 있는 NOT NULL 필드
+    private Boolean emailConfirm;
+    private MemberState state;
+    private MemberGrade grade;
+    private SNSProvider provider;
+
+    // Nullable 필드
+    private String profileImg;
+    private Integer point;
     private String account;
-    private String grade;
-    private String profile_img;
-    private String gender;
-    private String birthday;
-    private String mobile;
-    private String address;
-    private String sns_info;
+    private LocalDateTime deletedAt;
 
-
+    // 외래키
+    
 }
