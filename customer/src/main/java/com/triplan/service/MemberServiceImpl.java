@@ -2,6 +2,7 @@ package com.triplan.service;
 
 import com.triplan.domain.MemberVO;
 import com.triplan.mapper.MemberMapper;
+import com.triplan.service.inf.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +18,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberVO getMember(int memberId) {
+    public MemberVO getMember(Integer memberId) {
         MemberVO result = memberMapper.select(memberId);
         return result;
     }
 
     @Override
-    public void update(int memberId, MemberVO memberVO) {
+    public void update(Integer memberId, MemberVO memberVO) {
         memberVO.setMemberId(memberId);
         memberMapper.update(memberVO);
     }
 
     @Override
-    public void delete(int memberId) {
+    public void delete(Integer memberId) {
         memberMapper.delete(memberId);
     }
 }

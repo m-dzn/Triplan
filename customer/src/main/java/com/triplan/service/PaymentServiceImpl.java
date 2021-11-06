@@ -2,6 +2,7 @@ package com.triplan.service;
 
 import com.triplan.domain.PaymentVO;
 import com.triplan.mapper.PaymentMapper;
+import com.triplan.service.inf.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentVO read(Integer paymentId) {
-        return paymentMapper.read(paymentId);
+        return paymentMapper.select(paymentId);
     }
 
     @Override

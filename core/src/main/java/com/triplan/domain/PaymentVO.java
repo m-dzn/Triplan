@@ -2,27 +2,33 @@ package com.triplan.domain;
 
 import com.triplan.enumclass.PaymentState;
 import com.triplan.enumclass.PaymentType;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
-@Data
-public class PaymentVO {
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+public class PaymentVO extends BaseVO {
 
+    // 식별자 필드
     private Integer paymentId;
 
-    private Integer resId;
+    // 필수 입력 필드 : Default 없는 NOT NULL 필드
+    private PaymentType type;
+    private Integer totalPayment;
+    private LocalDateTime paymentDeadline;
 
+    // Default 값이 있는 NOT NULL 필드
     private PaymentState state;
 
-    private PaymentType type;
+    // Nullable 필드
 
-    private Integer price;
-
-    private Timestamp paymentDeadline;
-
-    private Timestamp createdAt;
-
-    private Timestamp updatedAt;
+    // 외래키
+    private Integer resId;
 
 }

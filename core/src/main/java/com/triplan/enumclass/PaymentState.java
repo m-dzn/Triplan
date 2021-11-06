@@ -5,11 +5,12 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum PaymentState {
+public enum PaymentState implements BaseEnum {
 
-    PaymentCompleted("결제완료"),
-    PaymentFailed("결제실패");
+    UNPAID("미결제"),
+    PAID("결제완료"),
+    FAILED("결제실패");
 
-    private String explain;
+    private final String explain;
 
 }

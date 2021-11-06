@@ -1,24 +1,36 @@
 package com.triplan.domain;
 
-import com.triplan.enumclass.PersonalOrCompany;
-import com.triplan.enumclass.ProductGroup;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 @Builder
+@AllArgsConstructor
 public class SellerVO {
+
+    // 식별자 필드
     private Integer sellerId;
-    private Integer memberId;
-    private ProductGroup productGroup;
+
+    // 필수 입력 필드 : Default 없는 NOT NULL 필드
     private String businessLicenseNumber;
     private String businessName;
     private String tel;
     private String ownerName;
-    private String address;
-    private String zipCode;
     private String email;
-    private String sellerImg;
     private String businessAccount;
-    private PersonalOrCompany personalOrCompany;
+    private Boolean privateBusiness;
+    private String zipCode;
+    private String address;
+
+    // Default 값이 있는 NOT NULL 필드
+
+    // Nullable 필드
+    private String addressDetail;
+    private String sellerImg;
+
+    // 외래키
+    private Integer memberId;
+
 }
