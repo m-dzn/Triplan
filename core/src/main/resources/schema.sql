@@ -23,7 +23,7 @@ CREATE TABLE `Seller` (
 	`owner_name`	VARCHAR(30)	NOT NULL,
 	`email`	VARCHAR(50)	NOT NULL,
 	`business_account`	VARCHAR(30)	NOT NULL,
-	`privateBusiness`	TINYINT	NOT NULL	DEFAULT 0	COMMENT '11.05 변경 : Enum인 personal_or_company -> Boolean인 privateBusiness',
+	`private_business`	TINYINT	NOT NULL	DEFAULT 0	COMMENT '11.05 변경 : Enum인 personal_or_company -> Boolean인 privateBusiness',
 	`zip_code`	VARCHAR(100)	NOT NULL,
 	`address`	VARCHAR(200)	NOT NULL,
 	`address_detail`	VARCHAR(200)	NULL	COMMENT '11.05 추가',
