@@ -1,14 +1,11 @@
 package com.triplan.domain;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 
 @Data
-@Getter
-@Setter
 public class RoomVO {
 
     private Integer roomId;
@@ -17,7 +14,7 @@ public class RoomVO {
     private Integer maxPerson;
     private String name;
     private String img;
-    private Timestamp resDate;
+    private LocalDateTime resDate;
     private Integer addPerson;
 
 }

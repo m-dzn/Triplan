@@ -1,15 +1,11 @@
 package com.triplan.domain;
 
 import com.triplan.enumclass.ResType;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @ToString
 @Builder
 public class ReservationVO {
@@ -19,14 +15,14 @@ public class ReservationVO {
     private Integer totalPrice;
     private Integer discountPrice;
     private Integer finalPrice;
-    private Timestamp resDate;
+    private LocalDateTime resDate;
     private Integer numberOfPerson;
     private String coupon;
     private String name;
     private String phone;
     private ResType type;
-    private boolean usage1;
-    private Timestamp completeAt;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private boolean used;
+    private LocalDateTime completeAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

@@ -5,8 +5,8 @@
 <mapper namespace="com.triplan.mapper.ReservationMapper">
 
      <insert id="insert">
-        INSERT INTO reservation (res_id, member_id, item_id, total_price, discount_price, final_price, res_date, number_of_person, coupon, name, phone, type, usage1, complete_at, created_at, updated_at)
-        VALUES (#{resId}, #{memberId}, #{itemId}, #{totalPrice}, #{discountPrice}, #{finalPrice}, #{resDate}, #{numberOfPerson}, #{coupon}, #{name}, #{phone}, #{type}, #{usage1}, #{completeAt}, #{createdAt}, #{updatedAt} )
+        INSERT INTO reservation (res_id, member_id, item_id, total_price, discount_price, final_price, res_date, number_of_person, coupon, name, phone, type, used, complete_at, created_at, updated_at)
+        VALUES (#{resId}, #{memberId}, #{itemId}, #{totalPrice}, #{discountPrice}, #{finalPrice}, #{resDate}, #{numberOfPerson}, #{coupon}, #{name}, #{phone}, #{type}, #{used}, #{completeAt}, #{createdAt}, #{updatedAt} )
     </insert>
 
     <select id="read" resultType="ReservationVO">
@@ -30,7 +30,7 @@
             name = #{name},
             phone = #{phone},
             type = #{type},
-            usage1 = #{usage1},
+            used = #{used},
             complete_at = #{completeAt},
             created_at = #{createdAt},
             updated_at = #{updatedAt}

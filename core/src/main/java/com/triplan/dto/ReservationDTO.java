@@ -2,14 +2,13 @@ package com.triplan.dto;
 
 import com.triplan.domain.ReservationVO;
 import com.triplan.enumclass.ResType;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @ToString
 public class ReservationDTO {
 
@@ -19,16 +18,20 @@ public class ReservationDTO {
     private Integer totalPrice;
     private Integer discountPrice;
     private Integer finalPrice;
-    private Timestamp resDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime resDate;
     private Integer numberOfPerson;
     private String coupon;
     private String name;
     private String phone;
     private ResType type;
-    private boolean usage1;
-    private Timestamp completeAt;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private boolean used;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime completeAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime createdAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime updatedAt;
 
     public static ReservationDTO of (ReservationVO reservationVO) {
         ReservationDTO dto = new ReservationDTO();
@@ -44,7 +47,7 @@ public class ReservationDTO {
         dto.setName(reservationVO.getName());
         dto.setPhone(reservationVO.getPhone());
         dto.setType(reservationVO.getType());
-        dto.setUsage1(reservationVO.isUsage1());
+        dto.setUsed(reservationVO.isUsed());
         dto.setCompleteAt(reservationVO.getCompleteAt());
         dto.setCreatedAt(reservationVO.getCreatedAt());
         dto.setUpdatedAt(reservationVO.getUpdatedAt());
@@ -65,7 +68,7 @@ public class ReservationDTO {
                 .name(name)
                 .phone(phone)
                 .type(type)
-                .usage1(usage1)
+                .used(used)
                 .completeAt(completeAt)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)

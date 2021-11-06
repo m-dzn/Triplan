@@ -38,6 +38,7 @@ subprojects {
 		implementation "$boot:spring-boot-starter-data-jdbc"
 		implementation "$boot:spring-boot-starter-web"
 
+		implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
 		implementation "$boot:spring-boot-starter-thymeleaf"
 		developmentOnly "$boot:spring-boot-devtools"
 
