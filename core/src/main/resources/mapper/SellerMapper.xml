@@ -3,40 +3,67 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.triplan.mapper.SellerMapper">
+
      <insert id="insert">
-        INSERT INTO seller (seller_id, business_license_number, business_name, tel, owner_name, email, business_account, private_business, zip_code, address, address_detail, seller_img, member_id)
-        VALUES (#{sellerId}, #{businessLicenseNumber}, #{businessName}, #{tel}, #{ownerName}, #{email}, #{businessAccount}, #{privateBusiness}, #{zipCode}, #{address}, #{addressDetail}, #{sellerImg}, #{memberId}
+        INSERT INTO seller (
+            business_license_number,
+            business_name,
+            tel,
+            owner_name,
+            email,
+            business_account,
+            private_business,
+            zip_code,
+            address,
+            address_detail,
+            seller_img,
+            member_id
+         ) VALUES (
+            #{businessLicenseNumber},
+            #{businessName},
+            #{tel},
+            #{ownerName},
+            #{email},
+            #{businessAccount},
+            #{privateBusiness},
+            #{zipCode},
+            #{address},
+            #{addressDetail},
+            #{sellerImg},
+            #{memberId}
          )
     </insert>
 
     <select id="read" resultType="SellerVO">
-        SELECT *
-        FROM seller
-        WHERE seller_id = #{sellerId}
+        SELECT  *
+        FROM    seller
+        WHERE   seller_id = #{sellerId}
     </select>
 
     <update id="update">
-        UPDATE seller
+        UPDATE  seller
         SET
-        seller_id = #{sellerId},
-        business_license_number = #{businessLicenseNumber},
-        business_name = #{businessName},
-        tel = #{tel},
-        owner_name = #{ownerName},
-        email = #{email},
-        business_account = #{businessAccount},
-        private_business = #{privateBusiness},
-        zip_code = #{zipCode},
-        address = #{address},
-        address_detail = #{addressDetail},
-        seller_img = #{sellerImg},
-        member_id = #{memberId}
-        WHERE seller_id = #{sellerId}
+                business_license_number = IFNULL(   #{businessLicenseNumber},   business_license_number ),
+                business_name           = IFNULL(   #{businessName},            business_name           ),
+                tel                     = IFNULL(   #{tel},                     tel                     ),
+                owner_name              = IFNULL(   #{ownerName},               owner_name              ),
+                email                   = IFNULL(   #{email},                   email                   ),
+                business_account        = IFNULL(   #{businessAccount},         business_account        ),
+                private_business        = IFNULL(   #{privateBusiness},         private_business        ),
+                zip_code                = IFNULL(   #{zipCode},                 zip_code                ),
+                address                 = IFNULL(   #{address},                 address                 ),
+                address_detail          = IFNULL(   #{addressDetail},           address_detail          ),
+                seller_img              = IFNULL(   #{sellerImg},               seller_img              ),
+                member_id               = IFNULL(   #{memberId},                member_id               ),
+                updated_at = CURRENT_TIMESTAMP
+        WHERE
+                seller_id = #{sellerId}
     </update>
 
     <delete id="delete">
-        DELETE FROM seller
-        WHERE seller_id = #{sellerId}
+        DELETE
+        FROM    seller
+        WHERE   seller_id = #{sellerId}
     </delete>
 
 </mapper>

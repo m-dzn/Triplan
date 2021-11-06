@@ -28,6 +28,8 @@ CREATE TABLE `Seller` (
 	`address`	VARCHAR(200)	NOT NULL,
 	`address_detail`	VARCHAR(200)	NULL	COMMENT '11.05 추가',
 	`seller_img`	VARCHAR(30)	NULL,
+    `created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`	TIMESTAMP	NULL
 	`member_id`	INT	NOT NULL
 );
 
