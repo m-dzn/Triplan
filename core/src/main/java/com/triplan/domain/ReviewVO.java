@@ -1,21 +1,30 @@
 package com.triplan.domain;
 
 import com.triplan.enumclass.ReviewScore;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+public class ReviewVO extends BaseVO {
 
-@Data
-public class ReviewVO {
-
+    // 식별자 필드
     private Integer reviewId;
-    private Integer memberId;
-    private Integer itemId;
+
+    // 필수 입력 필드 : Default 없는 NOT NULL 필드
     private String content;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
+    // Default 값이 있는 NOT NULL 필드
     private ReviewScore reviewScore; // Enum 0,0.5,.... 5점까지
 
+    // Nullable 필드
+
+    // 외래키
+    private Integer memberId;
+    private Integer itemId;
 
 }

@@ -3,7 +3,6 @@ package com.triplan.enumclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
 @Getter
 @AllArgsConstructor
 public enum ReviewScore {
@@ -21,6 +20,5 @@ public enum ReviewScore {
     Five(5);
 
     private double code;
-
 
 }

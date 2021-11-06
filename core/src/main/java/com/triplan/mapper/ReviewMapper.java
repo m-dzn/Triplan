@@ -6,11 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ReviewMapper {
 
-    void reviewInsert(ReviewVO reviewVO);
+    void insert(ReviewVO reviewVO);
 
-    ReviewVO reviewRead(Integer reviewId);
+    ReviewVO select(Integer reviewId);
 
-    void reviewUpdate(ReviewVO reviewVO);
+    void update(ReviewVO reviewVO);
 
-    void reviewDelete(Integer reviewId);
+    void delete(Integer reviewId);
+
 }

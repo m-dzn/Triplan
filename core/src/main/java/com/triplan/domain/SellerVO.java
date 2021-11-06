@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class SellerVO {
+public class SellerVO extends BaseVO {
 
     // 식별자 필드
     private Integer sellerId;

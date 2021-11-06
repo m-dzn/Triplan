@@ -2,6 +2,7 @@ package com.triplan.service;
 
 import com.triplan.domain.ReviewVO;
 import com.triplan.mapper.ReviewMapper;
+import com.triplan.service.inf.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +12,25 @@ public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewMapper reviewMapper;
 
-
     @Override
     public void reviewInsert(ReviewVO reviewVO) {
-        reviewMapper.reviewInsert(reviewVO);
+        reviewMapper.insert(reviewVO);
     }
 
     @Override
     public ReviewVO reviewRead(Integer reviewId) {
-        return reviewMapper.reviewRead(reviewId);
+        return reviewMapper.select(reviewId);
     }
 
     @Override
     public void reviewUpdate(Integer reviewId, ReviewVO reviewVO) {
         reviewVO.setReviewId(reviewId);
-        reviewMapper.reviewUpdate(reviewVO);
+        reviewMapper.update(reviewVO);
     }
 
     @Override
     public void reviewDelete(Integer reviewId) {
-        reviewMapper.reviewDelete(reviewId);
+        reviewMapper.delete(reviewId);
     }
+
 }

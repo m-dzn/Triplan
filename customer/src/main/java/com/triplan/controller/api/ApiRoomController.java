@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/rooms")
+@RequiredArgsConstructor
 public class ApiRoomController {
 
     private final RoomService roomService;

@@ -4,22 +4,44 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.triplan.mapper.ReviewMapper">
 
-    <insert id="reviewInsert">
-        insert into review (review_id,member_id,item_id,content,created_at,updated_at,review_score)
-        values (#{reviewId},#{memberId},#{itemId},#{content},#{createdAt},#{updatedAt},#{reviewScore})
+    <insert id="insert">
+        INSERT INTO review (
+            review_id,
+            content,
+            review_score,
+            member_id,
+            item_id
+        ) VALUES (
+            #{reviewId},
+            #{content},
+            #{reviewScore},
+            #{memberId},
+            #{itemId}
+        )
     </insert>
 
-    <select id="reviewRead" resultType="com.triplan.domain.ReviewVO">
-        select * from review where review_id=${reviewId}
+    <select id="select" resultType="ReviewVO">
+        SELECT  *
+        FROM    review
+        WHERE   review_id = ${reviewId}
     </select>
 
-    <update id="reviewUpdate">
-        update review set member_id=#{memberId},item_id=#{itemId},content=#{content},
-                            created_at=#{createdAt},updated_at=#{updatedAt},review_score=#{reviewScore}
-        where review_id=#{reviewId}
+    <update id="update">
+        UPDATE  review
+        SET
+                member_id = #{memberId},
+                item_id = #{itemId},
+                content = #{content},
+                review_score=#{reviewScore},
+                updated_at = CURRENT_TIMESTAMP
+        WHERE
+                review_id = #{reviewId}
     </update>
 
-    <delete id="reviewDelete">
-        delete from review where review_id=#{reviewId}
+    <delete id="delete">
+        DELETE
+        FROM    review
+        WHERE   review_id = #{reviewId}
     </delete>
+
 </mapper>

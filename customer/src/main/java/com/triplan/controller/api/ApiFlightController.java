@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/flights")
+@RequiredArgsConstructor
 public class ApiFlightController {
 
     private final FlightService flightService;

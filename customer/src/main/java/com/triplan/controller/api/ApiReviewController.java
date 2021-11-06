@@ -1,22 +1,18 @@
-package com.triplan.controller;
-
+package com.triplan.controller.api;
 
 import com.triplan.domain.ReviewVO;
-import com.triplan.service.ReviewService;
+import com.triplan.service.inf.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-
 
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/api/reviews")
 @RequiredArgsConstructor
-public class ReviewController {
-
+public class ApiReviewController {
 
     private final ReviewService reviewService;
 
-    @PostMapping("/reviewInsert")
+    @PostMapping
     public String reviewInsert(@RequestBody ReviewVO reviewVO){
         reviewService.reviewInsert(reviewVO);
         return "정보 입력 성공";
@@ -39,10 +35,5 @@ public class ReviewController {
         reviewService.reviewDelete(reviewId);
         return "정보 삭제 완료";
     }
-
-
-
-
-
 
 }
