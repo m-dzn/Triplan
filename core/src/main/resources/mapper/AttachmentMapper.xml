@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.AttachmentMapper">
+
+    <insert id="insert">
+        insert into attachment( about_table_type, id_in_table_type, origin_file_name, server_file_name, file_extension, file_size, upload_path )
+        values
+        <foreach collection="list" item="attachment" separator=" , ">
+            (#{attachment.aboutTableType}, #{attachment.idInTableType}, #{attachment.originFileName}, #{attachment.serverFileName},
+                #{attachment.fileExtension}, #{attachment.fileSize}, #{attachment.uploadPath} )
+        </foreach>
+
+    </insert>
+
+    <select id="select" resultType="AttachmentVO">
+        select * from attachment
+        where about_table_type = #{tableType} AND id_in_table_type = #{id}
+    </select>
+
+    <select id="selectAll" resultType="AttachmentVO">
+        select * from attachment
+    </select>
+
+    <delete id="delete">
+        delete from attachment
+        where about_table_type = #{tableType} AND id_in_table_type = #{id}
+    </delete>
+
+</mapper>
