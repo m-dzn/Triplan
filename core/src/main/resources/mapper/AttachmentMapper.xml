@@ -19,10 +19,6 @@
         where about_table_type = #{tableType} AND id_in_table_type = #{id}
     </select>
 
-    <select id="selectAll" resultType="AttachmentVO">
-        select * from attachment
-    </select>
-
     <delete id="delete">
         delete from attachment
         where about_table_type = #{tableType} AND id_in_table_type = #{id}
