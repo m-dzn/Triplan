@@ -51,4 +51,22 @@
         WHERE   item_id = #{itemId}
     </delete>
 
+    <select id="getItemByItemId" parameterType="map" resultType="ItemVO">
+        SELECT *
+          FROM item
+         WHERE item_id = #{itemId} AND item_category = #{room}
+    </select>
+
+    <select id="getRoomByItemId" resultType="RoomVO">
+        SELECT *
+          FROM room
+         WHERE item_id = #{itemId}
+    </select>
+
+    <select id="getFlightByItemId" resultType="FlightVO">
+        SELECT *
+          FROM flight
+         WHERE item_id = #{itemId}
+    </select>
+
 </mapper>

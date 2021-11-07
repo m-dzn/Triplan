@@ -2,10 +2,15 @@ package com.triplan.controller.api;
 
 
 import com.triplan.domain.ItemVO;
+import com.triplan.dto.customer.response.ItemFlightResponseDTO;
+import com.triplan.dto.customer.response.ItemRoomResponseDTO;
+import com.triplan.enumclass.ItemCategory;
 import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/items")
@@ -36,6 +41,16 @@ public class ApiItemController {
     public String itemRemove(@PathVariable Integer itemId){
         itemService.itemRemove(itemId);
         return "delete 성공";
+    }
+
+    @GetMapping("/ROOM/{itemId}")
+    public ItemRoomResponseDTO readItemDetailRoom(@PathVariable Integer itemId){
+        return itemService.getDetailRoomByItemId(ItemCategory.ROOM,itemId);
+    }
+
+    @GetMapping("/FLIGHT/{itemId}")
+    public ItemFlightResponseDTO readItemDetailFlight(@PathVariable Integer itemId){
+        return itemService.getDetailFlightByItemId(ItemCategory.FLIGHT,itemId);
     }
 
 }
