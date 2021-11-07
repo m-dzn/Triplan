@@ -1,6 +1,7 @@
 package com.triplan.service.inf;
 
 import com.triplan.domain.ItemGroupVO;
+import com.triplan.dto.customer.response.ItemGroupResponseDTO;
 
 public interface ItemGroupService {
 
@@ -12,4 +13,5 @@ public interface ItemGroupService {
 
     void deleteItemGroup(Integer itemGroupId);
 
+    ItemGroupResponseDTO getItemList(Integer itemGroupId);
 }

@@ -65,4 +65,16 @@
         WHERE   item_group_id = ${itemGroupId}
     </delete>
 
+    <select id="getItemByItemGroupId" resultType="ItemVO">
+        SELECT *
+          FROM item
+         WHERE item_group_id = #{itemGroupId}
+    </select>
+
+    <select id="getItemGroupByItemGroupId" resultType="ItemGroupVO">
+        SELECT *
+          FROM item_group
+         WHERE item_group_id = #{itemGroupId}
+    </select>
+
 </mapper>

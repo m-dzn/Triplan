@@ -1,9 +1,12 @@
 package com.triplan.controller.api;
 
 import com.triplan.domain.ItemGroupVO;
+import com.triplan.dto.customer.response.ItemGroupResponseDTO;
 import com.triplan.service.inf.ItemGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/item-groups")
@@ -35,4 +38,10 @@ public class ApiItemGroupController {
         itemGroupService.deleteItemGroup(itemGroupId);
         return "Delete";
     }
+
+    @GetMapping("/item-list/{itemGroupId}")
+    public ItemGroupResponseDTO getItemGroupByItemGroupId(@PathVariable Integer itemGroupId){
+        return itemGroupService.getItemList(itemGroupId);
+    }
+
 }

@@ -1,7 +1,10 @@
 package com.triplan.mapper;
 
 import com.triplan.domain.ItemGroupVO;
+import com.triplan.domain.ItemVO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface ItemGroupMapper {
@@ -14,4 +17,7 @@ public interface ItemGroupMapper {
 
     void delete(Integer itemGroupId);
 
+    List<ItemVO> getItemByItemGroupId(Integer itemGroupId);
+
+    ItemGroupVO getItemGroupByItemGroupId(Integer itemGroupId);
 }
