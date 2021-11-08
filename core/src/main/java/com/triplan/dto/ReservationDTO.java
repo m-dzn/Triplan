@@ -20,6 +20,7 @@ public class ReservationDTO {
     private String name;
     private String phone;
     private Long totalDiscountPrice;
+    private Integer sellerId;
 
     private Integer memberId;
 
@@ -40,7 +41,7 @@ public class ReservationDTO {
         dto.setMemberId(reservationVO.getMemberId());
         dto.setCreatedAt(reservationVO.getCreatedAt());
         dto.setUpdatedAt(reservationVO.getUpdatedAt());
-
+        dto.setSellerId(reservationVO.getSellerId());
         return dto;
     }
 
@@ -55,6 +56,7 @@ public class ReservationDTO {
                 .phone(phone)
                 .totalDiscountPrice(totalDiscountPrice)
                 .memberId(memberId)
+                .sellerId(sellerId)
                 .build();
     }
 

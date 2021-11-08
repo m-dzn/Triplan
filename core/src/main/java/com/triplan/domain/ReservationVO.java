@@ -24,6 +24,8 @@ public class ReservationVO extends BaseVO {
     private String name;
     private String phone;
 
+    private Integer sellerId;
+
     // Default 값이 있는 NOT NULL 필드
 
     // Nullable 필드

@@ -13,7 +13,8 @@
             name,
             phone,
             total_discount_price,
-            member_id
+            member_id,
+            seller_id
          ) VALUES (
             #{itemCategory},
             #{totalPrice},
@@ -22,7 +23,8 @@
             #{name},
             #{phone},
             #{totalDiscountPrice},
-            #{memberId}
+            #{memberId},
+            #{sellerId}
          )
     </insert>
 
@@ -31,6 +33,14 @@
         FROM    reservation
         WHERE   res_id = #{resId}
     </select>
+
+    <!--메인페이지 예약건수 조회-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT  count(res_id)
+        FROM    reservation
+        WHERE   seller_id = #{sellerId}
+    </select>
+
 
     <update id="update">
         UPDATE  reservation

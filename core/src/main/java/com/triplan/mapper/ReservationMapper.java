@@ -15,4 +15,5 @@ public interface ReservationMapper {
 
     void delete(Integer resId);
 
+    Integer selectCount(Integer sellerId);
 }

@@ -1,8 +1,10 @@
-package com.triplan.service;
+package com.triplan.service.inf;
 
 import com.triplan.domain.SellerVO;
+import com.triplan.dto.SellerDTO;
+
 public interface SellerService {
-        //dsad
+
     void register(SellerVO sellerVO);
 
     SellerVO getSeller(Integer sellerId);

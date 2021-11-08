@@ -157,7 +157,8 @@ CREATE TABLE `Reservation` (
 	`total_discount_price`	INT UNSIGNED	NULL	DEFAULT 0,
 	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
-	`member_id`	INT	NOT NULL
+	`member_id`	INT	NOT NULL,
+	`seller_id`	INT	NOT NULL
 );
 
 CREATE TABLE `Tag` (
