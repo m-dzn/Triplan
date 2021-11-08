@@ -1,6 +1,9 @@
 package com.triplan.service.inf;
 
 import com.triplan.domain.ItemVO;
+import com.triplan.domain.RoomVO;
+import com.triplan.dto.customer.request.ItemFlightRequestDTO;
+import com.triplan.dto.customer.request.ItemRoomRequestDTO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.enumclass.ItemCategory;
@@ -19,5 +22,7 @@ public interface ItemService {
 
     ItemFlightResponseDTO getDetailFlightByItemId(ItemCategory flight, Integer itemId);
 
-    void insertItemRoomBytoVO(ItemVO itemVO);
+    void insertItemRoom(ItemRoomRequestDTO itemRoomRequestDTO);
+
+    void insertItemFlight(ItemFlightRequestDTO itemFlightRequestDTO);
 }

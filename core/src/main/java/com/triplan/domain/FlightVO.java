@@ -2,15 +2,14 @@ package com.triplan.domain;
 
 import com.triplan.enumclass.FlightType;
 import com.triplan.enumclass.SeatClass;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class FlightVO {
 
     // 식별자 필드

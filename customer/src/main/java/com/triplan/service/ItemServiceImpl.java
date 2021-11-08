@@ -1,8 +1,11 @@
 package com.triplan.service;
 
+import com.sun.org.apache.bcel.internal.generic.INEG;
 import com.triplan.domain.FlightVO;
 import com.triplan.domain.ItemVO;
 import com.triplan.domain.RoomVO;
+import com.triplan.dto.customer.request.ItemFlightRequestDTO;
+import com.triplan.dto.customer.request.ItemRoomRequestDTO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.enumclass.ItemCategory;
@@ -76,8 +79,26 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void insertItemRoomBytoVO(ItemVO itemVO) {
-        //ITME DTO에 item정보 및 room정보 저장
-        //
+    public void insertItemRoom(ItemRoomRequestDTO itemRoomRequestDTO) {
+
+        ItemVO itemVO = itemRoomRequestDTO.toItemVO();
+        RoomVO roomVO = itemRoomRequestDTO.toRoomVO();
+
+        itemMapper.insert(itemVO);
+        roomVO.setItemId(itemVO.getItemId());
+        roomMapper.insert(roomVO);
+
+    }
+
+    @Override
+    public void insertItemFlight(ItemFlightRequestDTO itemFlightRequestDTO) {
+
+        ItemVO itemVO = itemFlightRequestDTO.toItemVO();
+        FlightVO flightVO = itemFlightRequestDTO.toFlightVO();
+
+        itemMapper.insert(itemVO);
+        flightVO.setItemId(itemVO.getItemId());
+        flightMapper.insert(flightVO);
+
     }
 }

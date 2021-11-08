@@ -1,9 +1,11 @@
 package com.triplan.dto.customer.request;
 
+import com.triplan.domain.FlightVO;
 import com.triplan.domain.ItemVO;
 import com.triplan.domain.RoomVO;
-import com.triplan.domain.SellerVO;
+import com.triplan.enumclass.FlightType;
 import com.triplan.enumclass.ItemCategory;
+import com.triplan.enumclass.SeatClass;
 import lombok.*;
 
 @Getter
@@ -12,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class ItemRoomRequestDTO {
+public class ItemFlightRequestDTO {
 
     private Integer itemId;
 
@@ -26,12 +28,15 @@ public class ItemRoomRequestDTO {
 
     private Integer itemGroupId;
 /////////////////////////////////////
-    private Integer roomId;
+    private Integer flightId;
 
-    private Integer numberOfPerson;
-    private Integer maxPerson;
+    private String departure;
+    private String destination;
+    private FlightType flightType;
+    private SeatClass seatClass;
 
-    private String img;
+    private Integer minAge;
+    private Integer maxAge;
 
     public ItemVO toItemVO() {
         return ItemVO.builder()
@@ -46,12 +51,15 @@ public class ItemRoomRequestDTO {
                 .build();
     }
 
-    public RoomVO toRoomVO(){
-        return RoomVO.builder()
-                .roomId(roomId)
-                .numberOfPerson(numberOfPerson)
-                .maxPerson(maxPerson)
-                .img(img)
+    public FlightVO toFlightVO(){
+        return FlightVO.builder()
+                .flightId(flightId)
+                .departure(departure)
+                .destination(destination)
+                .flightType(flightType)
+                .seatClass(seatClass)
+                .minAge(minAge)
+                .maxAge(maxAge)
                 .build();
     }
 }

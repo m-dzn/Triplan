@@ -1,14 +1,13 @@
 package com.triplan.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class RoomVO {
     // 식별자 필드
     private Integer roomId;

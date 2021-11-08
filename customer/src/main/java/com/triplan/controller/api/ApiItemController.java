@@ -2,6 +2,9 @@ package com.triplan.controller.api;
 
 
 import com.triplan.domain.ItemVO;
+import com.triplan.domain.RoomVO;
+import com.triplan.dto.customer.request.ItemFlightRequestDTO;
+import com.triplan.dto.customer.request.ItemRoomRequestDTO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.enumclass.ItemCategory;
@@ -54,9 +57,15 @@ public class ApiItemController {
     }
 
     @PostMapping("/ROOM/insert")
-    public String  insertItemRoom(@RequestBody ItemVO itemVO){
-        itemService.insertItemRoomBytoVO(itemVO);
-        return "toVO insert성공";
+    public String insertItemRoom(@RequestBody ItemRoomRequestDTO itemRoomRequestDTO){
+        itemService.insertItemRoom(itemRoomRequestDTO);
+        return "DTO ROOM insert성공";
+    }
+
+    @PostMapping("/FLIGHT/insert")
+    public String insertItemFlight(@RequestBody ItemFlightRequestDTO itemFlightRequestDTO){
+        itemService.insertItemFlight(itemFlightRequestDTO);
+        return "DTO Flight insert성공";
     }
 
 }

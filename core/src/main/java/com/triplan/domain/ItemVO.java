@@ -1,15 +1,14 @@
 package com.triplan.domain;
 
 import com.triplan.enumclass.ItemCategory;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class ItemVO extends BaseVO {
 
     // 식별자 필드

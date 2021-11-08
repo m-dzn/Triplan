@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.triplan.mapper.ItemMapper">
 
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="itemId">
         INSERT INTO item (
             name,
             explain,
@@ -65,6 +65,9 @@
         WHERE item_group_id = #{itemGroupId}
     </select>
 
-
+    <select id="getItemId" resultType="Integer">
+        SELECT MAX(item_id) as item_id
+          FROM item
+    </select>
 
 </mapper>

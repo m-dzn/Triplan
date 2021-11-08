@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface ItemMapper {
 
-    void insert(ItemVO itemVO);
+    Integer insert(ItemVO itemVO);
 
     ItemVO select(Integer itemId);
 
@@ -24,4 +24,5 @@ public interface ItemMapper {
 
     ItemVO getItemByItemId(@Param("room") ItemCategory room, @Param("itemId") Integer itemId);
 
+    //Integer getItemId();
 }
