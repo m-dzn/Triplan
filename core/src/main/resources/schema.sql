@@ -156,7 +156,7 @@ CREATE TABLE `Reservation` (
 	`phone`	VARCHAR(45)	NOT NULL,
 	`total_discount_price`	INT UNSIGNED	NULL	DEFAULT 0,
 	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL,
+	`updated_at`	TIMESTAMP	NULL        ON UPDATE CURRENT_TIMESTAMP,
 	`member_id`	INT	NOT NULL
 );
 

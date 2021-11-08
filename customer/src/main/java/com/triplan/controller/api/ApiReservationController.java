@@ -13,14 +13,14 @@ public class ApiReservationController {
     private final ReservationService reservationService;
 
     @PostMapping
-    public String register(@RequestBody ReservationDTO reservationDTO) {
-        reservationService.register(reservationDTO);
+    public String insert(@RequestBody ReservationDTO reservationDTO) {
+        reservationService.insert(reservationDTO);
         return "예약 추가 성공";
     }
 
     @GetMapping("/{resId}")
-    public ReservationDTO getReservation(@PathVariable Integer resId) {
-        return reservationService.getReservation(resId);
+    public ReservationDTO select(@PathVariable Integer resId) {
+        return reservationService.select(resId);
     }
 
     @PutMapping("/{resId}")

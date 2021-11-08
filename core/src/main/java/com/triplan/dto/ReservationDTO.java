@@ -37,6 +37,7 @@ public class ReservationDTO {
         dto.setEndDate(reservationVO.getEndDate());
         dto.setName(reservationVO.getName());
         dto.setPhone(reservationVO.getPhone());
+        dto.setTotalDiscountPrice(reservationVO.getTotalDiscountPrice());
         dto.setMemberId(reservationVO.getMemberId());
         dto.setCreatedAt(reservationVO.getCreatedAt());
         dto.setUpdatedAt(reservationVO.getUpdatedAt());

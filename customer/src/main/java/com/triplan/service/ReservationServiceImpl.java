@@ -15,13 +15,13 @@ public class ReservationServiceImpl implements ReservationService {
     private final ReservationMapper reservationMapper;
 
     @Transactional
-    public void register(ReservationDTO reservationDTO) {
+    public void insert(ReservationDTO reservationDTO) {
         ReservationVO reservationVO = reservationDTO.toVO();
         reservationMapper.insert(reservationVO);
     }
 
     @Override
-    public ReservationDTO getReservation(Integer resId) {
+    public ReservationDTO select(Integer resId) {
         ReservationVO reservationVO = reservationMapper.select(resId);
         return ReservationDTO.of(reservationVO);
     }
@@ -37,11 +37,6 @@ public class ReservationServiceImpl implements ReservationService {
         reservationMapper.delete(resId);
     }
 
-    @Override
-    public Integer reserve(ReservationDTO reservationDTO) {
-        ReservationVO reservationVO = reservationDTO.toVO();
-        Integer result = reservationMapper.insert(reservationVO);
-        return result;
-    }
+
 
 }
