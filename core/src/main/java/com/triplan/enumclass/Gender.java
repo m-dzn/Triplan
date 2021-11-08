@@ -7,16 +7,14 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Gender {
 
-    NONE(1,"없음"),
-    MALE(2,"남자"),
-    FEMALE(3,"여자"),
-    ETC(4,"기타");
+    NONE("없음"),
+    MALE("남자"),
+    FEMALE("여자"),
+    ETC("기타");
 
-    private Integer code;
+
     private String explain;
 
-    Gender(String explain){
-        this.explain = explain;
-    }
+
 
 }

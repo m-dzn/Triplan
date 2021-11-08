@@ -11,8 +11,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-
-
 public class MemberVO {
 
     private Integer memberId;
