@@ -1,33 +1,33 @@
 package com.triplan.domain;
 
-import com.triplan.enumclass.ItemPrice;
-import com.triplan.enumclass.ItemType;
-import lombok.Data;
+import com.triplan.enumclass.ItemCategory;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
-import org.apache.ibatis.type.Alias;
-import org.springframework.stereotype.Component;
-
-import java.sql.Timestamp;
+import lombok.ToString;
 
 @Getter
 @Setter
-@Log4j2
-@Component
-@Alias("item")
-public class ItemVO {
-    private int itemId;
-    private int itemGroupId;
-    private int location;
-    private Timestamp startDay;
-    private Timestamp endDay;
-    private ItemPrice price; // 성인, 청소년, 소인
-    private ItemType type; // 객실, 패키지, 항공권
-    private int totalStock;
-    private int totalSalesCount;
-    private String introduce;
+@ToString
+@NoArgsConstructor
+public class ItemVO extends BaseVO {
+
+    // 식별자 필드
+    private Integer itemId;
+
+    // 필수 입력 필드 : Default 없는 NOT NULL 필드
+    private String name;
+    private String explain;
+    private ItemCategory itemCategory;
+
+    // Default 값이 있는 NOT NULL 필드
+
+    // Nullable 필드
+    private Integer baseStock;
+    private Integer salesVolume;
     private String detailImg;
-    private int discountPrice;
-    private String itemName;
+
+    // 외래키
+    private Integer itemGroupId;
+
 }

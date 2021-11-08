@@ -8,7 +8,7 @@ public interface PaymentMapper {
 
     void insert(PaymentVO paymentVO);
 
-    PaymentVO read(Integer paymentId);
+    PaymentVO select(Integer paymentId);
 
     void update(PaymentVO paymentVO);
 

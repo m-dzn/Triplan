@@ -5,10 +5,11 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum PassengerType {
+public enum PassengerType implements BaseEnum {
+
     ADULT("대인"),
     CHILD("소인");
 
+    private final String explain;
 
-    private String person;
 }

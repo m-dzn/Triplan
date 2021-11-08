@@ -7,47 +7,65 @@
     <update id="updateBasicInfo">
         UPDATE member
         SET nickname = #{nickname},
-            profile_img = #{profileImg},
-            updated_at = CURRENT_TIMESTAMP
+        profile_img = #{profileImg},
+        updated_at = CURRENT_TIMESTAMP
         WHERE member_id = ${memberId}
     </update>
 
     <update id="updateEmail">
         UPDATE member
         SET email = #{email},
-            email_confirm = #{emailConfirm},
-            updated_at = CURRENT_TIMESTAMP
+        email_confirm = #{emailConfirm},
+        updated_at = CURRENT_TIMESTAMP
         WHERE member_id = ${memberId}
     </update>
 
     <update id="updatePassword">
         UPDATE member
         SET password = #{password},
-            updated_at = CURRENT_TIMESTAMP
+        updated_at = CURRENT_TIMESTAMP
         WHERE member_id = ${memberId}
     </update>
 
     <insert id="insert">
-        INSERT INTO member(email,password,nickname,provider)
-        values (#{email},#{password},#{nickname},#{provider})
+        INSERT INTO member (
+        email,
+        password,
+        nickname
+        <if test="provider != null">, provider</if>
+        ) VALUES (
+        #{email},
+        #{password},
+        #{nickname}
+        <if test="provider != null">, #{provider}</if>
+        )
     </insert>
 
-    <select id="select" resultType="com.triplan.domain.MemberVO">
-        SELECT * FROM member where member_id=${memberId}
+    <select id="select" resultType="MemberVO">
+        SELECT  *
+        FROM    member
+        WHERE   member_id = ${memberId}
     </select>
 
     <update id="update">
-        update member
-        set state=#{state},
-            updated_at = CURRENT_TIMESTAMP,
-            point=#{point},
-            account=#{account},
-            grade=#{grade}
-        where member_id=#{memberId}
+        UPDATE  member
+        SET
+        nickname    = IFNULL(   #{nickname},    nickname    ),
+        grade       = IFNULL(   #{grade},       grade       ),
+        profile_img = IFNULL(   #{profileImg},  profile_img ),
+        point       = IFNULL(   #{point},       point       ),
+        account     = IFNULL(   #{account},     account     ),
+        updated_at  = CURRENT_TIMESTAMP <!-- BaseVO를 상속 받은 테이블에 들어가는 공통 구문 -->
+        WHERE
+        member_id   = #{memberId}
     </update>
 
-    <delete id="delete">
-        delete from member where member_id=#{memberId}
-    </delete>
-</mapper>
+    <update id="delete">
+        UPDATE  member
+        SET
+        state       = 'UNREGISTER',
+        deleted_at  = CURRENT_TIMESTAMP
+        WHERE   member_id   = #{memberId}
+    </update>
 
+</mapper>

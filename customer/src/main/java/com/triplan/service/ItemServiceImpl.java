@@ -2,6 +2,7 @@ package com.triplan.service;
 
 import com.triplan.domain.ItemVO;
 import com.triplan.mapper.ItemMapper;
+import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,22 +16,22 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void itemSave(ItemVO itemVO) {
-        itemMapper.itemInsert(itemVO);
+        itemMapper.insert(itemVO);
     }
 
     @Override
-    public ItemVO itemRead(int itemId) {
-        return itemMapper.itemGet(itemId);
+    public ItemVO itemRead(Integer itemId) {
+        return itemMapper.select(itemId);
     }
 
     @Override
-    public void itemModify(int itemId, ItemVO itemVO) {
+    public void itemModify(Integer itemId, ItemVO itemVO) {
         itemVO.setItemId(itemId);
-        itemMapper.itemUpdate(itemVO);
+        itemMapper.update(itemVO);
     }
 
     @Override
-    public void itemRemove(int itemId) {
-        itemMapper.itemDelete(itemId);
+    public void itemRemove(Integer itemId) {
+        itemMapper.delete(itemId);
     }
 }

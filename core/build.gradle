@@ -1,5 +1,4 @@
 dependencies {
-    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatisVersion"
 }
 
 war.enabled(true)

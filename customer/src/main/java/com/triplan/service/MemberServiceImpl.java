@@ -2,6 +2,7 @@ package com.triplan.service;
 
 import com.triplan.domain.MemberVO;
 import com.triplan.mapper.MemberMapper;
+import com.triplan.service.inf.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

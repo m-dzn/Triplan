@@ -5,10 +5,11 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum SeatClass {
-    ECONOMY("이코노미"),
-    BUSINESS("비즈니스"),
-    FIRST("퍼스트");
+public enum SeatClass implements BaseEnum {
 
-    private String sit;
+    ECONOMY("이코노미"),
+    BUSINESS("비즈니스");
+
+    private final String explain;
+
 }
