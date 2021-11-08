@@ -12,6 +12,22 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
 
+    public void register(MemberVO memberVO) {
+        memberMapper.insert(memberVO);
+    }
+
+    @Override
+    public MemberVO getMember(Integer memberId) {
+        MemberVO result = memberMapper.select(memberId);
+        return result;
+    }
+
+    @Override
+    public void update(Integer memberId, MemberVO memberVO) {
+        memberVO.setMemberId(memberId);
+        memberMapper.update(memberVO);
+    }
+
     @Override
     public void updateBasicInfo(Integer memberId, MemberVO memberVO) {
         memberVO.setMemberId(memberId);
@@ -30,25 +46,22 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.updatePassword(memberVO);
     }
 
-    public void register(MemberVO memberVO) {
-        memberMapper.insert(memberVO);
-    }
-
-    @Override
-    public MemberVO getMember(Integer memberId) {
-        MemberVO result = memberMapper.select(memberId);
-        return result;
-    }
-
-    @Override
-    public void update(Integer memberId, MemberVO memberVO) {
-        memberVO.setMemberId(memberId);
-        memberMapper.update(memberVO);
-    }
-
     @Override
     public void delete(Integer memberId) {
         memberMapper.delete(memberId);
     }
+
+    @Override
+    public Integer emailCheck(String email) {
+        Integer result = memberMapper.emailCheck(email);
+        return result;
+    }
+
+    @Override
+    public Integer nicknameCheck(String nickname) {
+        Integer result = memberMapper.nicknameCheck(nickname);
+        return result;
+    }
+
 
 }
