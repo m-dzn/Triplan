@@ -40,4 +40,10 @@
         WHERE   room_id = #{roomId}
     </delete>
 
+    <select id="getRoomByItemId" resultType="RoomVO">
+        SELECT *
+        FROM room
+        WHERE item_id = #{itemId}
+    </select>
+
 </mapper>

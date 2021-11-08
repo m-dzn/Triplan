@@ -14,4 +14,6 @@ public interface FlightMapper {
 
     void delete(Integer flightId);
 
+    FlightVO getFlightByItemId(Integer itemId);
+
 }

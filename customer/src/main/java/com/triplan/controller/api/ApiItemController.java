@@ -53,5 +53,11 @@ public class ApiItemController {
         return itemService.getDetailFlightByItemId(ItemCategory.FLIGHT,itemId);
     }
 
+    @PostMapping("/ROOM/insert")
+    public String  insertItemRoom(@RequestBody ItemVO itemVO){
+        itemService.insertItemRoomBytoVO(itemVO);
+        return "toVO insert성공";
+    }
+
 }
 

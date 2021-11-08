@@ -18,4 +18,6 @@ public interface ItemService {
     ItemRoomResponseDTO getDetailRoomByItemId(ItemCategory room, Integer itemId);
 
     ItemFlightResponseDTO getDetailFlightByItemId(ItemCategory flight, Integer itemId);
+
+    void insertItemRoomBytoVO(ItemVO itemVO);
 }

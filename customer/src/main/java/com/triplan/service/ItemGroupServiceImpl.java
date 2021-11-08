@@ -5,6 +5,7 @@ import com.triplan.domain.ItemVO;
 import com.triplan.dto.customer.response.ItemGroupResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.mapper.ItemGroupMapper;
+import com.triplan.mapper.ItemMapper;
 import com.triplan.service.inf.ItemGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class ItemGroupServiceImpl implements ItemGroupService {
 
     private final ItemGroupMapper itemGroupMapper;
+    private final ItemMapper itemMapper;
 
     @Override
     public void ItemGroupRegister(ItemGroupVO itemGroupVO) {
@@ -42,7 +44,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
     @Override
     public ItemGroupResponseDTO getItemList(Integer itemGroupId) {
 
-        List<ItemVO> itemVO = itemGroupMapper.getItemByItemGroupId(itemGroupId);
+        List<ItemVO> itemVO = itemMapper.getItemByItemGroupId(itemGroupId);
 
         List<ItemRoomResponseDTO> itemRoomResponseDTO = itemVO.stream()
                 .map(ItemRoomResponseDTO::of).collect(Collectors.toList());

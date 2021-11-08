@@ -7,6 +7,8 @@ import com.triplan.enumclass.ItemCategory;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface ItemMapper {
 
@@ -18,9 +20,8 @@ public interface ItemMapper {
 
     void delete(Integer itemId);
 
+    List<ItemVO> getItemByItemGroupId(Integer itemGroupId);
+
     ItemVO getItemByItemId(@Param("room") ItemCategory room, @Param("itemId") Integer itemId);
 
-    RoomVO getRoomByItemId(Integer itemId);
-
-    FlightVO getFlightByItemId(Integer itemId);
 }

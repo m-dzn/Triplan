@@ -57,16 +57,14 @@
          WHERE item_id = #{itemId} AND item_category = #{room}
     </select>
 
-    <select id="getRoomByItemId" resultType="RoomVO">
+
+
+    <select id="getItemByItemGroupId" resultType="ItemVO">
         SELECT *
-          FROM room
-         WHERE item_id = #{itemId}
+        FROM item
+        WHERE item_group_id = #{itemGroupId}
     </select>
 
-    <select id="getFlightByItemId" resultType="FlightVO">
-        SELECT *
-          FROM flight
-         WHERE item_id = #{itemId}
-    </select>
+
 
 </mapper>
