@@ -2,6 +2,8 @@ package com.triplan.service.inf;
 
 import com.triplan.dto.ReservationDTO;
 
+import java.util.List;
+
 
 public interface ReservationService {
 
@@ -13,5 +15,9 @@ public interface ReservationService {
 
     void delete(Integer resId);
 
+    List<ReservationDTO> myResList(Integer memberId);
 
+    List<ReservationDTO> myUpcomingResList(Integer memberId);
+
+    List<ReservationDTO> myPastResList(Integer memberId);
 }

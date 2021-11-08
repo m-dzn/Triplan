@@ -51,4 +51,32 @@
         WHERE   res_id = #{resId}
     </delete>
 
+    <select id="myResList" resultType="ReservationVO">
+        SELECT      *
+        FROM        reservation
+        WHERE       member_id = #{member_id}
+        ORDER BY    start_date desc
+    </select>
+
+<!--
+    날짜 형식 변환 비교
+    MySQL : SELECT date_format(now(),'%Y%m%d') FROM dual;
+    H2  : SELECT formatdatetime(now(), 'yyyyMMdd') FROM dual;
+-->
+    <select id="myUpcomingResList" resultType="ReservationVO">
+        SELECT      *
+        FROM        reservation
+        WHERE       member_id = #{member_id}
+          AND         formatdatetime(start_date, 'yyyyMMdd') >= formatdatetime(now(), 'yyyyMMdd')
+        ORDER BY    start_date desc
+    </select>
+
+    <select id="myPastResList" resultType="ReservationVO">
+        SELECT      *
+        FROM        reservation
+        WHERE       member_id = #{member_id}
+          AND         formatdatetime(now(), 'yyyyMMdd') > formatdatetime(start_date, 'yyyyMMdd')
+        ORDER BY    start_date desc
+    </select>
+
 </mapper>
