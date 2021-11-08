@@ -6,20 +6,30 @@
 
     <update id="updateBasicInfo">
         UPDATE member
-        SET
-    <!--    name = #{name}    -->
-            nickname = #{nickname},
+        SET nickname = #{nickname},
             profile_img = #{profileImg},
-            mobile = #{mobile},
-            birthday = #{birthday}
+            updated_at = CURRENT_TIMESTAMP
+        WHERE member_id = ${memberId}
+    </update>
+
+    <update id="updateEmail">
+        UPDATE member
+        SET email = #{email},
+            email_confirm = #{emailConfirm},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE member_id = ${memberId}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE member
+        SET password = #{password},
+            updated_at = CURRENT_TIMESTAMP
         WHERE member_id = ${memberId}
     </update>
 
     <insert id="insert">
-        INSERT INTO member(email,password,nickname,state,created_at,updated_at,deleted_at,email_confirm,
-                                point,account,grade,profile_img,gender,birthday,mobile,address,sns_info)
-        values (#{email},#{password},#{nickname},#{state},#{createdAt},#{updatedAt},#{deletedAt},#{emailConfirm},#{point},
-                #{account},#{grade},#{profileImg},#{gender},#{birthday},#{mobile},#{address},#{snsInfo})
+        INSERT INTO member(email,password,nickname,provider)
+        values (#{email},#{password},#{nickname},#{provider})
     </insert>
 
     <select id="select" resultType="com.triplan.domain.MemberVO">
@@ -28,10 +38,11 @@
 
     <update id="update">
         update member
-        set member_id=#{memberId},email=#{email},password=#{password},nickname=#{nickname},state=#{state},created_at=#{createdAt},
-                    updated_at=#{updatedAt},deleted_at=#{deletedAt},email_confirm=#{emailConfirm},point=#{point},account=#{account},
-                    grade=#{grade},profile_img=#{profileImg},gender=#{gender},birthday=#{birthday},mobile=#{mobile},address=#{address},
-                    sns_info=#{snsInfo}
+        set state=#{state},
+            updated_at = CURRENT_TIMESTAMP,
+            point=#{point},
+            account=#{account},
+            grade=#{grade}
         where member_id=#{memberId}
     </update>
 

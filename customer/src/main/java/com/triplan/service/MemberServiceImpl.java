@@ -14,7 +14,19 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void updateBasicInfo(Integer memberId, MemberVO memberVO) {
         memberVO.setMemberId(memberId);
-        memberMapper.update(memberVO);
+        memberMapper.updateBasicInfo(memberVO);
+    }
+
+    @Override
+    public void updateEmail(Integer memberId, MemberVO memberVO) {
+        memberVO.setMemberId(memberId);
+        memberMapper.updateEmail(memberVO);
+    }
+
+    @Override
+    public void updatePassword(Integer memberId, MemberVO memberVO) {
+        memberVO.setMemberId(memberId);
+        memberMapper.updatePassword(memberVO);
     }
 
     public void register(MemberVO memberVO) {
@@ -22,19 +34,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberVO getMember(int memberId) {
+    public MemberVO getMember(Integer memberId) {
         MemberVO result = memberMapper.select(memberId);
         return result;
     }
 
     @Override
-    public void update(int memberId, MemberVO memberVO) {
+    public void update(Integer memberId, MemberVO memberVO) {
         memberVO.setMemberId(memberId);
         memberMapper.update(memberVO);
     }
 
     @Override
-    public void delete(int memberId) {
+    public void delete(Integer memberId) {
         memberMapper.delete(memberId);
     }
 

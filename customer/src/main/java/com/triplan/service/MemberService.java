@@ -7,13 +7,17 @@ public interface MemberService {
     
     void updateBasicInfo(Integer memberId, MemberVO memberVO);
 
+    void updateEmail(Integer memberId, MemberVO memberVO);
+
+    void updatePassword(Integer memberId, MemberVO memberVO);
+
     void register(MemberVO memberVO);
 
-    MemberVO getMember(int memberId);
+    MemberVO getMember(Integer memberId);
 
-    void update(int memberId, MemberVO memberVO);
+    void update(Integer memberId, MemberVO memberVO);
 
-    void delete(int memberId);
+    void delete(Integer memberId);
 
 
 }
