@@ -8,10 +8,10 @@ public interface MemberMapper {
 
     void insert(MemberVO memberVO);
 
-    MemberVO select(int memberId);
+    MemberVO select(Integer memberId);
 
     void update(MemberVO memberVO);
 
-    void delete(int memberId);
+    void delete(Integer memberId);
 
 }

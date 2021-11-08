@@ -5,13 +5,13 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum MemberGrade {
+public enum MemberGrade implements BaseEnum {
 
-    BRONZE(1,"브론즈"),
-    SILVER(2,"실버"),
-    GOLD(3,"골드"),
-    PLATINUM(4,"플래티넘");
+    BRONZE("브론즈"),
+    SILVER("실버"),
+    GOLD("골드"),
+    PLATINUM("플래티넘");
 
-    private Integer code;
-    private String kor;
+    private final String explain;
+
 }
