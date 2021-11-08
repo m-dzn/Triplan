@@ -1,17 +1,20 @@
-package com.triplan.controller;
+package com.triplan.controller.api;
 
 
 import com.triplan.domain.ReviewVO;
 import com.triplan.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 
 @RestController
 @RequestMapping("/review")
 @RequiredArgsConstructor
-public class ReviewController {
+public class ApiReviewController {
 
 
     private final ReviewService reviewService;
