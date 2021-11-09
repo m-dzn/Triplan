@@ -26,6 +26,6 @@ public class CouponVO extends BaseVO {
     private LocalDateTime deadline;
 
     // 외래키
-    private Integer itemId;
+    private Integer resId;
 
 }

@@ -27,8 +27,8 @@ VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);
 INSERT INTO reservation_item (res_id, item_schedule_id)
 VALUES (1, 1);
 
-INSERT INTO coupon(name, num, price, condition, deadline, item_id)
-VALUES ('쿠폰1', 1234, 1000, '숙박대전 이벤트', '2021-11-10T12:00:00', 1);
+INSERT INTO coupon(name, num, price, condition, deadline)
+VALUES ('쿠폰1', 1234, 1000, '숙박대전 이벤트', '2021-11-10T12:00:00');
 
 /* Flight 아이템 그룹 (식별자: 2번) */
 INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id)

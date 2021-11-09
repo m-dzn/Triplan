@@ -181,7 +181,7 @@ CREATE TABLE `Coupon` (
 	`price`	INT UNSIGNED	NOT NULL,
 	`condition`	VARCHAR(200)	NULL,
 	`usage1`	TINYINT	NULL    DEFAULT 0	COMMENT '0(미사용) / 1(사용)',
-	`item_id`	INT	NULL	COMMENT '예약 id Foreign key로 들고와서 조인해서 사용',
+	`res_id`	INT	NULL	COMMENT '예약 id Foreign key로 들고와서 조인해서 사용',
 	`deadline`	TIMESTAMP	NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL	COMMENT 'ON UPDATE CURRENT_TIMESTAMP'

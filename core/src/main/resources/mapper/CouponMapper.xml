@@ -10,15 +10,13 @@
             num,
             price,
             condition,
-            deadline,
-            item_id
+            deadline
         ) VALUES (
             #{name},
             #{num},
             #{price},
             #{condition},
-            #{deadline},
-            #{itemId}
+            #{deadline}
         )
     </insert>
 
@@ -37,7 +35,7 @@
                 usage1              = IFNULL(   #{usage1},          usage1              ),
                 condition           = IFNULL(   #{condition},       condition           ),
                 deadline            = IFNULL(   #{deadline},        deadline            ),
-                item_id             = IFNULL(   #{itemId},          item_id             ),
+                res_id              = IFNULL(   #{resId},           res_id              ),
                 updated_at          = CURRENT_TIMESTAMP
         WHERE
             coupon_id = #{couponId}
