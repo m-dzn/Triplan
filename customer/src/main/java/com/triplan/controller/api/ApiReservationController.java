@@ -43,10 +43,11 @@ public class ApiReservationController {
     @PostMapping("/reserve/{itemScheduleId}")
     public String reserve(@PathVariable Integer itemScheduleId, @RequestBody ReservationDTO reservationDTO) {
         reservationService.reserve(itemScheduleId, reservationDTO);
+        // + 쿠폰 사용처리 하기(`usage1` + `item_id`)
 
         // URL로 itemScheduleId 넘기기
         // 받아와야할 거
-        // - 상품 : itemCategory, totalPrice, startDate, endDate + item_id
+        // - 상품 : itemCategory, totalPrice, startDate, endDate + itemScheduleId
         // - 사용자 입력 : name, phone
         // - 쿠폰 : totalDiscountPrice
         // - 회원 로그인 정보 : memberId

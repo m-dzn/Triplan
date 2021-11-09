@@ -180,7 +180,7 @@ CREATE TABLE `Coupon` (
 	`num`	INT	NULL	COMMENT '쿠폰 등록시 입력하면 쿠폰 등록',
 	`price`	INT UNSIGNED	NOT NULL,
 	`condition`	VARCHAR(200)	NULL,
-	`usage1`	TINYINT	NULL	COMMENT 'default 0(미사용) / 1(사용)',
+	`usage1`	TINYINT	NULL    DEFAULT 0	COMMENT '0(미사용) / 1(사용)',
 	`item_id`	INT	NULL	COMMENT '예약 id Foreign key로 들고와서 조인해서 사용',
 	`deadline`	TIMESTAMP	NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,

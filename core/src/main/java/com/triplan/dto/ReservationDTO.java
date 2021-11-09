@@ -2,14 +2,17 @@ package com.triplan.dto;
 
 import com.triplan.domain.ReservationVO;
 import com.triplan.enumclass.ItemCategory;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReservationDTO {
 
     private Integer resId;
@@ -31,23 +34,23 @@ public class ReservationDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime updatedAt;
 
-    public static ReservationDTO of (ReservationVO reservationVO) {
-        ReservationDTO dto = new ReservationDTO();
-        dto.setResId(reservationVO.getResId());
-        dto.setItemCategory(reservationVO.getItemCategory());
-        dto.setTotalPrice(reservationVO.getTotalPrice());
-        dto.setStartDate(reservationVO.getStartDate());
-        dto.setEndDate(reservationVO.getEndDate());
-        dto.setName(reservationVO.getName());
-        dto.setPhone(reservationVO.getPhone());
-        dto.setTotalDiscountPrice(reservationVO.getTotalDiscountPrice());
-        dto.setMemberId(reservationVO.getMemberId());
-        dto.setSellerId(reservationVO.getSellerId());
-        dto.setCancellation(reservationVO.getCancellation());
-        dto.setCreatedAt(reservationVO.getCreatedAt());
-        dto.setUpdatedAt(reservationVO.getUpdatedAt());
 
-        return dto;
+    public static ReservationDTO of(ReservationVO reservationVO){
+        return ReservationDTO.builder()
+                .resId(reservationVO.getResId())
+                .itemCategory(reservationVO.getItemCategory())
+                .totalPrice(reservationVO.getTotalPrice())
+                .startDate(reservationVO.getStartDate())
+                .endDate(reservationVO.getEndDate())
+                .name(reservationVO.getName())
+                .phone(reservationVO.getPhone())
+                .totalDiscountPrice(reservationVO.getTotalDiscountPrice())
+                .memberId(reservationVO.getMemberId())
+                .sellerId(reservationVO.getSellerId())
+                .cancellation(reservationVO.getCancellation())
+                .createdAt(reservationVO.getCreatedAt())
+                .updatedAt(reservationVO.getUpdatedAt())
+                .build();
     }
 
     public ReservationVO toVO() {

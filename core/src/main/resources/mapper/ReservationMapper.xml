@@ -57,8 +57,13 @@
     </delete>
 
     <insert id="insertResItem">
-        INSERT INTO reservation_item(res_id, item_schedule_id)
-        VALUES      (#{resId}, #{itemScheduleId})
+        INSERT INTO reservation_item(
+            res_id,
+            item_schedule_id
+        ) VALUES (
+            #{resId},
+            #{itemScheduleId}
+        )
     </insert>
 
     <update id="cancel">
