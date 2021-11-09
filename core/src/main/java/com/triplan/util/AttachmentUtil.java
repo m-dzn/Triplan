@@ -125,23 +125,4 @@ public class AttachmentUtil {
         }
     }
 
-
-//    public static void deleteAttachments(List<Integer> attachmentIdList) {
-//
-//        for(Integer attachmentId : attachmentIdList) {
-//            deleteAttachment(attachmentId);
-//        }
-//
-//    }
-//
-//    public static void deleteAttachment(Integer attachmentId) {
-//
-//        FILE_PATH = PRE_FIX + attachmentVO.getUploadPath() + "/" + attachmentVO.getServerFileName() + "." + attachmentVO.getFileExtension();
-//
-//        File deleteFile = new File(FILE_PATH);
-//        if (deleteFile.exists()) {
-//            deleteFile.delete();
-//        }
-//    }
-
 }
