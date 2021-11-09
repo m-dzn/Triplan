@@ -18,8 +18,8 @@ VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 
 INSERT INTO room (number_of_person, max_person, item_id)
 VALUES (3, 5, 1);
 
-INSERT INTO reservation (item_category, total_price, start_date, end_date, name, phone, member_id)
-VALUES ('ROOM', 50000, '2021-11-1T01:01:01', '2021-12-31T23:59:59', '양경호', '010-9999-9999', 1);
+INSERT INTO reservation (item_category, total_price, start_date, end_date, name, phone, member_id, seller_id)
+VALUES ('ROOM', 50000, '2021-11-1T01:01:01', '2021-12-31T23:59:59', '양경호', '010-9999-9999', 1, 1);
 
 INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
 VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);

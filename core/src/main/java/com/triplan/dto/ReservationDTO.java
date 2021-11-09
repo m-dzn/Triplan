@@ -21,7 +21,10 @@ public class ReservationDTO {
     private String phone;
     private Long totalDiscountPrice;
 
+    private Boolean cancellation;
+
     private Integer memberId;
+    private Integer sellerId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt;
@@ -37,7 +40,10 @@ public class ReservationDTO {
         dto.setEndDate(reservationVO.getEndDate());
         dto.setName(reservationVO.getName());
         dto.setPhone(reservationVO.getPhone());
+        dto.setTotalDiscountPrice(reservationVO.getTotalDiscountPrice());
         dto.setMemberId(reservationVO.getMemberId());
+        dto.setSellerId(reservationVO.getSellerId());
+        dto.setCancellation(reservationVO.getCancellation());
         dto.setCreatedAt(reservationVO.getCreatedAt());
         dto.setUpdatedAt(reservationVO.getUpdatedAt());
 
@@ -55,6 +61,8 @@ public class ReservationDTO {
                 .phone(phone)
                 .totalDiscountPrice(totalDiscountPrice)
                 .memberId(memberId)
+                .sellerId(sellerId)
+                .cancellation(cancellation)
                 .build();
     }
 

@@ -157,10 +157,12 @@ CREATE TABLE `Reservation` (
 	`total_discount_price`	INT UNSIGNED	NULL	DEFAULT 0,
 	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
-	`member_id`	INT	NOT NULL
+	`member_id`	INT	NOT NULL,
+	`seller_id`	INT	NOT NULL    COMMENT '11.9 추가',
+    `cancellation`	TINYINT	NOT NULL	DEFAULT 0	COMMENT '11.9 추가 Boolean 0-예약, 1-취소'
 );
 
-CREATE TABLE `Tag` (
+    CREATE TABLE `Tag` (
 	`tag_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`color`	VARCHAR(20)	NULL,
 	`name`	VARCHAR(255)	NULL,
@@ -261,7 +263,7 @@ ALTER TABLE `Reservation_Item` ADD CONSTRAINT `FK_Reservation_TO_Reservation_Ite
 )
 REFERENCES `Reservation` (
 	`res_id`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Reservation_Item` ADD CONSTRAINT `FK_Item_Schedule_TO_Reservation_Item_1` FOREIGN KEY (
 	`item_schedule_id`
