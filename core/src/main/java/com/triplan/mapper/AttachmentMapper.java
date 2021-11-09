@@ -11,14 +11,11 @@ public interface AttachmentMapper {
 
     void insert(List<AttachmentVO> attachmentList);
 
-
-    int delete(@Param("tableType") String tableType, @Param("id") int id);
-
-    List<AttachmentVO> select(@Param("aboutTableType") String aboutTableType, @Param("idInTableType") int idInTableType);
-
-    List<AttachmentVO> selectAll();
+    int delete(@Param("aboutTableType") String aboutTableType, @Param("idInTableType") Integer id);
 
     void deleteByAttachmentId(Integer attachmentId);
+
+    List<AttachmentVO> select(@Param("aboutTableType") String aboutTableType, @Param("idInTableType") Integer idInTableType);
 
     List<AttachmentVO> selectByAttachmentId(List<Integer> attachmentIdList);
 }

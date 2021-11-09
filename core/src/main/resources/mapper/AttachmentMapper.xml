@@ -16,7 +16,7 @@
 
     <select id="select" resultType="AttachmentVO">
         select * from attachment
-        where about_table_type = #{tableType} AND id_in_table_type = #{id}
+        where about_table_type = #{aboutTableType} AND id_in_table_type = #{idInTableType}
     </select>
 
     <select id="selectByAttachmentId" resultType="AttachmentVO">
@@ -29,12 +29,12 @@
 
     <delete id="delete">
         delete from attachment
-        where about_table_type = #{tableType} AND id_in_table_type = #{id}
+        where about_table_type = #{aboutTableType} AND id_in_table_type = #{idInTableType}
     </delete>
 
     <delete id="deleteByAttachmentId">
         delete from attachment
-        where attachment_id = #{id}
+        where attachment_id = #{attachmentId}
     </delete>
 
 

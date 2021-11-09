@@ -12,27 +12,32 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/attachment")
+@RequestMapping("/api/attachments")
 public class ApiAttachmentController {
 
     private final AttachmentService attachmentService;
 
-    @PostMapping("/save") // 파일업로드
-    public String save(@RequestBody List<MultipartFile> files) throws IOException {
+    @PostMapping() // 파일업로드
+    public String save(@RequestBody List<MultipartFile> files,
+                       @RequestParam("aboutTableType") AboutTableType aboutTableType,
+                       @RequestParam("idInTableType") Integer idInTableType
+                       ) throws IOException {
 //        attachmentService.save(files, aboutTableType, idInTableType);
         attachmentService.save(files, AboutTableType.REVIEW, 1); // 테스트 데이터
         return "첨부파일 create 완료";
     }
 
-    @GetMapping("/getList") // 파일목록
-    public String getList() {
+    @GetMapping() // 파일목록
+    public String getList(@RequestParam("aboutTableType") AboutTableType aboutTableType,
+                          @RequestParam("idInTableType") Integer idInTableType) {
 //        attachmentService.getlist(aboutTableType, idInTableType);
         attachmentService.getlist(AboutTableType.REVIEW, 1); // 테스트 데이터
         return "첨부파일 read 완료";
     }
 
-    @DeleteMapping("/remove") // 파일삭제
-    public String remove(@RequestBody List<Integer> attachmentIdList) {
+    @DeleteMapping() // 파일삭제
+    public String remove(@RequestBody List<Integer> attachmentIdList,
+                         @RequestParam("aboutTableType") AboutTableType aboutTableType) {
         List<Integer> idList = new ArrayList<>(); // 테스트 데이터
         idList.add(1);
         idList.add(3);
