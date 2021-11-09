@@ -1,15 +1,17 @@
-package com.triplan.controller;
+package com.triplan.controller.api;
 
 import com.triplan.domain.QuestionVO;
-import com.triplan.mapper.QuestionMapper;
-import com.triplan.service.QuestionService;
+import com.triplan.dto.customer.reponse.QuestionDTO;
+import com.triplan.service.inf.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/questions")
+@RequestMapping("/api/questions")
 @RequiredArgsConstructor
-public class QuestionController<questionVO> {
+public class ApiQuestionController {
 
     private final QuestionService questionService;
 
@@ -28,15 +30,20 @@ public class QuestionController<questionVO> {
     }
 
     @PutMapping("/{questionId}")
-    public String update(@PathVariable int questionId, @RequestBody QuestionVO questionVO){
+    public String update(@PathVariable Integer questionId, @RequestBody QuestionVO questionVO){
         questionService.update(questionId, questionVO);
         return "수정 완료";
     }
 
     @DeleteMapping("/{questionId}")
-    public String delete(@PathVariable int questionId){
+    public String delete(@PathVariable Integer questionId){
         questionService.delete(questionId);
         return "문의글 삭제 완료";
+    }
+
+    @GetMapping("/itemGroups/{itemGroupId}")
+    public List<QuestionDTO> questionList(@PathVariable Integer itemGroupId){
+        return questionService.questionList(itemGroupId);
     }
 }
 

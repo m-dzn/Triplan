@@ -6,9 +6,9 @@
 
     <insert id="insert">
         INSERT INTO question(question_id, title, content, created_at, updated_at,
-                            qna_category_id, member_id, item_group_id, hide)
+                            qna_category_id, member_id, item_group_id, hide, type)
         values (#{questionId},#{title},#{content},#{createdAt},#{updatedAt},#{qnaCategoryId},
-                #{memberId},#{itemGroupId},#{hide})
+                #{memberId},#{itemGroupId},#{hide},#{type})
     </insert>
 
     <select id="select" resultType="com.triplan.domain.QuestionVO">
@@ -26,10 +26,17 @@
         member_id=#{memberId},
         item_group_id=#{itemGroupId},
         hide=#{hide}
+        type=#{type}
         where question_id=#{questionId}
     </update>
 
     <delete id="delete">
         delete from question where  question_id=#{questionId}
     </delete>
+
+    <select id="getQuestionList" resultType="QuestionVO">
+        SELECT *
+        FROM   question
+        WHERE  item_group_id = #{item_group_id}
+    </select>
 </mapper>
