@@ -7,3 +7,4 @@ mybatis:
 app:
   resources:
     location: C:\Users\yeon\Desktop\triplan\Triplan #실제 공통 경로
+    commonUrl: /resources/img
