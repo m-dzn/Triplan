@@ -25,4 +25,5 @@ public interface ItemService {
     void insertItemRoom(ItemRoomRequestDTO itemRoomRequestDTO);
 
     void insertItemFlight(ItemFlightRequestDTO itemFlightRequestDTO);
+
 }

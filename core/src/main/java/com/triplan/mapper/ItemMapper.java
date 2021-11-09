@@ -25,4 +25,7 @@ public interface ItemMapper {
     ItemVO getItemByItemId(@Param("room") ItemCategory room, @Param("itemId") Integer itemId);
 
     //Integer getItemId();
+
+    Integer count(Integer sellerId);
+
 }

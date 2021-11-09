@@ -34,4 +34,10 @@ public class ItemServiceImpl implements ItemService {
     public void itemRemove(Integer itemId) {
         itemMapper.delete(itemId);
     }
+
+    @Override
+    public Integer countItem(Integer sellerId) {
+        return itemMapper.count(sellerId);
+    }
+
 }

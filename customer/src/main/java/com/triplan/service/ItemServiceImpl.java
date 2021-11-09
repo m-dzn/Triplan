@@ -1,6 +1,5 @@
 package com.triplan.service;
 
-import com.sun.org.apache.bcel.internal.generic.INEG;
 import com.triplan.domain.FlightVO;
 import com.triplan.domain.ItemVO;
 import com.triplan.domain.RoomVO;
@@ -16,6 +15,7 @@ import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Objects;
 
 @Service
@@ -99,6 +99,6 @@ public class ItemServiceImpl implements ItemService {
         itemMapper.insert(itemVO);
         flightVO.setItemId(itemVO.getItemId());
         flightMapper.insert(flightVO);
-
     }
+
 }

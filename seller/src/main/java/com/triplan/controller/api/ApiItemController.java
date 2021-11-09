@@ -43,5 +43,10 @@ public class ApiItemController {
 //    @GetMapping("/count/sellers/{sellerId}")
 //    public
 
+    @GetMapping("/count/sellers/{sellerId}")
+    public Integer countItem(@PathVariable Integer sellerId) {
+        return itemService.countItem(sellerId);
+    }
+
 }
 
