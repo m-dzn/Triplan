@@ -40,32 +40,43 @@ public class ApiItemController {
         return "update 성공";
     }
     
-    @DeleteMapping("/{itemId}")
+    @DeleteMapping("/delete/{itemId}")
     public String itemRemove(@PathVariable Integer itemId){
         itemService.itemRemove(itemId);
         return "delete 성공";
     }
 
-    @GetMapping("/ROOM/{itemId}")
+    @GetMapping("/room/{itemId}")
     public ItemRoomResponseDTO readItemDetailRoom(@PathVariable Integer itemId){
         return itemService.getDetailRoomByItemId(ItemCategory.ROOM,itemId);
     }
 
-    @GetMapping("/FLIGHT/{itemId}")
+    @GetMapping("/flight/{itemId}")
     public ItemFlightResponseDTO readItemDetailFlight(@PathVariable Integer itemId){
         return itemService.getDetailFlightByItemId(ItemCategory.FLIGHT,itemId);
     }
 
-    @PostMapping("/ROOM/insert")
+    @PostMapping("/room/insert")
     public String insertItemRoom(@RequestBody ItemRoomRequestDTO itemRoomRequestDTO){
-        itemService.insertItemRoom(itemRoomRequestDTO);
-        return "DTO ROOM insert성공";
+        return itemService.insertItemRoom(itemRoomRequestDTO,ItemCategory.ROOM);
     }
 
-    @PostMapping("/FLIGHT/insert")
+    @PostMapping("/flight/insert")
     public String insertItemFlight(@RequestBody ItemFlightRequestDTO itemFlightRequestDTO){
-        itemService.insertItemFlight(itemFlightRequestDTO);
-        return "DTO Flight insert성공";
+        return itemService.insertItemFlight(itemFlightRequestDTO, ItemCategory.FLIGHT);
+
+    }
+
+    @PutMapping("/room/update/{itemId}")
+    public String updateRoomItem(@PathVariable Integer itemId, @RequestBody ItemRoomRequestDTO itemRoomRequestDTO){
+        return itemService.updateRoomItem(itemId, itemRoomRequestDTO, ItemCategory.ROOM);
+
+    }
+
+    @PutMapping("/flight/update/{itemId}")
+    public String updateFlightItem(@PathVariable Integer itemId, @RequestBody ItemFlightRequestDTO itemFlightRequestDTO){
+        return itemService.updateFlightItem(itemId, itemFlightRequestDTO, ItemCategory.FLIGHT);
+
     }
 
 }

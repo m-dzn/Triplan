@@ -79,26 +79,78 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void insertItemRoom(ItemRoomRequestDTO itemRoomRequestDTO) {
+    public String insertItemRoom(ItemRoomRequestDTO itemRoomRequestDTO,ItemCategory room) {
 
         ItemVO itemVO = itemRoomRequestDTO.toItemVO();
         RoomVO roomVO = itemRoomRequestDTO.toRoomVO();
 
-        itemMapper.insert(itemVO);
-        roomVO.setItemId(itemVO.getItemId());
-        roomMapper.insert(roomVO);
+        if(itemVO.getItemCategory().equals(room)) {
+            itemMapper.insert(itemVO);
+            roomVO.setItemId(itemVO.getItemId());
+            roomMapper.insert(roomVO);
+
+            return "ItemCatgory MACTH insert Success";
+        }
+        else
+            return "ItemCatgory MISMACTH insert Fail";
 
     }
 
     @Override
-    public void insertItemFlight(ItemFlightRequestDTO itemFlightRequestDTO) {
+    public String insertItemFlight(ItemFlightRequestDTO itemFlightRequestDTO, ItemCategory flight) {
 
         ItemVO itemVO = itemFlightRequestDTO.toItemVO();
         FlightVO flightVO = itemFlightRequestDTO.toFlightVO();
 
-        itemMapper.insert(itemVO);
-        flightVO.setItemId(itemVO.getItemId());
-        flightMapper.insert(flightVO);
+        if(itemVO.getItemCategory().equals(flight)) {
+            itemMapper.insert(itemVO);
+            flightVO.setItemId(itemVO.getItemId());
+            flightMapper.insert(flightVO);
+
+            return "ItemCatgory MACTH Insert Success";
+        }
+        else
+            return "ItemCatgory MISMACTH Insert Fail";
+
+    }
+
+    @Override
+    public String  updateRoomItem(Integer itemId, ItemRoomRequestDTO itemRoomRequestDTO, ItemCategory room) {
+
+        ItemVO itemVO = itemRoomRequestDTO.toItemVO();
+        RoomVO roomVO = itemRoomRequestDTO.toRoomVO();
+
+        if(itemVO.getItemCategory().equals(room)) {
+
+            itemVO.setItemId(itemId);
+            itemMapper.update(itemVO);
+            roomVO.setItemId(itemVO.getItemId());
+            roomMapper.updateByItemId(roomVO);
+
+            return "ItemCatgory MACTH Update Success";
+        }
+        else
+            return "ItemCatgory MISMACTH Update Fail";
+
+    }
+
+    @Override
+    public String updateFlightItem(Integer itemId, ItemFlightRequestDTO itemFlightRequestDTO,ItemCategory flight) {
+
+        ItemVO itemVO = itemFlightRequestDTO.toItemVO();
+        FlightVO flightVO = itemFlightRequestDTO.toFlightVO();
+
+        if(itemVO.getItemCategory().equals(flight)) {
+
+            itemVO.setItemId(itemId);
+            itemMapper.update(itemVO);
+            flightVO.setItemId(itemVO.getItemId());
+            flightMapper.updateByItemId(flightVO);
+
+            return "ItemCatgory MACTH Update Success";
+        }
+        else
+            return "ItemCatgory MISMACTH Update Fail";
 
     }
 }

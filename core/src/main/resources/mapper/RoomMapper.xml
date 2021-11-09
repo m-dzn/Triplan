@@ -46,4 +46,14 @@
         WHERE item_id = #{itemId}
     </select>
 
+    <update id="updateByItemId">
+        UPDATE  room
+           SET
+                number_of_person    = IFNULL(   #{numberOfPerson},  number_of_person    ),
+                max_person          = IFNULL(   #{maxPerson},       max_person          ),
+                img                 = IFNULL(   #{img},             img                 )
+         WHERE
+                item_id = #{itemId}
+    </update>
+
 </mapper>

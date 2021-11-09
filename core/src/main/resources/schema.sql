@@ -271,3 +271,17 @@ REFERENCES `Item_Schedule` (
 	`item_schedule_id`
 );
 
+ALTER TABLE `Flight` ADD CONSTRAINT `FK_Flight_TO_Item_1` FOREIGN KEY (
+	`item_id`
+)
+REFERENCES `Item` (
+	`item_id`
+)ON DELETE CASCADE;
+
+ALTER TABLE `Room` ADD CONSTRAINT `FK_Room_TO_Item_1` FOREIGN KEY (
+	`item_id`
+)
+REFERENCES `Item` (
+	`item_id`
+)ON DELETE CASCADE;
+

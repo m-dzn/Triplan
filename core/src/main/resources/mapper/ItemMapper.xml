@@ -30,7 +30,7 @@
         WHERE   item_id = #{itemId}
     </select>
 
-    <update id="update">
+    <update id="update" useGeneratedKeys="true" keyProperty="itemId">
         UPDATE  item
         SET
                 name            = IFNULL(     #{name},            name            ),

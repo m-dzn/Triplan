@@ -22,7 +22,11 @@ public interface ItemService {
 
     ItemFlightResponseDTO getDetailFlightByItemId(ItemCategory flight, Integer itemId);
 
-    void insertItemRoom(ItemRoomRequestDTO itemRoomRequestDTO);
+    String insertItemRoom(ItemRoomRequestDTO itemRoomRequestDTO, ItemCategory room);
 
-    void insertItemFlight(ItemFlightRequestDTO itemFlightRequestDTO);
+    String insertItemFlight(ItemFlightRequestDTO itemFlightRequestDTO, ItemCategory flight);
+
+    String updateRoomItem(Integer itemId, ItemRoomRequestDTO itemRoomRequestDTO, ItemCategory room);
+
+    String updateFlightItem(Integer itemId, ItemFlightRequestDTO itemFlightRequestDTO, ItemCategory flight);
 }
