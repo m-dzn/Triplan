@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.triplan.mapper.ReservationMapper">
 
-     <insert id="insert">
+     <insert id="insert" useGeneratedKeys="true" keyProperty="resId">
          INSERT INTO reservation (
             item_category,
             total_price,
@@ -13,7 +13,8 @@
             name,
             phone,
             total_discount_price,
-            member_id
+            member_id,
+            seller_id
          ) VALUES (
             #{itemCategory},
             #{totalPrice},
@@ -22,7 +23,8 @@
             #{name},
             #{phone},
             #{totalDiscountPrice},
-            #{memberId}
+            #{memberId},
+            #{sellerId}
          )
     </insert>
 
@@ -41,7 +43,10 @@
                 end_date                = IFNULL(   #{endDate},             end_date                ),
                 name                    = IFNULL(   #{name},                name                    ),
                 phone                   = IFNULL(   #{phone},               phone                   ),
-                total_discount_price    = IFNULL(   #{totalDiscountPrice},  total_discount_price    )
+                total_discount_price    = IFNULL(   #{totalDiscountPrice},  total_discount_price    ),
+                seller_id               = IFNULL(   #{sellerId},            seller_id               ),
+                cancellation            = IFNULL(   #{cancellation},        cancellation            ),
+                updated_at = CURRENT_TIMESTAMP
         WHERE   res_id = #{resId}
     </update>
 
@@ -51,10 +56,24 @@
         WHERE   res_id = #{resId}
     </delete>
 
+    <insert id="insertResItem">
+        INSERT INTO reservation_item(res_id, item_schedule_id)
+        VALUES      (#{resId}, #{itemScheduleId})
+    </insert>
+
+    <update id="cancel">
+        UPDATE  reservation
+        SET
+            cancellation = 1,
+            updated_at   = CURRENT_TIMESTAMP
+        WHERE   res_id = #{resId}
+    </update>
+    
     <select id="myResList" resultType="ReservationVO">
         SELECT      *
         FROM        reservation
-        WHERE       member_id = #{member_id}
+        WHERE       member_id = #{memberId}
+          AND         cancellation != 1
         ORDER BY    start_date desc
     </select>
 
@@ -68,6 +87,7 @@
         FROM        reservation
         WHERE       member_id = #{member_id}
           AND         formatdatetime(start_date, 'yyyyMMdd') >= formatdatetime(now(), 'yyyyMMdd')
+          AND         cancellation != 1
         ORDER BY    start_date desc
     </select>
 
@@ -76,7 +96,18 @@
         FROM        reservation
         WHERE       member_id = #{member_id}
           AND         formatdatetime(now(), 'yyyyMMdd') > formatdatetime(start_date, 'yyyyMMdd')
+          AND         cancellation != 1
         ORDER BY    start_date desc
     </select>
+
+    <select id="myCancelledResList" resultType="ReservationVO">
+        SELECT      *
+        FROM        reservation
+        WHERE       member_id = #{member_id}
+          AND         cancellation = 1
+        ORDER BY    updated_at desc
+    </select>
+
+
 
 </mapper>

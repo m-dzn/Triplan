@@ -3,6 +3,7 @@ package com.triplan.mapper;
 import com.triplan.domain.ReservationVO;
 import com.triplan.dto.ReservationDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +23,10 @@ public interface ReservationMapper {
     List<ReservationVO> myUpcomingResList(Integer memberId);
 
     List<ReservationVO> myPastResList(Integer memberId);
+
+    List<ReservationVO> myCancelledResList(Integer memberId);
+
+    void insertResItem(@Param("resId") Integer resId, @Param("itemScheduleId") Integer itemScheduleId);
+
+    void cancel(ReservationDTO reservationDTO);
 }

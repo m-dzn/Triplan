@@ -41,6 +41,22 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public void reserve(Integer itemScheduleId, ReservationDTO reservationDTO) {
+        ReservationVO reservationVO = reservationDTO.toVO();
+        reservationMapper.insert(reservationVO);
+        // 생성된 res_id 불러오기
+        Integer resId = reservationVO.getResId();
+        // resId - resId 매칭하여 RESERVATION_ITEM 테이블에 insert
+        reservationMapper.insertResItem(resId, itemScheduleId);
+    }
+
+    @Override
+    public void cancel(Integer resId, ReservationDTO reservationDTO) {
+        reservationDTO.setResId(resId);
+        reservationMapper.cancel(reservationDTO);
+    }
+
+    @Override
     public List<ReservationDTO> myResList(Integer memberId) {
         List<ReservationVO> reservationVOList = reservationMapper.myResList(memberId);
         List<ReservationDTO> reservationDTOList = reservationVOList.stream()
@@ -66,6 +82,16 @@ public class ReservationServiceImpl implements ReservationService {
                 .map(ReservationDTO::of).collect(Collectors.toList());
         return reservationDTOList;
     }
+
+    @Override
+    public List<ReservationDTO> myCancelledResList(Integer memberId) {
+        List<ReservationVO> reservationVOList = reservationMapper.myCancelledResList(memberId);
+        List<ReservationDTO> reservationDTOList = reservationVOList.stream()
+                .map(ReservationDTO::of).collect(Collectors.toList());
+        return reservationDTOList;
+    }
+
+
 
 
 }
