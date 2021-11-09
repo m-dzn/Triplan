@@ -12,4 +12,6 @@ public interface ItemService {
 
     void itemRemove(Integer itemId);
 
+    Integer countItem(Integer sellerId);
+
 }

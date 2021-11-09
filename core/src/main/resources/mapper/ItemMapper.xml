@@ -70,4 +70,14 @@
           FROM item
     </select>
 
+    <select id="count" resultType="int">
+        SELECT  COUNT(*)
+        FROM    item
+        WHERE   item_group_id IN (
+        SELECT  item_group_id
+        FROM    item_group
+        WHERE   seller_id = #{sellerId}
+        )
+    </select>
+
 </mapper>
