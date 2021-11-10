@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.QuestionMapper">
+
+    <insert id="insert">
+        INSERT INTO question(question_id, title, content, created_at, updated_at,
+                            qna_category_id, member_id, item_group_id, hide, type)
+        values (#{questionId},#{title},#{content},#{createdAt},#{updatedAt},#{qnaCategoryId},
+                #{memberId},#{itemGroupId},#{hide},#{type})
+    </insert>
+
+    <select id="select" resultType="com.triplan.domain.QuestionVO">
+        SELECT * FROM question where question_id=${questionId}
+    </select>
+
+    <update id="update">
+        update question
+        set question_id=#{questionId},
+        title=#{title},
+        content=#{content},
+        created_at=#{createdAt},
+        updated_at=#{updatedAt},
+        qna_category_id=#{qnaCategoryId},
+        member_id=#{memberId},
+        item_group_id=#{itemGroupId},
+        hide=#{hide}
+        type=#{type}
+        where question_id=#{questionId}
+    </update>
+
+    <delete id="delete">
+        delete from question where  question_id=#{questionId}
+    </delete>
+
+    <select id="getQuestionList" resultType="QuestionVO">
+        SELECT *
+        FROM   question
+        WHERE  item_group_id = #{item_group_id}
+    </select>
+</mapper>
