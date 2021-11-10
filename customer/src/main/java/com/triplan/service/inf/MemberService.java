@@ -1,6 +1,11 @@
 package com.triplan.service.inf;
 
 import com.triplan.domain.MemberVO;
+import com.triplan.dto.MemberProfileDTO;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
 
 public interface MemberService {
 
@@ -21,4 +26,6 @@ public interface MemberService {
     Integer emailCheck(String email);
 
     Integer nicknameCheck(String nickname);
+
+    MemberVO updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> file) throws IOException;
 }
