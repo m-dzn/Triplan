@@ -187,6 +187,11 @@ CREATE TABLE `Coupon` (
 	`updated_at`	TIMESTAMP	NULL	COMMENT 'ON UPDATE CURRENT_TIMESTAMP'
 );
 
+CREATE TABLE `Member_Coupon` (
+    `member_id`     INT NOT NULL,
+    `coupon_id`     INT NOT NULL
+);
+
 CREATE TABLE `Wishlist` (
 	`wishlist_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
@@ -271,4 +276,18 @@ ALTER TABLE `Reservation_Item` ADD CONSTRAINT `FK_Item_Schedule_TO_Reservation_I
 REFERENCES `Item_Schedule` (
 	`item_schedule_id`
 );
+
+ALTER TABLE `Member_Coupon` ADD CONSTRAINT `FK_Coupon_TO_Member_Coupon_1` FOREIGN KEY (
+	`coupon_id`
+)
+REFERENCES `Coupon` (
+	`coupon_id`
+) ON DELETE CASCADE;
+
+ALTER TABLE `Member_Coupon` ADD CONSTRAINT `FK_Member_TO_Member_Coupon1` FOREIGN KEY (
+	`member_id`
+)
+REFERENCES `Member` (
+    `member_id`
+) ON DELETE CASCADE;
 
