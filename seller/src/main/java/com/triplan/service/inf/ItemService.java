@@ -1,6 +1,9 @@
 package com.triplan.service.inf;
 
 import com.triplan.domain.ItemVO;
+import com.triplan.dto.seller.response.ItemDTO;
+
+import java.util.List;
 
 public interface ItemService {
 
@@ -14,4 +17,7 @@ public interface ItemService {
 
     Integer countItem(Integer sellerId);
 
+    List<ItemDTO> itemList(Integer itemId);
+
+    List<ItemVO> itemListBySellerId(Integer sellerId);
 }

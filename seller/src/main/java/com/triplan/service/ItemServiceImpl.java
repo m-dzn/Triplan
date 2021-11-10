@@ -1,11 +1,15 @@
 package com.triplan.service;
 
 import com.triplan.domain.ItemVO;
+import com.triplan.dto.seller.response.ItemDTO;
 import com.triplan.mapper.ItemMapper;
 import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +42,20 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Integer countItem(Integer sellerId) {
         return itemMapper.count(sellerId);
+    }
+
+
+    @Override
+    public List<ItemDTO> itemList(Integer itemId) {
+        List<ItemVO> listVO = itemMapper.getItemList(itemId);
+        List<ItemDTO> res = listVO.stream().map(ItemDTO::of).collect(Collectors.toList());
+        return res;
+    }
+
+    @Override
+    public List<ItemVO> itemListBySellerId(Integer sellerId) {
+        List<ItemVO> listVO = itemMapper.getItemBySellerId(sellerId);
+        return listVO;
     }
 
 }

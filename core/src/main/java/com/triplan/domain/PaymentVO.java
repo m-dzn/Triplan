@@ -22,6 +22,7 @@ public class PaymentVO extends BaseVO {
     private PaymentType type;
     private Integer totalPayment;
     private LocalDateTime paymentDeadline;
+    private LocalDateTime paidAt;
 
     // Default 값이 있는 NOT NULL 필드
     private PaymentState state;

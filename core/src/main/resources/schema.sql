@@ -89,6 +89,7 @@ CREATE TABLE `Payment` (
 	`total_payment`	INT UNSIGNED	NOT NULL,
 	`payment_deadline`	TIMESTAMP	NOT NULL,
 	`state`	VARCHAR(20)	NOT NULL	DEFAULT 'UNPAID',
+	`paid_at`	TIMESTAMP	NOT NULL,
 	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
 	`res_id`	INT	NOT NULL

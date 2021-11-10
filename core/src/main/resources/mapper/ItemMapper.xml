@@ -73,11 +73,24 @@
     <select id="count" resultType="int">
         SELECT  COUNT(*)
         FROM    item
-        WHERE   item_group_id IN (
-        SELECT  item_group_id
-        FROM    item_group
-        WHERE   seller_id = #{sellerId}
-        )
+        WHERE   item_group_id IN (  SELECT  item_group_id
+                                    FROM    item_group
+                                    WHERE   seller_id = #{sellerId} )
+    </select>
+
+    <select id="getItemList" resultType="ItemVO">
+        SELECT *
+        FROM   item
+        WHERE  item_id = #{itemId}
+    </select>
+
+    <select id="getItemBySellerId" resultType="ItemVO">
+        SELECT name, sales_volume
+        FROM   item
+        WHERE  item_group_id IN (   SELECT seller_id
+                                    FROM   item_group
+                                    WHERE  seller_id = #{sellerId} )
+        ORDER BY sales_volume DESC
     </select>
 
 </mapper>

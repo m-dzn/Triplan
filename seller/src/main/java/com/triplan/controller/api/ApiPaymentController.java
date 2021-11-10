@@ -1,9 +1,12 @@
 package com.triplan.controller.api;
 
 import com.triplan.domain.PaymentVO;
+import com.triplan.dto.seller.response.PaymentResponseDTO;
 import com.triplan.service.inf.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/payments")
@@ -37,5 +40,8 @@ public class ApiPaymentController {
 
     // 메인 페이지
     // 매출 (Daily, Weekly)
-
+    @GetMapping("/sellers/{sellerId}")
+    public List<PaymentResponseDTO> readSellerId(@PathVariable Integer sellerId){
+        return paymentService.readSellerId(sellerId);
+    }
 }
