@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class CouponVO extends BaseVO {
 
     // 식별자 필드
