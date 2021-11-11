@@ -306,6 +306,10 @@ ALTER TABLE `Coupon` ADD CONSTRAINT `PK_COUPON` PRIMARY KEY (
 	`coupon_id`
 );
 
+ALTER TABLE `Member_Coupon` ADD CONSTRAINT `PK_MEMBER_COUPON` PRIMARY KEY (
+    `member_coupon_id`
+);
+
 ALTER TABLE `Wishlist` ADD CONSTRAINT `PK_WISHLIST` PRIMARY KEY (
 	`wishlist_id`
 );
