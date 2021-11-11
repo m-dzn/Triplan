@@ -10,6 +10,7 @@ import lombok.ToString;
 @ToString
 public class MemberProfileDTO {
 
+
     private Integer memberId;
     private String profileImg;
     private String nickname;
