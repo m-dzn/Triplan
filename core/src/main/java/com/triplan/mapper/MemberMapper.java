@@ -12,6 +12,15 @@ public interface MemberMapper {
 
     void update(MemberVO memberVO);
 
+    void updateBasicInfo(MemberVO memberVO);
+
+    void updateEmail(MemberVO memberVO);
+
+    void updatePassword(MemberVO memberVO);
+
     void delete(Integer memberId);
 
+    Integer emailCheck(String email);
+
+    Integer nicknameCheck(String nickname);
 }
