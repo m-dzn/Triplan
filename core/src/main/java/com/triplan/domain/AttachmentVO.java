@@ -62,6 +62,6 @@ public class AttachmentVO {
     }
 
     public String getUrl() {
-        return  uploadPath+"/"+originFileName+"."+fileExtension;
+        return  uploadPath+"/"+serverFileName+"."+fileExtension;
     }
 }
