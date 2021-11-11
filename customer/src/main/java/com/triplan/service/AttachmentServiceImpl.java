@@ -17,7 +17,6 @@ import java.util.List;
 public class AttachmentServiceImpl implements AttachmentService {
 
     private final AttachmentMapper attachmentMapper;
-    private final AttachmentUtil attachmentUtil;
 
     @Override
     public void save(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType) throws IOException {
