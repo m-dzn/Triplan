@@ -30,9 +30,10 @@ public class ApiCouponController {
     }
 
     @DeleteMapping("/{couponId}")
-    public String roomDelete(@PathVariable Integer couponId) {
+    public String delete(@PathVariable Integer couponId) {
         couponService.delete(couponId);
         return "쿠폰 delete 성공";
     }
+
 
 }

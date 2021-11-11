@@ -20,12 +20,8 @@ public class CouponDTO {
     private Integer num;
     private Long price;
 
-    private Boolean usage1;
-
     private String condition;
-    private LocalDateTime deadline;
-
-    private Integer resId;
+    private LocalDateTime expiredAt;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt;
@@ -39,10 +35,8 @@ public class CouponDTO {
                 .name(couponVO.getName())
                 .num(couponVO.getNum())
                 .price(couponVO.getPrice())
-                .usage1(couponVO.getUsage1())
                 .condition(couponVO.getCondition())
-                .deadline(couponVO.getDeadline())
-                .resId(couponVO.getResId())
+                .expiredAt(couponVO.getExpiredAt())
                 .createdAt(couponVO.getCreatedAt())
                 .updatedAt(couponVO.getUpdatedAt())
                 .build();
@@ -54,10 +48,8 @@ public class CouponDTO {
                 .name(name)
                 .num(num)
                 .price(price)
-                .usage1(usage1)
                 .condition(condition)
-                .deadline(deadline)
-                .resId(resId)
+                .expiredAt(expiredAt)
                 .build();
     }
 

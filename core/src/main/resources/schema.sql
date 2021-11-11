@@ -156,7 +156,7 @@ CREATE TABLE `Reservation` (
 	`phone`	VARCHAR(45)	NOT NULL,
 	`total_discount_price`	INT UNSIGNED	NULL	DEFAULT 0,
 	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL,
+	`updated_at`	TIMESTAMP	NULL        ON UPDATE CURRENT_TIMESTAMP,
 	`member_id`	INT	NOT NULL,
 	`seller_id`	INT	NOT NULL    COMMENT '11.9 추가',
     `cancellation`	TINYINT	NOT NULL	DEFAULT 0	COMMENT '11.9 추가 Boolean 0-예약, 1-취소'
@@ -180,16 +180,18 @@ CREATE TABLE `Coupon` (
 	`num`	INT	NULL	COMMENT '쿠폰 등록시 입력하면 쿠폰 등록',
 	`price`	INT UNSIGNED	NOT NULL,
 	`condition`	VARCHAR(200)	NULL,
-	`usage1`	TINYINT	NULL    DEFAULT 0	COMMENT '0(미사용) / 1(사용)',
-	`res_id`	INT	NULL	COMMENT '예약 id Foreign key로 들고와서 조인해서 사용',
-	`deadline`	TIMESTAMP	NULL,
+	`expired_at`	TIMESTAMP	NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL	COMMENT 'ON UPDATE CURRENT_TIMESTAMP'
+	`updated_at`	TIMESTAMP	NULL	    ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `Member_Coupon` (
+    `member_coupon_id`	INT PRIMARY KEY AUTO_INCREMENT,
     `member_id`     INT NOT NULL,
-    `coupon_id`     INT NOT NULL
+    `coupon_id`     INT NOT NULL,
+    `usage1`	TINYINT	NULL    DEFAULT 0	COMMENT '0(미사용) / 1(사용)',
+    `used_at`	TIMESTAMP	NULL,
+    `res_id`	INT	NULL	COMMENT '예약 id Foreign key로 들고와서 조인해서 사용'
 );
 
 CREATE TABLE `Wishlist` (
@@ -263,31 +265,49 @@ REFERENCES `Tag` (
 	`tag_id`
 );
 
+ALTER TABLE `Reservation` ADD CONSTRAINT `FK_Member_TO_Reservation` FOREIGN KEY (
+    `member_id`
+) REFERENCES `Member` (
+    `member_id`
+) ON UPDATE CASCADE ON DELETE SET NULL;
+
+ALTER TABLE `Reservation` ADD CONSTRAINT `FK_Seller_TO_Reservation` FOREIGN KEY (
+    `seller_id`
+) REFERENCES `Seller` (
+    `seller_id`
+) ON UPDATE CASCADE ON DELETE SET NULL;
+
 ALTER TABLE `Reservation_Item` ADD CONSTRAINT `FK_Reservation_TO_Reservation_Item_1` FOREIGN KEY (
 	`res_id`
 )
 REFERENCES `Reservation` (
 	`res_id`
-) ON DELETE CASCADE;
+) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE `Reservation_Item` ADD CONSTRAINT `FK_Item_Schedule_TO_Reservation_Item_1` FOREIGN KEY (
 	`item_schedule_id`
 )
 REFERENCES `Item_Schedule` (
 	`item_schedule_id`
-);
+) ON UPDATE CASCADE ON DELETE SET NULL;
 
 ALTER TABLE `Member_Coupon` ADD CONSTRAINT `FK_Coupon_TO_Member_Coupon_1` FOREIGN KEY (
 	`coupon_id`
 )
 REFERENCES `Coupon` (
 	`coupon_id`
-) ON DELETE CASCADE;
+) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE `Member_Coupon` ADD CONSTRAINT `FK_Member_TO_Member_Coupon1` FOREIGN KEY (
 	`member_id`
 )
 REFERENCES `Member` (
     `member_id`
-) ON DELETE CASCADE;
+) ON UPDATE CASCADE ON DELETE CASCADE;
 
+ALTER TABLE `Member_Coupon` ADD CONSTRAINT `FK_Reservation_TO_Member_Coupon1` FOREIGN KEY (
+    `res_id`
+)
+REFERENCES `Reservation` (
+    `res_id`
+) ON UPDATE CASCADE ON DELETE CASCADE;

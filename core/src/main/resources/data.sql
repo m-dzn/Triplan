@@ -26,7 +26,7 @@ VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);
 INSERT INTO reservation_item (res_id, item_schedule_id)
 VALUES (1, 1);
 
-INSERT INTO coupon(name, num, price, condition, deadline)
+INSERT INTO coupon(name, num, price, condition, expired_at)
 VALUES ('쿠폰1', 1234, 1000, '숙박대전 이벤트', '2021-11-10T12:00:00');
 
 INSERT INTO member_coupon (member_id, coupon_id)

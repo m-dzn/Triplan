@@ -10,13 +10,13 @@
             num,
             price,
             condition,
-            deadline
+            expired_at
         ) VALUES (
             #{name},
             #{num},
             #{price},
             #{condition},
-            #{deadline}
+            #{expiredAt}
         )
     </insert>
 
@@ -32,11 +32,8 @@
                 name                = IFNULL(   #{name},            name                ),
                 num                 = IFNULL(   #{num},             num                 ),
                 price               = IFNULL(   #{price},           price               ),
-                usage1              = IFNULL(   #{usage1},          usage1              ),
                 condition           = IFNULL(   #{condition},       condition           ),
-                deadline            = IFNULL(   #{deadline},        deadline            ),
-                res_id              = IFNULL(   #{resId},           res_id              ),
-                updated_at          = CURRENT_TIMESTAMP
+                expired_at          = IFNULL(   #{expiredAt},       expired_at          )
         WHERE
             coupon_id = #{couponId}
     </update>
@@ -46,5 +43,11 @@
         FROM    coupon
         WHERE   coupon_id = #{couponId}
     </delete>
+
+
+
+
+
+
 
 </mapper>
