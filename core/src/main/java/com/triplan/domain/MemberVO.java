@@ -37,5 +37,9 @@ public class MemberVO extends BaseVO {
     private LocalDateTime deletedAt;
 
     // 외래키
+
+    // 중복검사 필드
+    private Integer nicknameCheck;
+    private Integer emailCheck;
     
 }
