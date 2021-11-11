@@ -1,28 +1,21 @@
 package com.triplan.controller.api;
 
 import com.triplan.domain.MemberVO;
+import com.triplan.dto.MemberProfileDTO;
 import com.triplan.service.inf.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.lang.reflect.Member;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/members")
 @RequiredArgsConstructor
 public class ApiMemberController {
-/*   // 회원정보 수정 화면 구현 : GET방식
-    @GetMapping("/memberModify")
-    public String memberModifyGET(HttpServletRequest req, Model model, MemberVO memverVO) throws Exception {
-
-        HttpSession session = req.getSession();
-
-        MemberVO member = (MemberVO) session.getAttribute("member");
-        MemberVO modifyMember = memberService.getMember(member.getMemberId());
-
-        model.addAttribute("modifyNickname", modifyMember.getNickname());
-
-        return "memberModify";
-    }
-*/
 
     private final MemberService memberService;
 
@@ -79,8 +72,5 @@ public class ApiMemberController {
         Integer result = memberService.nicknameCheck(nickname);
         return result;
     }
-
-
-
 
 }

@@ -39,9 +39,6 @@ public class MemberVO extends BaseVO {
     // 외래키
 
     // 중복검사 필드
-    // 참고자료 = https://sincerity.tistory.com/342
-    // 나중에 mybatis boolean으로 하는 법 찾아보기
-
     private Integer nicknameCheck;
     private Integer emailCheck;
     
