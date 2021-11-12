@@ -16,5 +16,4 @@ public interface FlightMapper {
 
     FlightVO getFlightByItemId(Integer itemId);
 
-    void updateByItemId(FlightVO flightVO);
 }

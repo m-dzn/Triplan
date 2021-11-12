@@ -55,18 +55,4 @@
         WHERE item_id = #{itemId}
     </select>
 
-    <update id="updateByItemId">
-        UPDATE  flight
-           SET
-                departure   = IFNULL(   #{departure},      departure    ),
-                destination = IFNULL(   #{destination},    destination  ),
-                flight_type = IFNULL(   #{flightType},     flight_type  ),
-                seat_class  = IFNULL(   #{seatClass},      seat_class   ),
-                min_age     = IFNULL(   #{minAge},         min_age      ),
-                max_age     = IFNULL(   #{maxAge},         max_age      )
-         WHERE
-                item_id   = #{itemId}
-
-    </update>
-
 </mapper>
