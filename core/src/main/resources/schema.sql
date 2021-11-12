@@ -109,9 +109,10 @@ CREATE TABLE `Question` (
 CREATE TABLE `Review` (
 	`review_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`content`	VARCHAR(1000)	NOT NULL,
-	`created_at`	TIMESTAMP	NOT NULL,
+	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
-	`review_score`	INT	NOT NULL	DEFAULT 0	COMMENT 'Boolean -> Enum으로 수정',
+	`review_img`	VARCHAR(200)	NULL,
+	`review_score`	TINYINT	NOT NULL	DEFAULT 0	COMMENT 'Boolean -> Enum으로 수정',
 	`member_id`	VARCHAR(255)	NOT NULL,
 	`item_id`	INT	NOT NULL
 );
@@ -158,11 +159,10 @@ CREATE TABLE `Reservation` (
 	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
 	`member_id`	INT	NOT NULL,
-	`seller_id`	INT	NOT NULL    COMMENT '11.9 추가',
-    `cancellation`	TINYINT	NOT NULL	DEFAULT 0	COMMENT '11.9 추가 Boolean 0-예약, 1-취소'
+	`seller_id` INT NOT NULL
 );
 
-    CREATE TABLE `Tag` (
+CREATE TABLE `Tag` (
 	`tag_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`color`	VARCHAR(20)	NULL,
 	`name`	VARCHAR(255)	NULL,
@@ -263,7 +263,7 @@ ALTER TABLE `Reservation_Item` ADD CONSTRAINT `FK_Reservation_TO_Reservation_Ite
 )
 REFERENCES `Reservation` (
 	`res_id`
-) ON DELETE CASCADE;
+);
 
 ALTER TABLE `Reservation_Item` ADD CONSTRAINT `FK_Item_Schedule_TO_Reservation_Item_1` FOREIGN KEY (
 	`item_schedule_id`

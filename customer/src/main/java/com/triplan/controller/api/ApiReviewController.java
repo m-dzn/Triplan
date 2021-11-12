@@ -5,6 +5,9 @@ import com.triplan.service.inf.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+
 @RestController
 @RequestMapping("/api/reviews")
 @RequiredArgsConstructor
@@ -35,5 +38,13 @@ public class ApiReviewController {
         reviewService.reviewDelete(reviewId);
         return "정보 삭제 완료";
     }
+
+    @GetMapping("/list")
+    public List<ReviewVO> reviewList(){
+        List<ReviewVO> list = reviewService.reviewList();
+        return list;
+    }
+
+
 
 }
