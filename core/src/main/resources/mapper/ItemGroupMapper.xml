@@ -71,4 +71,14 @@
          WHERE item_group_id = #{itemGroupId}
     </select>
 
+    <select id="selectAll" parameterType="list" resultType="ItemGroupVO">
+        SELECT *
+          FROM item_group
+         WHERE item_group_id
+            IN
+        <foreach collection="list" item="itemGroup" separator="," open="(" close=")">
+        #{itemGroup.itemGroupId}
+    </foreach>
+    </select>
+
 </mapper>

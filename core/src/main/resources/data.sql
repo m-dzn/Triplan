@@ -23,7 +23,12 @@ VALUES ('ROOM', 50000, '2021-11-1T01:01:01', '2021-12-31T23:59:59', '양경호',
 
 
 INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
-VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);
+VALUES (70000, 1, '2021-12-1T01:01:01', '2021-12-31T23:59:59', 1);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (100000, 2, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 2);
+
 
 INSERT INTO reservation_item (res_id, item_schedule_id)
 VALUES (1, 1);

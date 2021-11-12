@@ -1,6 +1,7 @@
 package com.triplan.dto.customer.response;
 
 import com.triplan.domain.ItemGroupVO;
+import com.triplan.domain.ItemVO;
 import com.triplan.enumclass.ItemCategory;
 import lombok.*;
 
@@ -29,7 +30,8 @@ public class ItemGroupResponseDTO {
     private Integer lat;
     private Integer lng;
 
-    private List<ItemRoomResponseDTO> itemList;
+    private List<ItemRoomResponseDTO> itemRoomList;
+    private List<ItemFlightResponseDTO> itemFlightList;
 
     public static ItemGroupResponseDTO of(ItemGroupVO vo) {
 

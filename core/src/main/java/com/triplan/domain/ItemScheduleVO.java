@@ -28,5 +28,6 @@ public class ItemScheduleVO extends BaseVO {
     private Long discountPrice;
 
     // 외래키
+    private Integer itemId;
 
 }
