@@ -40,7 +40,7 @@ public class Pagination <T> {
         this.list = list;
 
         // 현재 페이지를 pageSize 로 나눈 후 소수점은 내림하는 효과
-        // ex) (15 / 10) * 10 + 1 = 1(내림) * 10 + 1 = 11
+        // ex) (15 / 10) * 10 + 1 = 1 * 10 + 1 = 11
         startPage = (currentPage - 1) / pageSize * pageSize + 1;
 
         // 계산된 마지막 페이지
