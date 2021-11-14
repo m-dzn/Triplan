@@ -49,6 +49,7 @@ public class Pagination <T> {
         totalPages = totalElements / pageSize                   // 아이템으로 꽉 채워진 페이지 수
                 + (totalElements % pageSize == 0 ? 0 : 1);      // 나머지가 있을 경우 덜 채워진 잔여 1페이지 추가
 
+        // 실제 마지막 페이지
         endPage = Math.min(calculatedEndPage, totalPages);
 
         // Prev, Next 버튼 활성화 관련 속성 초기화
