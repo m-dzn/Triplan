@@ -16,6 +16,8 @@ public class Pagination <T> {
     // 입력 받을 페이징 정보
     private Integer pageSize;
     private Integer currentPage;
+
+    // DB 함수로 집계할 페이징 정보
     private Integer totalElements;
 
     // 계산할 페이징 정보
