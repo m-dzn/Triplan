@@ -33,6 +33,41 @@ VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 2);
 INSERT INTO reservation_item (res_id, item_schedule_id)
 VALUES (1, 1);
 
+/* Tag 그룹 */
+INSERT INTO Tag (color,name,icon)
+VALUES('#ffdbdb','시즌이벤트','1번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#ffeddb','호텔','2번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#ffffdb','감성충만','3번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#edffdb','4번','4번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#dbffdb','5번','5번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#dbffed','선착순이벤트','6번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#dbffff','국내선','7번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#dbedff','마감임박','8번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#dbdbff','9번','9번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#eddbff','10번','10번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#ffdbff','11번','11번');
+INSERT INTO Tag (color,name,icon)
+VALUES('#ffdbed','12번','12번');
+/* Tag_Group */
+INSERT INTO Item_Group_Tag (item_group_id,tag_id)
+VALUES(1,1);
+INSERT INTO Item_Group_Tag (item_group_id,tag_id)
+VALUES(1,2);
+INSERT INTO Item_Group_Tag (item_group_id,tag_id)
+VALUES(1,3);
+
+
+
 /* Flight 아이템 그룹 (식별자: 2번) */
 INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id)
 VALUES ('에어 부산 김해 -> 김포', '안내사항 요약', '상세 안내사항', 'FLIGHT', '부산광역시 해운대구', 1);
@@ -43,6 +78,12 @@ VALUES ('소인', '0세 ~ 12세', 'FLIGHT', 2);
 INSERT INTO flight (departure, destination, flight_type, seat_class, item_id)
 VALUES ('부산', '서울', 'ONE_WAY', 'ECONOMY', 2);
 
+INSERT INTO Item_Group_Tag (item_group_id,tag_id)
+VALUES(2,6);
+INSERT INTO Item_Group_Tag (item_group_id,tag_id)
+VALUES(2,7);
+INSERT INTO Item_Group_Tag (item_group_id,tag_id)
+VALUES(2,8);
 
 /*payment*/
 INSERT INTO payment
