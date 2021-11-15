@@ -8,12 +8,16 @@
         INSERT INTO payment (
             type,
             total_payment,
+            account_bank,
+            account_number,
             payment_deadline,
             state,
             res_id
         ) VALUES (
             #{type},
             #{totalPayment},
+            #{accountBank},
+            #{accountNumber},
             #{paymentDeadline},
             #{state},
             #{resId}

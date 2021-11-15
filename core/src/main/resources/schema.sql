@@ -85,9 +85,11 @@ CREATE TABLE `Room` (
 
 CREATE TABLE `Payment` (
 	`payment_id`	INT PRIMARY KEY AUTO_INCREMENT,
+	account_bank varchar(20),
+	account_number  varchar(20),
 	`type`	VARCHAR(20)	NOT NULL,
 	`total_payment`	INT UNSIGNED	NOT NULL,
-	`payment_deadline`	TIMESTAMP	NOT NULL,
+	`payment_deadline`	TIMESTAMP,
 	`state`	VARCHAR(20)	NOT NULL	DEFAULT 'UNPAID',
 	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
