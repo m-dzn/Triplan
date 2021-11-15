@@ -1,7 +1,6 @@
 package com.triplan.dto.seller.response;
 
 import com.triplan.domain.ItemScheduleVO;
-import com.triplan.domain.ItemVO;
 import lombok.*;
 
 import java.time.LocalDateTime;
