@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.ReservationMapper">
+
+     <insert id="insert">
+         INSERT INTO reservation (
+            item_category,
+            total_price,
+            start_date,
+            end_date,
+            name,
+            phone,
+            total_discount_price,
+            member_id
+         ) VALUES (
+            #{itemCategory},
+            #{totalPrice},
+            #{startDate},
+            #{endDate},
+            #{name},
+            #{phone},
+            #{totalDiscountPrice},
+            #{memberId}
+         )
+    </insert>
+
+    <select id="select" resultType="ReservationVO">
+        SELECT  *
+        FROM    reservation
+        WHERE   res_id = #{resId}
+    </select>
+
+    <update id="update">
+        UPDATE  reservation
+        SET
+                item_category           = IFNULL(   #{itemCategory},        item_category           ),
+                total_price             = IFNULL(   #{totalPrice},          total_price             ),
+                start_date              = IFNULL(   #{startDate},           start_date              ),
+                end_date                = IFNULL(   #{endDate},             end_date                ),
+                name                    = IFNULL(   #{name},                name                    ),
+                phone                   = IFNULL(   #{phone},               phone                   ),
+                total_discount_price    = IFNULL(   #{totalDiscountPrice},  total_discount_price    )
+        WHERE   res_id = #{resId}
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM    reservation
+        WHERE   res_id = #{resId}
+    </delete>
+
+</mapper>
