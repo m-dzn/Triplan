@@ -270,4 +270,3 @@ ALTER TABLE `Reservation_Item` ADD CONSTRAINT `FK_Item_Schedule_TO_Reservation_I
 REFERENCES `Item_Schedule` (
 	`item_schedule_id`
 );
-
