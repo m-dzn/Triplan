@@ -5,9 +5,9 @@
 <mapper namespace="com.triplan.mapper.QuestionMapper">
 
     <insert id="insert">
-        INSERT INTO question(question_id, title, content, created_at, updated_at,
+        INSERT INTO question(title, content,
                             qna_category_id, member_id, item_group_id, hide, type)
-        values (#{questionId},#{title},#{content},#{createdAt},#{updatedAt},#{qnaCategoryId},
+        values (#{title},#{content},#{qnaCategoryId},
                 #{memberId},#{itemGroupId},#{hide},#{type})
     </insert>
 
