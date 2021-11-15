@@ -13,7 +13,7 @@ public interface MemberService {
 
     MemberVO getMember(Integer memberId);
 
-    void update(Integer memberId, MemberVO memberVO);
+    void updateEtc(Integer memberId, MemberVO memberVO);
 
     void updateBasicInfo(Integer memberId, MemberVO memberVO);
 
@@ -23,9 +23,9 @@ public interface MemberService {
 
     void delete(Integer memberId);
 
-    Integer emailCheck(String email);
+    Boolean emailCheck(String email);
 
-    Integer nicknameCheck(String nickname);
+    Boolean nicknameCheck(String nickname);
 
     MemberVO updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> file) throws IOException;
 }

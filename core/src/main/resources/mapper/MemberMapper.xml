@@ -24,7 +24,7 @@
         WHERE   member_id = ${memberId}
     </select>
 
-    <update id="update">
+    <update id="updateEtc">
         UPDATE  member
         SET
         grade       = IFNULL(   #{grade},       grade       ),
@@ -69,16 +69,16 @@
         WHERE   member_id   = #{memberId}
     </update>
 
-    <select id="emailCheck" resultType="java.lang.Integer">
-        SELECT COUNT(*) <!-- 값 => 존재o:count=1/ 존재x:count=0 -->
-        FROM member
-        WHERE email = #{email}
+    <select id="emailCheck" resultType="boolean"> <!-- 값 => 존재o:true/ 존재x:false -->
+        SELECT  CASEWHEN(COUNT(*) = 1, 1, 0)
+        FROM    member
+        WHERE   email = #{email}
     </select>
 
-    <select id="nicknameCheck" resultType="java.lang.Integer">
-        SELECT COUNT(*)
-        FROM member
-        WHERE nickname = #{nickname}
+    <select id="nicknameCheck" resultType="boolean">
+        SELECT  CASEWHEN(COUNT(*) = 1, 1, 0)
+        FROM    member
+        WHERE   nickname = #{nickname}
     </select>
 
 </mapper>

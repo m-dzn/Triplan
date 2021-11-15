@@ -10,7 +10,7 @@ public interface MemberMapper {
 
     MemberVO select(Integer memberId);
 
-    void update(MemberVO memberVO);
+    void updateEtc(MemberVO memberVO);
 
     void updateBasicInfo(MemberVO memberVO);
 
@@ -20,7 +20,7 @@ public interface MemberMapper {
 
     void delete(Integer memberId);
 
-    Integer emailCheck(String email);
+    Boolean emailCheck(String email);
 
-    Integer nicknameCheck(String nickname);
+    Boolean nicknameCheck(String nickname);
 }
