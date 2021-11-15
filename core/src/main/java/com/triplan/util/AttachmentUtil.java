@@ -23,7 +23,7 @@ public class AttachmentUtil {
 
     @Value("${app.resources.location}")
     public void setPreFix(String PRE_FIX) {
-        this.PRE_FIX = PRE_FIX;
+        AttachmentUtil.PRE_FIX = PRE_FIX;
     }
 
     private static String FILE_PATH;
@@ -91,7 +91,6 @@ public class AttachmentUtil {
 
         // 파일을 물리적으로 저장
         try {
-
             Files.write(savePathServerNameExt, file.getBytes());
             return attachmentVO;
 
