@@ -1,6 +1,7 @@
 package com.triplan.service;
 
 import com.triplan.domain.FlightVO;
+import com.triplan.mapper.FlightMapper;
 import com.triplan.service.inf.FlightService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

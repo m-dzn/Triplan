@@ -1,6 +1,7 @@
 package com.triplan.controller.api;
 
 import com.triplan.domain.ItemGroupVO;
+import com.triplan.dto.customer.request.ItemGroupRequestDTO;
 import com.triplan.dto.customer.response.ItemGroupResponseDTO;
 import com.triplan.service.inf.ItemGroupService;
 import lombok.RequiredArgsConstructor;
@@ -44,4 +45,16 @@ public class ApiItemGroupController {
         return itemGroupService.getItemList(itemGroupId);
     }
 
+    @PostMapping("/plus-tags")
+    public String ItemGroupAddTags(@RequestBody ItemGroupRequestDTO itemGroupRequestDTO){
+        itemGroupService.ItemGroupRegisterAddTags(itemGroupRequestDTO);
+        return "addTag";
+    }
+
+    @PostMapping("/plus-tags/{itemGroupId}")
+    public String ItemGroupUpdateTags(@PathVariable Integer itemGroupId,
+                                      @RequestBody ItemGroupRequestDTO itemGroupRequestDTO){
+        itemGroupService.updateItemGroupTags(itemGroupId,itemGroupRequestDTO);
+        return "Update Tags";
+    }
 }

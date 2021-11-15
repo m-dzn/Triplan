@@ -1,5 +1,6 @@
 package com.triplan.dto.customer.response;
 
+import com.triplan.domain.ItemGroupTagVO;
 import com.triplan.domain.ItemGroupVO;
 import com.triplan.domain.ItemVO;
 import com.triplan.enumclass.ItemCategory;
@@ -32,6 +33,8 @@ public class ItemGroupResponseDTO {
 
     private List<ItemRoomResponseDTO> itemRoomList;
     private List<ItemFlightResponseDTO> itemFlightList;
+    private List<Integer> tagIdList;
+
 
     public static ItemGroupResponseDTO of(ItemGroupVO vo) {
 
@@ -50,5 +53,6 @@ public class ItemGroupResponseDTO {
                 .lng(vo.getLng())
                 .build();
     }
+
 
 }

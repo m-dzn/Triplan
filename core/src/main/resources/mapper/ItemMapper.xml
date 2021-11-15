@@ -93,4 +93,10 @@
         ORDER BY sales_volume DESC
     </select>
 
+
+    <update id="updateByItemGroupId">
+        UPDATE item
+           SET item_group_id = #{itemGroupId}
+         WHERE item_group_id = #{itemGroupId}
+    </update>
 </mapper>

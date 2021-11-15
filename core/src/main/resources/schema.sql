@@ -237,6 +237,14 @@ REFERENCES `Role` (
 	`role_id`
 );
 
+ALTER TABLE `Item` ADD CONSTRAINT `FK_Item_Group_TO_Item_1` FOREIGN KEY (
+    `item_group_id`
+)
+REFERENCES `Item_Group` (
+    `item_group_id`
+)ON DELETE CASCADE;
+
+
 ALTER TABLE `Answer` ADD CONSTRAINT `FK_Question_TO_Answer_1` FOREIGN KEY (
 	`question_id`
 )
@@ -249,7 +257,7 @@ ALTER TABLE `Item_Group_Tag` ADD CONSTRAINT `FK_Item_Group_TO_Item_Group_Tag_1` 
 )
 REFERENCES `Item_Group` (
 	`item_group_id`
-);
+)ON DELETE CASCADE;
 
 ALTER TABLE `Item_Group_Tag` ADD CONSTRAINT `FK_Tag_TO_Item_Group_Tag_1` FOREIGN KEY (
 	`tag_id`
@@ -272,14 +280,14 @@ REFERENCES `Item_Schedule` (
 	`item_schedule_id`
 );
 
-ALTER TABLE `Flight` ADD CONSTRAINT `FK_Flight_TO_Item_1` FOREIGN KEY (
+ALTER TABLE `Flight` ADD CONSTRAINT `FK_Item_TO_Flight_1` FOREIGN KEY (
 	`item_id`
 )
 REFERENCES `Item` (
 	`item_id`
 )ON DELETE CASCADE;
 
-ALTER TABLE `Room` ADD CONSTRAINT `FK_Room_TO_Item_1` FOREIGN KEY (
+ALTER TABLE `Room` ADD CONSTRAINT `FK_Item_TO_Room_1` FOREIGN KEY (
 	`item_id`
 )
 REFERENCES `Item` (

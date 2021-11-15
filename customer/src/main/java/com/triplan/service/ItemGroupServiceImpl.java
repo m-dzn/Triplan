@@ -2,12 +2,14 @@ package com.triplan.service;
 
 import com.triplan.domain.ItemGroupVO;
 import com.triplan.domain.ItemVO;
+import com.triplan.dto.customer.request.ItemGroupRequestDTO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemGroupResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.enumclass.ItemCategory;
 import com.triplan.mapper.ItemGroupMapper;
 import com.triplan.mapper.ItemMapper;
+import com.triplan.mapper.TagMapper;
 import com.triplan.service.inf.ItemGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 
     private final ItemGroupMapper itemGroupMapper;
     private final ItemMapper itemMapper;
+    private final TagMapper tagMapper;
 
     @Override
     public void ItemGroupRegister(ItemGroupVO itemGroupVO) {
@@ -57,6 +60,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 
             ItemGroupResponseDTO itemGroupResponseDTO = ItemGroupResponseDTO.of(itemGroupVO);
             itemGroupResponseDTO.setItemRoomList(itemRoomResponseDTO);
+            itemGroupResponseDTO.setTagIdList(tagMapper.getIdList(itemGroupId));
 
             return itemGroupResponseDTO;
         }
@@ -69,10 +73,30 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 
             ItemGroupResponseDTO itemGroupResponseDTO = ItemGroupResponseDTO.of(itemGroupVO);
             itemGroupResponseDTO.setItemFlightList(itemFlightResponseDTO);
+            itemGroupResponseDTO.setTagIdList(tagMapper.getIdList(itemGroupId));
 
             return itemGroupResponseDTO;
         }
         else return null;
+
+    }
+
+    @Override
+    public void ItemGroupRegisterAddTags(ItemGroupRequestDTO itemGroupRequestDTO) {
+
+        ItemGroupVO itemGroupVO = itemGroupRequestDTO.toItemGroupVO();
+        itemGroupMapper.insert(itemGroupVO);
+        tagMapper.RegisterAddTagIdList(itemGroupVO.getItemGroupId(),itemGroupRequestDTO.getTagIdList());
+
+    }
+
+    @Override
+    public void updateItemGroupTags(Integer itemGroupId, ItemGroupRequestDTO itemGroupRequestDTO) {
+        ItemGroupVO itemGroupVO = itemGroupRequestDTO.toItemGroupVO();
+        itemGroupVO.setItemGroupId(itemGroupId);
+        itemGroupMapper.update(itemGroupVO);
+        tagMapper.delete(itemGroupId);
+        tagMapper.RegisterAddTagIdList(itemGroupVO.getItemGroupId(),itemGroupRequestDTO.getTagIdList());
 
     }
 
