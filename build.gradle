@@ -38,6 +38,9 @@ subprojects {
 		implementation "$boot:spring-boot-starter-web"
 //		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
+		//타임리프 레이아웃
+		implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+
 		// 타임리프 관련 의존성
 		implementation "$boot:spring-boot-starter-thymeleaf"
 		developmentOnly "$boot:spring-boot-devtools"
