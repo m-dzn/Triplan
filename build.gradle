@@ -4,6 +4,7 @@ buildscript {
 		boot = "org.springframework.boot"
 		lombok = "org.projectlombok:lombok"
 		mybatisStarterVersion = "2.2.0"
+		jjwt = "0.11.2"
 	}
 
 	repositories {
@@ -36,6 +37,9 @@ subprojects {
 
 	dependencies {
 		implementation "$boot:spring-boot-starter-web"
+		implementation "$boot:spring-boot-starter-validation"
+		implementation "$boot:spring-boot-starter-security"
+		implementation "$boot:spring-boot-starter-oauth2-client"
 //		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 		// 타임리프 관련 의존성
@@ -50,6 +54,11 @@ subprojects {
 		// 롬복 : 보일러플레이트 코드 자동 생성 라이브러리
 		compileOnly lombok
 		annotationProcessor lombok
+
+		// JWT 라이브러리
+		compileOnly "io.jsonwebtoken:jjwt-api:$jjwt"
+		runtimeOnly "io.jsonwebtoken:jjwt-impl:$jjwt"
+		runtimeOnly "io.jsonwebtoken:jjwt-jackson:$jjwt"
 
 		// 테스트 도구 : JUnit5
 		testImplementation "$boot:spring-boot-starter-test"

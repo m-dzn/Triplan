@@ -45,4 +45,10 @@
         WHERE   member_id   = #{memberId}
     </update>
 
+    <select id="selectByEmail" resultType="MemberVO">
+        SELECT  *
+        FROM    member
+        WHERE   email = #{email}
+    </select>
+
 </mapper>

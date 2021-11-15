@@ -4,6 +4,7 @@ import com.triplan.domain.MemberVO;
 import com.triplan.mapper.MemberMapper;
 import com.triplan.service.inf.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Service;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void register(MemberVO memberVO) {
+        memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
         memberMapper.insert(memberVO);
     }
 

@@ -14,4 +14,6 @@ public interface MemberMapper {
 
     void delete(Integer memberId);
 
+    MemberVO selectByEmail(String email);
+
 }
