@@ -5,6 +5,7 @@ import com.triplan.enumclass.ItemCategory;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,17 +17,30 @@ import java.time.LocalDateTime;
 public class ReservationDTO {
 
     private Integer resId;
+    @NotNull(message = "itemCategory는 필수 값입니다.")
     private ItemCategory itemCategory;
+    @NotNull(message = "totalPrice는 필수 값입니다.")
+    @PositiveOrZero
     private Long totalPrice;
+    @NotNull(message = "startDate는 필수 값입니다.")
+    @Future
     private LocalDateTime startDate;
+    @NotNull(message = "endDate는 필수 값입니다.")
+    @Future
     private LocalDateTime endDate;
+    @NotEmpty(message = "name는 필수 값입니다.")
+    @Size(min = 2, max = 10, message = "name은 2자 이상 10자 이내로 입력해주십시오.")
     private String name;
+    @NotEmpty(message = "phone는 필수 값입니다.")
+    @Pattern(regexp="^01(?:0|1|[6-9])[-]?(\\d{3}|\\d{4})[-]?(\\d{4})$", message = "010-xxx-xxxx 형식으로 입력해주십시오.")
     private String phone;
     private Long totalDiscountPrice;
 
     private Boolean cancellation;
 
+    @NotNull(message = "memberId는 필수 값입니다.")
     private Integer memberId;
+    @NotNull(message = "sellerId는 필수 값입니다.")
     private Integer sellerId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")

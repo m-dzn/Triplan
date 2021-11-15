@@ -5,6 +5,7 @@ import com.triplan.service.inf.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -16,7 +17,7 @@ public class ApiReservationController {
     private final ReservationService reservationService;
 
     @PostMapping
-    public String insert(@RequestBody ReservationDTO reservationDTO) {
+    public String insert(@Valid @RequestBody ReservationDTO reservationDTO) {
         reservationService.insert(reservationDTO);
         return "예약 추가 성공";
     }
@@ -27,7 +28,7 @@ public class ApiReservationController {
     }
 
     @PutMapping("/update/{resId}")
-    public String update(@PathVariable Integer resId, @RequestBody ReservationDTO reservationDTO) {
+    public String update(@Valid @PathVariable Integer resId, @RequestBody ReservationDTO reservationDTO) {
         reservationService.update(resId, reservationDTO);
         return "예약 수정 성공";
     }
@@ -42,7 +43,7 @@ public class ApiReservationController {
     // 예약하기 -> 프론트에서 쿠폰 적용 안 할 시 memberCouponId == 0 으로 넘기기
     @PostMapping("/reserve/{itemScheduleId}/{memberCouponId}")
     public Integer reserve(@PathVariable Integer itemScheduleId, @PathVariable Integer memberCouponId,
-                          @RequestBody ReservationDTO reservationDTO) {
+                          @Valid @RequestBody ReservationDTO reservationDTO) {
         Integer result = reservationService.reserve(itemScheduleId, memberCouponId, reservationDTO);
         // * 받아와야할 거
         // - 상품 : itemCategory, totalPrice, startDate, endDate + itemScheduleId
