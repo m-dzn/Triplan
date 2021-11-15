@@ -1,14 +1,14 @@
 CREATE TABLE `Member` (
-	`member_id`	INT AUTO_INCREMENT	NOT NULL,
+	`member_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`email`	VARCHAR(50)	NOT NULL,
 	`password`	VARCHAR(255)	NOT NULL,
 	`nickname`	VARCHAR(20)	NOT NULL,
 	`email_confirm`	TINYINT	NOT NULL	DEFAULT 0	COMMENT 'Boolean',
 	`state`	VARCHAR(20)	NOT NULL	DEFAULT 'REGISTER',
 	`grade`	VARCHAR(20)	NOT NULL	DEFAULT 'BRONZE',
+	`provider`	VARCHAR(100)	NOT NULL	DEFAULT 'LOCAL'	COMMENT 'sns_info -> provider로 변경',
 	`profile_img`	VARCHAR(200)	NULL,
 	`point`	INT	NULL	DEFAULT 0	COMMENT 'Integer',
-	`provider`	VARCHAR(100)	NOT NULL	DEFAULT 'LOCAL'	COMMENT 'sns_info -> provider로 변경',
 	`account`	VARCHAR(30)	NULL,
 	`deleted_at`	TIMESTAMP	NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
@@ -16,7 +16,7 @@ CREATE TABLE `Member` (
 );
 
 CREATE TABLE `Seller` (
-	`seller_id`	INT AUTO_INCREMENT	NOT NULL,
+	`seller_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`business_license_number`	VARCHAR(30)	NOT NULL,
 	`business_name`	VARCHAR(30)	NOT NULL,
 	`tel`	VARCHAR(30)	NOT NULL,
@@ -27,15 +27,14 @@ CREATE TABLE `Seller` (
 	`zip_code`	VARCHAR(100)	NOT NULL,
 	`address`	VARCHAR(200)	NOT NULL,
 	`address_detail`	VARCHAR(200)	NULL	COMMENT '11.05 추가',
-	`seller_img`	VARCHAR(30)	NULL	COMMENT '/seller/img/UUID.jpg <img src="/seller/img/UUID.jpg"/>',
-	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL,
+	`seller_img`	VARCHAR(30)	NULL,
+    `created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`	TIMESTAMP	NULL,
 	`member_id`	INT	NOT NULL
 );
 
 CREATE TABLE `Item_Group` (
-	`item_group_id`	INT AUTO_INCREMENT	NOT NULL,
-	`seller_id`	INT	NOT NULL,
+	`item_group_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`name`	VARCHAR(50)	NOT NULL,
 	`summary_explain`	VARCHAR(1000)	NOT NULL,
 	`detail_explain`	VARCHAR(1000)	NOT NULL,
@@ -49,35 +48,35 @@ CREATE TABLE `Item_Group` (
 	`lng`	INT UNSIGNED	NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
-	`like_count`	INT UNSIGNED	NULL	DEFAULT 0	COMMENT '11.08 추가'
+	`seller_id`	INT	NOT NULL
 );
 
 CREATE TABLE `Item` (
-	`item_id`	INT AUTO_INCREMENT	NOT NULL,
+	`item_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`name`	VARCHAR(45)	NOT NULL,
 	`explain`	TEXT	NOT NULL,
 	`item_category`	VARCHAR(20)	NOT NULL	COMMENT 'type -> item_category',
 	`base_stock`	INT UNSIGNED	NULL	DEFAULT 0,
 	`sales_volume`	INT UNSIGNED	NULL	DEFAULT 0,
 	`detail_img`	VARCHAR(200)	NULL,
-	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
 	`item_group_id`	INT	NOT NULL
 );
 
 CREATE TABLE `Flight` (
-	`flight_id`	INT AUTO_INCREMENT	NOT NULL,
+	`flight_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`departure`	VARCHAR(45)	NOT NULL,
 	`destination`	VARCHAR(45)	NOT NULL,
 	`flight_type`	VARCHAR(20)	NOT NULL,
 	`seat_class`	VARCHAR(20)	NOT NULL,
-	`min_age`	TINYINT UNSIGNED	NULL	DEFAULT 0	COMMENT '11.06 추가',
-	`max_age`	TINYINT UNSIGNED	NULL	DEFAULT 127	COMMENT '11.06 추가 : h2는 127, MySQL은 255로 적용',
+	`min_age`	TINYINT UNSIGNED 	NULL	DEFAULT 0	COMMENT '11.06 추가',
+	`max_age`	TINYINT UNSIGNED 	NULL	DEFAULT 127	COMMENT '11.06 추가',
 	`item_id`	INT	NOT NULL
 );
 
 CREATE TABLE `Room` (
-	`room_id`	INT AUTO_INCREMENT	NOT NULL,
+	`room_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`number_of_person`	INT	NOT NULL,
 	`max_person`	INT	NOT NULL,
 	`img`	VARCHAR(200)	NULL,
@@ -85,12 +84,12 @@ CREATE TABLE `Room` (
 );
 
 CREATE TABLE `Payment` (
-	`payment_id`	INT AUTO_INCREMENT	NOT NULL,
+	`payment_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`type`	VARCHAR(20)	NOT NULL,
 	`total_payment`	INT UNSIGNED	NOT NULL,
 	`payment_deadline`	TIMESTAMP	NOT NULL,
 	`state`	VARCHAR(20)	NOT NULL	DEFAULT 'UNPAID',
-	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
 	`res_id`	INT	NOT NULL
 );
@@ -103,18 +102,19 @@ CREATE TABLE `Question` (
 	`updated_at`	TIMESTAMP	NULL,
 	`hide`	TINYINT	NOT NULL	DEFAULT 0	COMMENT 'Boolean',
 	`member_id`	INT	NOT NULL	COMMENT 'Integer',
-	`qna_category_id`	INT	NOT NULL	COMMENT 'Integer',
+	`qna_category_id`	INT	NULL	COMMENT 'Integer',
 	`item_group_id`	INT	NULL	COMMENT 'Integer',
 	`type`	VARCHAR(45)	NOT NULL
 );
 
+
 CREATE TABLE `Review` (
-	`review_id`	INT AUTO_INCREMENT	NOT NULL,
+	`review_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`content`	VARCHAR(1000)	NOT NULL,
-	`review_score`	INT	NOT NULL	DEFAULT 0	COMMENT 'Boolean -> Enum으로 수정',
 	`created_at`	TIMESTAMP	NOT NULL,
 	`updated_at`	TIMESTAMP	NULL,
-	`member_id`	INT	NOT NULL,
+	`review_score`	INT	NOT NULL	DEFAULT 0	COMMENT 'Boolean -> Enum으로 수정',
+	`member_id`	VARCHAR(255)	NOT NULL,
 	`item_id`	INT	NOT NULL
 );
 
@@ -124,13 +124,13 @@ CREATE TABLE `Member_Role` (
 );
 
 CREATE TABLE `Role` (
-	`role_id`	INT AUTO_INCREMENT	NOT NULL,
-	`name`	VARCHAR(20)	NOT NULL
+	`role_id`	INT PRIMARY KEY AUTO_INCREMENT,
+	`name` VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE `Answer` (
-	`question_id`	INT	NOT NULL,
-	`content`	text	NOT NULL
+	`question_id`	INT PRIMARY KEY AUTO_INCREMENT,
+	`content`	text	NULL
 );
 
 CREATE TABLE `QNA_Category` (
@@ -139,16 +139,16 @@ CREATE TABLE `QNA_Category` (
 );
 
 CREATE TABLE `Notice` (
-	`notice_id`	INT AUTO_INCREMENT	NOT NULL,
+	`notice_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`title`	VARCHAR(60)	NOT NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
-	`content`	VARCHAR(1000)	NOT NULL	COMMENT 'contents -> content로 수정',
+	`content`	VARCHAR(1000)	NULL	COMMENT 'contents -> content로 수정',
 	`target`	VARCHAR(20)	NOT NULL	COMMENT '11.05 추가'
 );
 
 CREATE TABLE `Reservation` (
-	`res_id`	INT AUTO_INCREMENT	NOT NULL,
+	`res_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`item_category`	VARCHAR(30)	NOT NULL,
 	`total_price`	INT UNSIGNED	NOT NULL,
 	`start_date`	TIMESTAMP	NOT NULL,
@@ -156,14 +156,13 @@ CREATE TABLE `Reservation` (
 	`name`	VARCHAR(45)	NOT NULL,
 	`phone`	VARCHAR(45)	NOT NULL,
 	`total_discount_price`	INT UNSIGNED	NULL	DEFAULT 0,
-	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
-	`member_id`	INT	NOT NULL,
-	`seller_id`	INT	NULL
+	`member_id`	INT	NOT NULL
 );
 
 CREATE TABLE `Tag` (
-	`tag_id`	INT AUTO_INCREMENT	NOT NULL,
+	`tag_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`color`	VARCHAR(20)	NULL,
 	`name`	VARCHAR(255)	NULL,
 	`icon`	VARCHAR(255)	NULL
@@ -175,7 +174,7 @@ CREATE TABLE `Item_Group_Tag` (
 );
 
 CREATE TABLE `Coupon` (
-	`coupon_id`	INT AUTO_INCREMENT	NOT NULL,
+	`coupon_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`name`	VARCHAR(45)	NOT NULL,
 	`num`	INT	NULL	COMMENT '쿠폰 등록시 입력하면 쿠폰 등록',
 	`price`	INT UNSIGNED	NOT NULL,
@@ -188,14 +187,14 @@ CREATE TABLE `Coupon` (
 );
 
 CREATE TABLE `Wishlist` (
-	`wishlist_id`	INT AUTO_INCREMENT	NOT NULL,
-	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`item_group_id`	INT	NOT NULL	COMMENT 'Integer',
+	`wishlist_id`	INT PRIMARY KEY AUTO_INCREMENT,
+	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
+	`item_id`	INT	NOT NULL	COMMENT 'Integer',
 	`member_id`	INT	NOT NULL	COMMENT 'Integer'
 );
 
 CREATE TABLE `Attachment` (
-	`attachment_id`	INT AUTO_INCREMENT	NOT NULL,
+	`attachment_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`about_table_type`	VARCHAR(20)	NOT NULL,
 	`id_in_table_type`	INT	NOT NULL,
 	`origin_file_name`	VARCHAR(200)	NOT NULL,
@@ -203,8 +202,7 @@ CREATE TABLE `Attachment` (
 	`file_extension`	VARCHAR(10)	NOT NULL,
 	`upload_path`	VARCHAR(45)	NOT NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`file_size`	INT UNSIGNED	NULL,
-	`upload_ip`	VARCHAR(20)	NOT NULL	COMMENT '11.05 제거'
+	`file_size`	INT UNSIGNED	NULL
 );
 
 CREATE TABLE `Reservation_Item` (
@@ -213,7 +211,7 @@ CREATE TABLE `Reservation_Item` (
 );
 
 CREATE TABLE `Item_Schedule` (
-	`item_schedule_id`	INT AUTO_INCREMENT	NOT NULL,
+	`item_schedule_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`price`	INT UNSIGNED	NOT NULL,
 	`discount_price`	INT UNSIGNED	NULL	DEFAULT 0,
 	`stock`	INT UNSIGNED	NOT NULL	DEFAULT 0	COMMENT '남은 재고수량',
@@ -222,97 +220,6 @@ CREATE TABLE `Item_Schedule` (
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
 	`item_id`	INT	NOT NULL
-);
-
-ALTER TABLE `Member` ADD CONSTRAINT `PK_MEMBER` PRIMARY KEY (
-	`member_id`
-);
-
-ALTER TABLE `Seller` ADD CONSTRAINT `PK_SELLER` PRIMARY KEY (
-	`seller_id`
-);
-
-ALTER TABLE `Item_Group` ADD CONSTRAINT `PK_ITEM_GROUP` PRIMARY KEY (
-	`item_group_id`
-);
-
-ALTER TABLE `Item` ADD CONSTRAINT `PK_ITEM` PRIMARY KEY (
-	`item_id`
-);
-
-ALTER TABLE `Flight` ADD CONSTRAINT `PK_FLIGHT` PRIMARY KEY (
-	`flight_id`
-);
-
-ALTER TABLE `Room` ADD CONSTRAINT `PK_ROOM` PRIMARY KEY (
-	`room_id`
-);
-
-ALTER TABLE `Payment` ADD CONSTRAINT `PK_PAYMENT` PRIMARY KEY (
-	`payment_id`
-);
-
-ALTER TABLE `Question` ADD CONSTRAINT `PK_QUESTION` PRIMARY KEY (
-	`question_id`
-);
-
-ALTER TABLE `Review` ADD CONSTRAINT `PK_REVIEW` PRIMARY KEY (
-	`review_id`
-);
-
-ALTER TABLE `Member_Role` ADD CONSTRAINT `PK_MEMBER_ROLE` PRIMARY KEY (
-	`member_id`,
-	`role_id`
-);
-
-ALTER TABLE `Role` ADD CONSTRAINT `PK_ROLE` PRIMARY KEY (
-	`role_id`
-);
-
-ALTER TABLE `Answer` ADD CONSTRAINT `PK_ANSWER` PRIMARY KEY (
-	`question_id`
-);
-
-ALTER TABLE `QNA_Category` ADD CONSTRAINT `PK_QNA_CATEGORY` PRIMARY KEY (
-	`qna_category_id`
-);
-
-ALTER TABLE `Notice` ADD CONSTRAINT `PK_NOTICE` PRIMARY KEY (
-	`notice_id`
-);
-
-ALTER TABLE `Reservation` ADD CONSTRAINT `PK_RESERVATION` PRIMARY KEY (
-	`res_id`
-);
-
-ALTER TABLE `Tag` ADD CONSTRAINT `PK_TAG` PRIMARY KEY (
-	`tag_id`
-);
-
-ALTER TABLE `Item_Group_Tag` ADD CONSTRAINT `PK_ITEM_GROUP_TAG` PRIMARY KEY (
-	`item_group_id`,
-	`tag_id`
-);
-
-ALTER TABLE `Coupon` ADD CONSTRAINT `PK_COUPON` PRIMARY KEY (
-	`coupon_id`
-);
-
-ALTER TABLE `Wishlist` ADD CONSTRAINT `PK_WISHLIST` PRIMARY KEY (
-	`wishlist_id`
-);
-
-ALTER TABLE `Attachment` ADD CONSTRAINT `PK_ATTACHMENT` PRIMARY KEY (
-	`attachment_id`
-);
-
-ALTER TABLE `Reservation_Item` ADD CONSTRAINT `PK_RESERVATION_ITEM` PRIMARY KEY (
-	`res_id`,
-	`item_schedule_id`
-);
-
-ALTER TABLE `Item_Schedule` ADD CONSTRAINT `PK_ITEM_SCHEDULE` PRIMARY KEY (
-	`item_schedule_id`
 );
 
 ALTER TABLE `Member_Role` ADD CONSTRAINT `FK_Member_TO_Member_Role_1` FOREIGN KEY (

@@ -1,9 +1,9 @@
 package com.triplan.domain;
 
+import com.triplan.enumclass.QuestionType;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 public class QuestionVO {
@@ -17,7 +17,7 @@ public class QuestionVO {
     private Integer memberId;
     private Integer itemGroupId;
     private Boolean hide;
-    private String type;
+    private QuestionType type;
 
 
 }
