@@ -45,8 +45,7 @@
                 phone                   = IFNULL(   #{phone},               phone                   ),
                 total_discount_price    = IFNULL(   #{totalDiscountPrice},  total_discount_price    ),
                 seller_id               = IFNULL(   #{sellerId},            seller_id               ),
-                cancellation            = IFNULL(   #{cancellation},        cancellation            ),
-                updated_at = CURRENT_TIMESTAMP
+                cancellation            = IFNULL(   #{cancellation},        cancellation            )
         WHERE   res_id = #{resId}
     </update>
 
@@ -57,16 +56,74 @@
     </delete>
 
     <insert id="insertResItem">
-        INSERT INTO reservation_item(res_id, item_schedule_id)
-        VALUES      (#{resId}, #{itemScheduleId})
+        INSERT INTO reservation_item(
+            res_id,
+            item_schedule_id
+        ) VALUES (
+            #{resId},
+            #{itemScheduleId}
+        )
+    </insert>
+
+    <select id="checkCoupon" resultType="Integer">
+        SELECT  count(*)
+        FROM    coupon
+        WHERE   formatdatetime(expired_at, 'yyyyMMdd') >= formatdatetime(now(), 'yyyyMMdd')
+          AND   coupon_id = (
+                              SELECT    coupon_id
+                              FROM      member_coupon
+                              WHERE     member_coupon_id = #{memberCouponId}
+                            )
+    </select>
+
+    <select id="checkMemberCoupon" resultType="Integer">
+        SELECT  count(*)
+        FROM    member_coupon
+        WHERE   member_coupon_id = #{memberCouponId}
+          AND   usage1   != 1
+    </select>
+
+    <insert id="useCoupon">
+        UPDATE  member_coupon
+        SET
+                usage1  = 1,
+                res_id  = #{resId},
+                used_at = CURRENT_TIMESTAMP
+        WHERE   member_coupon_id = #{memberCouponId}
     </insert>
 
     <update id="cancel">
         UPDATE  reservation
         SET
-            cancellation = 1,
-            updated_at   = CURRENT_TIMESTAMP
+            cancellation = 1
         WHERE   res_id = #{resId}
+    </update>
+
+    <select id="getMemberId" resultType="Integer">
+        SELECT  member_id
+        FROM    member_coupon
+        WHERE   res_id = #{resId}
+    </select>
+
+    <select id="checkExpiredCoupon" resultType="Integer">
+        SELECT  count(*)
+        FROM    coupon
+        WHERE   formatdatetime(expired_at, 'yyyyMMdd') >= formatdatetime(now(), 'yyyyMMdd')
+          AND   coupon_id = (
+                              SELECT  coupon_id
+                              FROM    member_coupon
+                              WHERE   res_id = #{res_id}
+                            )
+    </select>
+
+    <update id="giveBackCoupon">
+        UPDATE  member_coupon
+        SET
+                usage1  =  0,
+                used_at = NULL,
+                res_id  = NULL
+        WHERE   res_id = #{resId}
+          AND     member_id = #{memberId}
     </update>
     
     <select id="myResList" resultType="ReservationVO">

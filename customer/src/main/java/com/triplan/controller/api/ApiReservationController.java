@@ -5,6 +5,7 @@ import com.triplan.service.inf.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -16,9 +17,9 @@ public class ApiReservationController {
     private final ReservationService reservationService;
 
     @PostMapping
-    public String insert(@RequestBody ReservationDTO reservationDTO) {
+    public String insert(@Valid @RequestBody ReservationDTO reservationDTO) {
         reservationService.insert(reservationDTO);
-        return "예약 추가 성공";
+        return "resCreated";
     }
 
     @GetMapping("/{resId}")
@@ -27,40 +28,41 @@ public class ApiReservationController {
     }
 
     @PutMapping("/update/{resId}")
-    public String update(@PathVariable Integer resId, @RequestBody ReservationDTO reservationDTO) {
+    public String update(@Valid @PathVariable Integer resId, @RequestBody ReservationDTO reservationDTO) {
         reservationService.update(resId, reservationDTO);
-        return "예약 수정 성공";
+        return "resUpdated";
     }
 
     @DeleteMapping("/delete/{resId}")
     public String delete(@PathVariable Integer resId) {
         reservationService.delete(resId);
         // RESERVATION_ITEM TABLE ON DELETE CASCADE
-        return "예약 삭제 성공";
+        return "resDeleted";
     }
 
-    // 예약하기
-    @PostMapping("/reserve/{itemScheduleId}")
-    public String reserve(@PathVariable Integer itemScheduleId, @RequestBody ReservationDTO reservationDTO) {
-        reservationService.reserve(itemScheduleId, reservationDTO);
-
-        // URL로 itemScheduleId 넘기기
-        // 받아와야할 거
-        // - 상품 : itemCategory, totalPrice, startDate, endDate + item_id
+    // 예약하기 -> 프론트에서 쿠폰 적용 안 할 시 memberCouponId == 0 으로 넘기기
+    @PostMapping("/reserve/{itemScheduleId}/{memberCouponId}")
+    public Integer reserve(@PathVariable Integer itemScheduleId, @PathVariable Integer memberCouponId,
+                          @Valid @RequestBody ReservationDTO reservationDTO) {
+        Integer result = reservationService.reserve(itemScheduleId, memberCouponId, reservationDTO);
+        // * 받아와야할 거
+        // - 상품 : itemCategory, totalPrice, startDate, endDate + itemScheduleId
         // - 사용자 입력 : name, phone
-        // - 쿠폰 : totalDiscountPrice
+        // - 쿠폰 : totalDiscountPrice, couponId
         // - 회원 로그인 정보 : memberId
-        return "상품 예약 성공";
+
+        // result : -1(예약 실패), 0(예약 실패-쿠폰 사용 불가), 1(예약 성공)
+        return result;
     }
 
     // 예약 취소 : cancellation 0 -> 1
     @PutMapping("/cancel/{resId}")
-    public String cancel(@PathVariable Integer resId, @RequestBody ReservationDTO reservationDTO) {
-        reservationService.cancel(resId, reservationDTO);
-        return "상품 예약 취소 성공";
+    public Integer cancel(@PathVariable Integer resId, @RequestBody ReservationDTO reservationDTO) {
+        Integer result =  reservationService.cancel(resId, reservationDTO);
+        // result : -1(예약 취소 실패), 0(예약 취소이나 쿠폰 반환 X), 1(예약 취소)
+        return result;
     }
 
-    // + 페이징 처리 여부
     // 나외 예약 조회 (최신 여행 일자 순으로)
     @GetMapping("/myResList/{memberId}")
     public List<ReservationDTO> myResList(@PathVariable Integer memberId) {
