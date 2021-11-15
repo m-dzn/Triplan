@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 @ToString
 public class MemberProfileDTO {
 
+
     private Integer memberId;
     private String profileImg;
 
