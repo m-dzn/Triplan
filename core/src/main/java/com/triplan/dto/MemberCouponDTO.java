@@ -3,6 +3,7 @@ package com.triplan.dto;
 import com.triplan.domain.MemberCouponVO;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,7 +20,9 @@ public class MemberCouponDTO {
 
     private LocalDateTime usedAt;
 
+    @NotNull(message = "memberId는 필수 값입니다.")
     private Integer memberId;
+    @NotNull(message = "couponId는 필수 값입니다.")
     private Integer couponId;
     private Integer resId;
 

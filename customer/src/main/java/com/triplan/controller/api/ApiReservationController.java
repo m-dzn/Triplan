@@ -19,7 +19,7 @@ public class ApiReservationController {
     @PostMapping
     public String insert(@Valid @RequestBody ReservationDTO reservationDTO) {
         reservationService.insert(reservationDTO);
-        return "예약 추가 성공";
+        return "resCreated";
     }
 
     @GetMapping("/{resId}")
@@ -30,14 +30,14 @@ public class ApiReservationController {
     @PutMapping("/update/{resId}")
     public String update(@Valid @PathVariable Integer resId, @RequestBody ReservationDTO reservationDTO) {
         reservationService.update(resId, reservationDTO);
-        return "예약 수정 성공";
+        return "resUpdated";
     }
 
     @DeleteMapping("/delete/{resId}")
     public String delete(@PathVariable Integer resId) {
         reservationService.delete(resId);
         // RESERVATION_ITEM TABLE ON DELETE CASCADE
-        return "예약 삭제 성공";
+        return "resDeleted";
     }
 
     // 예약하기 -> 프론트에서 쿠폰 적용 안 할 시 memberCouponId == 0 으로 넘기기

@@ -38,10 +38,50 @@
         WHERE   member_coupon_id = #{memberCouponId}
     </delete>
 
+    <select id="ownCoupon" resultType="Integer">
+        SELECT  count(*)
+        FROM    member_coupon
+        WHERE   coupon_id = #{couponId}
+          AND     member_id = #{memberId}
+          AND     usage1 != 1
+    </select>
 
 
+    <select id="myCouponList" resultType="com.triplan.dto.MemberCouponDTO">
+        SELECT      m.member_coupon_id, m.member_id, m.coupon_id, m.usage1, m.used_at, m.res_id,
+                    c.name, c.price, c.condition, c.expired_at
+        FROM        member_coupon m JOIN coupon c
+        ON          (m.coupon_id = c.coupon_id)
+        ORDER BY    member_coupon_id desc
+    </select>
 
+    <select id="myAvailableCouponList" resultType="com.triplan.dto.MemberCouponDTO">
+        SELECT      m.member_coupon_id, m.member_id, m.coupon_id, m.usage1, m.used_at, m.res_id,
+                    c.name, c.price, c.condition, c.expired_at
+        FROM        member_coupon m JOIN coupon c
+        ON          (m.coupon_id = c.coupon_id)
+        WHERE       formatdatetime(expired_at, 'yyyyMMdd') >= formatdatetime(now(), 'yyyyMMdd')
+          AND         m.usage1 != 1
+        ORDER BY    expired_at asc
+    </select>
 
+    <select id="myUsedCouponList" resultType="com.triplan.dto.MemberCouponDTO">
+        SELECT      m.member_coupon_id, m.member_id, m.coupon_id, m.usage1, m.used_at, m.res_id,
+                    c.name, c.price, c.condition, c.expired_at
+        FROM        member_coupon m JOIN coupon c
+        ON          (m.coupon_id = c.coupon_id)
+        WHERE       m.usage1 = 1
+        ORDER BY    used_at desc
+    </select>
 
+    <select id="myUnavailableCouponList" resultType="com.triplan.dto.MemberCouponDTO">
+        SELECT      m.member_coupon_id, m.member_id, m.coupon_id, m.usage1, m.used_at, m.res_id,
+                    c.name, c.price, c.condition, c.expired_at
+        FROM        member_coupon m JOIN coupon c
+        ON          (m.coupon_id = c.coupon_id)
+        WHERE       formatdatetime(now(), 'yyyyMMdd') > formatdatetime(expired_at, 'yyyyMMdd')
+          AND         m.usage1 != 1
+        ORDER BY    expired_at desc
+    </select>
 
 </mapper>

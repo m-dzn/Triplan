@@ -178,7 +178,7 @@ CREATE TABLE `Item_Group_Tag` (
 CREATE TABLE `Coupon` (
 	`coupon_id`	INT AUTO_INCREMENT NOT NULL,
 	`name`	VARCHAR(45)	NOT NULL,
-	`num`	INT	NULL	COMMENT '쿠폰 등록시 입력하면 쿠폰 등록',
+	`num`	INT	NULL    UNIQUE  	COMMENT '쿠폰 등록시 입력하면 쿠폰 등록',
 	`price`	INT UNSIGNED	NOT NULL,
 	`condition`	VARCHAR(200)	NULL,
 	`expired_at`	TIMESTAMP	NULL,

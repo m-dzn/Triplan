@@ -44,6 +44,12 @@
         WHERE   coupon_id = #{couponId}
     </delete>
 
+    <select id="selectByNum" resultType="CouponVO">
+        SELECT  *
+        FROM    coupon
+        WHERE   num = #{num}
+    </select>
+
 
 
 

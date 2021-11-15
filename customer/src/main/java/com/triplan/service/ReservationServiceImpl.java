@@ -61,14 +61,14 @@ public class ReservationServiceImpl implements ReservationService {
                 result = reservationMapper.checkCoupon(memberCouponId);
                 if (result == 1) {
                     result = reservationMapper.checkMemberCoupon(memberCouponId, memberId);
-                }
-                if (result == 1) {
-                    // result == 0 : 쿠폰 사용 불가 - 유효기관 경과 or 이미 사용한 쿠폰
-                    // result == 1 : 쿠폰 사용 처리(MEMBER_COUPON)
-                    reservationMapper.insert(reservationVO);
-                    resId = reservationVO.getResId();
-                    reservationMapper.insertResItem(resId, itemScheduleId);
-                    reservationMapper.useCoupon(resId, memberCouponId, memberId);
+                    if (result == 1) {
+                        // result == 0 : 쿠폰 사용 불가 - 유효기관 경과 or 이미 사용한 쿠폰
+                        // result == 1 : 쿠폰 사용 처리(MEMBER_COUPON)
+                        reservationMapper.insert(reservationVO);
+                        resId = reservationVO.getResId();
+                        reservationMapper.insertResItem(resId, itemScheduleId);
+                        reservationMapper.useCoupon(resId, memberCouponId, memberId);
+                    }
                 }
             }
         }

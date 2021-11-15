@@ -15,7 +15,7 @@ public class ApiCouponController {
     @PostMapping
     public String insert(@RequestBody CouponDTO couponDTO) {
         couponService.insert(couponDTO);
-        return "쿠폰 insert 성공";
+        return "couponCreated";
     }
 
     @GetMapping("/{couponId}")
@@ -26,13 +26,13 @@ public class ApiCouponController {
     @PutMapping("/{couponId}")
     public String update(@PathVariable Integer couponId, @RequestBody CouponDTO couponDTO) {
         couponService.update(couponId, couponDTO);
-        return "쿠폰 update 성공";
+        return "couponUpdated";
     }
 
     @DeleteMapping("/{couponId}")
     public String delete(@PathVariable Integer couponId) {
         couponService.delete(couponId);
-        return "쿠폰 delete 성공";
+        return "couponDeleted";
     }
 
 

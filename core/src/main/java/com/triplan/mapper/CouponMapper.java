@@ -15,4 +15,5 @@ public interface CouponMapper {
 
     void delete(Integer couponId);
 
+    CouponVO selectByNum(Integer num);
 }

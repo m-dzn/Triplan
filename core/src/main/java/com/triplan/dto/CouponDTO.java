@@ -4,6 +4,10 @@ import com.triplan.domain.CouponVO;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,8 +20,12 @@ public class CouponDTO {
 
     private Integer couponId;
 
+    @NotEmpty(message = "name는 필수 값입니다.")
+    @Size(min = 2, max = 10, message = "name은 2자 이상 10자 이내로 입력해주십시오.")
     private String name;
+    @Positive   // 양수만 가능
     private Integer num;
+    @NotNull(message = "price는 필수 값입니다.")
     private Long price;
 
     private String condition;
