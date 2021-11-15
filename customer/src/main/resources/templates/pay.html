@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <form>
+    <div class="row margin-section">
+        <section class="col-7">
+
+            <div class="border bg-white rounded-3 border-2 padding-16 margin-window"><!--네모구역-->
+                <th:block th:replace="fragment/title :: title_2('상품 정보')"></th:block>
+                <div class="row">
+                    <div class="col-auto">
+                        <img src="img/광안리.jpg" id="product_img">
+                    </div>
+                    <div class="col-auto" style="
+    padding-left: 16px;
+">
+                        <div class="row 4 font-size-20 font-weight-bold">
+                            상품 그룹 이름 전달 받는 메소드는 이 곳에
+                        </div>
+                        <div class="row font-size-16">
+                            <span class="offset-1">옵션 : (옵션 전달 받는 메소드는 이 곳에)</span>
+                        </div>
+                        <div class="row font-size-16">
+                            <span class="offset-1">수량(인원) : (수량 전달 받는 메소드는 이 곳에)</span>
+                        </div>
+                        <div class="row font-size-16">
+                            <span class="offset-1">예약날짜 : (예약 날짜 전달 받는 메소드는 이 곳에)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border bg-white rounded-3 border-2 d-flex justify-content-between margin-window padding-16">
+
+                <div class="col-auto">총 금액</div>
+                <div class="col-auto">(총 금액 전달 받는 메소드 여기에)원</div>
+
+            </div>
+        </section>
+        <section class="col-5">
+            <div class="border bg-white rounded-3 border-2 padding-16 margin-window">
+    <th:block th:replace="fragment/title :: title_2('예약자 정보')"></th:block>
+    <div class="row">
+        <label>이름
+            <input  type="text" class="form-control" name="name"></input>
+        </label>
+    </div>
+    <div class="row">
+        <label>연락처
+            <input  type="text" class="form-control" name="phone"></input>
+        </label>
+    </div>
+                <!--예약 테이블 ERD에 이메일 제외되서 비활성화 시켜놓음-->
+<!--    <div class="row">-->
+<!--        <label>이메일-->
+<!--            <input type="text" class="form-control" name="email"> </input>-->
+<!--        </label>-->
+<!--    </div>-->
+            </div>
+            <div class="border bg-white rounded-3 border-2  padding-16 margin-window">
+                <th:block th:replace="fragment/title :: title_2('결제 수단')"></th:block>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment_type" id="creditCard">
+                    <label class="form-check-label" for="creditCard"> 신용/체크카드
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment_type" id="account">
+                    <label class="form-check-label" for="account"> 무통장입금
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment_type" id="naverPay">
+                    <label class="form-check-label" for="naverPay"> 네이버페이
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment_type" id="kakaoPay">
+                    <label class="form-check-label" for="kakaoPay"> 카카오페이
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment_type" id="payco">
+                    <label class="form-check-label" for="payco"> 페이코
+                    </label>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <input  class="col-auto btn btn-primary margin-top-16"
+                            id="button_solid"
+                            href="#"
+                            value="(결제 금액 불러오는 메소드)원 결제"
+                            type="submit"/>
+                </div>
+            </div>
+        </section>
+    </div>
+    </form>
+</div>
+</html>

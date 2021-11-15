@@ -1,0 +1,13 @@
+<!--th 안 쓴 거 복사용-->
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="체크박스이름">
+    <label class="form-check-label" for="input태그의 id">
+        체크박스에 들어갈 텍스트
+    </label>
+</div>
+<!--프래그먼트-->
+<div class="form-check" th:fragment="checkbox_test(text)">
+    <input class="form-check-input" type="checkbox" value="" id="체크박스이름">
+    <label class="form-check-label" for="input태그의 id" th:text="${text}">
+    </label>
+</div>
