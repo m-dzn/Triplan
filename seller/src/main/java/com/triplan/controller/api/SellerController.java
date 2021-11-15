@@ -1,4 +1,4 @@
-package com.triplan.controller;
+package com.triplan.controller.api;
 
 import com.triplan.domain.SellerVO;
 import com.triplan.service.SellerService;

@@ -37,4 +37,11 @@ VALUES ('소인', '0세 ~ 12세', 'FLIGHT', 2);
 INSERT INTO flight (departure, destination, flight_type, seat_class, item_id)
 VALUES ('부산', '서울', 'ONE_WAY', 'ECONOMY', 2);
 
-
+INSERT INTO question (title, content, hide, member_id, type)
+VALUES ('테스트 문의1', '테스트 문의 내용', 0, 1, 'CUSTOMER');
+INSERT INTO question (title, content, hide, member_id, type)
+VALUES ('테스트 문의2', '테스트 문의 내용', 0, 1, 'CUSTOMER');
+INSERT INTO question (title, content, hide, member_id, type)
+VALUES ('테스트 문의3', '테스트 문의 내용', 0, 1, 'CUSTOMER');
+INSERT INTO question (title, content, hide, member_id, type)
+VALUES ('테스트 문의4', '테스트 문의 내용', 0, 1, 'CUSTOMER');
