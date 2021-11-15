@@ -5,14 +5,15 @@ CREATE TABLE `Member` (
 	`nickname`	VARCHAR(20)	NOT NULL,
 	`email_confirm`	TINYINT	NOT NULL	DEFAULT 0	COMMENT 'Boolean',
 	`state`	VARCHAR(20)	NOT NULL	DEFAULT 'REGISTER',
-	`grade`	VARCHAR(20)	NOT NULL	DEFAULT 'BRONZE',
+	`grade`	VARCHAR(20)	NOT NULL	DEFAULT 'BRONZE'	COMMENT 'grade_id로 바꿀지 생각해보기',
 	`profile_img`	VARCHAR(200)	NULL,
 	`point`	INT	NULL	DEFAULT 0	COMMENT 'Integer',
 	`provider`	VARCHAR(100)	NOT NULL	DEFAULT 'LOCAL'	COMMENT 'sns_info -> provider로 변경',
 	`account`	VARCHAR(30)	NULL,
 	`deleted_at`	TIMESTAMP	NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL
+	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`grade_id`	INT AUTO_INCREMENT	NOT NULL
 );
 
 CREATE TABLE `Seller` (
@@ -29,13 +30,12 @@ CREATE TABLE `Seller` (
 	`address_detail`	VARCHAR(200)	NULL	COMMENT '11.05 추가',
 	`seller_img`	VARCHAR(30)	NULL	COMMENT '/seller/img/UUID.jpg <img src="/seller/img/UUID.jpg"/>',
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL,
+	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`member_id`	INT	NOT NULL
 );
 
 CREATE TABLE `Item_Group` (
 	`item_group_id`	INT AUTO_INCREMENT	NOT NULL,
-	`seller_id`	INT	NOT NULL,
 	`name`	VARCHAR(50)	NOT NULL,
 	`summary_explain`	VARCHAR(1000)	NOT NULL,
 	`detail_explain`	VARCHAR(1000)	NOT NULL,
@@ -47,9 +47,10 @@ CREATE TABLE `Item_Group` (
 	`location`	VARCHAR(255)	NULL,
 	`lat`	INT UNSIGNED	NULL,
 	`lng`	INT UNSIGNED	NULL,
+	`like_count`	INT UNSIGNED	NULL	DEFAULT 0	COMMENT '11.08 추가',
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL,
-	`like_count`	INT UNSIGNED	NULL	DEFAULT 0	COMMENT '11.08 추가'
+	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`seller_id`	INT	NOT NULL
 );
 
 CREATE TABLE `Item` (
@@ -61,7 +62,7 @@ CREATE TABLE `Item` (
 	`sales_volume`	INT UNSIGNED	NULL	DEFAULT 0,
 	`detail_img`	VARCHAR(200)	NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL,
+	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`item_group_id`	INT	NOT NULL
 );
 
@@ -86,12 +87,13 @@ CREATE TABLE `Room` (
 
 CREATE TABLE `Payment` (
 	`payment_id`	INT AUTO_INCREMENT	NOT NULL,
-	`type`	VARCHAR(20)	NOT NULL,
+	`type`	VARCHAR(30)	NOT NULL,
 	`total_payment`	INT UNSIGNED	NOT NULL,
 	`payment_deadline`	TIMESTAMP	NOT NULL,
 	`state`	VARCHAR(20)	NOT NULL	DEFAULT 'UNPAID',
+	`paid_at`	TIMESTAMP	NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL,
+	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`res_id`	INT	NOT NULL
 );
 
@@ -100,10 +102,10 @@ CREATE TABLE `Question` (
 	`title`	VARCHAR(45)	NOT NULL,
 	`content`	TEXT	NOT NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL,
+	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`hide`	TINYINT	NOT NULL	DEFAULT 0	COMMENT 'Boolean',
 	`member_id`	INT	NOT NULL	COMMENT 'Integer',
-	`qna_category_id`	INT	NOT NULL	COMMENT 'Integer',
+	`qna_category_id`	INT	NULL	COMMENT 'Integer',
 	`item_group_id`	INT	NULL	COMMENT 'Integer',
 	`type`	VARCHAR(45)	NOT NULL
 );
@@ -112,10 +114,11 @@ CREATE TABLE `Review` (
 	`review_id`	INT AUTO_INCREMENT	NOT NULL,
 	`content`	VARCHAR(1000)	NOT NULL,
 	`review_score`	INT	NOT NULL	DEFAULT 0	COMMENT 'Boolean -> Enum으로 수정',
-	`created_at`	TIMESTAMP	NOT NULL,
-	`updated_at`	TIMESTAMP	NULL,
+	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`member_id`	INT	NOT NULL,
-	`item_id`	INT	NOT NULL
+	`item_id`	INT	NOT NULL,
+	`review_img`	VARCHAR(200)	NULL
 );
 
 CREATE TABLE `Member_Role` (
@@ -142,7 +145,7 @@ CREATE TABLE `Notice` (
 	`notice_id`	INT AUTO_INCREMENT	NOT NULL,
 	`title`	VARCHAR(60)	NOT NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL,
+	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`content`	VARCHAR(1000)	NOT NULL	COMMENT 'contents -> content로 수정',
 	`target`	VARCHAR(20)	NOT NULL	COMMENT '11.05 추가'
 );
@@ -156,11 +159,11 @@ CREATE TABLE `Reservation` (
 	`name`	VARCHAR(45)	NOT NULL,
 	`phone`	VARCHAR(45)	NOT NULL,
 	`total_discount_price`	INT UNSIGNED	NULL	DEFAULT 0,
-	`created_at`	TIMESTAMP	NOT NULL    DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL        ON UPDATE CURRENT_TIMESTAMP,
+	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+	`updated_at`	TIMESTAMP	NULL	DEFAULT ON UPDATE CURRENT_TIMESTAMP,
 	`member_id`	INT	NOT NULL,
-	`seller_id`	INT	NOT NULL    COMMENT '11.9 추가',
-    `cancellation`	TINYINT	NOT NULL	DEFAULT 0	COMMENT '11.9 추가 Boolean 0-예약, 1-취소'
+	`seller_id`	INT	NULL,
+	`cancellation`	INT	NULL	DEFAULT 0	COMMENT '0(예약) / 1(취소)'
 );
 
 CREATE TABLE `Tag` (
@@ -173,26 +176,6 @@ CREATE TABLE `Tag` (
 CREATE TABLE `Item_Group_Tag` (
 	`item_group_id`	INT	NOT NULL,
 	`tag_id`	INT	NOT NULL
-);
-
-CREATE TABLE `Coupon` (
-	`coupon_id`	INT AUTO_INCREMENT NOT NULL,
-	`name`	VARCHAR(45)	NOT NULL,
-	`num`	INT	NULL    UNIQUE  	COMMENT '쿠폰 등록시 입력하면 쿠폰 등록',
-	`price`	INT UNSIGNED	NOT NULL,
-	`condition`	VARCHAR(200)	NULL,
-	`expired_at`	TIMESTAMP	NULL,
-	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL	    ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE `Member_Coupon` (
-    `member_coupon_id`	INT AUTO_INCREMENT NOT NULL,
-    `member_id`     INT NOT NULL,
-    `coupon_id`     INT NOT NULL,
-    `usage1`	TINYINT	NULL    DEFAULT 0	COMMENT '0(미사용) / 1(사용)',
-    `used_at`	TIMESTAMP	NULL,
-    `res_id`	INT	NULL	COMMENT '예약 id Foreign key로 들고와서 조인해서 사용'
 );
 
 CREATE TABLE `Wishlist` (
@@ -211,8 +194,7 @@ CREATE TABLE `Attachment` (
 	`file_extension`	VARCHAR(10)	NOT NULL,
 	`upload_path`	VARCHAR(45)	NOT NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`file_size`	INT UNSIGNED	NULL,
-	`upload_ip`	VARCHAR(20)	NOT NULL	COMMENT '11.05 제거'
+	`file_size`	INT UNSIGNED	NULL
 );
 
 CREATE TABLE `Reservation_Item` (
@@ -228,8 +210,34 @@ CREATE TABLE `Item_Schedule` (
 	`start_date`	TIMESTAMP	NOT NULL,
 	`end_date`	TIMESTAMP	NOT NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`updated_at`	TIMESTAMP	NULL,
+	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`item_id`	INT	NOT NULL
+);
+
+CREATE TABLE `Member_Coupon` (
+	`member_coupon_id`	INT AUTO_INCREMENT	NOT NULL,
+	`member_id`	INT	NOT NULL,
+	`coupon_id`	INT	NOT NULL,
+	`usage1`	TINYINT	NOT NULL	DEFAULT 0	COMMENT '0(미사용) / 1(사용 or 기한지남)',
+	`used_at`	TIMESTAMP	NULL,
+	`res_id`	INT	NULL	COMMENT 'Foreign Key(Reservation)'
+);
+
+CREATE TABLE `Coupon` (
+	`coupon_id`	INT AUTO_INCREMENT	NOT NULL,
+	`name`	VARCHAR(45)	NOT NULL,
+	`num`	INT + UNIQUE	NULL	COMMENT '쿠폰 등록시 입력하면 쿠폰 등록',
+	`price`	INT UNSIGNED	NOT NULL,
+	`condition`	VARCHAR(200)	NULL,
+	`expired_at`	TIMESTAMP	NULL,
+	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+	`updated_at`	TIMESTAMP	NULL	DEFAULT ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `Grade` (
+	`grade`	VARCHAR(20)	NOT NULL,
+	`min_payment`	INT	NULL,
+	`max_payment`	INT	NULL
 );
 
 ALTER TABLE `Member` ADD CONSTRAINT `PK_MEMBER` PRIMARY KEY (
@@ -302,14 +310,6 @@ ALTER TABLE `Item_Group_Tag` ADD CONSTRAINT `PK_ITEM_GROUP_TAG` PRIMARY KEY (
 	`tag_id`
 );
 
-ALTER TABLE `Coupon` ADD CONSTRAINT `PK_COUPON` PRIMARY KEY (
-	`coupon_id`
-);
-
-ALTER TABLE `Member_Coupon` ADD CONSTRAINT `PK_MEMBER_COUPON` PRIMARY KEY (
-    `member_coupon_id`
-);
-
 ALTER TABLE `Wishlist` ADD CONSTRAINT `PK_WISHLIST` PRIMARY KEY (
 	`wishlist_id`
 );
@@ -325,6 +325,20 @@ ALTER TABLE `Reservation_Item` ADD CONSTRAINT `PK_RESERVATION_ITEM` PRIMARY KEY 
 
 ALTER TABLE `Item_Schedule` ADD CONSTRAINT `PK_ITEM_SCHEDULE` PRIMARY KEY (
 	`item_schedule_id`
+);
+
+ALTER TABLE `Member_Coupon` ADD CONSTRAINT `PK_MEMBER_COUPON` PRIMARY KEY (
+	`member_coupon_id`,
+	`member_id`,
+	`coupon_id`
+);
+
+ALTER TABLE `Coupon` ADD CONSTRAINT `PK_COUPON` PRIMARY KEY (
+	`coupon_id`
+);
+
+ALTER TABLE `Grade` ADD CONSTRAINT `PK_GRADE` PRIMARY KEY (
+	`grade`
 );
 
 ALTER TABLE `Member_Role` ADD CONSTRAINT `FK_Member_TO_Member_Role_1` FOREIGN KEY (
@@ -362,49 +376,30 @@ REFERENCES `Tag` (
 	`tag_id`
 );
 
-ALTER TABLE `Reservation` ADD CONSTRAINT `FK_Member_TO_Reservation` FOREIGN KEY (
-    `member_id`
-) REFERENCES `Member` (
-    `member_id`
-) ON UPDATE CASCADE ON DELETE SET NULL;
-
-ALTER TABLE `Reservation` ADD CONSTRAINT `FK_Seller_TO_Reservation` FOREIGN KEY (
-    `seller_id`
-) REFERENCES `Seller` (
-    `seller_id`
-) ON UPDATE CASCADE ON DELETE SET NULL;
-
 ALTER TABLE `Reservation_Item` ADD CONSTRAINT `FK_Reservation_TO_Reservation_Item_1` FOREIGN KEY (
 	`res_id`
 )
 REFERENCES `Reservation` (
 	`res_id`
-) ON UPDATE CASCADE ON DELETE CASCADE;
+);
 
 ALTER TABLE `Reservation_Item` ADD CONSTRAINT `FK_Item_Schedule_TO_Reservation_Item_1` FOREIGN KEY (
 	`item_schedule_id`
 )
 REFERENCES `Item_Schedule` (
 	`item_schedule_id`
-) ON UPDATE CASCADE ON DELETE SET NULL;
+);
+
+ALTER TABLE `Member_Coupon` ADD CONSTRAINT `FK_Member_TO_Member_Coupon_1` FOREIGN KEY (
+	`member_id`
+)
+REFERENCES `Member` (
+	`member_id`
+);
 
 ALTER TABLE `Member_Coupon` ADD CONSTRAINT `FK_Coupon_TO_Member_Coupon_1` FOREIGN KEY (
 	`coupon_id`
 )
 REFERENCES `Coupon` (
 	`coupon_id`
-) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE `Member_Coupon` ADD CONSTRAINT `FK_Member_TO_Member_Coupon1` FOREIGN KEY (
-	`member_id`
-)
-REFERENCES `Member` (
-    `member_id`
-) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE `Member_Coupon` ADD CONSTRAINT `FK_Reservation_TO_Member_Coupon1` FOREIGN KEY (
-    `res_id`
-)
-REFERENCES `Reservation` (
-    `res_id`
-) ON UPDATE CASCADE ON DELETE CASCADE;
+);
