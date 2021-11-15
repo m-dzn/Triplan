@@ -1,7 +1,7 @@
 package com.triplan.controller;
 
 import com.triplan.domain.MemberVO;
-import com.triplan.service.MemberService;
+import com.triplan.service.inf.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
