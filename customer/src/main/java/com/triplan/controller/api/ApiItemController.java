@@ -2,48 +2,26 @@ package com.triplan.controller.api;
 
 
 import com.triplan.domain.ItemVO;
-import com.triplan.domain.RoomVO;
-import com.triplan.dto.customer.request.ItemFlightRequestDTO;
-import com.triplan.dto.customer.request.ItemRoomRequestDTO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.enumclass.ItemCategory;
 import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/items")
 @RequiredArgsConstructor
 public class ApiItemController {
 
-    @Autowired
     private final ItemService itemService;
-
-    @PostMapping
-    public String itemSave(@RequestBody ItemVO itemVO) {
-        itemService.itemSave(itemVO);
-        return "create 성공";
-    }
 
     @GetMapping("/{itemId}")
     public ItemVO itemRead(@PathVariable Integer itemId){
         return itemService.itemRead(itemId);
-    }
-    
-    @PutMapping("/{itemId}")
-    public String itemModify(@PathVariable Integer itemId, @RequestBody ItemVO itemVO){
-        itemService.itemModify(itemId, itemVO);
-        return "update 성공";
-    }
-    
-    @DeleteMapping("/delete/{itemId}")
-    public String itemRemove(@PathVariable Integer itemId){
-        itemService.itemRemove(itemId);
-        return "delete 성공";
     }
 
     @GetMapping("/room/{itemId}")
@@ -55,29 +33,5 @@ public class ApiItemController {
     public ItemFlightResponseDTO readItemDetailFlight(@PathVariable Integer itemId){
         return itemService.getDetailFlightByItemId(ItemCategory.FLIGHT,itemId);
     }
-
-    @PostMapping("/room/insert")
-    public String insertItemRoom(@RequestBody ItemRoomRequestDTO itemRoomRequestDTO){
-        return itemService.insertItemRoom(itemRoomRequestDTO,ItemCategory.ROOM);
-    }
-
-    @PostMapping("/flight/insert")
-    public String insertItemFlight(@RequestBody ItemFlightRequestDTO itemFlightRequestDTO){
-        return itemService.insertItemFlight(itemFlightRequestDTO, ItemCategory.FLIGHT);
-
-    }
-
-    @PutMapping("/room/update/{itemId}")
-    public String updateRoomItem(@PathVariable Integer itemId, @RequestBody ItemRoomRequestDTO itemRoomRequestDTO){
-        return itemService.updateRoomItem(itemId, itemRoomRequestDTO, ItemCategory.ROOM);
-
-    }
-
-    @PutMapping("/flight/update/{itemId}")
-    public String updateFlightItem(@PathVariable Integer itemId, @RequestBody ItemFlightRequestDTO itemFlightRequestDTO){
-        return itemService.updateFlightItem(itemId, itemFlightRequestDTO, ItemCategory.FLIGHT);
-
-    }
-
 }
 

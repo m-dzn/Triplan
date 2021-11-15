@@ -12,12 +12,6 @@ public class ApiReservationController {
 
     private final ReservationService reservationService;
 
-    @PostMapping
-    public String register(@RequestBody ReservationDTO reservationDTO) {
-        reservationService.register(reservationDTO);
-        return "예약 추가 성공";
-    }
-
     @GetMapping("/{resId}")
     public ReservationDTO getReservation(@PathVariable Integer resId) {
         return reservationService.getReservation(resId);
@@ -27,7 +21,6 @@ public class ApiReservationController {
     public Integer getCountReservation(@PathVariable Integer sellerId){
         return reservationService.getCountReservation(sellerId);
     }
-
 
     @PutMapping("/{resId}")
     public String update(@PathVariable Integer resId, @RequestBody ReservationDTO reservationDTO) {
@@ -40,8 +33,4 @@ public class ApiReservationController {
         reservationService.delete(resId);
         return "예약 삭제 성공";
     }
-
-    // 메인 페이지
-    // 예약 건수(Daily, Weekly)
-
 }

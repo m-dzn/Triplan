@@ -1,7 +1,6 @@
 package com.triplan.controller.api;
 
 import com.triplan.domain.SellerVO;
-import com.triplan.dto.SellerDTO;
 import com.triplan.service.inf.SellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

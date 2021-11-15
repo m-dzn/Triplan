@@ -21,30 +21,13 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-    @Autowired
     private final ItemMapper itemMapper;
     private final FlightMapper flightMapper;
     private final RoomMapper roomMapper;
 
     @Override
-    public void itemSave(ItemVO itemVO) {
-        itemMapper.insert(itemVO);
-    }
-
-    @Override
     public ItemVO itemRead(Integer itemId) {
         return itemMapper.select(itemId);
-    }
-
-    @Override
-    public void itemModify(Integer itemId, ItemVO itemVO) {
-        itemVO.setItemId(itemId);
-        itemMapper.update(itemVO);
-    }
-
-    @Override
-    public void itemRemove(Integer itemId) {
-        itemMapper.delete(itemId);
     }
 
     @Override
@@ -75,81 +58,5 @@ public class ItemServiceImpl implements ItemService {
         itemFlightResponseDTO.setFlightVO(flightVO);
 
         return itemFlightResponseDTO;
-    }
-
-    @Override
-    public String insertItemRoom(ItemRoomRequestDTO itemRoomRequestDTO,ItemCategory room) {
-
-        ItemVO itemVO = itemRoomRequestDTO.toItemVO();
-        RoomVO roomVO = itemRoomRequestDTO.toRoomVO();
-
-        if(itemVO.getItemCategory().equals(room)) {
-            itemMapper.insert(itemVO);
-            roomVO.setItemId(itemVO.getItemId());
-            roomMapper.insert(roomVO);
-
-            return "ItemCatgory MACTH insert Success";
-        }
-        else
-            return "ItemCatgory MISMACTH insert Fail";
-
-    }
-
-    @Override
-    public String insertItemFlight(ItemFlightRequestDTO itemFlightRequestDTO, ItemCategory flight) {
-
-        ItemVO itemVO = itemFlightRequestDTO.toItemVO();
-        FlightVO flightVO = itemFlightRequestDTO.toFlightVO();
-
-        if(itemVO.getItemCategory().equals(flight)) {
-            itemMapper.insert(itemVO);
-            flightVO.setItemId(itemVO.getItemId());
-            flightMapper.insert(flightVO);
-
-            return "ItemCatgory MACTH Insert Success";
-        }
-        else
-            return "ItemCatgory MISMACTH Insert Fail";
-
-    }
-
-    @Override
-    public String  updateRoomItem(Integer itemId, ItemRoomRequestDTO itemRoomRequestDTO, ItemCategory room) {
-
-        ItemVO itemVO = itemRoomRequestDTO.toItemVO();
-        RoomVO roomVO = itemRoomRequestDTO.toRoomVO();
-
-        if(itemVO.getItemCategory().equals(room)) {
-
-            itemVO.setItemId(itemId);
-            itemMapper.update(itemVO);
-            roomVO.setItemId(itemVO.getItemId());
-            roomMapper.updateByItemId(roomVO);
-
-            return "ItemCatgory MACTH Update Success";
-        }
-        else
-            return "ItemCatgory MISMACTH Update Fail";
-
-    }
-
-    @Override
-    public String updateFlightItem(Integer itemId, ItemFlightRequestDTO itemFlightRequestDTO,ItemCategory flight) {
-
-        ItemVO itemVO = itemFlightRequestDTO.toItemVO();
-        FlightVO flightVO = itemFlightRequestDTO.toFlightVO();
-
-        if(itemVO.getItemCategory().equals(flight)) {
-
-            itemVO.setItemId(itemId);
-            itemMapper.update(itemVO);
-            flightVO.setItemId(itemVO.getItemId());
-            flightMapper.updateByItemId(flightVO);
-
-            return "ItemCatgory MACTH Update Success";
-        }
-        else
-            return "ItemCatgory MISMACTH Update Fail";
-
     }
 }

@@ -5,8 +5,6 @@ import com.triplan.dto.ReservationDTO;
 
 public interface ReservationService {
 
-    void register(ReservationDTO reservationDTO);
-
     ReservationDTO getReservation(Integer resId);
 
     void update(Integer reservationId, ReservationDTO reservationDTO);

@@ -2,7 +2,6 @@ package com.triplan.service;
 
 import com.triplan.domain.ItemGroupVO;
 import com.triplan.domain.ItemVO;
-import com.triplan.dto.customer.request.ItemGroupRequestDTO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemGroupResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
@@ -26,24 +25,8 @@ public class ItemGroupServiceImpl implements ItemGroupService {
     private final TagMapper tagMapper;
 
     @Override
-    public void ItemGroupRegister(ItemGroupVO itemGroupVO) {
-        itemGroupMapper.insert(itemGroupVO);
-    }
-
-    @Override
     public ItemGroupVO getItemGroup(Integer itemGroupId) {
         return itemGroupMapper.select(itemGroupId);
-    }
-
-    @Override
-    public void updateItemGroup(ItemGroupVO itemGroupVO,Integer itemGroupId) {
-        itemGroupVO.setItemGroupId(itemGroupId);
-        itemGroupMapper.update(itemGroupVO);
-    }
-
-    @Override
-    public void deleteItemGroup(Integer itemGroupId) {
-        itemGroupMapper.delete(itemGroupId);
     }
 
     @Override
@@ -78,26 +61,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
             return itemGroupResponseDTO;
         }
         else return null;
-
     }
 
-    @Override
-    public void ItemGroupRegisterAddTags(ItemGroupRequestDTO itemGroupRequestDTO) {
-
-        ItemGroupVO itemGroupVO = itemGroupRequestDTO.toItemGroupVO();
-        itemGroupMapper.insert(itemGroupVO);
-        tagMapper.RegisterAddTagIdList(itemGroupVO.getItemGroupId(),itemGroupRequestDTO.getTagIdList());
-
-    }
-
-    @Override
-    public void updateItemGroupTags(Integer itemGroupId, ItemGroupRequestDTO itemGroupRequestDTO) {
-        ItemGroupVO itemGroupVO = itemGroupRequestDTO.toItemGroupVO();
-        itemGroupVO.setItemGroupId(itemGroupId);
-        itemGroupMapper.update(itemGroupVO);
-        tagMapper.delete(itemGroupId);
-        tagMapper.RegisterAddTagIdList(itemGroupVO.getItemGroupId(),itemGroupRequestDTO.getTagIdList());
-
-    }
 
 }
