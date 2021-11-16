@@ -39,12 +39,10 @@ public class ApiReviewController {
         return "정보 삭제 완료";
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public List<ReviewVO> reviewList(){
         List<ReviewVO> list = reviewService.reviewList();
         return list;
     }
-
-
 
 }

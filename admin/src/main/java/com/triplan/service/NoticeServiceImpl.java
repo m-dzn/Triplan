@@ -4,11 +4,9 @@ import com.triplan.domain.NoticeVO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.Target;
 import com.triplan.mapper.NoticeMapper;
-import com.triplan.paging.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service

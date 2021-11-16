@@ -9,17 +9,16 @@ import java.util.List;
 @Mapper
 public interface NoticeMapper {
 
-
     void noticeInsert(NoticeVO noticeVO);
 
-    NoticeVO noticeSelect(Integer noticeId);
+    NoticeVO noticeSelect(int noticeId);
 
     void noticeUpdate(NoticeVO noticeVO);
 
-    void noticeDelete(Integer noticeId);
+    void noticeDelete(int noticeId);
 
     List<NoticeVO> noticeList(Target target);
 
-
+    Integer count(Target target);
 
 }

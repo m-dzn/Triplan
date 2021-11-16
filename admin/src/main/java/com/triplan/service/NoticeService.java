@@ -5,13 +5,7 @@ import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.Target;
 
 
-
-import java.util.List;
-
-
 public interface NoticeService {
-
-
 
     void noticeInsert(NoticeVO noticeVO);
 

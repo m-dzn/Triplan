@@ -52,7 +52,7 @@
                     c.name, c.price, c.condition, c.expired_at
         FROM        member_coupon m JOIN coupon c
         ON          (m.coupon_id = c.coupon_id)
-        ORDER BY    member_coupon_id desc
+        ORDER BY    member_coupon_id DESC
     </select>
 
     <select id="myAvailableCouponList" resultType="com.triplan.dto.MemberCouponDTO">
@@ -60,9 +60,9 @@
                     c.name, c.price, c.condition, c.expired_at
         FROM        member_coupon m JOIN coupon c
         ON          (m.coupon_id = c.coupon_id)
-        WHERE       formatdatetime(expired_at, 'yyyyMMdd') >= formatdatetime(now(), 'yyyyMMdd')
+        WHERE       FORMATDATETIME(expired_at, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
           AND         m.usage1 != 1
-        ORDER BY    expired_at asc
+        ORDER BY    expired_at
     </select>
 
     <select id="myUsedCouponList" resultType="com.triplan.dto.MemberCouponDTO">
@@ -71,7 +71,7 @@
         FROM        member_coupon m JOIN coupon c
         ON          (m.coupon_id = c.coupon_id)
         WHERE       m.usage1 = 1
-        ORDER BY    used_at desc
+        ORDER BY    used_at DESC
     </select>
 
     <select id="myUnavailableCouponList" resultType="com.triplan.dto.MemberCouponDTO">
@@ -79,9 +79,9 @@
                     c.name, c.price, c.condition, c.expired_at
         FROM        member_coupon m JOIN coupon c
         ON          (m.coupon_id = c.coupon_id)
-        WHERE       formatdatetime(now(), 'yyyyMMdd') > formatdatetime(expired_at, 'yyyyMMdd')
-          AND         m.usage1 != 1
-        ORDER BY    expired_at desc
+        WHERE       FORMATDATETIME(now(), 'yyyyMMdd') > FORMATDATETIME(expired_at, 'yyyyMMdd')
+          AND       m.usage1 != 1
+        ORDER BY    expired_at DESC
     </select>
 
 </mapper>

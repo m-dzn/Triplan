@@ -66,19 +66,7 @@ INSERT INTO grade (grade, min_payment, max_payment)
 VALUES ('SILVER', 100001,300000);
 
 INSERT INTO grade (grade, min_payment, max_payment)
-VALUES ('GOLD', 300001,500000);
+VALUES ('GOLD', 300001, 500000);
 
 INSERT INTO grade (grade, min_payment, max_payment)
 VALUES ('PLATINUM', 500001, 2100000000);
-
-insert into payment
-values (1, 'CREDIT_CARD',110000,'2021-11-11T17:00:00','PAID', '2021-11-11T17:00:00','2021-11-11T17:00:00',null,1);
-
-insert into payment
-values (2, 'CREDIT_CARD',110000,'2019-11-11T17:00:00','PAID', '2019-11-11T17:00:00','2019-11-11T17:00:00',null,1);
-
-insert into payment
-values (3, 'CREDIT_CARD',110000,'2023-11-11T17:00:00','PAID', '2023-11-11T17:00:00','2023-11-11T17:00:00',null,1);
-
-insert into payment
-values (4, 'CREDIT_CARD',110000,'2021-11-11T17:00:00','PAID', '2021-11-11T17:00:00','2021-11-11T17:00:00',null,1);
