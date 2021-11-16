@@ -42,10 +42,10 @@ public class AttachmentUtil {
             return attachmentList;
 
         for (MultipartFile file : files) {
-                if (!file.getOriginalFilename().isEmpty() && !file.isEmpty()) {
-                    AttachmentVO attachmentVO = getAttachment(file, tableType, id);
-                    attachmentList.add(attachmentVO);
-                }
+            if (!file.getOriginalFilename().isEmpty() && !file.isEmpty()) {
+                AttachmentVO attachmentVO = getAttachment(file, tableType, id);
+                attachmentList.add(attachmentVO);
+            }
         }
 
         return attachmentList;

@@ -10,8 +10,17 @@ public interface MemberMapper {
 
     MemberVO select(Integer memberId);
 
-    void update(MemberVO memberVO);
+    void updateEtc(MemberVO memberVO);
+
+    void updateBasicInfo(MemberVO memberVO);
+
+    void updateEmail(MemberVO memberVO);
+
+    void updatePassword(MemberVO memberVO);
 
     void delete(Integer memberId);
 
+    Boolean emailCheck(String email);
+
+    Boolean nicknameCheck(String nickname);
 }

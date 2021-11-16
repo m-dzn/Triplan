@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class Pagination <T> {
-
+  
     private static final int PAGE_RANGE = 10;
 
     // 입력 받을 페이징 정보
@@ -28,7 +28,7 @@ public class Pagination <T> {
     private Integer endPage;
     private Boolean hasPrev;
     private Boolean hasNext;
-
+  
     // 데이터
     private List<T> list;
 
