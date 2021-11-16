@@ -13,18 +13,22 @@ import lombok.ToString;
 public class ReviewVO extends BaseVO {
 
     // 식별자 필드
+
     private Integer reviewId;
 
     // 필수 입력 필드 : Default 없는 NOT NULL 필드
     private String content;
 
     // Default 값이 있는 NOT NULL 필드
-    private ReviewScore reviewScore; // Enum 0,0.5,.... 5점까지
+    private Integer reviewScore;
 
     // Nullable 필드
+    private String reviewImg;
+
 
     // 외래키
     private Integer memberId;
     private Integer itemId;
+
 
 }
