@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Pagination <T> {
 
+    private static final int PAGE_RANGE = 10;
+
     // 입력 받을 페이징 정보
     private Integer pageSize;
     private Integer currentPage;
@@ -43,10 +45,10 @@ public class Pagination <T> {
 
         // 현재 페이지를 pageSize 로 나눈 후 소수점은 내림하는 효과
         // ex) (15 / 10) * 10 + 1 = 1 * 10 + 1 = 11
-        startPage = (currentPage - 1) / pageSize * pageSize + 1;
+        startPage = (currentPage - 1) / PAGE_RANGE * PAGE_RANGE + 1;
 
         // 계산된 마지막 페이지
-        int calculatedEndPage = startPage + pageSize - 1;
+        int calculatedEndPage = startPage + PAGE_RANGE - 1;
 
         totalPages = totalElements / pageSize                   // 아이템으로 꽉 채워진 페이지 수
                 + (totalElements % pageSize == 0 ? 0 : 1);      // 나머지가 있을 경우 덜 채워진 잔여 1페이지 추가
