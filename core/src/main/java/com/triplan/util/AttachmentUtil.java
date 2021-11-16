@@ -27,15 +27,8 @@ public class AttachmentUtil {
 
     private static String FILE_PATH;
 
-    public static List<AttachmentVO> getAttachments(List<MultipartFile> files, AboutTableType tableType, int id) {
-
-
-
-    public static List<AttachmentVO> getAttachments(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType)
-            throws IOException {
-
-        FILE_PATH = PRE_FIX+aboutTableType.getFilePath(); // 파일저장경로
-
+    public static List<AttachmentVO> getAttachments(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType) {
+        FILE_PATH = PREFIX + aboutTableType.getFilePath(); // 파일저장경로
 
         List<AttachmentVO> attachmentList = new ArrayList<>();
 
@@ -46,23 +39,21 @@ public class AttachmentUtil {
 
         for (MultipartFile file : files) {
 
-                if (!file.getOriginalFilename().isEmpty() && !file.isEmpty()) {
-                    AttachmentVO attachmentVO = getAttachment(file, aboutTableType, idInTableType);
+            if (!file.getOriginalFilename().isEmpty() && !file.isEmpty()) {
+                AttachmentVO attachmentVO = getAttachment(file, aboutTableType, idInTableType);
 
-                    attachmentList.add(attachmentVO);
-                } else {
-                    deleteAttachments(attachmentList);
-                    return new ArrayList<>();
-                }
+                attachmentList.add(attachmentVO);
+            } else {
+                deleteAttachments(attachmentList);
+                return new ArrayList<>();
+            }
+        }
 
         return attachmentList;
     }
 
 
-    public static AttachmentVO getAttachment(MultipartFile file, AboutTableType aboutTableType, Integer idInTableType)
-            throws IOException {
-
-
+    public static AttachmentVO getAttachment(MultipartFile file, AboutTableType aboutTableType, Integer idInTableType) {
         // 확장자 위치 인덱스
         int extPosition = file.getOriginalFilename().indexOf(".");
 
@@ -73,11 +64,8 @@ public class AttachmentUtil {
         String uploadPath = aboutTableType.getFilePath(); // 저장될 폴더 경로
         Long fileSize = file.getSize(); // 파일 사이즈
 
-        // 저장경로 + 파일 + 확장자 => 물리적으로 파일을 저장하기위함
-        Path savePathServerNameExt = Paths.get(PREFIX + tableType.getFilePath() + "/" +serverFileName + "." + fileExtension);
-
         // 저장할 디렉토리 생성
-        File saveDir = new File(PREFIX + tableType.getFilePath());
+        File saveDir = new File(PREFIX + aboutTableType.getFilePath());
         if (!saveDir.exists()) { // 저장할 디렉토리가 존재하지 않으면 생성
             saveDir.mkdirs();
         }
@@ -95,7 +83,8 @@ public class AttachmentUtil {
 
         // 파일을 물리적으로 저장
         try {
-            Files.write(savePathServerNameExt, file.getBytes());
+            // 저장경로 + 파일 + 확장자 => 물리적으로 파일을 저장하기위함
+            Files.write(Paths.get(PREFIX + attachmentVO.getUrl()), file.getBytes());
             return attachmentVO;
         } catch (IOException e) {
             deleteAttachment(attachmentVO);
