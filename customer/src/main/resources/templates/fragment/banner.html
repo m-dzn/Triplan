@@ -1,0 +1,38 @@
+건드려아 될 것 :
+1. banner로 네이밍 되있는거 복사해가서 자기가 사용할 배너 프래그먼트 따로 만들기
+2. data-bs-slide-to="n"에 숫자 붙여주기
+3. aria-label 이름 slide 뒤에 숫자 붙여주기
+4. 숫자 적은 만큼 carousel-item라는 클래스명을 가진 div 만들어주기
+5. 높이 변경해주려면 carousel-inner이라는 클래스명을 가진 곳에 아이디명 따로 지정해줘서 css로 height 설정해주기
+
+<div    th:fragment="banner"
+        id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" >
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
+  <div class="carousel-inner" id="banner">
+    <div class="carousel-item active">
+      <img src="img/슬라이드1.PNG" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="img/슬라이드2.PNG" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="img/슬라이드3.PNG" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="img/슬라이드1.PNG" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

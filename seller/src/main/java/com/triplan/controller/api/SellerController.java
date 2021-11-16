@@ -1,4 +1,4 @@
-package com.triplan.controller;
+package com.triplan.controller.api;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <div class="row margin-section">
+        <section class="col-3">
+            <th:block th:replace="fragment/myPage :: mypage_top"></th:block>
+            <th:block th:replace="fragment/myPage :: mypage_nav_member"></th:block>
+<!--            <th:block th:replace="fragment/myPage :: mypage_bottom"></th:block>-->
+        </section>
+        <section class="col-9">
+            <th:block th:replace="fragment/myPage :: modify"></th:block>
+
+
+        </section>
+    </div>
+
+</div>
+</html>
