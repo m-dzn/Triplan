@@ -30,10 +30,10 @@ public class AttachmentUtil {
 
 
 
-    public static List<AttachmentVO> getAttachments(List<MultipartFile> files, AboutTableType tableType, int id)
+    public static List<AttachmentVO> getAttachments(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType)
             throws IOException {
 
-        FILE_PATH = PRE_FIX+tableType.getFilePath(); // 파일저장경로
+        FILE_PATH = PRE_FIX+aboutTableType.getFilePath(); // 파일저장경로
 
         List<AttachmentVO> attachmentList = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class AttachmentUtil {
 
         for (MultipartFile file : files) {
                 if (!file.getOriginalFilename().isEmpty() && !file.isEmpty()) {
-                    AttachmentVO attachmentVO = getAttachment(file, tableType, id);
+                    AttachmentVO attachmentVO = getAttachment(file, aboutTableType, idInTableType);
                     attachmentList.add(attachmentVO);
                 }
         }
@@ -54,7 +54,7 @@ public class AttachmentUtil {
 
 
 
-    public static AttachmentVO getAttachment(MultipartFile file, AboutTableType tableType, int id)
+    public static AttachmentVO getAttachment(MultipartFile file, AboutTableType aboutTableType, Integer idInTableType)
             throws IOException {
 
         // 확장자 위치 인덱스
@@ -64,10 +64,8 @@ public class AttachmentUtil {
         String originFileName = file.getOriginalFilename().substring(0,extPosition); // 원본파일이름
         String fileExtension = file.getOriginalFilename().substring(extPosition+1); // 확장자
         String serverFileName = UUID.randomUUID().toString(); // 서버에 저장될 파일이름
-        String uploadPath = tableType.getFilePath(); // 저장될 폴더 경로
+        String uploadPath = aboutTableType.getFilePath(); // 저장될 폴더 경로
         Long fileSize = file.getSize(); // 파일 사이즈
-        AboutTableType aboutTableType = tableType;
-        Integer idInTableType = id;
 
         // 저장경로 + 파일 + 확장자 => 물리적으로 파일을 저장하기위함
         Path savePathServerNameExt = Paths.get(FILE_PATH + "/" +serverFileName + "." + fileExtension);
