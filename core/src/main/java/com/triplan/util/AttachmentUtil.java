@@ -30,8 +30,7 @@ public class AttachmentUtil {
 
 
 
-    public static List<AttachmentVO> getAttachments(List<MultipartFile> files, AboutTableType tableType, int id)
-            throws IOException {
+    public static List<AttachmentVO> getAttachments(List<MultipartFile> files, AboutTableType tableType, int id) {
 
         FILE_PATH = PRE_FIX+tableType.getFilePath(); // 파일저장경로
 
@@ -54,8 +53,7 @@ public class AttachmentUtil {
 
 
 
-    public static AttachmentVO getAttachment(MultipartFile file, AboutTableType tableType, int id)
-            throws IOException {
+    public static AttachmentVO getAttachment(MultipartFile file, AboutTableType tableType, int id) {
 
         // 확장자 위치 인덱스
         int extPosition = file.getOriginalFilename().indexOf(".");
@@ -99,10 +97,12 @@ public class AttachmentUtil {
             try { // 파일 저장시 에러생기면 롤백
                 Files.delete(savePathServerNameExt);
             } catch (IOException eDel) {
-                throw new FileUploadException();
+                eDel.printStackTrace();
             }
-            throw new FileUploadException();
+            e.printStackTrace();
         }
+
+        return null;
     }
 
 
