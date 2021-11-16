@@ -13,12 +13,10 @@ public interface AttachmentService {
     void save(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType) throws IOException;
 
     // 해당글의 파일목록
-    List<AttachmentVO> getlist(AboutTableType aboutTableType, Integer idInTableType);
-
-    // 글 수정시 해당글의 특정 파일만 삭제
-    void remove(List<Integer> attachmentId);
+    List<AttachmentVO> getList(AboutTableType aboutTableType, Integer idInTableType);
 
     // 글 삭제시 해당글의 파일 전부 삭제
-    void remove(AboutTableType aboutTableType, Integer idInTableType);
+    void remove(List<Integer> attachmentIdList);
 
+    void removeByTableId(AboutTableType aboutTableType, Integer idInTableType);
 }

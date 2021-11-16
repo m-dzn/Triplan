@@ -68,7 +68,7 @@
     <select id="checkCoupon" resultType="Integer">
         SELECT  count(*)
         FROM    coupon
-        WHERE   formatdatetime(expired_at, 'yyyyMMdd') >= formatdatetime(now(), 'yyyyMMdd')
+        WHERE   FORMATDATETIME(expired_at, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
           AND   coupon_id = (
                               SELECT    coupon_id
                               FROM      member_coupon
@@ -95,7 +95,7 @@
     <update id="cancel">
         UPDATE  reservation
         SET
-            cancellation = 1
+                cancellation = 1
         WHERE   res_id = #{resId}
     </update>
 
@@ -108,7 +108,7 @@
     <select id="checkExpiredCoupon" resultType="Integer">
         SELECT  count(*)
         FROM    coupon
-        WHERE   formatdatetime(expired_at, 'yyyyMMdd') >= formatdatetime(now(), 'yyyyMMdd')
+        WHERE   FORMATDATETIME(expired_at, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
           AND   coupon_id = (
                               SELECT  coupon_id
                               FROM    member_coupon
@@ -123,14 +123,14 @@
                 used_at = NULL,
                 res_id  = NULL
         WHERE   res_id = #{resId}
-          AND     member_id = #{memberId}
+          AND   member_id = #{memberId}
     </update>
     
     <select id="myResList" resultType="ReservationVO">
         SELECT      *
         FROM        reservation
         WHERE       member_id = #{memberId}
-          AND         cancellation != 1
+          AND       cancellation != 1
         ORDER BY    start_date desc
     </select>
 
@@ -143,8 +143,8 @@
         SELECT      *
         FROM        reservation
         WHERE       member_id = #{member_id}
-          AND         formatdatetime(start_date, 'yyyyMMdd') >= formatdatetime(now(), 'yyyyMMdd')
-          AND         cancellation != 1
+          AND       FORMATDATETIME(start_date, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
+          AND       cancellation != 1
         ORDER BY    start_date desc
     </select>
 
@@ -152,17 +152,17 @@
         SELECT      *
         FROM        reservation
         WHERE       member_id = #{member_id}
-          AND         formatdatetime(now(), 'yyyyMMdd') > formatdatetime(start_date, 'yyyyMMdd')
-          AND         cancellation != 1
-        ORDER BY    start_date desc
+          AND       FORMATDATETIME(now(), 'yyyyMMdd') > FORMATDATETIME(start_date, 'yyyyMMdd')
+          AND       cancellation != 1
+        ORDER BY    start_date DESC
     </select>
 
     <select id="myCancelledResList" resultType="ReservationVO">
         SELECT      *
         FROM        reservation
         WHERE       member_id = #{member_id}
-          AND         cancellation = 1
-        ORDER BY    updated_at desc
+          AND       cancellation = 1
+        ORDER BY    updated_at DESC
     </select>
 
 

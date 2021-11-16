@@ -29,7 +29,7 @@
                 used_at             = IFNULL(   #{usedAt},          used_at             ),
                 res_id              = IFNULL(   #{resId},           res_id              )
         WHERE
-            member_coupon_id = #{memberCouponId}
+                member_coupon_id = #{memberCouponId}
     </update>
 
     <delete id="delete">
@@ -42,8 +42,8 @@
         SELECT  count(*)
         FROM    member_coupon
         WHERE   coupon_id = #{couponId}
-          AND     member_id = #{memberId}
-          AND     usage1 != 1
+          AND   member_id = #{memberId}
+          AND   usage1 != 1
     </select>
 
 

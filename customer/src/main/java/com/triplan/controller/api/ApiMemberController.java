@@ -1,17 +1,11 @@
 package com.triplan.controller.api;
 
 import com.triplan.domain.MemberVO;
-import com.triplan.dto.MemberProfileDTO;
 import com.triplan.service.inf.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.IOException;
-import java.lang.reflect.Member;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/members")
@@ -33,25 +27,25 @@ public class ApiMemberController {
     }
 
     /* 회원정보수정 */
-    @PutMapping("/{memberId}/basic-info") /*닉네임,프로필이미지*/
+    @PatchMapping("/{memberId}/basic-info") /*닉네임,프로필이미지*/
     public String updateBasicInfo(@PathVariable Integer memberId, @RequestBody MemberVO memberVO){
         memberService.updateBasicInfo(memberId, memberVO);
         return "회원 기본정보 수정";
     }
 
-    @PutMapping("/{memberId}/change-email") /*이메일*/
+    @PatchMapping("/{memberId}/change-email") /*이메일*/
     public String updateEmail(@PathVariable Integer memberId, @RequestBody MemberVO memberVO){
         memberService.updateEmail(memberId, memberVO);
         return "회원 이메일정보 수정";
     }
 
-    @PutMapping("/{memberId}/change-password") /*비밀번호*/
+    @PatchMapping("/{memberId}/change-password") /*비밀번호*/
     public String updatePassword(@PathVariable Integer memberId, @RequestBody MemberVO memberVO){
         memberService.updatePassword(memberId, memberVO);
         return "회원 비밀번호정보 수정";
     }
 
-    @PutMapping("/{memberId}/change-etc") /*기타(포인트,등급,계좌)*/
+    @PatchMapping("/{memberId}/change-etc") /*기타(포인트,등급,계좌)*/
     public String updateEtc(@PathVariable Integer memberId, @RequestBody MemberVO memberVO) {
         memberService.updateEtc(memberId, memberVO);
         return "회원 기타정보 수정";

@@ -12,7 +12,7 @@ public class ApiPaymentController {
 
     private final PaymentService paymentService;
 
-    @PostMapping()
+    @PostMapping
     public String create(@RequestBody PaymentVO paymentVO){
         paymentService.create(paymentVO);
         return "결제정보입력";
