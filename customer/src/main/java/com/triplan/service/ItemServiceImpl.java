@@ -15,7 +15,10 @@ import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,5 +61,39 @@ public class ItemServiceImpl implements ItemService {
         itemFlightResponseDTO.setFlightVO(flightVO);
 
         return itemFlightResponseDTO;
+    }
+
+    @Override
+    public List<ItemRoomResponseDTO> getItemRoomList(ItemCategory room) {
+
+        List<ItemVO> itemVOS = itemMapper.getItemVOList(room);
+
+        List<ItemRoomResponseDTO> responseDTOS = itemVOS.stream()
+                .map(ItemRoomResponseDTO::of).collect(Collectors.toList());
+
+        for(ItemRoomResponseDTO itemRoomResponseDTO : responseDTOS) {
+            RoomVO roomVO = roomMapper.getRoomByItemId(itemRoomResponseDTO.getItemId());
+
+            itemRoomResponseDTO.setRoomVO(roomVO);
+        }
+
+        return responseDTOS;
+    }
+
+    @Override
+    public List<ItemFlightResponseDTO> getItemFlightList(ItemCategory flight) {
+
+        List<ItemVO> itemVOS = itemMapper.getItemVOList(flight);
+
+        List<ItemFlightResponseDTO> responseDTOS = itemVOS.stream()
+                .map(ItemFlightResponseDTO::of).collect(Collectors.toList());
+
+        for(ItemFlightResponseDTO itemFlightResponseDTO : responseDTOS) {
+            FlightVO flightVO = flightMapper.getFlightByItemId(itemFlightResponseDTO.getItemId());
+
+            itemFlightResponseDTO.setFlightVO(flightVO);
+        }
+
+        return responseDTOS;
     }
 }

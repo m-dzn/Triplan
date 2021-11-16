@@ -99,4 +99,10 @@
            SET item_group_id = #{itemGroupId}
          WHERE item_group_id = #{itemGroupId}
     </update>
+
+    <select id="getItemVOList" resultType="ItemVO">
+        SELECT *
+          FROM item
+         WHERE item_category = #{room}
+    </select>
 </mapper>

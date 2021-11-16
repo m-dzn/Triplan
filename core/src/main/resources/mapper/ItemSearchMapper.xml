@@ -14,6 +14,8 @@
           FROM item
           JOIN item_group
             ON item.item_group_id = item_group.item_group_id
+          JOIN item_group_tag
+            ON item_group.item_group_id = item_group_tag.item_group_id
          WHERE item_id in(
                             SELECT DISTINCT item_id
                               FROM Item_Schedule
@@ -24,6 +26,11 @@
                               <if test="underPrice != null">     AND price &lt;= #{underPrice}</if>
                               <if test="overPrice != null">     AND price &gt;= #{overPrice}</if>
                           )
+        </if>
+        <if test="tags != null">
+            AND tag_id in( <foreach collection="tags" item="item" index="idx" separator=",">
+                        #{item}
+                        </foreach> )
         </if>
     </select>
 </mapper>

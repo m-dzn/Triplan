@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ItemSearchService {
     List<ItemScheduleVO> getListAll();
-    List<ItemGroupVO> getFilterAsDate(LocalDateTime startDate, LocalDateTime endDate, Integer underPrice, Integer overPrice);
+    List<ItemGroupVO> getFilterAsDate(LocalDateTime startDate, LocalDateTime endDate, Integer underPrice, Integer overPrice,List<Integer> tags);
 }

@@ -31,4 +31,6 @@ public interface ItemMapper {
     Integer count(Integer sellerId);
 
     void updateByItemGroupId(Integer itemGroupId);
+
+    List<ItemVO> getItemVOList(ItemCategory room);
 }

@@ -3,7 +3,6 @@ package com.triplan.service;
 
 import com.triplan.domain.ItemGroupVO;
 import com.triplan.domain.ItemScheduleVO;
-import com.triplan.domain.ItemVO;
 import com.triplan.mapper.ItemGroupMapper;
 import com.triplan.mapper.ItemSearchMapper;
 import com.triplan.service.inf.ItemSearchService;
@@ -11,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,7 +25,7 @@ public class ItemSearchServiceImpl implements ItemSearchService {
     }
 
     @Override
-    public List<ItemGroupVO> getFilterAsDate(LocalDateTime startDate, LocalDateTime endDate, Integer underPrice, Integer overPrice) {
+    public List<ItemGroupVO> getFilterAsDate(LocalDateTime startDate, LocalDateTime endDate, Integer underPrice, Integer overPrice, List<Integer> tags) {
 
         Integer Data = null;
 
@@ -38,14 +36,8 @@ public class ItemSearchServiceImpl implements ItemSearchService {
         else if (overPrice != null) Data = 1;
         else Data = null;
 
-        List<ItemGroupVO> resultItemGroupId = itemSearchMapper.getFilterAsDateDistinct(startDate,endDate,underPrice,overPrice,Data);
+        List<ItemGroupVO> resultItemGroupId = itemSearchMapper.getFilterAsDateDistinct(startDate,endDate,underPrice,overPrice,tags,Data);
         List<ItemGroupVO> itemGroupVOS = itemGroupMapper.selectAll(resultItemGroupId);
-        //[1,2]
-
-//        for(int i=0; i<resultItemGroupId.size(); i++){
-//            Integer itemGroupId = (resultItemGroupId.get(i).getItemGroupId());
-//            itemGroupVOS.add(itemGroupMapper.select(itemGroupId));
-//        }
 
         return itemGroupVOS;
     }

@@ -2,7 +2,6 @@ package com.triplan.mapper;
 
 import com.triplan.domain.ItemGroupVO;
 import com.triplan.domain.ItemScheduleVO;
-import com.triplan.domain.ItemVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,5 +15,6 @@ public interface ItemSearchMapper {
     List<ItemGroupVO> getFilterAsDateDistinct(@Param("startDate")LocalDateTime startDate, @Param("endDate")LocalDateTime endDate,
                                               @Param("underPrice") Integer underPrice,
                                               @Param("overPrice") Integer overPrice,
+                                              @Param("tags") List<Integer> tags,
                                               @Param("Data") Integer Data);
 }

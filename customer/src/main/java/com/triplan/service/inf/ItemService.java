@@ -8,6 +8,8 @@ import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.enumclass.ItemCategory;
 
+import java.util.List;
+
 public interface ItemService {
 
 
@@ -16,4 +18,8 @@ public interface ItemService {
     ItemRoomResponseDTO getDetailRoomByItemId(ItemCategory room, Integer itemId);
 
     ItemFlightResponseDTO getDetailFlightByItemId(ItemCategory flight, Integer itemId);
+
+    List<ItemRoomResponseDTO> getItemRoomList(ItemCategory room);
+
+    List<ItemFlightResponseDTO> getItemFlightList(ItemCategory flight);
 }

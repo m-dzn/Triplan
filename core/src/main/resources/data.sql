@@ -14,9 +14,20 @@ VALUES ('부산 해운대 하얏트 호텔', '5성급 호텔', '상세 설명', 
 
 INSERT INTO item (name, `explain`, item_category, item_group_id)
 VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 1);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('4인용 오션뷰 객실', '가격은 2배', 'ROOM', 1);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('대회의실', '가격은 4배', 'ROOM', 1);
+
+
 
 INSERT INTO room (number_of_person, max_person, item_id)
 VALUES (3, 5, 1);
+INSERT INTO room (number_of_person, max_person, item_id)
+VALUES (4, 4, 2);
+INSERT INTO room (number_of_person, max_person, item_id)
+VALUES (10, 20, 3);
+
 
 INSERT INTO reservation (item_category, total_price, start_date, end_date, name, phone, member_id, seller_id)
 VALUES ('ROOM', 50000, '2021-11-1T01:01:01', '2021-12-31T23:59:59', '양경호', '010-9999-9999', 1, 1);
@@ -25,9 +36,11 @@ VALUES ('ROOM', 50000, '2021-11-1T01:01:01', '2021-12-31T23:59:59', '양경호',
 INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
 VALUES (70000, 1, '2021-12-1T01:01:01', '2021-12-31T23:59:59', 1);
 INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
-VALUES (100000, 2, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);
+VALUES (100000, 2, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 2);
 INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
-VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 2);
+VALUES (30000, 1, '2021-11-1T01:01:01', '2021-11-30T23:59:59', 3);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59',4);
 
 
 INSERT INTO reservation_item (res_id, item_schedule_id)
@@ -76,7 +89,7 @@ INSERT INTO item (name, `explain`, item_category, item_group_id)
 VALUES ('소인', '0세 ~ 12세', 'FLIGHT', 2);
 
 INSERT INTO flight (departure, destination, flight_type, seat_class, item_id)
-VALUES ('부산', '서울', 'ONE_WAY', 'ECONOMY', 2);
+VALUES ('부산', '서울', 'ONE_WAY', 'ECONOMY', 4);
 
 INSERT INTO Item_Group_Tag (item_group_id,tag_id)
 VALUES(2,6);

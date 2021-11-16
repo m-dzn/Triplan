@@ -22,7 +22,7 @@ public class ApiItemGroupController {
         return itemGroupVO;
     }
 
-    @GetMapping("/item-list/{itemGroupId}")
+    @GetMapping("/{itemGroupId}/items")
     public ItemGroupResponseDTO getItemGroupByItemGroupId(@PathVariable Integer itemGroupId){
         return itemGroupService.getItemList(itemGroupId);
     }
