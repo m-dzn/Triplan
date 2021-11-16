@@ -39,6 +39,9 @@ public class ApiItemController {
     }
 
     // 상품 관리
+        // 판매자 상품관리 리스트
+
+        // room + flight
     @GetMapping("/room/{itemId}")
     public ItemRoomResponseDTO readItemDetailRoom(@PathVariable Integer itemId){
         return itemService.getDetailRoomByItemId(ItemCategory.ROOM,itemId);
