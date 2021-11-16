@@ -141,9 +141,9 @@ CREATE TABLE `QNA_Category` (
 CREATE TABLE `Notice` (
 	`notice_id`	INT PRIMARY KEY AUTO_INCREMENT,
 	`title`	VARCHAR(60)	NOT NULL,
-	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+	`created_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL,
-	`content`	VARCHAR(1000)	NULL	COMMENT 'contents -> content로 수정',
+	`content`	VARCHAR(1000) NOT NULL	COMMENT 'contents -> content로 수정',
 	`target`	VARCHAR(20)	NOT NULL	COMMENT '11.05 추가'
 );
 

@@ -6,10 +6,10 @@ import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.Target;
 import com.triplan.service.NoticeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class ApiNoticeController {
     private final NoticeService noticeService;
 
     @PostMapping
-    public String noticeInsert(@RequestBody NoticeVO noticeVO){
+    public String noticeInsert(@Valid @RequestBody NoticeVO noticeVO){
         noticeService.noticeInsert(noticeVO);
         return "공지사항 입력 완료";
     }
@@ -29,7 +29,7 @@ public class ApiNoticeController {
         return noticeVO;
     }
     @PutMapping("/{noticeId}")
-    public String noticeUpdate(@PathVariable Integer noticeId, @RequestBody NoticeVO noticeVO){
+    public String noticeUpdate(@PathVariable Integer noticeId, @Valid @RequestBody NoticeVO noticeVO){
         noticeVO.setNoticeId(noticeId);
         noticeService.noticeUpdate(noticeVO);
         return "공지사항 수정 완료";
@@ -40,15 +40,36 @@ public class ApiNoticeController {
         return "공지사항 삭제 완료";
     }
 
-   // @GetMapping("/notice")
-   @GetMapping("/list/{target}")
-    public Pagination<NoticeVO> noticeList(
-            @PathVariable Target target,
+   // 모든 리스트
+    @GetMapping("/list")
+    public Pagination<NoticeVO> noticeAllList(
+
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "1") Integer currentPage)
+    {
+        return noticeService.noticeAllList(pageSize, currentPage);
+    }
+
+    // 타겟별 리스트 - SELLER
+   @GetMapping("/list/seller")
+    public Pagination<NoticeVO> noticeSellerList(
+
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "1") Integer currentPage) {
-       Pagination<NoticeVO> noticeVO = noticeService.noticeList(target,pageSize,currentPage);
-       return noticeVO;
+      /* Pagination<NoticeVO> noticeVO = noticeService.noticeList(target,pageSize,currentPage);
+       return noticeVO;*/
+       return noticeService.noticeSellerList(Target.SELLER,pageSize,currentPage);
    }
+    // 타겟별 리스트 - MEMBER
+    @GetMapping("/list/member")
+    public Pagination<NoticeVO> noticeMemberList(
+
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "1") Integer currentPage) {
+      /* Pagination<NoticeVO> noticeVO = noticeService.noticeList(target,pageSize,currentPage);
+       return noticeVO;*/
+        return noticeService.noticeSellerList(Target.MEMBER,pageSize,currentPage);
+    }
 
 
 

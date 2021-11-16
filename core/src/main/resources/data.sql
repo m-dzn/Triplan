@@ -27,11 +27,11 @@ VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);
 INSERT INTO reservation_item (res_id, item_schedule_id)
 VALUES (1, 1);
 
-insert into notice (title, created_at, updated_at, content, target)
-values ('제목', '2021-11-09T17:00:00', '2021-11-09T17:00:00', '내용', 'SELLER');
+insert into notice (title,  content, target)
+values ('제목', '내용', 'SELLER');
 
-insert into notice (title, created_at, updated_at, content, target)
-values ('제목', '2021-11-15T17:00:00', '2021-11-15T17:00:00', '내용', 'MEMBER');
+insert into notice (title, content, target)
+values ('제목', '내용', 'MEMBER');
 
 
 

@@ -4,11 +4,9 @@ import com.triplan.domain.NoticeVO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.Target;
 import com.triplan.mapper.NoticeMapper;
-import com.triplan.paging.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -40,14 +38,28 @@ public class NoticeServiceImpl implements NoticeService {
 
 
     @Override
-    public Pagination<NoticeVO> noticeList(Target target, Integer pageSize, Integer currentPage) {
-        List<NoticeVO> noticeList = noticeMapper.noticeList(target);
-        Integer count = noticeMapper.count(target);
-        Pagination<NoticeVO> noticePagination = new Pagination<>(pageSize,currentPage, count,noticeList);
+    public Pagination<NoticeVO> noticeSellerList(Target target, Integer pageSize, Integer currentPage) {
+        List<NoticeVO> noticeSellerList = noticeMapper.noticeSellerList(target,pageSize, currentPage);
+
+        Integer countSeller = noticeMapper.countSeller(target);
+         Pagination<NoticeVO> noticePagination = new Pagination<>(pageSize, currentPage, countSeller, noticeSellerList);
         return noticePagination;
     }
 
+    @Override
+    public Pagination<NoticeVO> noticeMemberList(Target target, Integer pageSize, Integer currentPage) {
+        List<NoticeVO> noticeMemberList = noticeMapper.noticeMemberList(target,pageSize, currentPage);
 
+        Integer countMember = noticeMapper.countMember(target);
+        Pagination<NoticeVO> noticePagination = new Pagination<>(pageSize, currentPage, countMember, noticeMemberList);
+        return noticePagination;
+    }
+    @Override
+    public Pagination<NoticeVO> noticeAllList(Integer pageSize, Integer currentPage) {
+        List<NoticeVO> noticeAllList = noticeMapper.noticeAllList(pageSize, currentPage);
 
+        int totalNotices = noticeMapper.count();
 
+        return new Pagination<>(pageSize,currentPage,totalNotices, noticeAllList);
+    }
 }
