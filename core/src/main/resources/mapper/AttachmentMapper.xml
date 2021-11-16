@@ -16,16 +16,27 @@
 
     <select id="select" resultType="AttachmentVO">
         select * from attachment
-        where about_table_type = #{tableType} AND id_in_table_type = #{id}
+        where about_table_type = #{aboutTableType} AND id_in_table_type = #{idInTableType}
     </select>
 
-    <select id="selectAll" resultType="AttachmentVO">
+    <select id="selectByAttachmentId" resultType="AttachmentVO">
         select * from attachment
+        where attachment_id in
+        <foreach collection="list" item="attachmentId" separator=" , ">
+            #{attachmentId}
+        </foreach>
     </select>
 
     <delete id="delete">
         delete from attachment
-        where about_table_type = #{tableType} AND id_in_table_type = #{id}
+        where about_table_type = #{aboutTableType} AND id_in_table_type = #{idInTableType}
     </delete>
+
+    <delete id="deleteByAttachmentId">
+        delete from attachment
+        where attachment_id = #{attachmentId}
+    </delete>
+
+
 
 </mapper>

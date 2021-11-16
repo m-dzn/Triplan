@@ -17,14 +17,14 @@ public class Pagination <T> {
     private Integer pageSize;
     private Integer currentPage;
     private Integer totalElements;
-    
+  
     // 계산할 페이징 정보
     private Integer totalPages;
     private Integer startPage;
     private Integer endPage;
     private Boolean hasPrev;
     private Boolean hasNext;
-    
+  
     // 데이터
     private List<T> list;
 

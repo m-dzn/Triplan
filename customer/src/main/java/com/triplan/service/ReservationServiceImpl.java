@@ -41,19 +41,53 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public void reserve(Integer itemScheduleId, ReservationDTO reservationDTO) {
+    public Integer reserve(Integer itemScheduleId, Integer memberCouponId, ReservationDTO reservationDTO) {
+        Integer result = -1;
         ReservationVO reservationVO = reservationDTO.toVO();
-        reservationMapper.insert(reservationVO);
-        // 생성된 res_id 불러오기
-        Integer resId = reservationVO.getResId();
-        // resId - resId 매칭하여 RESERVATION_ITEM 테이블에 insert
-        reservationMapper.insertResItem(resId, itemScheduleId);
+        Integer resId = null;
+        // 쿠폰 사용 처리
+        if (memberCouponId != null) {
+            if(memberCouponId == 0) {
+                // 쿠폰 적용 안 한 경우
+                reservationMapper.insert(reservationVO);
+                // 생성된 res_id 불러오기
+                resId = reservationVO.getResId();
+                // resId - resId 매칭하여 RESERVATION_ITEM 테이블에 insert
+                reservationMapper.insertResItem(resId, itemScheduleId);
+                result = 1;
+            } else {
+                // 쿠폰 적용 한 경우 : 사용 가능한 쿠폰인지 확인(유효 기간, 사용 여부)
+                Integer memberId = reservationVO.getMemberId();
+                result = reservationMapper.checkCoupon(memberCouponId);
+                if (result == 1) {
+                    result = reservationMapper.checkMemberCoupon(memberCouponId, memberId);
+                    if (result == 1) {
+                        // result == 0 : 쿠폰 사용 불가 - 유효기관 경과 or 이미 사용한 쿠폰
+                        // result == 1 : 쿠폰 사용 처리(MEMBER_COUPON)
+                        reservationMapper.insert(reservationVO);
+                        resId = reservationVO.getResId();
+                        reservationMapper.insertResItem(resId, itemScheduleId);
+                        reservationMapper.useCoupon(resId, memberCouponId, memberId);
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     @Override
-    public void cancel(Integer resId, ReservationDTO reservationDTO) {
+    public Integer cancel(Integer resId, ReservationDTO reservationDTO) {
+        Integer result = -1;
         reservationDTO.setResId(resId);
+        Integer memberId = reservationMapper.getMemberId(resId);
+        // 쿠폰 반환 처리
+        result = reservationMapper.checkExpiredCoupon(resId);
+        if (result != -1 && result != 0) {
+            // 쿠폰 유효 기간이 지나지(result == 0) 않았으면 반환 처리
+            reservationMapper.giveBackCoupon(resId, memberId);
+        }
         reservationMapper.cancel(reservationDTO);
+        return result;
     }
 
     @Override
@@ -90,8 +124,6 @@ public class ReservationServiceImpl implements ReservationService {
                 .map(ReservationDTO::of).collect(Collectors.toList());
         return reservationDTOList;
     }
-
-
 
 
 }

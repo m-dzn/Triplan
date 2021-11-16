@@ -8,7 +8,6 @@ VALUES ('user@gmail.com', '1111', '사용자1');
 INSERT INTO seller (business_license_number, business_name, tel, owner_name, email, business_account, zip_code, address, member_id)
 VALUES ('1', 'Com. Trip', '010-1111-1111', '손명진', 'smj@gmail.com', '00-000-0000', '000-00', '부산광역시 부산진구', 1);
 
-
 INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id)
 VALUES ('부산 해운대 하얏트 호텔', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1);
 
@@ -26,6 +25,13 @@ VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);
 
 INSERT INTO reservation_item (res_id, item_schedule_id)
 VALUES (1, 1);
+
+INSERT INTO coupon(name, num, price, condition, expired_at)
+VALUES ('쿠폰1', 1234, 1000, '숙박대전 이벤트', '2021-12-10T12:00:00');
+
+INSERT INTO member_coupon (member_id, coupon_id)
+VALUES (1, 1);
+
 
 /* Flight 아이템 그룹 (식별자: 2번) */
 INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id)
