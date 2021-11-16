@@ -27,7 +27,7 @@ VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);
 INSERT INTO reservation_item (res_id, item_schedule_id)
 VALUES (1, 1);
 
-insert into notice (title, content, target)
+insert into notice (title,  content, target)
 values ('제목', '내용', 'SELLER');
 
 insert into notice (title, content, target)
@@ -71,12 +71,3 @@ values (3, 'CREDIT_CARD',110000,'2023-11-11T17:00:00','PAID', '2023-11-11T17:00:
 
 insert into payment
 values (4, 'CREDIT_CARD',110000,'2021-11-11T17:00:00','PAID', '2021-11-11T17:00:00','2021-11-11T17:00:00',null,1);
-
-INSERT INTO question (title, content, hide, member_id, type)
-VALUES ('테스트 문의1', '테스트 문의 내용', 0, 1, 'CUSTOMER');
-INSERT INTO question (title, content, hide, member_id, type)
-VALUES ('테스트 문의2', '테스트 문의 내용', 0, 1, 'CUSTOMER');
-INSERT INTO question (title, content, hide, member_id, type)
-VALUES ('테스트 문의3', '테스트 문의 내용', 0, 1, 'CUSTOMER');
-INSERT INTO question (title, content, hide, member_id, type)
-VALUES ('테스트 문의4', '테스트 문의 내용', 0, 1, 'CUSTOMER');

@@ -21,8 +21,9 @@ public interface NoticeService {
 
     void noticeDelete(Integer noticeId);
 
-    Pagination<NoticeVO> noticeList(Target target, Integer pageSize, Integer currentPage);
+    Pagination<NoticeVO> noticeSellerList(Target target, Integer pageSize, Integer currentPage);
+    Pagination<NoticeVO> noticeMemberList(Target target, Integer pageSize, Integer currentPage);
 
-
+    Pagination<NoticeVO> noticeAllList(Integer pageSize, Integer currentPage);
 
 }

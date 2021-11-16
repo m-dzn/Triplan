@@ -5,8 +5,8 @@
 <mapper namespace="com.triplan.mapper.NoticeMapper">
 
     <insert id="noticeInsert">
-        INSERT INTO notice(title, created_at, updated_at, content)
-        VALUES (#{title}, #{createdAt}, #{updatedAt}, #{content})
+        INSERT INTO notice(title, content, target)
+        VALUES (#{title}, #{content}, #{target})
     </insert>
 
     <select id="noticeSelect" resultType="com.triplan.domain.NoticeVO">
@@ -29,14 +29,47 @@
         where notice_id = #{noticeId}
     </delete>
 
-
-    <select id="noticeList" resultType="NoticeVO">
+    <select id="noticeSellerList" resultType="NoticeVO">
         SELECT *
         FROM notice
-        WHERE target = #{target}
+        where target = #{target}
+        ORDER BY notice_id DESC
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+
+    </select>
+    <select id="noticeMemberList" resultType="NoticeVO">
+        SELECT *
+        FROM notice
+        where target = #{target}
+        ORDER BY notice_id DESC
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+
     </select>
 
+    <select id="countSeller" resultType="Integer">
+        SELECT count(*)
+        FROM notice
+        where target = #{target}
 
+    </select>
 
+    <select id="countMember" resultType="Integer">
+        SELECT count(*)
+        FROM notice
+        where target = #{target}
+
+    </select>
+
+    <select id="noticeAllList" resultType="NoticeVO">
+        SELECT *
+        FROM notice
+        ORDER BY notice_id DESC
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+
+    </select>
+
+    <select id="count" resultType="Integer">
+        SELECT count(*)
+        FROM notice
+    </select>
 </mapper>
-
