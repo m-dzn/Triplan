@@ -48,6 +48,19 @@
         WHERE   payment_id = ${paymentId}
     </delete>
 
+    <select id="getYearPayment" resultType="Long">
+        <![CDATA[
+            select  sum(total_payment)
+            from    payment p join reservation r
+            on      p.res_id = r.res_id
+            where   r.member_id = #{memberId}
+             and    ABS(DATEDIFF(MONTH, paid_at, current_timestamp)) <= 12;
+        ]]>
+
+    </select>
+
+
+
 </mapper>
 
 

@@ -20,7 +20,7 @@ public class Pagination <T> {
     private Integer currentPage;
 
     // DB 함수로 집계할 페이징 정보
-    private Integer totalElements;
+    private Integer totalElements; //
 
     // 계산할 페이징 정보
     private Integer totalPages;
@@ -30,7 +30,7 @@ public class Pagination <T> {
     private Boolean hasNext;
   
     // 데이터
-    private List<T> list;
+    private List<T> list; //
 
     public Pagination(
             Integer pageSize,

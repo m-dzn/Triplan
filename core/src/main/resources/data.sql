@@ -32,6 +32,11 @@ VALUES ('쿠폰1', 1234, 1000, '숙박대전 이벤트', '2021-12-10T12:00:00');
 INSERT INTO member_coupon (member_id, coupon_id)
 VALUES (1, 1);
 
+insert into notice (title, created_at, updated_at, content, target)
+values ('제목', '2021-11-09T17:00:00', '2021-11-09T17:00:00', '내용', 'SELLER');
+
+insert into notice (title, created_at, updated_at, content, target)
+values ('제목', '2021-11-15T17:00:00', '2021-11-15T17:00:00', '내용', 'MEMBER');
 
 /* Flight 아이템 그룹 (식별자: 2번) */
 INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id)
@@ -51,3 +56,29 @@ INSERT INTO question (title, content, hide, member_id, type)
 VALUES ('테스트 문의3', '테스트 문의 내용', 0, 1, 'CUSTOMER');
 INSERT INTO question (title, content, hide, member_id, type)
 VALUES ('테스트 문의4', '테스트 문의 내용', 0, 1, 'CUSTOMER');
+
+/*Grade 그룹*/
+
+INSERT INTO grade (grade, min_payment, max_payment)
+VALUES ('BRONZE', 0,100000);
+
+INSERT INTO grade (grade, min_payment, max_payment)
+VALUES ('SILVER', 100001,300000);
+
+INSERT INTO grade (grade, min_payment, max_payment)
+VALUES ('GOLD', 300001,500000);
+
+INSERT INTO grade (grade, min_payment, max_payment)
+VALUES ('PLATINUM', 500001, 2100000000);
+
+insert into payment
+values (1, 'CREDIT_CARD',110000,'2021-11-11T17:00:00','PAID', '2021-11-11T17:00:00','2021-11-11T17:00:00',null,1);
+
+insert into payment
+values (2, 'CREDIT_CARD',110000,'2019-11-11T17:00:00','PAID', '2019-11-11T17:00:00','2019-11-11T17:00:00',null,1);
+
+insert into payment
+values (3, 'CREDIT_CARD',110000,'2023-11-11T17:00:00','PAID', '2023-11-11T17:00:00','2023-11-11T17:00:00',null,1);
+
+insert into payment
+values (4, 'CREDIT_CARD',110000,'2021-11-11T17:00:00','PAID', '2021-11-11T17:00:00','2021-11-11T17:00:00',null,1);
