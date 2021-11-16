@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <form action="/questions/write" method="post">
+        <input type="hidden" name="memberId" value="123">
+        <input type="hidden" name="type" value="CUSTOMER">
+        <table id="qnaup-table">
+            <tr>
+                <td>문의종류</td>
+                <td>
+                    <select class="form-select test" name="qna_category_id" aria-label="Default select example">
+                        <option selected>문의 종류를 선택하세요.</option>
+                        <option value="1">계정 계좌 관련</option>
+                        <option value="2">개인정보 변경 관련</option>
+                        <option value="3">포인트 적립/사용 관련</option>
+                    </select>
+                </td>
+                <td class="test">비밀 글 여부</td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="hide" value="1" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            비밀 글
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 7%">제목</td>
+                <td colspan="3"><input type="text" class="test" name="title" style="width: 100%;"></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td colspan="3" style="width: 97%;"><textarea name="content" class="test" rows=10 style="height: 100%;width:100%;"></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3">
+                    <!-- <input type="submit" value="수정"> 밑에도 서브밋 값을 줘야하는지? -->
+                    <input class="btn col-auto margin-right-16 color-white a-button-solid" id="button_solid" type="submit" value="글쓰기">
+                    <button type="button" class="btn col-auto " id="button_solid"><a href="qna" class="color-white a-button-solid">취소</a></button>
+                </td>
+            </tr>
+        </table>
+
+
+    </form>
+</div>
+</html>

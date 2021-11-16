@@ -1,6 +1,5 @@
 package com.triplan.controller;
 
-import com.triplan.domain.MemberVO;
 import com.triplan.dto.MemberProfileDTO;
 import com.triplan.service.inf.MemberService;
 import lombok.RequiredArgsConstructor;

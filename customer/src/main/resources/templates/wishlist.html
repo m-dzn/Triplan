@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <section class="margin-section">
+        <th:block th:replace="fragment/title :: title_2('위시 리스트')"></th:block>
+
+        <!--카테고리 탭-->
+        <ul class="nav nav-tabs margin-bottom-40">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">테스트용 통합 카테고리</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">숙소</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">액티비티</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">교통</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">렌터카</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">패키지</a>
+            </li>
+        </ul>
+        <!--카테고리 탭 끝-->
+
+        <!--예시용 카드-->
+        <div class="card" id="card" th:fragment="card(text)">
+            <!--상품그룹이랑 조인해서 상품 사진 가져오면 될 거 같아요-->
+            <img src="img/서면.jpg" class="card-img-top" id="detail-card-img" alt="...">
+            <div class="card-body p-0">
+                <div class="row m-0 p-0 h-100 d-flex align-content-between">
+                    <div class="row m-0 p-0 d-flex justify-content-between">
+                        <div class="col-auto">제목<!--상품그룹이랑 조인해서 제목 가져오면 될 거 같아요--></div>
+                        <div class="col-auto">
+                            <input name="wish" id="heart" type="checkbox" th:fragment="heart">
+                            <label for="heart">🖤</label><!--찜 구현 할 테이블 따로 만들어서 연결시켜주면 될 거 같아요-->
+                        </div>
+                    </div>
+                    <div class="row m-0 p-0">
+                        <div class="col-auto">위치<!--상품그룹이랑 조인해서 주소 가져오면 될 거 같아요--></div>
+                    </div>
+                    <div class="row m-0 p-0 d-flex justify-content-between">
+                        <div class="col-auto">별점<!--상품그룹이랑 조인해서 별점 가져오면 될 거 같아요--></div>
+                        <div class="col-auto">가격(인원)<!--어떻게 표현할 지 생각해봐야 할 거 같아요--></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--예시용 카드 끝-->
+
+    </section>
+</div>
+</html>

@@ -1,11 +1,10 @@
 package com.triplan.dto.customer.reponse;
 
-import com.triplan.domain.ItemVO;
 import com.triplan.domain.QuestionVO;
+import com.triplan.enumclass.QuestionType;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -23,7 +22,7 @@ public class QuestionDTO {
     private Integer memberId;
     private Integer qnaCategoryId;
     private Integer itemGroupId;
-    private String type;
+    private QuestionType type;
 
     public static QuestionDTO of(QuestionVO vo) {
 

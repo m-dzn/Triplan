@@ -9,7 +9,7 @@
         values
         <foreach collection="list" item="attachment" separator=" , ">
             (#{attachment.aboutTableType}, #{attachment.idInTableType}, #{attachment.originFileName}, #{attachment.serverFileName},
-            #{attachment.fileExtension}, #{attachment.fileSize}, #{attachment.uploadPath} )
+            #{attachment.fileExtension}, #{attachment.fileSize}, #{attachment.uploadPath} 
         </foreach>
 
     </insert>

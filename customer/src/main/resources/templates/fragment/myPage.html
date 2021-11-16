@@ -1,0 +1,407 @@
+<div    th:fragment="mypage_top"
+        class="border bg-white rounded-3 border-2 py-5 mb-3">
+    <div class="d-flex justify-content-center position-relative">
+        <div class="position-relative">
+        <img src="img/광안리.jpg" class="rounded-circle pro-pho" alt="...">
+        <div class="position-absolute" style="
+        top: 95%;
+        left: 95%;
+        transform: translate( -50%, -50% );
+">
+            <button style="border: 0px;    background: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-camera-fill top-100" viewBox="0 0 16 16">
+                    <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                    <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                </svg>
+            </button>
+        </div>
+        </div>
+    </div>
+    <div class="align-items-start" id="myp-sns">연동SNS :</div>
+
+</div>
+
+<div    th:fragment="mypage_bottom"
+        class="border bg-white rounded-3 border-2">
+
+</div>
+
+<div    th:fragment="modify"
+        class="border bg-white rounded-3 border-2 margin-title">
+
+    <th:block th:replace="fragment/title :: title_2('프로필 관리')"></th:block>
+    <div class="row">
+        <div class="col">
+            <form>
+<!--                <div class="row" id="myp-mod">-->
+<!--                    <label for="name" class="col-2 col-form-label">이름</label>-->
+<!--                    <div class="col-9">-->
+<!--                        <input type="text" class="form-control" id="name">-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="row" id="myp-mod">
+                    <label for="nickname" class="col-2 col-form-label font-weight-bold text-align-end">닉네임</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="nickname">
+                    </div>
+                    <a class="btn btn-primary col-auto" href="#" id="button_outline" role="button">중복확인</a>
+                </div>
+                <div class="row" id="myp-mod">
+                    <label for="email" class="col-2 col-form-label font-weight-bold text-align-end">이메일</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="email">
+                    </div>
+                    <a class="btn btn-primary col-auto" href="#" id="button_outline" role="button">중복확인</a>
+                </div>
+                <div class="row" id="myp-mod">
+                    <label for="password" class="col-2 col-form-label font-weight-bold text-align-end">비밀번호</label>
+                    <div class="col-8">
+                        <input type="password" class="form-control" id="password">
+                    </div>
+                </div>
+                <div class="row" id="myp-mod">
+                    <label for="passwordCheck" class="col-2 col-form-label font-weight-bold text-align-end">비밀번호확인</label>
+                    <div class="col-8">
+                        <input type="password" class="form-control" id="passwordCheck">
+                    </div>
+                </div>
+<!--                <div class="row" id="myp-mod">-->
+<!--                    <label for="tel" class="col-2 col-form-label">연락처</label>-->
+<!--                    <div class="col-9">-->
+<!--                        <input type="text" class="form-control" id="mobile">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row" id="myp-mod">-->
+<!--                    <label for="birth" class="col-2 col-form-label">생년월일</label>-->
+<!--                    <div class="col-9">-->
+<!--                        <input type="date" class="form-control" id="birthday">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row" id="myp-mod">-->
+<!--                    <span for="email" class="col-2">SNS 연동</span> &lt;!&ndash;아이콘으로 대체 예정&ndash;&gt;-->
+<!--                    <div class="d-flex justify-content-between col-9 font-weight-normal" id="myp-sns-set">-->
+<!--                        <div class="row">-->
+<!--                            <label class="form-check-label col-auto">네이버</label>-->
+<!--                            <div class="form-check form-switch col-auto">-->
+<!--                                <input class="form-check-input" type="checkbox">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <label class="form-check-label col-auto">카카오</label>-->
+<!--                            <div class="form-check form-switch col-auto">-->
+<!--                                <input class="form-check-input" type="checkbox">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <label class="form-check-label col-auto">페이스북</label>-->
+<!--                            <div class="form-check form-switch col-auto">-->
+<!--                                <input class="form-check-input" type="checkbox">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <label class="form-check-label col-auto">구글</label>-->
+<!--                            <div class="form-check form-switch col-auto">-->
+<!--                                <input class="form-check-input" type="checkbox">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>&lt;!&ndash;sns연동 묶음 div&ndash;&gt;-->
+                <div class="row col-12 padding-x-8 padding-bottom-16 padding-top-24 d-flex justify-content-between">
+
+                    <!-- Button trigger modal -->
+                    <a class="col-auto font-size-16 margin-left-16 color-gray font-weight-normal" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        회원 탈퇴
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-lg modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title font-weight-bold" id="exampleModalLabel">회원 탈퇴</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+
+
+                                    <div class="modal-body"><!--내용-->
+                                        <div class="margin-bottom-24">계정을 삭제하시면, 프로필 및 소중한 여행의 기록들이 모두 사라지게 되며, 더 이상 회원님의 계정으로 활동할 수 없게 됩니다. :(
+                                    </div>
+
+                                    <!--2. <div class="row">로 구역 나눠주면서 그 안에 요소-->
+
+                                    <div class="margin-bottom-32">
+                                    계정을 삭제하려는 이유가 무엇인가요?
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="mem_delete" id="delete_1">
+                                        <label class="form-check-label" for="delete_1">
+                                            여행을 자주 떠나지 않아서요.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="mem_delete" id="delete_2">
+                                        <label class="form-check-label" for="delete_2">
+                                            다른 이유가 있어요.(아래에 자세히 적어주세요.)
+                                        </label>
+                                    </div>
+                                    <div class="row col-11">
+                                        <label>
+                                            <input  type="text" class="form-control" id="question"></input>
+                                        </label>
+                                    </div>
+                                    </div>
+                                    계정을 삭제하시면 다시 복구할 수 없습니다. <br>
+                                    정말로 계정을 삭제하시겠습니까? <br>
+                                </div>
+
+
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                    <button type="button" class="btn btn-primary">탈퇴</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!---->
+<!--                    계정을 삭제하시면, 프로필 및 소중한 여행의 기록들이 모두 사라지게 되며,-->
+<!--                    더 이상 회원님의 계정으로 활동할 수 없게 됩니다. :( <br>-->
+
+<!--                    &lt;!&ndash;2. <div class="row">로 구역 나눠주면서 그 안에 요소&ndash;&gt;-->
+<!--                    계정을 삭제하려는 이유가 무엇인가요?-->
+<!--                    <div class="form-check">-->
+<!--                        <input class="form-check-input" type="radio" name="mem_delete" id="delete_1">-->
+<!--                        <label class="form-check-label" for="delete_1">-->
+<!--                            여행을 자주 떠나지 않아서요.-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    <div class="form-check">-->
+<!--                        <input class="form-check-input" type="radio" name="mem_delete" id="delete_2">-->
+<!--                        <label class="form-check-label" for="delete_2">-->
+<!--                            다른 이유가 있어요.(아래에 자세히 적어주세요.)-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    <div class="row col-11">-->
+<!--                        <label>-->
+<!--                            <input  type="text" class="form-control" id="question"></input>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    계정을 삭제하시면 다시 복구할 수 없습니다. <br>-->
+<!--                    정말로 계정을 삭제하시겠습니까? <br>-->
+
+<!--                    <th:block th:replace="fragment/button :: outline('다시 생각해볼게요!')" />-->
+<!--                    <th:block th:replace="fragment/button :: solid('회원탈퇴')" />-->
+                    <!---->
+
+                    <th:block th:replace="fragment/button :: solid(저장)"></th:block>
+                </div>
+            </form>
+        </div><!--col-->
+    </div><!--row-->
+
+</div><!--프로필 관리 창-->
+
+<form action="warning" th:fragment="couponInsert">
+    <div class="row align-items-end margin-left-8">
+
+        <label class="col-10">쿠폰 등록
+            <input  type="text" class="form-control" name="num"></input>
+        </label>
+
+        <input  class="col-auto btn btn-primary"
+                id="button_solid"
+                value="쿠폰 등록"
+                type="submit"/>
+
+    </div><!--row-->
+</form>
+
+<div    th:fragment="coupon"
+        class="border bg-white rounded-3 border-2 margin-title padding-16">
+
+    <th:block th:replace="fragment/title :: title_2('나의 쿠폰')"></th:block>
+    <th:block th:replace="fragment/myPage :: couponInsert"></th:block>
+
+    <!--카테고리 탭-->
+    <ul class="nav nav-tabs margin-bottom-32 margin-top-24">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="mypagecoupon">사용 가능</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link color-gray" href="mypagecoupondisabled">사용 완료</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link color-gray" href="mypagecouponexpired">사용 불가</a>
+        </li>
+    </ul>
+    <!--카테고리 탭 끝-->
+
+        <div class="row text-align-center margin-top-24 justify-content-center">
+            <table class="col-11" id="couponTable">
+                <tr>
+                    <td>쿠폰명</td>
+                    <td>할인 금액</td>
+                    <td>사용 조건</td>
+                    <td>유효 기간</td>
+                </tr>
+                <tr>
+                    <td style="width: 32%;white-space: nowrap">아이티윌 수료 기념 5% 할인 쿠폰</td>
+                    <td style="width: 11%;white-space: nowrap">5%</td>
+                    <td style="white-space: nowrap"><pre>- 전 품목에 사용 가능</pre></td>
+                    <td style="width: 13%;white-space: nowrap">~21.11.23</td>
+                </tr>
+            </table>
+        </div>
+
+</div><!--프로필 관리 창-->
+
+<div    th:fragment="coupon_disabled"
+        class="border bg-white rounded-3 border-2 margin-title padding-16">
+
+    <th:block th:replace="fragment/title :: title_2('나의 쿠폰')"></th:block>
+    <th:block th:replace="fragment/myPage :: couponInsert"></th:block>
+
+    <!--카테고리 탭-->
+    <ul class="nav nav-tabs margin-bottom-32 margin-top-24">
+        <li class="nav-item">
+            <a class="nav-link color-gray" href="mypagecoupon">사용 가능</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="mypagecoupondisabled">사용 완료</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link color-gray" href="mypagecouponexpired">사용 불가</a>
+        </li>
+    </ul>
+    <!--카테고리 탭 끝-->
+
+    <div class="row text-align-center margin-top-24 justify-content-center">
+        <table class="col-11" id="couponTable">
+            <tr>
+                <td>쿠폰명</td>
+                <td>할인 금액</td>
+                <td>사용 품목</td>
+                <td>사용 일자</td>
+            </tr>
+            <tr>
+                <td style="width: 32%;white-space: nowrap">아이티윌 수료 기념 5% 할인 쿠폰</td>
+                <td style="width: 11%;white-space: nowrap">5%</td>
+                <td><a href="prodet">[특가 50% 진행중!] 아이티윌 강의실 입장권</a></td>
+                <td style="width: 13%;white-space: nowrap">21.11.23</td>
+            </tr>
+        </table>
+    </div>
+
+</div><!--프로필 관리 창-->
+
+<div    th:fragment="coupon_expired"
+        class="border bg-white rounded-3 border-2 margin-title padding-16">
+
+    <th:block th:replace="fragment/title :: title_2('나의 쿠폰')"></th:block>
+    <th:block th:replace="fragment/myPage :: couponInsert"></th:block>
+
+    <!--카테고리 탭-->
+    <ul class="nav nav-tabs margin-bottom-32 margin-top-24">
+        <li class="nav-item">
+            <a class="nav-link color-gray"href="mypagecoupon">사용 가능</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link color-gray" href="mypagecoupondisabled">사용 완료</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page"  href="mypagecouponexpired">사용 불가</a>
+        </li>
+    </ul>
+    <!--카테고리 탭 끝-->
+
+    <div class="row text-align-center margin-top-24 justify-content-center">
+        <table class="col-11" id="couponTable">
+            <tr>
+                <td>쿠폰명</td>
+                <td>할인 금액</td>
+                <td>유효 기간</td>
+            </tr>
+            <tr>
+                <td>아이티윌 수료 기념 5% 할인 쿠폰</td>
+                <td style="width: 11%;white-space: nowrap">5%</td>
+                <td style="width: 13%;white-space: nowrap">~21.11.23</td>
+            </tr>
+        </table>
+    </div>
+
+</div><!--프로필 관리 창-->
+
+<div    th:fragment="mypage_nav_member"
+        class="border bg-white rounded-3 border-2 margin-title padding-16">
+    <div class="row margin-bottom-16 mx-0">
+        <h1 href="#" class="font-weight-bold position-relative font-size-16 mb-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+            정보 조회/수정</h1>
+    </div>
+    <div class="row margin-bottom-16 mx-0">
+        <a href="mypagecoupon" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-cash" viewBox="0 0 16 16">
+                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+            </svg>
+            나의 쿠폰</a>
+    </div>
+    <div class="row margin-bottom-16 mx-0">
+
+        <a href="#" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-gem" viewBox="0 0 16 16">
+                <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z"/>
+            </svg>
+            나의 등급</a>
+    </div>
+    <div class="row margin-bottom-8 mx-0">
+        <a href="#" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-card-list" viewBox="0 0 16 16">
+                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+            </svg>
+            나의 예약</a>
+    </div>
+</div>
+
+<div    th:fragment="mypage_nav_coupon"
+        class="border bg-white rounded-3 border-2 margin-title padding-16">
+    <div class="row margin-bottom-16 mx-0">
+
+        <a href="mypagemember" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+            정보 조회/수정</a>
+    </div>
+    <div class="row margin-bottom-16 mx-0">
+        <h1 href="#" class="font-weight-bold position-relative font-size-16 mb-0">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-cash" viewBox="0 0 16 16">
+                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+            </svg>
+            나의 쿠폰</h1>
+    </div>
+    <div class="row margin-bottom-16 mx-0">
+
+        <a href="#" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-gem" viewBox="0 0 16 16">
+                <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z"/>
+            </svg>
+            나의 등급</a>
+    </div>
+    <div class="row margin-bottom-8 mx-0">
+        <a href="#" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-card-list" viewBox="0 0 16 16">
+                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+            </svg>
+            나의 예약</a>
+    </div>
+</div>

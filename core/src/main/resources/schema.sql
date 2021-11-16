@@ -112,6 +112,7 @@ CREATE TABLE `Question` (
 	`type`	VARCHAR(45)	NOT NULL
 );
 
+
 CREATE TABLE `Review` (
 	`review_id`	INT AUTO_INCREMENT	NOT NULL,
 	`content`	VARCHAR(1000)	NOT NULL,

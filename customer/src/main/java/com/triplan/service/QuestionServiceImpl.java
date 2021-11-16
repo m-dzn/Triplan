@@ -2,6 +2,8 @@ package com.triplan.service;
 
 import com.triplan.domain.QuestionVO;
 import com.triplan.dto.customer.reponse.QuestionDTO;
+import com.triplan.dto.response.Pagination;
+import com.triplan.enumclass.QuestionType;
 import com.triplan.mapper.QuestionMapper;
 import com.triplan.service.inf.QuestionService;
 import lombok.RequiredArgsConstructor;
@@ -43,4 +45,31 @@ public class QuestionServiceImpl implements QuestionService {
         List<QuestionDTO> res = listVO.stream().map(QuestionDTO::of).collect(Collectors.toList());
         return res;
     }
+
+    @Override
+    public List<QuestionVO> questionListBySellerId(Integer sellerId) {
+        List<QuestionVO> questionVO = questionMapper.getQuestionBySellerId(sellerId);
+        return questionVO;
+    }
+
+    @Override
+    public List<QuestionVO> questionListByItemGId(Integer itemGroupId)  {
+        List<QuestionVO> listVO = questionMapper.getQuestionByItemGId(itemGroupId);
+        return listVO;
+    }
+
+    @Override
+    public List<QuestionVO> questionListByMemberId(Integer memberId) {
+        List<QuestionVO> listVO = questionMapper.getQuestionListByMemberId(memberId);
+        return listVO;
+    }
+
+    @Override
+    public Pagination<QuestionVO> list(Integer pageSize, Integer currentPage) {
+        List<QuestionVO> questionList = questionMapper.list(pageSize, currentPage);
+
+        int totalQuestions = questionMapper.count(QuestionType.CUSTOMER.toString());
+        return new Pagination<>(pageSize, currentPage, totalQuestions, questionList);
+    }
+
 }

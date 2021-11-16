@@ -18,7 +18,6 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     private final AttachmentMapper attachmentMapper;
 
-
     @Override
     public void save(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType) throws IOException {
         List<AttachmentVO> attachmentList = AttachmentUtil.getAttachments(files, aboutTableType, idInTableType);

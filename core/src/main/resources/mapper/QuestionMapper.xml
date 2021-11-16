@@ -5,9 +5,9 @@
 <mapper namespace="com.triplan.mapper.QuestionMapper">
 
     <insert id="insert">
-        INSERT INTO question(question_id, title, content, created_at, updated_at,
+        INSERT INTO question(title, content,
                             qna_category_id, member_id, item_group_id, hide, type)
-        values (#{questionId},#{title},#{content},#{createdAt},#{updatedAt},#{qnaCategoryId},
+        values (#{title},#{content},#{qnaCategoryId},
                 #{memberId},#{itemGroupId},#{hide},#{type})
     </insert>
 
@@ -37,6 +37,48 @@
     <select id="getQuestionList" resultType="QuestionVO">
         SELECT *
         FROM   question
-        WHERE  item_group_id = #{item_group_id}
+        WHERE  item_group_id = #{itemGroupId}
     </select>
+
+    <!-- 판매자에게 물어보는 고객의 질문 목록 가져오기 -->
+    <select id="getQuestionBySellerId" resultType="QuestionVO">
+        SELECT title, content
+        FROM   question
+        WHERE  item_group_id IN (   SELECT item_group_id
+                                    FROM   item_group
+                                    WHERE  seller_id = #{sellerId} )
+        ORDER BY sales_volume DESC
+    </select>
+
+    <select id="getQuestionByItemGId" resultType="QuestionVO">
+        SELECT item_group_id, title, member_id, created_at
+        FROM question
+        WHERE item_group_id in ( SELECT  item_group_id
+                                 FROM item_group
+                                 WHERE seller_id=#{sellerId})
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 자기가 한 문의 목록 보기 -->
+    <select id="getQuestionListByMemberId" resultType="QuestionVO">
+        SELECT  title, created_at
+        FROM    question
+        WHERE   member_id = #{memberId}
+        ORDER BY created_at desc
+    </select>
+
+    <select id="list" resultType="QuestionVO">
+        SELECT *
+        FROM question
+        WHERE type = 'CUSTOMER'
+        ORDER BY question_id DESC
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT  COUNT(*)
+        FROM    question
+        WHERE   type = 'CUSTOMER'
+    </select>
+
 </mapper>
