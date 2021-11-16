@@ -26,7 +26,7 @@ public class ApiItemSearchController {
         return itemSearchService.getListAll();
     }
 
-    @GetMapping("/filter")// 경록아 여기에 태그 추가해야한다.
+    @GetMapping("/filter")
     public List<ItemGroupVO> getSearchFilterDate(@RequestParam(value = "startDate", required = false, defaultValue = "2000-01-01 00:00:00") String FomstartDate,
                                                  @RequestParam(value = "endDate", required = false, defaultValue = "9999-12-30 11:59:59" ) String FomendDate,
                                                  @RequestParam(value = "underPrice", required = false) Integer underPrice,

@@ -5,6 +5,8 @@ import com.triplan.domain.ItemVO;
 import com.triplan.enumclass.ItemCategory;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
@@ -22,6 +24,7 @@ public class ItemFlightResponseDTO {
     private Integer baseStock;
     private Integer salesVolume;
     private String detailImg;
+    private LocalDateTime createdAt;
 
     private FlightVO flightVO;
 
@@ -35,6 +38,7 @@ public class ItemFlightResponseDTO {
                 .baseStock(vo.getBaseStock())
                 .salesVolume(vo.getSalesVolume())
                 .detailImg(vo.getDetailImg())
+                .createdAt(vo.getCreatedAt())
                 .build();
 
     }

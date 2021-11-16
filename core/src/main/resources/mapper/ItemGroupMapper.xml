@@ -96,8 +96,5 @@
                                   FROM   item_group
                                   WHERE  seller_id = #{sellerId})
     </select>
-
-
-
-
+    
 </mapper>
