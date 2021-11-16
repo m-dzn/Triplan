@@ -5,6 +5,7 @@ import com.triplan.service.inf.MemberCouponService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,7 @@ public class ApiMemberCouponController {
     private final MemberCouponService memberCouponService;
 
     @PostMapping
-    public String insert(@RequestBody MemberCouponDTO memberCouponDTO) {
+    public String insert(@Valid @RequestBody MemberCouponDTO memberCouponDTO) {
         memberCouponService.insert(memberCouponDTO);
         return "memberCouponCreated";
     }
@@ -26,7 +27,7 @@ public class ApiMemberCouponController {
     }
 
     @PutMapping("/{memberCouponId}")
-    public String update(@PathVariable Integer memberCouponId, @RequestBody MemberCouponDTO memberCouponDTO) {
+    public String update(@PathVariable Integer memberCouponId, @Valid @RequestBody MemberCouponDTO memberCouponDTO) {
         memberCouponService.update(memberCouponId, memberCouponDTO);
         return "memberCouponUpdated";
     }
