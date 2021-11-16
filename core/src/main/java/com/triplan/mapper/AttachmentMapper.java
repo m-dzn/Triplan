@@ -12,7 +12,8 @@ public interface AttachmentMapper {
 
     void insert(List<AttachmentVO> attachmentList);
 
-    int delete(@Param("aboutTableType") AboutTableType aboutTableType, @Param("idInTableType") Integer id);
+
+    int delete(@Param("aboutTableType") String aboutTableType, @Param("idInTableType") Integer idInTableType);
 
     void deleteAllByAttachmentId(@Param("attachmentIdList") List<Integer> attachmentIdList);
 

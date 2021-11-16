@@ -17,7 +17,9 @@ public class ApiAttachmentController {
 
     private final AttachmentService attachmentService;
 
-    @PostMapping // 파일업로드
+
+    @PostMapping("/insert") // 파일업로드
+
     public String save(@RequestBody List<MultipartFile> files,
                        @RequestParam("aboutTableType") AboutTableType aboutTableType,
                        @RequestParam("idInTableType") Integer idInTableType
@@ -27,16 +29,24 @@ public class ApiAttachmentController {
         return "첨부파일 create 완료";
     }
 
-    @GetMapping("/{aboutTableType}/{idInTableType}")
-    public List<AttachmentVO> getList(@PathVariable AboutTableType aboutTableType,
-                                      @PathVariable Integer idInTableType) {
+
+    @GetMapping("/read") // 파일목록
+    public String getList(@RequestParam("aboutTableType") AboutTableType aboutTableType,
+                          @RequestParam("idInTableType") Integer idInTableType) {
+
 //        attachmentService.getlist(aboutTableType, idInTableType);
         return attachmentService.getList(aboutTableType, idInTableType); // 테스트 데이터
     }
 
-    @DeleteMapping // 파일삭제
-    public String remove(@RequestBody List<Integer> attachmentIdList) {
-        attachmentService.remove(attachmentIdList);
+
+    @DeleteMapping("/remove") // 파일삭제
+    public String remove(@RequestBody List<Integer> attachmentIdList,
+                         @RequestParam("aboutTableType") AboutTableType aboutTableType) {
+        List<Integer> idList = new ArrayList<>(); // 테스트 데이터
+        idList.add(1);
+        idList.add(3);
+        attachmentService.remove(idList);
+
 //        attachmentService.remove(attachmentIdList);
         return "첨부파일 delete 완료";
     }
