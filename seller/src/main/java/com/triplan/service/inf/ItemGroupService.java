@@ -1,7 +1,11 @@
 package com.triplan.service.inf;
 
+import com.triplan.domain.ItemGroupVO;
 import com.triplan.dto.customer.request.ItemGroupRequestDTO;
 import com.triplan.dto.customer.response.ItemGroupResponseDTO;
+import com.triplan.dto.response.Pagination;
+
+import java.util.List;
 
 public interface ItemGroupService {
 
@@ -13,4 +17,5 @@ public interface ItemGroupService {
 
     void updateItemGroupTags(Integer itemGroupId, ItemGroupRequestDTO itemGroupRequestDTO);
 
+    Pagination<ItemGroupVO> itemGroupListBySellerId(Integer sellerId, Integer pageSize, Integer currentPage);
 }

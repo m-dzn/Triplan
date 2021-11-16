@@ -6,6 +6,7 @@ import com.triplan.dto.customer.request.ItemGroupRequestDTO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemGroupResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
+import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.ItemCategory;
 import com.triplan.mapper.ItemGroupMapper;
 import com.triplan.mapper.ItemMapper;
@@ -82,5 +83,12 @@ public class ItemGroupServiceImpl implements ItemGroupService {
         tagMapper.delete(itemGroupId);
         tagMapper.RegisterAddTagIdList(itemGroupVO.getItemGroupId(),itemGroupRequestDTO.getTagIdList());
 
+    }
+
+    @Override
+    public Pagination<ItemGroupVO> itemGroupListBySellerId(Integer sellerId, Integer pageSize, Integer currentPage) {
+        List<ItemGroupVO> itemGroupList = itemGroupMapper.getItemGroupBySellerId(sellerId, pageSize, currentPage);
+        int totalReviews = itemGroupMapper.count(sellerId);
+        return new Pagination<>(pageSize, currentPage, totalReviews, itemGroupList);
     }
 }
