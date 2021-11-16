@@ -12,10 +12,10 @@ public class ApiPaymentController {
 
     private final PaymentService paymentService;
 
-    @PostMapping("/paymentInsert")
+    @PostMapping()
     public String create(@RequestBody PaymentVO paymentVO){
         paymentService.create(paymentVO);
-        return "결제 성공";
+        return "결제정보입력";
     }
 
     @GetMapping("/{paymentId}")
