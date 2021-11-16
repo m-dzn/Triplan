@@ -1,4 +1,4 @@
-package com.triplan.controller.api;
+package com.triplan.controller;
 
 import com.triplan.domain.RoomVO;
 import com.triplan.service.inf.RoomService;

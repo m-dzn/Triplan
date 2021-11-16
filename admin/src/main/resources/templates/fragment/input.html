@@ -1,0 +1,23 @@
+<--
+<label>인풋 이름 삽입할 곳
+<input  type="text" class="form-control" id="컬럼명과 매칭"></input>
+</label>
+-->
+
+
+<input th:fragment="search"
+        class="form-control"
+        id="search"
+        type="search"
+        aria-label="Search" />
+
+<!--/*@thymesVar id="label" type=""*/-->
+<label th:fragment="inp(label,id,class,type)" th:text="${label}" >
+        <!--/*@thymesVar id="id" type="String"*/-->
+        <!--/*@thymesVar id="class" type="String"*/-->
+        <!--/*@thymesVar id="type" type="String"*/-->
+        <input
+            th:id="''+${id}"
+            th:class="'form-control '+${class}"
+            th:type="''+${type}"/>
+</label>

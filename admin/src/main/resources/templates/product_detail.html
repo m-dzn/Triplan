@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layoutFooX">
+
+<div layout:fragment="content">
+    <section class="sec-mag">
+    <th:block th:replace="fragment/title :: title_2('리뷰')"></th:block>
+<!--    <div class="row mb-4 ms-2">-->
+<!--        <div class="col-1 rounded-3 border-2 d-flex align-items-center" style="width: 56px;height: 56px;background-color: var(&#45;&#45;signature);color:white;">-->
+<!--            <span>3.96</span>-->
+<!--        </div>-->
+
+<!--    </div>-->
+    <form>
+    <div class="row align-items-center">
+        <div class="form-floating col-10">
+            <textarea class="form-control" id="Review_Content" style="height: 100px;display: inline-block"></textarea>
+        </div>
+        <div class="row col-auto d-flex justify-content-center">
+        <div class="col-auto">
+            <!--별점-->
+            <div class="startRadio col-auto p-0" th:fragment="star_2">
+                <label class="startRadio__box">
+                    <input type="radio" name="star_score" id="0.5">
+                    <span class="startRadio__img"><span class="blind">별 0.5개</span></span>
+                </label>
+                <label class="startRadio__box">
+                    <input type="radio" name="star_score" id="1.0">
+                    <span class="startRadio__img"><span class="blind">별 1개</span></span>
+                </label>
+                <label class="startRadio__box">
+                    <input type="radio" name="star_score" id="1.5">
+                    <span class="startRadio__img"><span class="blind">별 1.5</span></span>
+                </label>
+                <label class="startRadio__box">
+                    <input type="radio" name="star_score" id="2.0">
+                    <span class="startRadio__img"><span class="blind">별 2개</span></span>
+                </label>
+                <label class="startRadio__box">
+                    <input type="radio" name="star_score" id="2.5">
+                    <span class="startRadio__img"><span class="blind">별 2.5개</span></span>
+                </label>
+                <label class="startRadio__box">
+                    <input type="radio" name="star_score" id="3">
+                    <span class="startRadio__img"><span class="blind">별 3개</span></span>
+                </label>
+                <label class="startRadio__box">
+                    <input type="radio" name="star_score" id="3.5">
+                    <span class="startRadio__img"><span class="blind">별 3.5개</span></span>
+                </label>
+                <label class="startRadio__box">
+                    <input type="radio" name="star_score" id="4">
+                    <span class="startRadio__img"><span class="blind">별 4개</span></span>
+                </label>
+                <label class="startRadio__box">
+                    <input type="radio" name="star_score" id="4.5">
+                    <span class="startRadio__img"><span class="blind">별 4.5개</span></span>
+                </label>
+                <label class="startRadio__box">
+                    <input type="radio" name="star_score" id="5">
+                    <span class="startRadio__img"><span class="blind">별 5개</span></span>
+                </label>
+            </div>
+            <!--별점-->
+        </div>
+            <div class="row d-flex justify-content-center mt-2">
+        <input class="btn btn-primary col-auto" id="button_solid" type="submit" value="작성"/>
+            </div>
+        </div>
+    </div>
+</form>
+        <div class="row">
+        <table class="col-12" style="border: 1px;">
+            <tr>
+                <td rowspan="3" class="col-1">프사</td>
+                <td>이름(작성일)</td>
+            </tr>
+            <tr>
+                <td>별점</td>
+            </tr>
+            <tr>
+                <td>내용</td>
+            </tr>
+        </table>
+        </div>
+    </section>
+</div>
+</html>

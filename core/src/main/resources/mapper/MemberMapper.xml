@@ -45,4 +45,18 @@
         WHERE   member_id   = #{memberId}
     </update>
 
+    <update id="updateGrade">
+        <![CDATA[
+        UPDATE member
+        SET grade = (
+            select  grade
+            from    grade
+            where   min_payment <= #{totalPayment}
+        and max_payment >= #{totalPayment})
+        where member_id = #{memberId}
+      ]]>
+    </update>
+
+
+
 </mapper>

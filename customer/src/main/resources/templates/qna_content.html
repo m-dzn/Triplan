@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+<!--
+    <td>글번호</td>
+    <td>제목</td>
+    <td>작성일</td>
+    <td>비밀글 여부</td>
+    <td>문의사항 종류</td>
+    <td>작성자</td>
+-->
+
+    <table>
+        <tr>
+            <td>글번호</td>
+            <td>글 번호 불러오는 메소드 넣어주세요</td>
+            <td>작성일</td>
+            <td>작성일 불러오는 메소드 넣어주세요</td>
+        </tr>
+        <tr>
+            <td>문의 종류</td>
+            <td colspan="3">문의사항 종류 불러오는 메소드 넣어주세요</td>
+        </tr>
+        <tr>
+            <td>작성자</td>
+            <td colspan="3">작성자 불러오는 메소드 넣어주세요</td>
+        </tr>
+        <tr>
+            <td>비밀글 여부</td><!--데이터 -->
+            <td colspan="3">비밀글 체크 여부 불러오는 메소드<br>(확인용으로 만든 칼럼이고 나중에는 제목에 자물쇠 아이콘 삽입하는 것으로 교체 고려)</td>
+        </tr>
+        <tr>
+            <td>제목</td>
+            <td colspan="3">제목 불러오는 메소드 넣어주세요</td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td colspan="3">내용 불러오는 메소드 넣어주세요</td>
+        </tr>
+    </table>
+    <button><a href="qnaupd">글 수정</a></button>
+    <button><a href="qnaans">답변하기</a></button><!--구조 잡히고나면 어드민한테만 버튼 보이게 설정-->
+    <button><a href="warning">글 삭제</a></button>
+
+    <br><Br>
+    ▼답변(답변은 구현 완료되고나면, 어드민만 버튼 클릭 할 수 있게 변경)
+    <table>
+        <tr>
+            <td>(답변)내용</td>
+            <td>(답변)내용 불러오는 메소드 넣어주세요</td>
+        </tr>
+    </table>
+</div>
+</html>
