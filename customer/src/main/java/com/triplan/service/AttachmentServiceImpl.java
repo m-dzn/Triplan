@@ -32,32 +32,23 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     @Override
-    public void remove(AboutTableType aboutTableType, Integer idInTableType) {
-        List<AttachmentVO> attachmentList = attachmentMapper.select(aboutTableType.name(), idInTableType);
+    public void remove(List<Integer> attachmentIdList) {
+        List<AttachmentVO> attachmentList = attachmentMapper.selectAllByAttachmentId(attachmentIdList);
             // 삭제하려는 테이블타입, 글번호와 일치하는 행들 전부 반환
 
         AttachmentUtil.deleteAttachments(attachmentList); // 물리적으로 파일 삭제
-        attachmentMapper.delete(aboutTableType.name(), idInTableType);  // db에서 파일삭제
+        attachmentMapper.deleteAllByAttachmentId(attachmentIdList);  // db에서 파일삭제
+    }
 
+    @Override
+    public void removeByTableId(AboutTableType aboutTableType, Integer idInTableType) {
+        List<AttachmentVO> attachmentList = attachmentMapper.select(aboutTableType, idInTableType);
     }
 
 
     @Override
-    public void remove(List<Integer> attachmentIdList) {
-        List<AttachmentVO> attachmentList = attachmentMapper.selectByAttachmentId(attachmentIdList);
-
-        AttachmentUtil.deleteAttachments(attachmentList); // 물리적으로 파일 삭제
-        for(Integer attachmentId : attachmentIdList) {
-            attachmentMapper.deleteByAttachmentId(attachmentId); // db에서 파일 삭제
-
-        }
+    public List<AttachmentVO> getList(AboutTableType aboutTableType, Integer idInTableType) {
+        return attachmentMapper.select(aboutTableType, idInTableType);
     }
-
-
-    @Override
-    public List<AttachmentVO> getlist(AboutTableType aboutTableType, Integer idInTableType) {
-        return attachmentMapper.select(aboutTableType.name(), idInTableType);
-    }
-
 
 }
