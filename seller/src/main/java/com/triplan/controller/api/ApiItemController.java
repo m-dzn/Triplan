@@ -92,4 +92,3 @@ public class ApiItemController {
         return itemService.getItemFlightList(sellerId, ItemCategory.FLIGHT, pageSize, currentPage);
     }
 }
-

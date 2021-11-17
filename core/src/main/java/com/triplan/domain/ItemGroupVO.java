@@ -3,6 +3,8 @@ package com.triplan.domain;
 import com.triplan.enumclass.ItemCategory;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @ToString
