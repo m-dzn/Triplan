@@ -122,7 +122,7 @@
                 usage1  =  0,
                 used_at = NULL,
                 res_id  = NULL
-        WHERE   res_id = #{resId}
+        WHERE   res_id  = #{resId}
           AND   member_id = #{memberId}
     </update>
     

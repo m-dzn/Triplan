@@ -1,5 +1,6 @@
 package com.triplan.mapper;
 
+import com.triplan.domain.ItemGroupVO;
 import com.triplan.dto.response.WishlistResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,4 +18,5 @@ public interface WishlistMapper {
 
     Boolean exist(@Param("itemGroupId") Integer itemGroupId, @Param("memberId") Integer memberId);
 
+    ItemGroupVO selectItemGroupByWishlistId(Integer wishlistId);
 }

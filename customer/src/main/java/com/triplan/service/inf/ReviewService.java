@@ -9,24 +9,16 @@ import java.util.List;
 
 public interface ReviewService {
 
-    void reviewInsert(ReviewVO reviewVO);
-    void reviewInsert(ReviewVO reviewVO, List<MultipartFile> files, AboutTableType aboutTableType);
+    void reviewInsert(ReviewVO reviewVO, List<MultipartFile> files);
 
     ReviewVO reviewRead(Integer reviewId);
-
-    void reviewUpdate(Integer reviewId, ReviewVO reviewVO);
 
     ReviewVO reviewUpdate(ReviewVO reviewVO, List<MultipartFile> files);
 
     List<ReviewVO> reviewList();
 
-
     Pagination<ReviewVO> page(Integer itemId, Integer pageSize, Integer currentPage);
 
     void reviewDelete(Integer reviewId);
 
-    void reviewDelete( String aboutTableType, Integer idInTableType);
-
-
-    ;
 }

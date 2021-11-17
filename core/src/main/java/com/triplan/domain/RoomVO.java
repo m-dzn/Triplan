@@ -20,7 +20,6 @@ public class RoomVO {
     // Default 값이 있는 NOT NULL 필드
 
     // Nullable 필드
-    private String img;
 
     // 외래키
     private Integer itemId;

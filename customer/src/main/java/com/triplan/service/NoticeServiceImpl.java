@@ -14,22 +14,22 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public void noticeInsert(NoticeVO noticeVO) {
-        noticeMapper.noticeInsert(noticeVO);
+        noticeMapper.insert(noticeVO);
     }
 
     @Override
     public NoticeVO noticeSelect(int noticeId) {
-        return noticeMapper.noticeSelect(noticeId);
+        return noticeMapper.select(noticeId);
     }
 
     @Override
     public void noticeUpdate(NoticeVO noticeVO) {
-        noticeMapper.noticeUpdate(noticeVO);
+        noticeMapper.update(noticeVO);
     }
 
     @Override
     public void noticeDelete(int noticeId) {
-        noticeMapper.noticeDelete(noticeId);
+        noticeMapper.delete(noticeId);
     }
 
 

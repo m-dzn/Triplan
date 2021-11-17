@@ -16,7 +16,6 @@ import javax.validation.constraints.*;
 public class ReviewVO extends BaseVO {
 
     // 식별자 필드
-
     private Integer reviewId;
 
     // 필수 입력 필드 : Default 없는 NOT NULL 필드 > 빈칸, 띄어쓰기
@@ -31,7 +30,6 @@ public class ReviewVO extends BaseVO {
 
     // Nullable 필드
     private String reviewImg;
-
 
     // 외래키 > 빈칸
     @NotNull

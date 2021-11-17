@@ -37,4 +37,14 @@
         )
     </select>
 
+    <select id="selectItemGroupByWishlistId" resultType="ItemGroupVO">
+        SELECT  *
+        FROM    item
+        WHERE   item_id = (
+                SELECT  item_id
+                FROM    wishlist
+                WHERE   wishlist_id = #{wishlistId}
+        )
+    </select>
+
 </mapper>

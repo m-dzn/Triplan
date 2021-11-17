@@ -10,7 +10,7 @@ import java.util.List;
 public interface AttachmentService {
     
     // 파일업로드
-    void save(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType) throws IOException;
+    void save(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType);
 
     // 해당글의 파일목록
     List<AttachmentVO> getList(AboutTableType aboutTableType, Integer idInTableType);

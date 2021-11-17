@@ -33,6 +33,9 @@ public class ReservationServiceImpl implements ReservationService {
     public void update(Integer resId, ReservationDTO reservationDTO) {
         reservationDTO.setResId(resId);
         reservationMapper.update(reservationDTO);
+        // name, phone 외의 모든 컬럼이 null이어도
+        // DB에 들어있던 item_category 같은 값이 null로
+        // 바뀌지 않는다
     }
 
     @Override

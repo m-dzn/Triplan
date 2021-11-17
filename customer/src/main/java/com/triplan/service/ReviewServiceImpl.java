@@ -17,43 +17,29 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewMapper reviewMapper;
     private final AttachmentMapper attachmentMapper;
 
-
-
-    @Override
-    public void reviewInsert(ReviewVO reviewVO) {
-       reviewMapper.insert(reviewVO);
-       reviewInsert(reviewVO, null, AboutTableType.REVIEW);
-    }
-
     @Override
     @Transactional
-    public void reviewInsert(ReviewVO reviewVO, List<MultipartFile> files, AboutTableType aboutTableType) {
-
-
+    public void reviewInsert(ReviewVO reviewVO, List<MultipartFile> files) { // 이미지 안 넣은 텍스트 리뷰, 이미지 넣은 이미지 리뷰
         reviewMapper.insert(reviewVO);
-        List<AttachmentVO> attachmentList
-                = AttachmentUtil.getAttachments(files,aboutTableType,reviewVO.getReviewId());
 
+        List<AttachmentVO> attachmentList
+                = AttachmentUtil.getAttachments(files, AboutTableType.REVIEW, reviewVO.getReviewId());
 
         if (!attachmentList.isEmpty()) {
             reviewVO.setReviewImg(attachmentList.get(0).getUrl());
 
             try {
                 attachmentMapper.insert(attachmentList);
-
+                reviewMapper.update(reviewVO);
             } catch (Exception e){
                 AttachmentUtil.deleteAttachments(attachmentList);
             }
         }
-
-        reviewMapper.updateUrl(reviewVO);
-
     }
 
     @Override
@@ -62,20 +48,14 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void reviewUpdate(Integer reviewId, ReviewVO reviewVO) {
-        reviewVO.setReviewId(reviewId);
-        reviewMapper.update(reviewVO);
-    }
-
-    @Override
     @Transactional
     public ReviewVO reviewUpdate(ReviewVO reviewVO, List<MultipartFile> files) {
         List<AttachmentVO> attachmentList = AttachmentUtil.getAttachments(files, AboutTableType.REVIEW, reviewVO.getReviewId());
 
         if (!files.isEmpty()) {
-            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.REVIEW.name(), reviewVO.getReviewId());
+            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.REVIEW, reviewVO.getReviewId());
             AttachmentUtil.deleteAttachments(filesToDelete);
-            attachmentMapper.delete(AboutTableType.REVIEW.name(), reviewVO.getReviewId());
+            attachmentMapper.delete(AboutTableType.REVIEW, reviewVO.getReviewId());
             reviewVO.setReviewImg("");
         }
 
@@ -84,38 +64,27 @@ public class ReviewServiceImpl implements ReviewService {
 
             try {
                 attachmentMapper.insert(attachmentList);
-
             } catch (Exception e){
                 AttachmentUtil.deleteAttachments(attachmentList);
             }
         }
 
         reviewMapper.update(reviewVO);
-
         return reviewVO;
     }
 
     @Override
-    public void reviewDelete(Integer reviewId) {
-         reviewMapper.delete(reviewId);
-    }
-
-    @Override
-    public void reviewDelete(String aboutTableType, Integer idInTableType) {
-
-
+    public void reviewDelete(Integer idInTableType) {
         reviewMapper.delete(idInTableType);
-        List<AttachmentVO> list = attachmentMapper.select(aboutTableType,idInTableType);
+        List<AttachmentVO> list = attachmentMapper.select(AboutTableType.REVIEW, idInTableType);
         AttachmentUtil.deleteAttachments(list);
 
         for(int i=0;list.size()>i;i++){
             idInTableType = list.get(i).getAttachmentId();
-            attachmentMapper.delete(aboutTableType,idInTableType);
-
+            attachmentMapper.delete(AboutTableType.REVIEW, idInTableType);
         }
 
     }
-
 
     @Override
     public List<ReviewVO> reviewList() {
@@ -131,6 +100,5 @@ public class ReviewServiceImpl implements ReviewService {
 
         return new Pagination<>(pageSize,currentPage,totalReviews,reviewPage);
     }
-
 
 }

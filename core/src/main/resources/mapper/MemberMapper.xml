@@ -40,35 +40,35 @@
     <update id="updateBasicInfo">
         UPDATE  member
         SET
-        nickname    = IFNULL(   #{nickname},     nickname    ),
-        profile_img = IFNULL(   #{profileImg},   profile_img   )
+                nickname    = IFNULL(   #{nickname},     nickname    ),
+                profile_img = IFNULL(   #{profileImg},   profile_img   )
         WHERE
-        member_id = ${memberId}
+                member_id = ${memberId}
     </update>
 
     <update id="updateEmail">
         UPDATE  member
         SET
-        email = IFNULL(  #{email},  email  ),
-        email_confirm = IFNULL( #{emailConfirm},   email_confirm   )
+                email           = IFNULL(  #{email},        email           ),
+                email_confirm   = IFNULL( #{emailConfirm},  email_confirm   )
         WHERE
-        member_id = ${memberId}
+                member_id = ${memberId}
     </update>
 
     <update id="updatePassword">
         UPDATE  member
         SET
-        password = IFNULL(  #{password}, password  )
+                password = IFNULL(  #{password}, password  )
         WHERE
-        member_id = ${memberId}
+                member_id = ${memberId}
     </update>
 
 
     <update id="delete">
         UPDATE  member
         SET
-        state       = 'UNREGISTER',
-        deleted_at  = CURRENT_TIMESTAMP
+                state       = 'UNREGISTER',
+                deleted_at  = CURRENT_TIMESTAMP
         WHERE   member_id   = #{memberId}
     </update>
 
@@ -86,13 +86,13 @@
 
     <update id="updateGrade">
         <![CDATA[
-        UPDATE member
-        SET grade = (
-            select  grade
-            from    grade
-            where   min_payment <= #{totalPayment}
-        and max_payment >= #{totalPayment})
-        where member_id = #{memberId}
+        UPDATE  member
+        SET     grade = (
+                SELECT  grade
+                FROM    grade
+                WHERE   min_payment <= #{totalPayment}
+                  AND   max_payment >= #{totalPayment})
+        WHERE   member_id = #{memberId}
       ]]>
     </update>
 

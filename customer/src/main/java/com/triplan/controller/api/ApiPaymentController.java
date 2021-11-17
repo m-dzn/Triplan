@@ -14,7 +14,8 @@ public class ApiPaymentController {
 
     @PostMapping
     public String create(@RequestBody PaymentVO paymentVO){
-        paymentService.create(paymentVO);
+        Integer memberId = 1;
+        paymentService.create(paymentVO, memberId);
         return "결제정보입력";
     }
 

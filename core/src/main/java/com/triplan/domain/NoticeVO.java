@@ -1,11 +1,17 @@
 package com.triplan.domain;
 
 import com.triplan.enumclass.Target;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Timestamp;
 
-@Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class NoticeVO {
 
     private Integer noticeId;
@@ -14,7 +20,5 @@ public class NoticeVO {
     private Timestamp updatedAt;
     private String content;
     private Target target;
-
-
 
 }

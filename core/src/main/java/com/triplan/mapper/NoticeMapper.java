@@ -9,13 +9,13 @@ import java.util.List;
 @Mapper
 public interface NoticeMapper {
 
-    void noticeInsert(NoticeVO noticeVO);
+    void insert(NoticeVO noticeVO);
 
-    NoticeVO noticeSelect(int noticeId);
+    NoticeVO select(int noticeId);
 
-    void noticeUpdate(NoticeVO noticeVO);
+    void update(NoticeVO noticeVO);
 
-    void noticeDelete(int noticeId);
+    void delete(int noticeId);
 
     List<NoticeVO> noticeList(Target target);
 

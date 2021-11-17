@@ -39,43 +39,54 @@ public class ApiMemberCouponController {
     }
 
     // 회원 쿠폰 등록 A - 이벤트 페이지 쿠폰 버튼 클릭
-    @PostMapping("/getcoupon/{memberId}/{couponId}")
-    public Integer getCoupon(@PathVariable Integer memberId, @PathVariable Integer couponId) {
+    @PostMapping("/getcoupon/{couponId}")
+    public Integer getCoupon(@PathVariable Integer couponId) {
+        // TODO : 스프링 시큐리티 적용
+        Integer memberId = 1;
         Integer result = memberCouponService.getCoupon(memberId, couponId);
         // -2(쿠폰 중복으로 인한 발급 실패), -1(발급 실패), 0(쿠폰 미존재, 유효기간 경과로 인한 발급 실패), 1(정상 발급)
         return result;
     }
 
     // 회원 쿠폰 등록 B - 회원이 직접 쿠폰 번호 입력
-    @PostMapping("/getcouponbynum/{memberId}/{num}")
-    public Integer getCouponByNum(@PathVariable Integer memberId, @PathVariable Integer num) {
+    @PostMapping("/getcouponbynum/{num}")
+    public Integer getCouponByNum(@PathVariable Integer num) {
+        // TODO : 스프링 시큐리티 적용
+        Integer memberId = 1;
         Integer result = memberCouponService.getCouponByNum(memberId, num);
         // -2(쿠폰 중복으로 인한 발급 실패), -1(발급 실패), 0(쿠폰 미존재, 유효기간 경과로 인한 발급 실패), 1(정상 발급)
         return result;
     }
 
-
     // 나의 쿠폰 조회 A - 전체
-    @GetMapping("/mycouponlist/{memberId}")
-    public List<MemberCouponDTO> myCouponList(@PathVariable Integer memberId) {
+    @GetMapping("/mycouponlist")
+    public List<MemberCouponDTO> myCouponList() {
+        // TODO : 스프링 시큐리티 적용
+        Integer memberId = 1;
         return memberCouponService.myCouponList(memberId);
     }
 
     // 나의 쿠폰 조회 B - 사용 가능
-    @GetMapping("/myavailablecouponlist/{memberId}")
-    public List<MemberCouponDTO> myAvailableCouponList(@PathVariable Integer memberId) {
+    @GetMapping("/myavailablecouponlist")
+    public List<MemberCouponDTO> myAvailableCouponList() {
+        // TODO : 스프링 시큐리티 적용
+        Integer memberId = 1;
         return memberCouponService.myAvailableCouponList(memberId);
     }
 
     // 나의 쿠폰 조회 C - 사용한 쿠폰
-    @GetMapping("/myusedcouponlist/{memberId}")
-    public List<MemberCouponDTO> myUsedCouponList(@PathVariable Integer memberId) {
+    @GetMapping("/myusedcouponlist")
+    public List<MemberCouponDTO> myUsedCouponList() {
+        // TODO : 스프링 시큐리티 적용
+        Integer memberId = 1;
         return memberCouponService.myUsedCouponList(memberId);
     }
 
     // 나의 쿠폰 조회 D - 기한 지난 쿠폰
-    @GetMapping("/myunavailablecouponlist/{memberId}")
-    public List<MemberCouponDTO> myUnavailableCouponList(@PathVariable Integer memberId) {
+    @GetMapping("/myunavailablecouponlist")
+    public List<MemberCouponDTO> myUnavailableCouponList() {
+        // TODO : 스프링 시큐리티 적용
+        Integer memberId = 1;
         return memberCouponService.myUnavailableCouponList(memberId);
     }
 }

@@ -2,18 +2,13 @@ package com.triplan.controller.api;
 
 import com.triplan.domain.ReviewVO;
 import com.triplan.dto.response.Pagination;
-import com.triplan.enumclass.AboutTableType;
 import com.triplan.service.inf.ReviewService;
-import javafx.application.Application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-
-
 
 @RestController
 @RequestMapping("/api/reviews")
@@ -25,20 +20,28 @@ public class ApiReviewController {
 
     // TODO : 안 쓰는 REST 메서드 주석 or 삭제하기
     @PostMapping
-    public String reviewInsert(@Valid @RequestBody ReviewVO reviewVO){
-        reviewService.reviewInsert(reviewVO);
+    public String reviewInsert(
+            @Valid @RequestBody ReviewVO reviewVO,
+            @RequestParam("file") List<MultipartFile> files
+    ) {
+        reviewService.reviewInsert(reviewVO, files);
         return "정보 입력 성공";
     }
 
     @GetMapping("/{reviewId}")
-    public ReviewVO reviewRead(@PathVariable Integer reviewId){
+    public ReviewVO reviewRead(@PathVariable Integer reviewId) {
         ReviewVO result = reviewService.reviewRead(reviewId);
         return result;
     }
 
     @PutMapping("/{reviewId}")
-    public String reviewUpdate(@PathVariable Integer reviewId, @RequestBody ReviewVO reviewVO){
-        reviewService.reviewUpdate(reviewId, reviewVO);
+    public String reviewUpdate(
+            @PathVariable Integer reviewId,
+            @RequestBody ReviewVO reviewVO,
+            @RequestParam("file") List<MultipartFile> files
+    ) {
+        reviewVO.setReviewId(reviewId);
+        reviewService.reviewUpdate(reviewVO, files);
         return "정보 수정 완료";
     }
 
@@ -59,9 +62,9 @@ public class ApiReviewController {
     public Pagination<ReviewVO> reviewPage(
             @PathVariable Integer itemId,
             @RequestParam(defaultValue = "5") Integer pageSize,
-            @RequestParam(defaultValue = "1") Integer currentPage){
-
-        return reviewService.page(itemId,pageSize,currentPage);
+            @RequestParam(defaultValue = "1") Integer currentPage
+    ) {
+        return reviewService.page(itemId, pageSize, currentPage);
     }
 
 }

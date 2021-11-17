@@ -91,8 +91,6 @@ public class AttachmentUtil {
             e.printStackTrace();
             return null;
         }
-
-        return null;
     }
 
     public static void deleteAttachments(List<AttachmentVO> attachmentList) {

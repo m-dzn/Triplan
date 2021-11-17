@@ -20,8 +20,6 @@
         )
     </insert>
 
-
-
     <select id="select" resultType="ReviewVO">
         SELECT  *
         FROM    review
@@ -39,12 +37,11 @@
     </update>
 
     <update id="updateUrl">
-        UPDATE review
-        SET review_img=#{reviewImg}
+        UPDATE  review
+        SET     review_img=#{reviewImg}
         WHERE
-        review_id = #{reviewId}
+                review_id = #{reviewId}
     </update>
-
 
     <delete id="delete">
         DELETE
@@ -59,16 +56,16 @@
 
     <!-- 페이징 처리-->
     <select id="page" resultType="ReviewVO">
-        SELECT *
-        FROM review
+        SELECT  *
+        FROM    review
         ORDER BY item_id DESC
         LIMIT (#{currentPage} -1) * #{pageSize}, #{pageSize}
     </select>
 
     <select id="count" resultType="int">
-        SELECT COUNT(*)
-        FROM review
-        WHERE item_id = #{itemId}
+        SELECT  COUNT(*)
+        FROM    review
+        WHERE   item_id = #{itemId}
     </select>
 
 </mapper>

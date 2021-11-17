@@ -9,7 +9,7 @@
         values (#{questionId},#{content})
     </insert>
 
-    <select id="select" resultType="com.triplan.domain.AnswerVO">
+    <select id="select" resultType="AnswerVO">
         SELECT * FROM answer where question_id=${questionId}
     </select>
 
@@ -23,4 +23,5 @@
     <delete id="delete">
         delete from answer where question_id=#{questionId}
     </delete>
+
 </mapper>

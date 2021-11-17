@@ -19,12 +19,8 @@ public interface ReviewMapper {
 
     List<ReviewVO> list();
 
-
-
-
     List<ReviewVO> page(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
 
     int count(Integer itemId);
 
-    void updateUrl(ReviewVO reviewVO);
 }

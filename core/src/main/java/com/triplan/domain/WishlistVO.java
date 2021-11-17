@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -23,7 +24,10 @@ public class WishlistVO {
     // Nullable 필드
 
     // 외래키
+    @NotNull
     private Integer itemGroupId;
+
+    @NotNull
     private Integer memberId;
 
     @Builder

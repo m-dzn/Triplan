@@ -23,6 +23,7 @@ public class ItemGroupVO extends BaseVO {
     private String address;
 
     // Default 값이 있는 NOT NULL 필드
+    private Integer likeCount;
 
     // Nullable 필드
     private String addressDetail;
@@ -34,5 +35,15 @@ public class ItemGroupVO extends BaseVO {
     
     // 외래키
     private Integer sellerId;
+
+    public void increaseLikeCount() {
+        likeCount++;
+    }
+
+    public void decreaseLikeCount() {
+        if (likeCount > 0) {
+            likeCount--;
+        }
+    }
 
 }

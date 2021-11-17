@@ -17,8 +17,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @Transactional
-    public void create(PaymentVO paymentVO) {
-        Integer memberId = 1;
+    public void create(PaymentVO paymentVO, Integer memberId) {
         paymentMapper.insert(paymentVO);
         Long yearPayment = paymentMapper.getYearPayment(memberId);
         memberMapper.updateGrade(memberId,yearPayment);
