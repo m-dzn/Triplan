@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <h1 class="font-size-32 margin-window-title-board margin-title col-auto margin-bottom-24">1:1문의</h1>
+
+    <div class="row border-top padding-top-40">
+
+
+        <table class="table table-bordered" id="qnaTable">
+            <tr class="text-align-center">
+                <td class="font-size-16">글번호</td>
+                <td class="font-size-16">제목</td>
+                <td class="font-size-16">작성일</td>
+                <td class="font-size-16">문의사항 종류</td>
+                <td class="font-size-16">작성자</td>
+            </tr>
+            <tr>
+                <td th:text="${}">1</td>
+                <td th:text="${}"><a href="qnacon">비행기 표 환불하려고 합니다.</a></td>
+                <td th:text="${}">2099-12-31</td>
+                <td th:text="${}">교환/환불</td>
+                <td th:text="${}">김불상</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><a href="qnacon">a</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><a href="qnacon">a</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <button type="button" class="btn col-auto btn-primary background-color-primary" id="button_solid"><a href="qnawri" class="color-white a-button-solid">글 쓰기</a></button>
+
+    </div>
+</html>

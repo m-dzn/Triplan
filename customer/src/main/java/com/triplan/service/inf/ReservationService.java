@@ -1,6 +1,5 @@
 package com.triplan.service.inf;
 
-import com.triplan.domain.ItemScheduleVO;
 import com.triplan.dto.ReservationDTO;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public interface ReservationService {
 
     List<ReservationDTO> myCancelledResList(Integer memberId);
 
-    void reserve(Integer itemScheduleId, ReservationDTO reservationDTO);
+    Integer reserve(Integer itemScheduleId, Integer memberCouponId, ReservationDTO reservationDTO);
 
-    void cancel(Integer resId, ReservationDTO reservationDTO);
+    Integer cancel(Integer resId, ReservationDTO reservationDTO);
 }

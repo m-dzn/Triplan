@@ -5,38 +5,85 @@
 <mapper namespace="com.triplan.mapper.QuestionMapper">
 
     <insert id="insert">
-        INSERT INTO question(question_id, title, content, created_at, updated_at,
-                            qna_category_id, member_id, item_group_id, hide, type)
-        values (#{questionId},#{title},#{content},#{createdAt},#{updatedAt},#{qnaCategoryId},
-                #{memberId},#{itemGroupId},#{hide},#{type})
+        INSERT INTO question(
+            title,
+            content,
+            qna_category_id,
+            member_id,
+            item_group_id,
+            hide,
+            type
+        ) VALUES (
+            #{title},
+            #{content},
+            #{qnaCategoryId},
+            #{memberId},
+            #{itemGroupId},
+            #{hide},
+            #{type}
+        )
     </insert>
 
     <select id="select" resultType="com.triplan.domain.QuestionVO">
-        SELECT * FROM question where question_id=${questionId}
+        SELECT  *
+        FROM    question
+        WHERE   question_id = ${questionId}
     </select>
 
     <update id="update">
-        update question
-        set question_id=#{questionId},
-        title=#{title},
-        content=#{content},
-        created_at=#{createdAt},
-        updated_at=#{updatedAt},
-        qna_category_id=#{qnaCategoryId},
-        member_id=#{memberId},
-        item_group_id=#{itemGroupId},
-        hide=#{hide}
-        type=#{type}
-        where question_id=#{questionId}
+        UPDATE  question
+        SET
+                title = #{title},
+                content = #{content},
+                qna_category_id = #{qnaCategoryId},
+                hide = #{hide}
+        WHERE
+                question_id = #{questionId}
     </update>
 
     <delete id="delete">
-        delete from question where  question_id=#{questionId}
+        DELETE
+        FROM    question
+        WHERE   question_id = #{questionId}
     </delete>
 
     <select id="getQuestionList" resultType="QuestionVO">
-        SELECT *
-        FROM   question
-        WHERE  item_group_id = #{item_group_id}
+        SELECT  *
+        FROM    question
+        WHERE   item_group_id = #{itemGroupId}
     </select>
+
+    <!-- 판매자에게 물어보는 고객의 질문 목록 가져오기 -->
+    <select id="getQuestionBySellerId" resultType="QuestionVO">
+        SELECT  *
+        FROM    question
+        WHERE   item_group_id IN (
+                SELECT item_group_id
+                FROM   item_group
+                WHERE  seller_id = #{sellerId} )
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 자기가 한 문의 목록 보기 -->
+    <select id="getQuestionListByMemberId" resultType="QuestionVO">
+        SELECT  title, created_at
+        FROM    question
+        WHERE   member_id = #{memberId}
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="list" resultType="QuestionVO">
+        SELECT  *
+        FROM    question
+        WHERE   type = 'CUSTOMER'
+        ORDER BY question_id DESC
+        LIMIT   (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT  COUNT(*)
+        FROM    question
+        WHERE   type = 'CUSTOMER'
+    </select>
+
 </mapper>

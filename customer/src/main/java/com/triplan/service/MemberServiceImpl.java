@@ -34,9 +34,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void update(Integer memberId, MemberVO memberVO) {
+    public void updateEtc(Integer memberId, MemberVO memberVO) {
         memberVO.setMemberId(memberId);
-        memberMapper.update(memberVO);
+        memberMapper.updateEtc(memberVO);
     }
 
     @Override
@@ -63,14 +63,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Integer emailCheck(String email) {
-        Integer result = memberMapper.emailCheck(email);
+    public Boolean emailCheck(String email) {
+        Boolean result = memberMapper.emailCheck(email);
         return result;
     }
 
     @Override
-    public Integer nicknameCheck(String nickname) {
-        Integer result = memberMapper.nicknameCheck(nickname);
+    public Boolean nicknameCheck(String nickname) {
+        Boolean result = memberMapper.nicknameCheck(nickname);
         return result;
     }
 

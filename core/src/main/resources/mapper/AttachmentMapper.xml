@@ -5,38 +5,53 @@
 <mapper namespace="com.triplan.mapper.AttachmentMapper">
 
     <insert id="insert">
-        insert into attachment( about_table_type, id_in_table_type, origin_file_name, server_file_name, file_extension, file_size, upload_path )
-        values
+        INSERT INTO attachment(
+            about_table_type,
+            id_in_table_type,
+            origin_file_name,
+            server_file_name,
+            file_extension,
+            file_size,
+            upload_path
+        ) VALUES
         <foreach collection="list" item="attachment" separator=" , ">
-            (#{attachment.aboutTableType}, #{attachment.idInTableType}, #{attachment.originFileName}, #{attachment.serverFileName},
-            #{attachment.fileExtension}, #{attachment.fileSize}, #{attachment.uploadPath} )
+            (
+                #{attachment.aboutTableType},
+                #{attachment.idInTableType},
+                #{attachment.originFileName},
+                #{attachment.serverFileName},
+                #{attachment.fileExtension},
+                #{attachment.fileSize},
+                #{attachment.uploadPath}
+            )
         </foreach>
-
     </insert>
 
-    <select id="select" resultType="AttachmentVO">
+    <select id="select" resultType="AttachmentVO"> <!--특정 글에 저장된 첨부파일정보 -->
+
         select * from attachment
         where about_table_type = #{aboutTableType} AND id_in_table_type = #{idInTableType}
     </select>
 
-    <select id="selectByAttachmentId" resultType="AttachmentVO">
+    <select id="selectByAttachmentId" resultType="AttachmentVO"> <!--첨부파일id들로 첨부파일정보 반환-->
         select * from attachment
         where attachment_id in
         <foreach collection="list" item="attachmentId" separator=" , ">
+
             #{attachmentId}
         </foreach>
     </select>
 
-    <delete id="delete">
+    <delete id="delete"> <!--글 삭제시 첨부파일도 해당 글의 첨부파일정보 전부 삭제-->
+
         delete from attachment
         where about_table_type = #{aboutTableType} AND id_in_table_type = #{idInTableType}
     </delete>
 
-    <delete id="deleteByAttachmentId">
+    <delete id="deleteByAttachmentId"> <!--글 수정시 특정 첨부파일만 삭제-->
         delete from attachment
         where attachment_id = #{attachmentId}
+
     </delete>
-
-
 
 </mapper>

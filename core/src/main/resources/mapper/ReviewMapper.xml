@@ -31,12 +31,9 @@
     <update id="update">
         UPDATE  review
         SET
-                member_id = IFNULL( #{memberId},member_id ),
-                item_id = IFNULL( #{itemId},item_id ),
-                content = IFNULL( #{content},content ),
-                review_score=IFNULL( #{reviewScore},review_score ),
-                updated_at = CURRENT_TIMESTAMP,
-                review_img = IFNULL( #{reviewImg},review_img )
+                content =       IFNULL(  #{content},      content       ),
+                review_score =  IFNULL(  #{reviewScore},  review_score  ),
+                review_img =    IFNULL(  #{reviewImg},    review_img    )
         WHERE
                 review_id = #{reviewId}
     </update>
@@ -56,8 +53,8 @@
     </delete>
 
     <select id="list" resultType="com.triplan.domain.ReviewVO">
-        SELECT *
-        FROM review
+        SELECT  *
+        FROM    review
     </select>
 
     <!-- 페이징 처리-->

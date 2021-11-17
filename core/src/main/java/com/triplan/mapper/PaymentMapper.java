@@ -14,4 +14,6 @@ public interface PaymentMapper {
 
     void delete(Integer paymentId);
 
+    Long getYearPayment(Integer memberId);
+
 }
