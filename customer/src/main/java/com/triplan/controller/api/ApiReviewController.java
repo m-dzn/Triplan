@@ -18,7 +18,6 @@ public class ApiReviewController {
 
     private final ReviewService reviewService;
 
-    // TODO : 안 쓰는 REST 메서드 주석 or 삭제하기
     @PostMapping
     public String reviewInsert(
             @Valid @RequestBody ReviewVO reviewVO,

@@ -24,8 +24,10 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
-    public void reviewInsert(ReviewVO reviewVO, List<MultipartFile> files) { // 이미지 안 넣은 텍스트 리뷰, 이미지 넣은 이미지 리뷰
+    public void reviewInsert(ReviewVO reviewVO, List<MultipartFile> files) {
         reviewMapper.insert(reviewVO);
+
+        if (!files.isEmpty()) return;
 
         List<AttachmentVO> attachmentList
                 = AttachmentUtil.getAttachments(files, AboutTableType.REVIEW, reviewVO.getReviewId());
