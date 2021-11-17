@@ -26,7 +26,7 @@ public class AttachmentUtil {
     }
 
     private static String FILE_PATH;
-
+  
     public static List<AttachmentVO> getAttachments(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType) {
         FILE_PATH = PREFIX + aboutTableType.getFilePath(); // 파일저장경로
 
@@ -91,6 +91,8 @@ public class AttachmentUtil {
             e.printStackTrace();
             return null;
         }
+
+        return null;
     }
 
     public static void deleteAttachments(List<AttachmentVO> attachmentList) {

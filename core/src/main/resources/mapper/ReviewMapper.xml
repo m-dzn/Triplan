@@ -38,6 +38,14 @@
                 review_id = #{reviewId}
     </update>
 
+    <update id="updateUrl">
+        UPDATE review
+        SET review_img=#{reviewImg}
+        WHERE
+        review_id = #{reviewId}
+    </update>
+
+
     <delete id="delete">
         DELETE
         FROM    review
@@ -48,4 +56,19 @@
         SELECT  *
         FROM    review
     </select>
+
+    <!-- 페이징 처리-->
+    <select id="page" resultType="ReviewVO">
+        SELECT *
+        FROM review
+        ORDER BY item_id DESC
+        LIMIT (#{currentPage} -1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*)
+        FROM review
+        WHERE item_id = #{itemId}
+    </select>
+
 </mapper>

@@ -34,11 +34,15 @@ public class ReviewDTO {
 
 
     public ReviewVO toVO() {
+        // TODO : ReviewMapper.xml 파일의 update 메서드에 있는 속성 다 넣기
         ReviewVO vo = new ReviewVO();
 
+        vo.setReviewId(getReviewId());
         vo.setContent(getContent());
+        vo.setReviewScore(getReviewScore());
+        vo.setMemberId(getMemberId());
+        vo.setItemId(getItemId());
         vo.setReviewImg(getReviewImg());
-
 
         return vo;
 
