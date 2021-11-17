@@ -79,6 +79,7 @@
         <foreach collection="list" item="itemGroup" separator="," open="(" close=")">
         #{itemGroup.itemGroupId}
     </foreach>
+        ORDER BY item_group_id ASC
     </select>
 
     <select id="getItemGroupBySellerId" resultType="ItemGroupVO">
@@ -97,7 +98,23 @@
                                   WHERE  seller_id = #{sellerId})
     </select>
 
-
+    <select id="selectAllSort" resultType="ItemGroupVO">
+        SELECT *
+        FROM item_group
+        WHERE item_group_id
+        IN
+        <foreach collection="itemGroupId" item="item" separator="," open="(" close=")">
+            #{item.itemGroupId}
+        </foreach>
+        <choose>
+            <when test='sortType.equals("wish")'>
+                ORDER BY like_count DESC
+            </when>
+            <when test='sortType.equals("review")'>
+                ORDER BY review_count DESC
+            </when>
+        </choose>
+    </select>
 
 
 </mapper>

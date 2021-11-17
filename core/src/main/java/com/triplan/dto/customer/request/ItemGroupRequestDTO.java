@@ -30,6 +30,8 @@ public class ItemGroupRequestDTO {
     private Integer location;
     private Integer lat;
     private Integer lng;
+    private Integer likeCount;
+    private Integer reviewCount;
 
     private Integer sellerId;
     private List<Integer> tagIdList;
@@ -48,6 +50,8 @@ public class ItemGroupRequestDTO {
                 .location(location)
                 .lat(lat)
                 .lng(lng)
+                .likeCount(likeCount)
+                .reviewCount(reviewCount)
                 .sellerId(sellerId)
                 .build();
     }

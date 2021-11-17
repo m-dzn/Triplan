@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/items")
 @RequiredArgsConstructor
@@ -36,14 +34,5 @@ public class ApiItemController {
         return itemService.getDetailFlightByItemId(ItemCategory.FLIGHT,itemId);
     }
 
-    @GetMapping("/rooms")
-    public List<ItemRoomResponseDTO> getItemRoomList(){
-        return itemService.getItemRoomList(ItemCategory.ROOM);
-    }
-
-    @GetMapping("/flights")
-    public List<ItemFlightResponseDTO> getItemFlightList(){
-        return itemService.getItemFlightList(ItemCategory.FLIGHT);
-    }
 }
 

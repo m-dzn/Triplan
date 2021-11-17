@@ -10,27 +10,86 @@
     </select>
 
     <select id="getFilterAsDateDistinct" parameterType="map" resultType="ItemGroupVO">
-        SELECT item.item_group_id
-          FROM item
-          JOIN item_group
-            ON item.item_group_id = item_group.item_group_id
-          JOIN item_group_tag
-            ON item_group.item_group_id = item_group_tag.item_group_id
-         WHERE item_id in(
-                            SELECT DISTINCT item_id
-                              FROM Item_Schedule
+        SELECT DISTINCT item.item_group_id
+        FROM item
+        JOIN item_group
+        ON item.item_group_id = item_group.item_group_id
+        JOIN item_group_tag
+        ON item_group.item_group_id = item_group_tag.item_group_id
+        WHERE item_id in(
+        SELECT DISTINCT item_id
+        FROM Item_Schedule
         <if test="Data != null">
-                                WHERE item_id IS NOT NULL
-                              <if test="startDate != null"> AND start_date &gt;= #{startDate}</if>
-                              <if test="endDate != null">   AND end_date &lt;= #{endDate}</if>
-                              <if test="underPrice != null">     AND price &lt;= #{underPrice}</if>
-                              <if test="overPrice != null">     AND price &gt;= #{overPrice}</if>
-                          )
+            WHERE item_id IS NOT NULL
+            <if test="startDate != null"> AND start_date &gt;= #{startDate}</if>
+            <if test="endDate != null">   AND end_date &lt;= #{endDate}</if>
+            <if test="underPrice != null">     AND price &lt;= #{underPrice}</if>
+            <if test="overPrice != null">     AND price &gt;= #{overPrice}</if>
+            )
         </if>
         <if test="tags != null">
             AND tag_id in( <foreach collection="tags" item="item" index="idx" separator=",">
-                        #{item}
-                        </foreach> )
+            #{item}
+        </foreach> )
         </if>
+
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+
     </select>
+
+    <select id="getCount" parameterType="map" resultType="Integer">
+        SELECT count( DISTINCT item.item_group_id)
+        FROM item
+        JOIN item_group
+        ON item.item_group_id = item_group.item_group_id
+        JOIN item_group_tag
+        ON item_group.item_group_id = item_group_tag.item_group_id
+        WHERE item_id in(
+        SELECT DISTINCT item_id
+        FROM Item_Schedule
+        <if test="Data != null">
+            WHERE item_id IS NOT NULL
+            <if test="startDate != null"> AND start_date &gt;= #{startDate}</if>
+            <if test="endDate != null">   AND end_date &lt;= #{endDate}</if>
+            <if test="underPrice != null">     AND price &lt;= #{underPrice}</if>
+            <if test="overPrice != null">     AND price &gt;= #{overPrice}</if>
+            )
+        </if>
+        <if test="tags != null">
+            AND tag_id in( <foreach collection="tags" item="item" index="idx" separator=",">
+            #{item}
+        </foreach> )
+        </if>
+
+    </select>
+
+    <select id="getFilterAndSort" parameterType="map" resultType="ItemGroupVO">
+        SELECT DISTINCT item.item_group_id
+        FROM item
+        JOIN item_group
+        ON item.item_group_id = item_group.item_group_id
+        JOIN item_group_tag
+        ON item_group.item_group_id = item_group_tag.item_group_id
+        WHERE item_id in(
+            SELECT DISTINCT item_id
+            FROM Item_Schedule
+            <if test="Data != null">
+                WHERE item_id IS NOT NULL
+                <if test="startDate != null"> AND start_date &gt;= #{startDate}</if>
+                <if test="endDate != null">   AND end_date &lt;= #{endDate}</if>
+                <if test="underPrice != null">     AND price &lt;= #{underPrice}</if>
+                <if test="overPrice != null">     AND price &gt;= #{overPrice}</if>
+            </if>
+                )
+        <if test="tags != null">
+        AND tag_id in( <foreach collection="tags" item="item" index="idx" separator=",">
+            #{item}
+            </foreach> )
+        </if>
+
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+
+    </select>
+
+
 </mapper>

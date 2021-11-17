@@ -30,6 +30,8 @@ public class ItemGroupResponseDTO {
     private Integer location;
     private Integer lat;
     private Integer lng;
+    private Integer likeCount;
+    private Integer reviewCount;
 
     private List<ItemRoomResponseDTO> itemRoomList;
     private List<ItemFlightResponseDTO> itemFlightList;
@@ -51,6 +53,8 @@ public class ItemGroupResponseDTO {
                 .location(vo.getLocation())
                 .lat(vo.getLat())
                 .lng(vo.getLng())
+                .likeCount(vo.getLikeCount())
+                .reviewCount(vo.getReviewCount())
                 .build();
     }
 
