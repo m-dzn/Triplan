@@ -1,8 +1,11 @@
 package com.triplan.domain;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class AnswerVO {
 
     private Integer questionId;

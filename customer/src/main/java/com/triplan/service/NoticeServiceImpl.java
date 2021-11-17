@@ -22,7 +22,6 @@ public class NoticeServiceImpl implements NoticeService {
         return noticeMapper.noticeSelect(noticeId);
     }
 
-
     @Override
     public void noticeUpdate(NoticeVO noticeVO) {
         noticeMapper.noticeUpdate(noticeVO);

@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.triplan.mapper.QuestionMapper">
 
+    <!-- 문의글 작성 -->
     <insert id="insert">
         INSERT INTO question(question_id, title, content, created_at, updated_at,
                             qna_category_id, member_id, item_group_id, hide, type)
@@ -11,10 +12,12 @@
                 #{memberId},#{itemGroupId},#{hide},#{type})
     </insert>
 
+    <!-- 문의글 read -->
     <select id="select" resultType="com.triplan.domain.QuestionVO">
         SELECT * FROM question where question_id=${questionId}
     </select>
 
+    <!-- 문의 글 수정 -->
     <update id="update">
         update question
         set question_id=#{questionId},
@@ -30,11 +33,13 @@
         where question_id=#{questionId}
     </update>
 
+    <!-- 문의 글 삭제 -->
     <delete id="delete">
         delete from question where  question_id=#{questionId}
     </delete>
 
-    <select id="getQuestionList" resultType="QuestionVO">
+    <!-- 전체 문의 글 작성 목록 -->
+    <select id="getQuestionListByItemGroupId" resultType="QuestionVO">
         SELECT *
         FROM   question
         WHERE  item_group_id = #{itemGroupId}
@@ -42,20 +47,11 @@
 
     <!-- 판매자에게 물어보는 고객의 질문 목록 가져오기 -->
     <select id="getQuestionBySellerId" resultType="QuestionVO">
-        SELECT title, content
+        SELECT *
         FROM   question
         WHERE  item_group_id IN (   SELECT item_group_id
                                     FROM   item_group
                                     WHERE  seller_id = #{sellerId} )
-        ORDER BY sales_volume DESC
-    </select>
-
-    <select id="getQuestionByItemGId" resultType="QuestionVO">
-        SELECT item_group_id, title, member_id, created_at
-        FROM question
-        WHERE item_group_id in ( SELECT  item_group_id
-                                 FROM item_group
-                                 WHERE seller_id=#{sellerId})
         ORDER BY created_at DESC
     </select>
 
@@ -67,7 +63,8 @@
         ORDER BY created_at desc
     </select>
 
-    <select id="list" resultType="QuestionVO">
+    <!-- 페이징 -->
+    <select id="questionListByItemGroupIdListPage" resultType="QuestionVO">
         SELECT *
         FROM question
         WHERE type = 'CUSTOMER'
@@ -75,10 +72,30 @@
         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
     </select>
 
-    <select id="count" resultType="int">
+    <select id="questionListByItemGroupIdCountPage" resultType="QuestionVO">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ount" resultType="int">
         SELECT  COUNT(*)
         FROM    question
         WHERE   type = 'CUSTOMER'
     </select>
 
+    <select id="questionListBySellerIdListPage" resultType="QuestionVO">
+        SELECT *
+        FROM question
+        WHERE type = 'SELLER'
+        ORDER BY question_id DESC
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="questionListBySellerIdCountPage" resultType="QuestionVO">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ount" resultType="int">
+        SELECT  COUNT(*)
+        FROM    question
+        WHERE   type = 'SELLER'
+    </select>
+
+    <select id="questionListByMemberIdListPage" resultType="QuestionVO">
+        SELECT title, created_at
+        FROM question
+        WHERE member_id=#{memberId}
+        ORDER BY created_at DESC
+    </select>
 </mapper>
