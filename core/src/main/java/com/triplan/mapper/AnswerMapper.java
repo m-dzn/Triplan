@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface AnswerMapper {
+
     void insert(AnswerVO answerVO);
 
     AnswerVO select(Integer questionId);

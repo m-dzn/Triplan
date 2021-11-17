@@ -1,10 +1,10 @@
 package com.triplan.controller;
 
-import com.triplan.domain.PaymentVO;
 import com.triplan.service.inf.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,4 +17,5 @@ public class PaymentController {
         paymentService.read(Integer.parseInt(paymentId));
         return "payment";
     }
+
 }

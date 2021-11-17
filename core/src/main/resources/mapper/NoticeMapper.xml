@@ -38,13 +38,15 @@
     <select id="noticeList" resultType="NoticeVO">
         SELECT  *
         FROM    notice
-        WHERE   target = #{target}
+        WHERE   noticeTarget = #{noticeTarget}
+        ORDER BY created_at DESC
+        LIMIT   (#{currentPage} - 1) * #{pageSize}, #{pageSize}
     </select>
 
     <select id="count" resultType="Integer">
         SELECT  count(*)
         FROM    notice
-        WHERE   target = #{target}
+        WHERE   noticeTarget = #{noticeTarget}
     </select>
 
 </mapper>

@@ -64,26 +64,30 @@ public class ApiReservationController {
     }
 
     // 나외 예약 조회 (최신 여행 일자 순으로)
-    @GetMapping("/myResList/{memberId}")
-    public List<ReservationDTO> myResList(@PathVariable Integer memberId) {
+    @GetMapping("/myResList")
+    public List<ReservationDTO> myResList() {
+        Integer memberId = 1;
         return reservationService.myResList(memberId);
     }
 
     // 나의 예약 조회 - 예정된 여행
-    @GetMapping("/myUpcomingResList/{memberId}")
-    public List<ReservationDTO> myUpcomingResList(@PathVariable Integer memberId) {
+    @GetMapping("/myUpcomingResList")
+    public List<ReservationDTO> myUpcomingResList() {
+        Integer memberId = 1;
         return reservationService.myUpcomingResList(memberId);
     }
 
     // 나의 예약 조회 - 지난 여행
-    @GetMapping("/myPastResList/{memberId}")
-    public List<ReservationDTO> myPastResList(@PathVariable Integer memberId) {
+    @GetMapping("/myPastResList")
+    public List<ReservationDTO> myPastResList() {
+        Integer memberId = 1;
         return reservationService.myPastResList(memberId);
     }
 
     // 나의 예약 조회 - 취소된 여행 (여행 취소 일자 순)
     @GetMapping("/myCancelledResList/{memberId}")
-    public List<ReservationDTO> myCancelledResList(@PathVariable Integer memberId) {
+    public List<ReservationDTO> myCancelledResList() {
+        Integer memberId = 1;
         return reservationService.myCancelledResList(memberId);
     }
 }

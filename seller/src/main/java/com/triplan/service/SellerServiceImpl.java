@@ -2,6 +2,7 @@ package com.triplan.service;
 
 import com.triplan.domain.SellerVO;
 import com.triplan.mapper.SellerMapper;
+import com.triplan.service.inf.SellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

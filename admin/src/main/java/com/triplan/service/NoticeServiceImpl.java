@@ -2,8 +2,9 @@ package com.triplan.service;
 
 import com.triplan.domain.NoticeVO;
 import com.triplan.dto.response.Pagination;
-import com.triplan.enumclass.Target;
+import com.triplan.enumclass.NoticeTarget;
 import com.triplan.mapper.NoticeMapper;
+import com.triplan.service.inf.NoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,14 +39,12 @@ public class NoticeServiceImpl implements NoticeService {
 
 
     @Override
-    public Pagination<NoticeVO> noticeList(Target target, Integer pageSize, Integer currentPage) {
-        List<NoticeVO> noticeList = noticeMapper.noticeList(target);
-        Integer count = noticeMapper.count(target);
-        Pagination<NoticeVO> noticePagination = new Pagination<>(pageSize,currentPage, count,noticeList);
+    public Pagination<NoticeVO> noticeList(NoticeTarget noticeTarget, Integer pageSize, Integer currentPage) {
+        List<NoticeVO> noticeList = noticeMapper.noticeList(noticeTarget, pageSize, currentPage);
+        Integer count = noticeMapper.count(noticeTarget);
+        Pagination<NoticeVO> noticePagination = new Pagination<>(pageSize, currentPage, count, noticeList);
         return noticePagination;
     }
-
-
 
 
 }

@@ -22,8 +22,10 @@ public class AttachmentServiceImpl implements AttachmentService {
     public void save(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType) {
         List<AttachmentVO> attachmentList = AttachmentUtil.getAttachments(files, aboutTableType, idInTableType);
 
-        try { // db작업중에 에러뜨면 서버에 저장한 파일도 삭제
-            attachmentMapper.insert(attachmentList);
+        if (attachmentList.isEmpty()) return;
+
+        try { // DB 작업 중에 에러뜨면 서버에 저장한 파일도 삭제
+            attachmentMapper.insertAll(attachmentList);
         } catch (Exception e) {
             AttachmentUtil.deleteAttachments(attachmentList);
         }
@@ -33,6 +35,8 @@ public class AttachmentServiceImpl implements AttachmentService {
     public void remove(List<Integer> attachmentIdList) {
         // 삭제하려는 테이블타입, 글번호와 일치하는 행들 전부 반환
         List<AttachmentVO> attachmentList = attachmentMapper.selectAllByAttachmentId(attachmentIdList);
+
+        if (attachmentList.isEmpty()) return;
 
         AttachmentUtil.deleteAttachments(attachmentList); // 물리적으로 파일 삭제
         attachmentMapper.deleteAllByAttachmentId(attachmentIdList);  // DB에서 파일 삭제

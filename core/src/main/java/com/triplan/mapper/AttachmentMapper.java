@@ -10,7 +10,9 @@ import java.util.List;
 @Mapper
 public interface AttachmentMapper {
 
-    void insert(List<AttachmentVO> attachmentList);
+    void insert(AttachmentVO attachment);
+
+    void insertAll(List<AttachmentVO> attachmentList);
 
     int delete(@Param("aboutTableType") AboutTableType aboutTableType, @Param("idInTableType") Integer idInTableType);
 

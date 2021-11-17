@@ -30,11 +30,11 @@
     <update id="update">
         UPDATE  coupon
         SET
-                name                = IFNULL(   #{name},            name                ),
-                num                 = IFNULL(   #{num},             num                 ),
-                price               = IFNULL(   #{price},           price               ),
-                condition           = IFNULL(   #{condition},       condition           ),
-                expired_at          = IFNULL(   #{expiredAt},       expired_at          )
+                name                = IFNULL(       #{name},            name                ),
+                num                 = IFNULL(       #{num},             num                 ),
+                price               = IFNULL(       #{price},           price               ),
+                condition           = IFNULL(       #{condition},       condition           ),
+                expired_at          = IFNULL(       #{expiredAt},       expired_at          )
         WHERE
                 coupon_id = #{couponId}
     </update>

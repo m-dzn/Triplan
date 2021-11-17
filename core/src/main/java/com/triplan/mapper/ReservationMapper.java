@@ -28,7 +28,6 @@ public interface ReservationMapper {
 
     void insertResItem(@Param("resId") Integer resId, @Param("itemScheduleId") Integer itemScheduleId);
 
-
     Integer checkCoupon(Integer memberCouponId);
 
     Integer checkMemberCoupon(@Param("memberCouponId") Integer memberCouponId, @Param("memberId") Integer memberId);

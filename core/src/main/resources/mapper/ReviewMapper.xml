@@ -36,13 +36,6 @@
                 review_id = #{reviewId}
     </update>
 
-    <update id="updateUrl">
-        UPDATE  review
-        SET     review_img=#{reviewImg}
-        WHERE
-                review_id = #{reviewId}
-    </update>
-
     <delete id="delete">
         DELETE
         FROM    review

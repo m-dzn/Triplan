@@ -1,15 +1,10 @@
 package com.triplan.domain;
 
-import com.triplan.enumclass.PaymentState;
-import com.triplan.enumclass.PaymentType;
 import com.triplan.enumclass.QuestionType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

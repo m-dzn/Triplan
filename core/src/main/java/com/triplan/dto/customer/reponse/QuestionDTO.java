@@ -4,10 +4,8 @@ import com.triplan.domain.QuestionVO;
 import com.triplan.enumclass.QuestionType;
 import lombok.*;
 
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-@Size
 @Getter
 @Setter
 @ToString

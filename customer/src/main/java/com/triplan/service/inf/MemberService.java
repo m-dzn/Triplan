@@ -4,7 +4,6 @@ import com.triplan.domain.MemberVO;
 import com.triplan.dto.MemberProfileDTO;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface MemberService {
@@ -27,5 +26,5 @@ public interface MemberService {
 
     Boolean nicknameCheck(String nickname);
 
-    MemberVO updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> file) throws IOException;
+    void updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> file);
 }

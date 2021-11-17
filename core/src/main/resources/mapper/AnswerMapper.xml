@@ -5,23 +5,31 @@
 <mapper namespace="com.triplan.mapper.AnswerMapper">
 
     <insert id="insert">
-        INSERT INTO answer(question_id, content)
-        values (#{questionId},#{content})
+        INSERT INTO answer (
+            question_id,
+            content
+        ) VALUES (
+            #{questionId},
+            #{content}
+        )
     </insert>
 
     <select id="select" resultType="AnswerVO">
-        SELECT * FROM answer where question_id=${questionId}
+        SELECT  *
+        FROM    answer
+        WHERE   question_id = ${questionId}
     </select>
 
     <update id="update">
-        update answer
-        set question_id=#{questionId},
-        content=#{answerVO.content}
-        where question_id=#{questionId}
+        UPDATE  answer
+        SET     content = #{answerVO.content}
+        WHERE   question_id = #{questionId}
     </update>
 
     <delete id="delete">
-        delete from answer where question_id=#{questionId}
+        DELETE
+        FROM    answer
+        WHERE   question_id = #{questionId}
     </delete>
 
 </mapper>

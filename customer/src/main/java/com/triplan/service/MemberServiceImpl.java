@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -58,6 +57,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public void delete(Integer memberId) {
         memberMapper.delete(memberId);
     }
@@ -76,17 +76,28 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberVO updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> files) throws IOException {
-        if(files.size() > 0){
-            List<AttachmentVO> attachmentVOList = AttachmentUtil.getAttachments(files, AboutTableType.MEMBER, memberProfileDTO.getMemberId());
-
-            attachmentMapper.insert(attachmentVOList);
-
-            memberProfileDTO.setProfileImg(attachmentVOList.get(0).getUrl());
-            memberMapper.updateBasicInfo(memberProfileDTO.toVO());
+    public void updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> files) {
+        if (!files.isEmpty()) {
+            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.MEMBER, memberProfileDTO.getMemberId());
+            AttachmentUtil.deleteAttachments(filesToDelete);
+            attachmentMapper.delete(AboutTableType.REVIEW, memberProfileDTO.getMemberId());
+            memberProfileDTO.setProfileImg("");
         }
 
-        return memberMapper.select(memberProfileDTO.getMemberId());
+        AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.MEMBER, memberProfileDTO.getMemberId());
+
+        if (attachmentVO != null) {
+            memberProfileDTO.setProfileImg(attachmentVO.getUrl());
+
+            try {
+                attachmentMapper.insert(attachmentVO);
+            } catch (Exception e) {
+                e.printStackTrace();
+                AttachmentUtil.deleteAttachment(attachmentVO);
+            }
+        }
+
+            memberMapper.updateBasicInfo(memberProfileDTO.toVO());
     }
 
 

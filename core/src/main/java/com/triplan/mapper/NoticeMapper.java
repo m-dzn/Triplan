@@ -1,8 +1,9 @@
 package com.triplan.mapper;
 
 import com.triplan.domain.NoticeVO;
-import com.triplan.enumclass.Target;
+import com.triplan.enumclass.NoticeTarget;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,8 +18,12 @@ public interface NoticeMapper {
 
     void delete(int noticeId);
 
-    List<NoticeVO> noticeList(Target target);
+    List<NoticeVO> noticeList(
+            @Param("target") NoticeTarget noticeTarget,
+            @Param("pageSize") Integer pageSize,
+            @Param("currentPage") Integer currentPage
+    );
 
-    Integer count(Target target);
+    Integer count(NoticeTarget noticeTarget);
 
 }

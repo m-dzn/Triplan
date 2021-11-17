@@ -4,6 +4,7 @@ import com.triplan.domain.ReviewVO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.service.inf.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,10 +19,10 @@ public class ApiReviewController {
 
     private final ReviewService reviewService;
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     public String reviewInsert(
-            @Valid @RequestBody ReviewVO reviewVO,
-            @RequestParam("file") List<MultipartFile> files
+            @RequestPart("review") @Valid ReviewVO reviewVO,
+            @RequestPart("file") List<MultipartFile> files
     ) {
         reviewService.reviewInsert(reviewVO, files);
         return "정보 입력 성공";

@@ -1,6 +1,6 @@
 package com.triplan.consts;
 
-public class Constraints {
+public abstract class Constraints {
 
     public static final int EMAIL_MAX_LENGTH = 100;
 

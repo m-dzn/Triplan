@@ -1,4 +1,4 @@
-package com.triplan.service;
+package com.triplan.service.inf;
 
 import com.triplan.domain.SellerVO;
 

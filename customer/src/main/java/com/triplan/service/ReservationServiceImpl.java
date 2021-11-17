@@ -48,6 +48,7 @@ public class ReservationServiceImpl implements ReservationService {
         Integer result = -1;
         ReservationVO reservationVO = reservationDTO.toVO();
         Integer resId = null;
+
         // 쿠폰 사용 처리
         if (memberCouponId != null) {
             if(memberCouponId == 0) {
@@ -75,6 +76,7 @@ public class ReservationServiceImpl implements ReservationService {
                 }
             }
         }
+
         return result;
     }
 

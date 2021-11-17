@@ -18,18 +18,13 @@ public interface QuestionMapper {
 
     void delete(Integer questionId);
 
-    List<QuestionVO> getQuestionListByItemGroupId(Integer itemGroupId);
+    List<QuestionVO> listByItemGroupId(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage, @Param("itemGroupId") Integer itemGroupId);
+    int countByItemGroupId(QuestionType type);
 
-    List<QuestionVO> getQuestionBySellerId(Integer sellerId);
+    List<QuestionVO> listBySellerId(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage, @Param("sellerId") Integer sellerId);
+    int countBySellerId(QuestionType type);
 
-    List<QuestionVO> getQuestionListByMemberId(Integer memberId);
+    List<QuestionVO> listByMemberId(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage, @Param("memberId") Integer memberId);
+    int countByMemberId(Integer memberId);
 
-    List<QuestionVO> questionListByItemGroupIdListPage(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
-    int questionListByItemGroupIdCountPage(String type);
-
-    List<QuestionVO> questionListBySellerIdListPage(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
-    int questionBySellerIdCountPage(String type);
-
-    List<QuestionVO> questionListByMemberIdListPage(@Param("memberId") Integer memberId, @Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
-    int questionListByMemberIdCountPage(Integer memberId);
 }
