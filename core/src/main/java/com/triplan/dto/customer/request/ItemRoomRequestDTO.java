@@ -31,7 +31,6 @@ public class ItemRoomRequestDTO {
     private Integer numberOfPerson;
     private Integer maxPerson;
 
-    private String img;
 
     public ItemVO toItemVO() {
         return ItemVO.builder()
@@ -51,7 +50,6 @@ public class ItemRoomRequestDTO {
                 .roomId(roomId)
                 .numberOfPerson(numberOfPerson)
                 .maxPerson(maxPerson)
-                .img(img)
                 .build();
     }
 }

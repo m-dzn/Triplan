@@ -20,12 +20,12 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public void save(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType) {
-        List<AttachmentVO> attachmentList = AttachmentUtil.getAttachments(files, aboutTableType, idInTableType);
+        AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), aboutTableType, idInTableType);
 
         try { // db작업중에 에러뜨면 서버에 저장한 파일도 삭제
-            attachmentMapper.insert(attachmentList);
+            attachmentMapper.insert(attachmentVO);
         } catch (Exception e) {
-            AttachmentUtil.deleteAttachments(attachmentList);
+            AttachmentUtil.deleteAttachment(attachmentVO);
         }
     }
 
@@ -40,13 +40,13 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public void removeByTableId(AboutTableType aboutTableType, Integer idInTableType) {
-        List<AttachmentVO> attachmentList = attachmentMapper.select(aboutTableType, idInTableType);
+        List<AttachmentVO> attachmentList = attachmentMapper.selectAll(aboutTableType, idInTableType);
         AttachmentUtil.deleteAttachments(attachmentList);
     }
 
     @Override
     public List<AttachmentVO> getList(AboutTableType aboutTableType, Integer idInTableType) {
-        return attachmentMapper.select(aboutTableType, idInTableType);
+        return attachmentMapper.selectAll(aboutTableType, idInTableType);
     }
 
 }

@@ -78,11 +78,11 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public MemberVO updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> files) throws IOException {
         if(files.size() > 0){
-            List<AttachmentVO> attachmentVOList = AttachmentUtil.getAttachments(files, AboutTableType.MEMBER, memberProfileDTO.getMemberId());
+            AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.MEMBER, memberProfileDTO.getMemberId());
 
-            attachmentMapper.insert(attachmentVOList);
+            attachmentMapper.insert(attachmentVO);
 
-            memberProfileDTO.setProfileImg(attachmentVOList.get(0).getUrl());
+            memberProfileDTO.setProfileImg(attachmentVO.getUrl());
             memberMapper.updateBasicInfo(memberProfileDTO.toVO());
         }
 

@@ -103,20 +103,36 @@ INSERT INTO Item_Group_Tag (item_group_id,tag_id)
 VALUES(2,8);
 
 /*payment*/
+// 카드결제
 INSERT INTO payment
-VALUES (1, 'CELL_PHONE', 100, '2021-11-9T01:01:01', 'PAID' ,'2021-11-9T01:01:01', '2021-11-9T01:01:01', '2021-11-9T01:01:01', 1);
+(TYPE, TOTAL_PAYMENT , STATE , CREATED_AT , RES_ID )
+VALUES ('CREDIT_CARD', 50000, 'PAID', '2021-11-17T12:13:33', 1);
 
-
+// 무통장입금(미결제)
 INSERT INTO payment
-VALUES (2, 'CELL_PHONE', 100, '2021-11-9T01:01:01', 'PAID' ,'2021-11-8T01:01:01', '2021-11-9T01:01:01', '2021-11-9T01:01:01', 1);
+(type, account_bank, account_number, total_payment, payment_deadline, state, created_at, res_id)
+VALUES ('TRANSFER_WITHOUT_ACCOUNT', '케이뱅크', '70112004110417', 100000, '2021-12-17T14:59:59', 'UNPAID', '2021-11-17T12:25:33', 2);
 
 
+// 무통장입금(결제)
 INSERT INTO payment
-VALUES (3, 'CELL_PHONE', 100, '2021-11-9T01:01:01', 'PAID' ,'2021-11-2T01:01:01', '2021-11-9T01:01:01', '2021-11-9T01:01:01', 1);
+(type, account_bank, account_number, total_payment, payment_deadline, state, created_at, updated_at, res_id)
+VALUES ('TRANSFER_WITHOUT_ACCOUNT', '신한(조흥)은행', '56211103867610', 130000, '2021-11-30T14:59:59', 'PAID', '2021-11-17T12:25:33', '2021-11-20T08:17:13', 3);
 
+// 폰결제
 INSERT INTO payment
-VALUES (4, 'CELL_PHONE', 100, '2021-11-9T01:01:01', 'PAID' ,'2021-10-8T01:01:01', '2021-11-9T01:01:01', '2021-11-9T01:01:01', 1);
+(TYPE, TOTAL_PAYMENT , STATE , CREATED_AT , RES_ID )
+VALUES ('CELL_PHONE', 35000, 'PAID', '2021-11-18T09:33:40', 4);
 
+// 네이버페이
+INSERT INTO payment
+(TYPE, TOTAL_PAYMENT , STATE , CREATED_AT , RES_ID )
+VALUES ('NAVER_PAY', 55000, 'PAID', '2021-11-20T18:48:23', 5);
+
+// 카카오페이
+INSERT INTO payment
+(TYPE, TOTAL_PAYMENT , STATE , CREATED_AT , RES_ID )
+VALUES ('KAKAO_PAY', 240000, 'PAID', '2021-11-20T22:10:30', 6);
 INSERT INTO question (title, content, hide, member_id, type)
 VALUES ('테스트 문의1', '테스트 문의 내용', 0, 1, 'CUSTOMER');
 INSERT INTO question (title, content, hide, member_id, type)
@@ -139,8 +155,3 @@ VALUES ('GOLD', 300001, 500000);
 
 INSERT INTO grade (grade, min_payment, max_payment)
 VALUES ('PLATINUM', 500001, 2100000000);
-INSERT INTO payment
-VALUES (5, 'CELL_PHONE', 100, '2021-11-9T01:01:01', 'PAID' ,'2021-11-9T01:01:01', '2021-11-9T01:01:01', '2021-11-9T01:01:01', 1);
-
-INSERT INTO payment
-VALUES (6, 'CELL_PHONE', 100, '2021-11-9T01:01:01', 'PAID' ,'2021-11-9T01:01:01', '2021-11-9T01:01:01', '2021-11-9T05:01:01', 1);

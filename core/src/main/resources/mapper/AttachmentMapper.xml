@@ -5,6 +5,26 @@
 <mapper namespace="com.triplan.mapper.AttachmentMapper">
 
     <insert id="insert">
+        INSERT INTO attachment (
+            about_table_type,
+            id_in_table_type,
+            origin_file_name,
+            server_file_name,
+            file_extension,
+            file_size,
+            upload_path
+        ) VALUES (
+            #{aboutTableType},
+            #{idInTableType},
+            #{originFileName},
+            #{serverFileName},
+            #{fileExtension},
+            #{fileSize},
+            #{uploadPath}
+        )
+    </insert>
+
+    <insert id="insertAll">
         INSERT INTO attachment(
             about_table_type,
             id_in_table_type,
@@ -16,13 +36,13 @@
         ) VALUES
         <foreach collection="list" item="attachment" separator=" , ">
             (
-                #{attachment.aboutTableType},
-                #{attachment.idInTableType},
-                #{attachment.originFileName},
-                #{attachment.serverFileName},
-                #{attachment.fileExtension},
-                #{attachment.fileSize},
-                #{attachment.uploadPath}
+            #{attachment.aboutTableType},
+            #{attachment.idInTableType},
+            #{attachment.originFileName},
+            #{attachment.serverFileName},
+            #{attachment.fileExtension},
+            #{attachment.fileSize},
+            #{attachment.uploadPath}
             )
         </foreach>
     </insert>
@@ -31,7 +51,14 @@
         SELECT  *
         FROM    attachment
         WHERE   about_table_type = #{aboutTableType}
-          AND   id_in_table_type = #{idInTableType}
+        AND   id_in_table_type = #{idInTableType}
+    </select>
+
+    <select id="selectAll" resultType="AttachmentVO"> <!--특정 글에 저장된 첨부파일정보 -->
+        SELECT  *
+        FROM    attachment
+        WHERE   about_table_type = #{aboutTableType}
+        AND   id_in_table_type = #{idInTableType}
     </select>
 
     <select id="selectByAttachmentId" resultType="AttachmentVO"> <!--첨부파일id들로 첨부파일정보 반환-->
