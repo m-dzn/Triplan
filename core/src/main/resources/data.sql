@@ -1,6 +1,6 @@
-INSERT INTO role (name) VALUES ('ROLE_ADMIN');
-INSERT INTO role (name) VALUES ('ROLE_SELLER');
-INSERT INTO role (name) VALUES ('ROLE_USER');
+INSERT INTO role (name) VALUES ('ADMIN');
+INSERT INTO role (name) VALUES ('SELLER');
+INSERT INTO role (name) VALUES ('USER');
 
 INSERT INTO member (email, password, nickname)
 VALUES ('user@gmail.com', '1111', '사용자1');

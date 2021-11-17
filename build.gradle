@@ -37,8 +37,9 @@ subprojects {
 	dependencies {
 		implementation "$boot:spring-boot-starter-web"
 		implementation "$boot:spring-boot-starter-validation"
+		implementation "$boot:spring-boot-starter-security"
+		implementation "$boot:spring-boot-starter-oauth2-client"
 //		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-		implementation "$boot:spring-boot-starter-validation"
 
 		//타임리프 레이아웃
 		implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
