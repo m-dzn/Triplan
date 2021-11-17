@@ -1,0 +1,89 @@
+/* 변수 */
+:root {
+    --unit: 0.0625rem;
+
+    --signature: #6ec4fa;
+    --sub: #ffffff;
+
+    /*
+    변수 설정 시 px로 입력하지 마시고 아래 공식으로 작성해주세요
+    calc(var(--unit)*원하는 픽셀)
+    */
+}
+
+.txt-1{
+    font-size: calc(var(--unit)*40);
+    font-weight: bold;
+}
+.txt-2{/*섹션 타이틀 등 큰 제목(ex:인기 카테고리, 결제, 장바구니)*/
+    font-size: calc(var(--unit)*32);
+    font-weight: bold;
+}
+.txt-3{
+    font-size: calc(var(--unit)*24);
+    font-weight: bold;
+}
+.txt-4{
+    font-size: calc(var(--unit)*20);
+}
+.txt-5{/*일반적인 본문 내용*/
+    font-size: calc(var(--unit)*16);
+}
+.txt-6{/*비밀번호 찾기 등 소기능*/
+    font-size: calc(var(--unit)*14);
+}
+
+.txt-gray{
+    color: gray;
+}
+
+.txt-normal{
+    font-weight: normal;
+}
+
+.txt-bold{
+    font-weight: bold;
+}
+
+.txt-cen{
+    text-align: center;
+}
+
+.txt-end{
+    text-align: end;
+}
+
+.sec-mag{
+    margin-top: calc(var(--unit)*56);
+    margin-left: calc(var(--unit)*32);
+    margin-bottom: calc(var(--unit)*88);
+}
+
+.tit-mag{
+    margin-bottom: calc(var(--unit)*32);
+}
+
+.tit-win-mag{ /*마이페이지 같이 네모 구역 여러 개로 나눠지는 곳에서 사용 할 타이틀*/
+    padding-top: calc(var(--unit)*24);
+    padding-bottom: calc(var(--unit)*16);
+    padding-left: calc(var(--unit)*32);
+    padding-right: calc(var(--unit)*16);
+}
+
+.foo-mag{
+    margin-top: calc(var(--unit)*168);
+}
+
+.win-mag{
+    margin-bottom: calc(var(--unit)*16);
+}
+
+.full{
+    width: 100%;
+    height: 100%;
+}
+
+.pro-pho{
+    width: calc(var(--unit)*120);
+    height: calc(var(--unit)*120);
+}
