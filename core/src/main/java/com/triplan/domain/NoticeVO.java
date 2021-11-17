@@ -9,20 +9,21 @@ import java.sql.Timestamp;
 @Data
 public class NoticeVO {
 
-    private Integer noticeId; //
+    private Integer noticeId;
 
+    @NotBlank
+    @Size(min = 2)
+    private String title;
 
-    @NotEmpty(message = "title은 필수값입니다.")
-    private String title; //
-
-    private Timestamp createdAt; //
+    private Timestamp createdAt;
 
     private Timestamp updatedAt;
 
+    @NotBlank
     private String content;
 
-    @NotBlank
-    private String target; //
+    @NotNull
+    private String target;
 
 
 }

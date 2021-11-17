@@ -54,8 +54,8 @@ public class ApiNoticeController {
    @GetMapping("/list/seller")
     public Pagination<NoticeVO> noticeSellerList(
 
-            @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(defaultValue = "1") Integer currentPage) {
+           @RequestParam(defaultValue = "10") Integer pageSize,
+           @RequestParam(defaultValue = "1") Integer currentPage) {
       /* Pagination<NoticeVO> noticeVO = noticeService.noticeList(target,pageSize,currentPage);
        return noticeVO;*/
        return noticeService.noticeSellerList(Target.SELLER,pageSize,currentPage);
@@ -68,7 +68,7 @@ public class ApiNoticeController {
             @RequestParam(defaultValue = "1") Integer currentPage) {
       /* Pagination<NoticeVO> noticeVO = noticeService.noticeList(target,pageSize,currentPage);
        return noticeVO;*/
-        return noticeService.noticeSellerList(Target.MEMBER,pageSize,currentPage);
+        return noticeService.noticeMemberList(Target.MEMBER,pageSize,currentPage);
     }
 
 
