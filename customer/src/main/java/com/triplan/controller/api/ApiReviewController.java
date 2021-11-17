@@ -19,7 +19,7 @@ public class ApiReviewController {
 
     private final ReviewService reviewService;
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping
     public String reviewInsert(
             @RequestPart("review") @Valid ReviewVO reviewVO,
             @RequestPart("file") List<MultipartFile> files
@@ -34,11 +34,11 @@ public class ApiReviewController {
         return result;
     }
 
-    @PutMapping("/{reviewId}")
+    @PutMapping(value = "/{reviewId}")
     public String reviewUpdate(
             @PathVariable Integer reviewId,
-            @RequestBody ReviewVO reviewVO,
-            @RequestParam("file") List<MultipartFile> files
+            @RequestPart("review") ReviewVO reviewVO,
+            @RequestPart("file") List<MultipartFile> files
     ) {
         reviewVO.setReviewId(reviewId);
         reviewService.reviewUpdate(reviewVO, files);
