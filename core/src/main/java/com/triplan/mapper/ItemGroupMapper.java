@@ -25,4 +25,7 @@ public interface ItemGroupMapper {
     List<ItemGroupVO> getItemGroupBySellerId(@Param("sellerId") Integer sellerId, @Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
 
     int count(Integer sellerId);
+
+    ItemGroupVO selectByItemId(Integer itemId);
+
 }

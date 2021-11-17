@@ -18,4 +18,6 @@ public interface PaymentMapper {
 
     List<PaymentVO> getPaymentBySellerId(Integer sellerId);
 
+    Long getYearPayment(Integer memberId);
+
 }
