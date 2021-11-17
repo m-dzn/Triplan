@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <th:block th:replace="fragment/title :: title_2('결제 정보')"></th:block>
+
+    <div class="row margin-section d-flex justify-content-center">
+
+            <div class="col-4 margin-left-16 border bg-white rounded-3 border-2 padding-16 margin-window">
+                <th:block th:replace="fragment/title :: title_3('상품 정보')"></th:block>
+                <div class="row  margin-left-32">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">예약번호</div>
+                        <div class="col-auto">482304823</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">상품종류</div>
+                        <div class="col-auto">숙소</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">상품이름</div>
+                        <div class="col-auto">문현 성원이 집</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4 margin-left-16 border bg-white rounded-3 border-2 padding-16 margin-window">
+                <th:block th:replace="fragment/title :: title_3('할인 정보')"></th:block>
+                <div class="row  margin-left-32">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">할인 전 가격</div>
+                        <div class="col-auto">10,000원</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">할인가격</div>
+                        <div class="col-auto">10,000원</div>
+                    </div>
+                    <div class="row border-bottom d-flex justify-content-between">
+                        <div class="col">할인 후 가격</div>
+                        <div class="col-auto">10,000원</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">지불금액</div>
+                        <div class="col-auto">10,000원</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4 margin-left-16 border bg-white rounded-3 border-2 padding-16 margin-window">
+                <th:block th:replace="fragment/title :: title_3('예약 정보')"></th:block>
+                <div class="row  margin-left-32">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">예약시작일</div>
+                        <div class="col-auto">2011-11-11</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">예약종료일</div>
+                        <div class="col-auto">2011-11-11</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">에약자이름</div>
+                        <div class="col-auto">이민재천재</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">예약자연락처</div>
+                        <div class="col-auto">010-5515-7419</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">예약취소여부</div>
+                        <div class="col-auto">예약성공</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4 margin-left-16 border bg-white rounded-3 border-2 padding-16 margin-window">
+                <th:block th:replace="fragment/title :: title_3('결제 정보')"></th:block>
+                <div class="row  margin-left-32">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">결제상태</div>
+                        <div class="col-auto">결제 성공</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">결제수단</div>
+                        <div class="col-auto">체크 카드</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col">결제일시</div>
+                        <div class="col-auto">2011-11-11</div>
+                    </div>
+                </div>
+            </div>
+
+<!--            <div class="col-8 border bg-white rounded-3 border-2 padding-16 margin-window">-->
+<!--                <th:block th:replace="fragment/title :: title_3('무통장 정보')"></th:block>-->
+<!--                <div class="row  margin-left-32">-->
+<!--                    <div class="row d-flex justify-content-between">-->
+<!--                        <div class="col">입금 은행</div>-->
+<!--                        <div class="col-auto">카카오뱅크</div>-->
+<!--                    </div>-->
+<!--                    <div class="row d-flex justify-content-between">-->
+<!--                        <div class="col">계좌 번호</div>-->
+<!--                        <div class="col-auto">3333-06-410-7364</div>-->
+<!--                    </div>-->
+<!--                    <div class="row d-flex justify-content-between">-->
+<!--                        <div class="col">입금 기한</div>-->
+<!--                        <div class="col-auto">2011-11-11</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+        <div class="row d-flex justify-content-end">
+            <a class="btn btn-primary col-auto margin-right-16" href="#" id="button_outline" role="button">메인으로 돌아가기</a>
+            <a class="btn btn-primary col-auto" href="#" id="button_solid" role="button">예약 조회</a>
+        </div>
+
+    </div>
+</div>
+</html>
