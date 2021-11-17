@@ -51,4 +51,7 @@ public class AttachmentVO {
         this.fileSize = fileSize;
     }
 
+    public String getUrl() {
+        return  uploadPath+"/"+serverFileName+"."+fileExtension;
+    }
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -21,6 +22,10 @@ public class PaymentVO extends BaseVO {
     // 필수 입력 필드 : Default 없는 NOT NULL 필드
     private PaymentType type;
     private Integer totalPayment;
+    private String accountBank;
+    private String accountNumber;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime paymentDeadline;
 
     // Default 값이 있는 NOT NULL 필드

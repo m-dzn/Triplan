@@ -5,38 +5,48 @@
 
 <div layout:fragment="content">
     <form action="warning">
-    <table>
-        <tr>
-            <td>문의종류</td>
-            <td>
-                <select class="form-select" name="category_name" aria-label="Default select example">
-                    <option selected>문의 종류를 선택하세요.</option>
-                    <option value="1">계정 계좌 관련</option>
-                    <option value="2">개인정보 변경 관련</option>
-                    <option value="3">포인트 적립/사용 관련</option>
-                </select>
-            </td>
-            <td>비밀 글 여부</td>
-            <td>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="hide" value="1" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        비밀 글
-                    </label>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 7%">제목</td>
-            <td colspan="3"><input type="text" name="subject" value="value에 원본 내용 불러오는 메소드 넣어주세요" style="width: 100%;"></td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td colspan="3" style="width: 97%;"><textarea name="content" rows=10 style="height: 100%;width:100%;"> textarea 태그 사이에 원본 내용 불러오는 메소드 넣어주세요</textarea></td>
-        </tr>
-    </table>
-        <input type="submit" value="수정">
-        <button type="button"><a href="qna">취소</a></button>
+        <table id="qnaup-table">
+            <tr>
+                <td>문의종류</td>
+                <td>
+                    <select class="form-select test" name="category_name" aria-label="Default select example">
+                        <option selected>문의 종류를 선택하세요.</option>
+                        <option value="1">계정 계좌 관련</option>
+                        <option value="2">개인정보 변경 관련</option>
+                        <option value="3">포인트 적립/사용 관련</option>
+                    </select>
+                </td>
+                <td class="test">비밀 글 여부</td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="hide" value="1" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            비밀 글
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 7%">제목</td>
+                <td colspan="3"><input type="text" class="test" name="subject" value="value에 원본 내용 불러오는 메소드 넣어주세요" style="width: 100%;"></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td colspan="3" style="width: 97%;"><textarea name="content" class="test" rows=10 style="height: 100%;width:100%;"> textarea 태그 사이에 원본 내용 불러오는 메소드 넣어주세요</textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3">
+                    <!-- <input type="submit" value="수정"> 밑에도 서브밋 값을 줘야하는지? -->
+                    <button type="button" class="btn col-auto margin-right-16" id="button_solid"><a href="" class="color-white a-button-solid">수정</a></button>
+                    <button type="button" class="btn col-auto " id="button_solid"><a href="qna" class="color-white a-button-solid">취소</a></button>
+
+
+                </td>
+            </tr>
+        </table>
+
+
     </form>
 </div>
 </html>

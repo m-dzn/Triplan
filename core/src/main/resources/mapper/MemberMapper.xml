@@ -37,6 +37,33 @@
                 member_id   = #{memberId}
     </update>
 
+    <update id="updateBasicInfo">
+        UPDATE  member
+        SET
+        nickname    = IFNULL(   #{nickname},     nickname    ),
+        profile_img = IFNULL(   #{profileImg},   profile_img   )
+        WHERE
+        member_id = ${memberId}
+    </update>
+
+    <update id="updateEmail">
+        UPDATE  member
+        SET
+        email = IFNULL(  #{email},  email  ),
+        email_confirm = IFNULL( #{emailConfirm},   email_confirm   )
+        WHERE
+        member_id = ${memberId}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE  member
+        SET
+        password = IFNULL(  #{password}, password  )
+        WHERE
+        member_id = ${memberId}
+    </update>
+
+
     <update id="delete">
         UPDATE  member
         SET
@@ -44,6 +71,18 @@
         deleted_at  = CURRENT_TIMESTAMP
         WHERE   member_id   = #{memberId}
     </update>
+
+    <select id="emailCheck" resultType="boolean"> <!-- 값 => 존재o:true/ 존재x:false -->
+        SELECT  CASEWHEN(COUNT(*) = 1, 1, 0)
+        FROM    member
+        WHERE   email = #{email}
+    </select>
+
+    <select id="nicknameCheck" resultType="boolean">
+        SELECT  CASEWHEN(COUNT(*) = 1, 1, 0)
+        FROM    member
+        WHERE   nickname = #{nickname}
+    </select>
 
     <update id="updateGrade">
         <![CDATA[
@@ -56,7 +95,5 @@
         where member_id = #{memberId}
       ]]>
     </update>
-
-
 
 </mapper>

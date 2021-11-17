@@ -29,14 +29,18 @@
         where notice_id = #{noticeId}
     </delete>
 
-
     <select id="noticeList" resultType="NoticeVO">
         SELECT *
         FROM notice
-        WHERE target = #{target}
+        where target = #{target}
+
     </select>
 
+    <select id="count" resultType="Integer">
+        SELECT count(*)
+        FROM notice
+        where target = #{target}
 
+    </select>
 
 </mapper>
-

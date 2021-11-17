@@ -6,10 +6,7 @@ import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.Target;
 import com.triplan.service.NoticeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,13 +43,8 @@ public class ApiNoticeController {
             @PathVariable Target target,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "1") Integer currentPage) {
-       Pagination<NoticeVO> noticeVO = noticeService.noticeList(target,pageSize,currentPage);
+       Pagination<NoticeVO> noticeVO = noticeService.noticeList(target, pageSize, currentPage);
        return noticeVO;
    }
-
-
-
-
-
 
 }
