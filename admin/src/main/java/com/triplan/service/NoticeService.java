@@ -6,7 +6,6 @@ import com.triplan.enumclass.Target;
 
 
 
-import java.util.List;
 
 
 public interface NoticeService {
