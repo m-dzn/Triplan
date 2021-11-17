@@ -5,6 +5,7 @@ import com.triplan.dto.customer.request.ItemFlightRequestDTO;
 import com.triplan.dto.customer.request.ItemRoomRequestDTO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
+import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.ItemCategory;
 
 import java.util.List;
@@ -29,4 +30,8 @@ public interface ItemService {
 
     String updateFlightItem(Integer itemId, ItemFlightRequestDTO itemFlightRequestDTO, ItemCategory flight);
 
+    // Seller Page 상품관리
+    Pagination<ItemRoomResponseDTO> getItemRoomList(Integer sellerId, ItemCategory room, Integer pageSize, Integer currentPage);
+
+    Pagination<ItemFlightResponseDTO> getItemFlightList(Integer sellerId,ItemCategory flight, Integer pageSize, Integer currentPage);
 }

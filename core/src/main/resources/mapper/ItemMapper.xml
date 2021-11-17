@@ -100,9 +100,47 @@
          WHERE item_group_id = #{itemGroupId}
     </update>
 
-    <select id="getItemVOList" resultType="ItemVO">
+    <select id="getItemRoomBySellerId" resultType="ItemVO">
         SELECT *
           FROM item
          WHERE item_category = #{room}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+        ORDER BY created_at DESC
+         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+
+    </select>
+
+    <select id="getItemFlightBySellerId" resultType="ItemVO">
+        SELECT *
+          FROM item
+         WHERE item_category = #{flight}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+        ORDER BY created_at DESC
+         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+
+    </select>
+
+    <select id="countRoom" resultType="Integer">
+        SELECT count(*)
+          FROM item
+         WHERE item_category = #{room}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+
+    </select>
+
+    <select id="countFlight" resultType="Integer">
+        SELECT count(*)
+        FROM item
+        WHERE item_category = #{flight}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+
     </select>
 </mapper>

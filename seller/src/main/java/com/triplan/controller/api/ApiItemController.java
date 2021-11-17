@@ -6,6 +6,7 @@ import com.triplan.dto.customer.request.ItemFlightRequestDTO;
 import com.triplan.dto.customer.request.ItemRoomRequestDTO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
+import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.ItemCategory;
 import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -72,7 +73,23 @@ public class ApiItemController {
     @PutMapping("/flight/{itemId}")
     public String updateFlightItem(@PathVariable Integer itemId, @RequestBody ItemFlightRequestDTO itemFlightRequestDTO){
         return itemService.updateFlightItem(itemId, itemFlightRequestDTO, ItemCategory.FLIGHT);
+    }
 
+    // Seller Page 상품관리
+    @GetMapping("/{sellerId}/rooms")
+    public Pagination<ItemRoomResponseDTO> getItemRoomList(
+            @PathVariable Integer sellerId,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "1") Integer currentPage) {
+        return itemService.getItemRoomList(sellerId,ItemCategory.ROOM, pageSize, currentPage);
+    }
+
+    @GetMapping("/{sellerId}/flights")
+    public Pagination<ItemFlightResponseDTO> getItemFlightList(
+            @PathVariable Integer sellerId,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "1") Integer currentPage) {
+        return itemService.getItemFlightList(sellerId, ItemCategory.FLIGHT, pageSize, currentPage);
     }
 }
 

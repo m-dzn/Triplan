@@ -32,5 +32,12 @@ public interface ItemMapper {
 
     void updateByItemGroupId(Integer itemGroupId);
 
-    List<ItemVO> getItemVOList(ItemCategory room);
+    List<ItemVO> getItemRoomBySellerId(@Param("sellerId") Integer sellerId, @Param("room") ItemCategory room, @Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
+
+    List<ItemVO> getItemFlightBySellerId(@Param("sellerId") Integer sellerId, @Param("flight") ItemCategory flight, @Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
+
+    int countRoom(@Param("sellerId") Integer sellerId, @Param("room") ItemCategory room);
+
+    int countFlight(@Param("sellerId") Integer sellerId, @Param("flight") ItemCategory flight);
+
 }
