@@ -1,0 +1,10 @@
+<th:block th:replace="fragment/ :: "></th:block>
+▲ 해당 태그에 프래그먼트 요소 치환
+--------------------------------------------------------------------------------------------------------
+둥글둥글한 네모구역
+<div class="border bg-white rounded-3 border-2">
+</div>
+
+부모 요소의 정중앙에 창을 놓고싶을 떄
+-> position-absolute top-50 start-50 translate-middle -->
+

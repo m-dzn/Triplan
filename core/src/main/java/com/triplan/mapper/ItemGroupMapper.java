@@ -14,4 +14,6 @@ public interface ItemGroupMapper {
 
     void delete(Integer itemGroupId);
 
+    ItemGroupVO selectByItemId(Integer itemId);
+
 }

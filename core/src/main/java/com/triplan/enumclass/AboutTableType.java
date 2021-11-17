@@ -15,4 +15,5 @@ public enum AboutTableType {
     MEMBER("/member");
 
     private final String filePath;
+  
 }

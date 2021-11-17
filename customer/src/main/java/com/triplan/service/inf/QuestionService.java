@@ -15,15 +15,16 @@ public interface QuestionService {
     void update(Integer questionID, QuestionVO questionVO);
     void delete(Integer questionId);
 
-    List<QuestionDTO> questionList(Integer itemGroupId);
-
+    List<QuestionDTO> questionListByItemGroupId(Integer itemGroupId);
 
     List<QuestionVO> questionListBySellerId(Integer sellerId);
 
-    List<QuestionVO> questionListByItemGId(Integer itemGroupId);
-
     List<QuestionVO> questionListByMemberId(Integer memberId);
 
-    Pagination<QuestionVO> list(Integer pageSize, Integer currentPage);
+    Pagination<QuestionVO> questionListByItemGroupIdListPage(Integer pageSize, Integer currentPage);
+
+    Pagination<QuestionVO> questionListBySellerIdListPage(Integer pageSize, Integer currentPage);
+
+    Pagination<QuestionVO> questionListByMemberIdListPage(Integer memberId, Integer pageSize, Integer currentPage);
 
 }

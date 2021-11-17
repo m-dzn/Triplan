@@ -8,12 +8,10 @@
         INSERT INTO room (
             number_of_person,
             max_person,
-            img,
             item_id
         ) VALUES (
             #{numberOfPerson},
             #{maxPerson},
-            #{img},
             #{itemId}
         )
     </insert>
@@ -28,8 +26,7 @@
         UPDATE  room
         SET
                 number_of_person    = IFNULL(   #{numberOfPerson},  number_of_person    ),
-                max_person          = IFNULL(   #{maxPerson},       max_person          ),
-                img                 = IFNULL(   #{img},             img                 )
+                max_person          = IFNULL(   #{maxPerson},       max_person          )
         WHERE
                 room_id = #{roomId}
     </update>

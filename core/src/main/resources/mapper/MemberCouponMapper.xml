@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.MemberCouponMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="memberCouponId">
+        INSERT INTO member_coupon (
+            member_id,
+            coupon_id
+        ) VALUES (
+            #{memberId},
+            #{couponId}
+        )
+    </insert>
+
+    <select id="select" resultType="MemberCouponVO">
+        SELECT  *
+        FROM    member_coupon
+        WHERE   member_coupon_id = #{memberCouponId}
+    </select>
+
+    <update id="update">
+        UPDATE  member_coupon
+        SET
+                member_id           = IFNULL(   #{memberId},        member_id           ),
+                coupon_id           = IFNULL(   #{couponId},        coupon_id           ),
+                usage1              = IFNULL(   #{usage1},          usage1              ),
+                used_at             = IFNULL(   #{usedAt},          used_at             ),
+                res_id              = IFNULL(   #{resId},           res_id              )
+        WHERE
+                member_coupon_id = #{memberCouponId}
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM    member_coupon
+        WHERE   member_coupon_id = #{memberCouponId}
+    </delete>
+
+    <select id="ownCoupon" resultType="Integer">
+        SELECT  count(*)
+        FROM    member_coupon
+        WHERE   coupon_id = #{couponId}
+          AND   member_id = #{memberId}
+          AND   usage1 != 1
+    </select>
+
+
+    <select id="myCouponList" resultType="com.triplan.dto.MemberCouponDTO">
+        SELECT      m.member_coupon_id, m.member_id, m.coupon_id, m.usage1, m.used_at, m.res_id,
+                    c.name, c.price, c.condition, c.expired_at
+        FROM        member_coupon m JOIN coupon c
+        ON          (m.coupon_id = c.coupon_id)
+        ORDER BY    member_coupon_id DESC
+    </select>
+
+    <select id="myAvailableCouponList" resultType="com.triplan.dto.MemberCouponDTO">
+        SELECT      m.member_coupon_id, m.member_id, m.coupon_id, m.usage1, m.used_at, m.res_id,
+                    c.name, c.price, c.condition, c.expired_at
+        FROM        member_coupon m JOIN coupon c
+        ON          (m.coupon_id = c.coupon_id)
+        WHERE       FORMATDATETIME(expired_at, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
+          AND         m.usage1 != 1
+        ORDER BY    expired_at
+    </select>
+
+    <select id="myUsedCouponList" resultType="com.triplan.dto.MemberCouponDTO">
+        SELECT      m.member_coupon_id, m.member_id, m.coupon_id, m.usage1, m.used_at, m.res_id,
+                    c.name, c.price, c.condition, c.expired_at
+        FROM        member_coupon m JOIN coupon c
+        ON          (m.coupon_id = c.coupon_id)
+        WHERE       m.usage1 = 1
+        ORDER BY    used_at DESC
+    </select>
+
+    <select id="myUnavailableCouponList" resultType="com.triplan.dto.MemberCouponDTO">
+        SELECT      m.member_coupon_id, m.member_id, m.coupon_id, m.usage1, m.used_at, m.res_id,
+                    c.name, c.price, c.condition, c.expired_at
+        FROM        member_coupon m JOIN coupon c
+        ON          (m.coupon_id = c.coupon_id)
+        WHERE       FORMATDATETIME(now(), 'yyyyMMdd') > FORMATDATETIME(expired_at, 'yyyyMMdd')
+          AND       m.usage1 != 1
+        ORDER BY    expired_at DESC
+    </select>
+
+</mapper>

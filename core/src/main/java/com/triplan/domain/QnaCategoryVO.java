@@ -1,10 +1,17 @@
 package com.triplan.domain;
 
-import com.triplan.enumclass.Inquirer;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class QnaCategoryVO {
+
     private Integer qnaCategoryId;
     private String name;
+
 }

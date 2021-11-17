@@ -25,11 +25,13 @@ public class ReservationVO extends BaseVO {
     private String phone;
 
     // Default 값이 있는 NOT NULL 필드
+    private Boolean cancellation;   // 0-예약, 1-취소
 
     // Nullable 필드
     private Long totalDiscountPrice;
 
     // 외래키
     private Integer memberId;
+    private Integer sellerId;
 
 }
