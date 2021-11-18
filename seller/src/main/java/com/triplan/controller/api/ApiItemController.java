@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -49,29 +50,29 @@ public class ApiItemController {
     }
 
     @PostMapping(value = "/room", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
-    public void insertItemRoom(@RequestPart ItemRoomRequestDTO itemRoomRequestDTO,
-                               @RequestPart("file") List<MultipartFile> files){
-        itemService.insertItemRoom(itemRoomRequestDTO,ItemCategory.ROOM, files);
+    public void insertItemRoom(@Valid @RequestPart ItemRoomRequestDTO itemRoomRequestDTO,
+                               @Valid @RequestPart("file") List<MultipartFile> files) {
+        itemService.insertItemRoom(itemRoomRequestDTO, ItemCategory.ROOM, files);
     }
 
     @PostMapping(value = "/flight", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
-    public void insertItemFlight(@RequestPart ItemFlightRequestDTO itemFlightRequestDTO,
-                                 @RequestPart("file") List<MultipartFile> files){
+    public void insertItemFlight(@Valid @RequestPart ItemFlightRequestDTO itemFlightRequestDTO,
+                                 @Valid @RequestPart("file") List<MultipartFile> files){
         itemService.insertItemFlight(itemFlightRequestDTO, ItemCategory.FLIGHT, files);
     }
 
     @PutMapping("/room/{itemId}")
-    public String updateRoomItem(@PathVariable Integer itemId,
-                                 @RequestBody ItemRoomRequestDTO itemRoomRequestDTO,
-                                 @RequestParam("file") List<MultipartFile> files){
+    public String updateRoomItem(@Valid @PathVariable Integer itemId,
+                                 @Valid @RequestBody ItemRoomRequestDTO itemRoomRequestDTO,
+                                 @Valid @RequestParam("file") List<MultipartFile> files){
         itemService.updateRoomItem(itemId, itemRoomRequestDTO, ItemCategory.ROOM, files);
         return "Update";
     }
 
     @PutMapping("/flight/{itemId}")
-    public String updateFlightItem(@PathVariable Integer itemId,
-                                   @RequestBody ItemFlightRequestDTO itemFlightRequestDTO,
-                                   @RequestParam("file") List<MultipartFile> files){
+    public String updateFlightItem(@Valid @PathVariable Integer itemId,
+                                   @Valid @RequestBody ItemFlightRequestDTO itemFlightRequestDTO,
+                                   @Valid @RequestParam("file") List<MultipartFile> files){
         itemService.updateFlightItem(itemId, itemFlightRequestDTO, ItemCategory.FLIGHT, files);
         return "Update";
     }

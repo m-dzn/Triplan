@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.stylesheets.LinkStyle;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,8 +22,8 @@ public class ApiItemGroupController {
     private final ItemGroupService itemGroupService;
 
     @PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
-    public String ItemGroupAddTags(@RequestPart("itemGroup") ItemGroupRequestDTO itemGroupRequestDTO,
-                                   @RequestPart("file") List<MultipartFile> files) {
+    public String ItemGroupAddTags(@Valid @RequestPart("itemGroup") ItemGroupRequestDTO itemGroupRequestDTO,
+                                   @Valid @RequestPart("file") List<MultipartFile> files) {
         itemGroupService.ItemGroupRegisterAddTags(itemGroupRequestDTO, files);
         return "addTag";
     }
@@ -41,9 +42,9 @@ public class ApiItemGroupController {
 
 
     @PutMapping("/{itemGroupId}")
-    public String ItemGroupUpdateTags(@PathVariable Integer itemGroupId,
-                                      @RequestBody ItemGroupRequestDTO itemGroupRequestDTO,
-                                      @RequestParam("file") List<MultipartFile> files){
+    public String ItemGroupUpdateTags(@Valid @PathVariable Integer itemGroupId,
+                                      @Valid @RequestBody ItemGroupRequestDTO itemGroupRequestDTO,
+                                      @Valid @RequestParam("file") List<MultipartFile> files){
         itemGroupRequestDTO.setItemGroupId(itemGroupId);
         itemGroupService.updateItemGroupTags(itemGroupId,itemGroupRequestDTO, files);
         return "Update Tags";
