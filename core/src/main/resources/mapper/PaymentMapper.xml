@@ -12,7 +12,8 @@
             account_number,
             payment_deadline,
             state,
-            res_id
+            res_id,
+            paid_at
         ) VALUES (
             #{type},
             #{totalPayment},
@@ -20,7 +21,8 @@
             #{accountNumber},
             #{paymentDeadline},
             #{state},
-            #{resId}
+            #{resId},
+            #{paidAt}
         )
     </insert>
 
@@ -50,7 +52,7 @@
 
     <select id="getYearPayment" resultType="Long">
         <![CDATA[
-            SELECT  SUM(total_payment)
+            SELECT  IFNULL(SUM(total_payment), 0)
             FROM    payment p JOIN reservation r
             ON      p.res_id = r.res_id
             WHERE   r.member_id = #{memberId}
