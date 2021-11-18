@@ -1,0 +1,68 @@
+<th:block th:fragment="question-table">
+    <table class="table question-table">
+        <thead>
+            <tr align="center">
+                <th scope="col">상품명</th>
+                <th scope="col">문의 제목</th>
+                <th scope="col">옵션명</th>
+                <th scope="col">작성자</th>
+                <th scope="col">등록일</th>
+                <th scope="col">답변</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr align="center">
+                <td>[특가] 아이티윌 항공 특가</td>
+                <td>예약 일정을 조정하고 싶습니다</td>
+                <td>소인</td>
+                <td>손*진</td>
+                <td>2021년 11월 5일 10:43</td>
+                <td>
+                    <a th:href="@{/seller/question-answer}">
+                        <button class="btn btn-secondary">작성</button>
+                    </a>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>인터컨티넨탈 서울 코엑스</td>
+                <td>슈피리어룸, 싱글침대 2개</td>
+                <td>환불 문의</td>
+                <td>윤*록</td>
+                <td>2021년 11월 5일 10:46</td>
+                <td>
+                    <i class="fas fa-check"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</th:block>
+
+<th:block th:fragment="reservation-table">
+    <table class="table">
+        <thead>
+            <tr align="center">
+                <th scope="col">예약자</th>
+                <th scope="col">예약 상품 그룹명</th>
+                <th scope="col">예약 상품명</th>
+                <th scope="col">작성일</th>
+                <th scope="col">취소</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr align="center">
+                <td>닉네임뭘로하지</td>
+                <td>서귀포 퍼스트 70 호텔</td>
+                <td>스위트룸 2인실</td>
+                <td>21년 11월 9일</td>
+                <td><button class="btn btn-danger">취소</button></td>
+            </tr>
+            <tr align="center">
+                <td>연쇄하린마</td>
+                <td>인터컨티넨탈 서울 코엑스</td>
+                <td>프리미엄 오션뷰 4인실</td>
+                <td>21년 11월 8일</td>
+                <td><button class="btn btn-danger">취소</button></td>
+            </tr>
+        </tbody>
+    </table>
+</th:block>

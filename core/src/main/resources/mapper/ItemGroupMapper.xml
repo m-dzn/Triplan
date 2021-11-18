@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.triplan.mapper.ItemGroupMapper">
 
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="itemGroupId">
         INSERT INTO item_group (
             name,
             summary_explain,
@@ -57,7 +57,7 @@
                 lng             = IFNULL(   #{lng},             lng                 ),
                 updated_at      = CURRENT_TIMESTAMP <!-- BaseVO를 상속 받은 테이블에 들어가는 공통 구문 -->
          WHERE
-                item_group_id = ${itemGroupId}
+                item_group_id = #{itemGroupId}
     </update>
 
     <delete id="delete">
@@ -65,6 +65,39 @@
         FROM    item_group
         WHERE   item_group_id = ${itemGroupId}
     </delete>
+
+    <select id="getItemGroupByItemGroupId" resultType="ItemGroupVO">
+        SELECT *
+          FROM item_group
+         WHERE item_group_id = #{itemGroupId}
+    </select>
+
+    <select id="selectAll" parameterType="list" resultType="ItemGroupVO">
+        SELECT *
+          FROM item_group
+         WHERE item_group_id
+            IN
+        <foreach collection="list" item="itemGroup" separator="," open="(" close=")">
+        #{itemGroup.itemGroupId}
+    </foreach>
+        ORDER BY item_group_id ASC
+    </select>
+
+    <select id="getItemGroupBySellerId" resultType="ItemGroupVO">
+        SELECT *
+        FROM item_group
+        WHERE seller_id = #{sellerId}
+        ORDER BY created_at DESC
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="Integer">
+        SELECT count(*)
+          FROM item_group
+         WHERE item_group_id IN ( SELECT item_group_id
+                                  FROM   item_group
+                                  WHERE  seller_id = #{sellerId})
+    </select>
 
     <select id="selectByItemId" resultType="ItemGroupVO">
         SELECT  *
@@ -74,6 +107,24 @@
                 FROM    item
                 WHERE   item_id = #{item_id}
         )
+    </select>
+
+    <select id="selectAllSort" resultType="ItemGroupVO">
+        SELECT *
+        FROM item_group
+        WHERE item_group_id
+        IN
+        <foreach collection="itemGroupId" item="item" separator="," open="(" close=")">
+            #{item.itemGroupId}
+        </foreach>
+        <choose>
+            <when test='sortType.equals("wish")'>
+                ORDER BY like_count DESC
+            </when>
+            <when test='sortType.equals("review")'>
+                ORDER BY review_count DESC
+            </when>
+        </choose>
     </select>
 
 </mapper>

@@ -1,7 +1,11 @@
 package com.triplan.mapper;
 
 import com.triplan.domain.ItemGroupVO;
+import com.triplan.domain.ItemVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface ItemGroupMapper {
@@ -14,6 +18,15 @@ public interface ItemGroupMapper {
 
     void delete(Integer itemGroupId);
 
+    ItemGroupVO getItemGroupByItemGroupId(Integer itemGroupId);
+
+    List<ItemGroupVO> selectAll(List<ItemGroupVO> resultItemGroupId);
+
+    List<ItemGroupVO> getItemGroupBySellerId(@Param("sellerId") Integer sellerId, @Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
+
+    int count(Integer sellerId);
+
     ItemGroupVO selectByItemId(Integer itemId);
 
+    List<ItemGroupVO> selectAllSort(@Param("itemGroupId") List<ItemGroupVO> sortItemGroupId, @Param("sortType")String sortType);
 }

@@ -14,4 +14,7 @@ public interface RoomMapper {
 
     void delete(Integer roomId);
 
+    RoomVO getRoomByItemId(Integer itemId);
+
+    void updateByItemId(RoomVO roomVO);
 }

@@ -24,6 +24,7 @@ public class ReservationVO extends BaseVO {
     private String name;
     private String phone;
 
+
     // Default 값이 있는 NOT NULL 필드
     private Boolean cancellation;   // 0-예약, 1-취소
 
