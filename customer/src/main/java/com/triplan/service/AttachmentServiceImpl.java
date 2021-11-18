@@ -20,12 +20,14 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public void save(List<MultipartFile> files, AboutTableType aboutTableType, Integer idInTableType) {
-        AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), aboutTableType, idInTableType);
+        List<AttachmentVO> attachmentList = AttachmentUtil.getAttachments(files, aboutTableType, idInTableType);
 
-        try { // db작업중에 에러뜨면 서버에 저장한 파일도 삭제
-            attachmentMapper.insert(attachmentVO);
+        if (attachmentList.isEmpty()) return;
+
+        try { // DB 작업 중에 에러뜨면 서버에 저장한 파일도 삭제
+            attachmentMapper.insertAll(attachmentList);
         } catch (Exception e) {
-            AttachmentUtil.deleteAttachment(attachmentVO);
+            AttachmentUtil.deleteAttachments(attachmentList);
         }
     }
 
@@ -34,19 +36,21 @@ public class AttachmentServiceImpl implements AttachmentService {
         // 삭제하려는 테이블타입, 글번호와 일치하는 행들 전부 반환
         List<AttachmentVO> attachmentList = attachmentMapper.selectAllByAttachmentId(attachmentIdList);
 
+        if (attachmentList.isEmpty()) return;
+
         AttachmentUtil.deleteAttachments(attachmentList); // 물리적으로 파일 삭제
         attachmentMapper.deleteAllByAttachmentId(attachmentIdList);  // DB에서 파일 삭제
     }
 
     @Override
     public void removeByTableId(AboutTableType aboutTableType, Integer idInTableType) {
-        List<AttachmentVO> attachmentList = attachmentMapper.selectAll(aboutTableType, idInTableType);
+        List<AttachmentVO> attachmentList = attachmentMapper.select(aboutTableType, idInTableType);
         AttachmentUtil.deleteAttachments(attachmentList);
     }
 
     @Override
     public List<AttachmentVO> getList(AboutTableType aboutTableType, Integer idInTableType) {
-        return attachmentMapper.selectAll(aboutTableType, idInTableType);
+        return attachmentMapper.select(aboutTableType, idInTableType);
     }
 
 }

@@ -5,7 +5,7 @@
 <mapper namespace="com.triplan.mapper.WishlistMapper">
 
     <insert id="insert">
-        INSERT INTO wishlist(
+        INSERT INTO wishlist (
             item_group_id,
             member_id
         ) VALUES (
@@ -14,6 +14,12 @@
         )
     </insert>
 
+    <select id="select" resultType="ItemGroupVO">
+        SELECT  *
+        FROM    wishlist
+        WHERE   wishlist_id = #{wishlistId}
+    </select>
+
     <delete id="delete">
         DELETE
         FROM    wishlist
@@ -21,11 +27,36 @@
     </delete>
 
     <select id="list" resultType="com.triplan.dto.response.WishlistResponseDTO">
-        SELECT  wishlist_id, name, item_category, location, like_count, wl.created_at
-        FROM    wishlist wl JOIN item_group ig
-                ON wl.item_group_id = ig.item_group_id
-        WHERE   member_id = #{memberId}
-        ORDER BY created_at DESC
+        SELECT
+                wishlist_id,
+                name,
+                item_category,
+                location,
+                like_count,
+                wl.created_at
+        FROM
+                wishlist wl JOIN item_group ig
+        ON
+                wl.item_group_id = ig.item_group_id
+        WHERE
+                member_id = #{memberId}
+        ORDER BY
+                created_at DESC
+        LIMIT
+                (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="countByMemberId" resultType="Integer">
+        SELECT
+                COUNT(*)
+        FROM
+                wishlist wl JOIN item_group ig
+        ON
+                wl.item_group_id = ig.item_group_id
+        WHERE
+                member_id = #{memberId}
+        ORDER BY
+                created_at DESC
     </select>
 
     <select id="exist" resultType="boolean">
@@ -34,16 +65,6 @@
             FROM    wishlist
             WHERE   item_group_id = #{itemGroupId}
               AND   member_id = #{memberId}
-        )
-    </select>
-
-    <select id="selectItemGroupByWishlistId" resultType="ItemGroupVO">
-        SELECT  *
-        FROM    item
-        WHERE   item_id = (
-                SELECT  item_id
-                FROM    wishlist
-                WHERE   wishlist_id = #{wishlistId}
         )
     </select>
 

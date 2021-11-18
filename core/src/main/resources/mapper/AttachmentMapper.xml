@@ -64,7 +64,7 @@
     <select id="selectByAttachmentId" resultType="AttachmentVO"> <!--첨부파일id들로 첨부파일정보 반환-->
         SELECT  *
         FROM    attachment
-        WHERE   attachment_id in
+        WHERE   attachment_id IN
         <foreach collection="list" item="attachmentId" separator=" , ">
             #{attachmentId}
         </foreach>

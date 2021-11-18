@@ -27,4 +27,6 @@ public interface MemberMapper {
 
     void updateGrade(@Param("memberId")Integer memberId, @Param("totalPayment") Long totalPayment);
 
+    MemberVO selectByEmail(String email);
+
 }

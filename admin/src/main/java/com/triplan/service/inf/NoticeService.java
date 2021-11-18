@@ -1,8 +1,8 @@
-package com.triplan.service;
+package com.triplan.service.inf;
 
 import com.triplan.domain.NoticeVO;
 import com.triplan.dto.response.Pagination;
-import com.triplan.enumclass.Target;
+import com.triplan.enumclass.NoticeTarget;
 
 
 public interface NoticeService {
@@ -15,7 +15,7 @@ public interface NoticeService {
 
     void noticeDelete(Integer noticeId);
 
-    Pagination<NoticeVO> noticeList(Target target, Integer pageSize, Integer currentPage);
+    Pagination<NoticeVO> noticeList(NoticeTarget noticeTarget, Integer pageSize, Integer currentPage);
 
 
 

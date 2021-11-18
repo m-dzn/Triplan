@@ -36,6 +36,4 @@ public class ApiAnswerController {
         return "답변 삭제 완료";
     }
 
-
-
 }

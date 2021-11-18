@@ -9,11 +9,11 @@ import com.triplan.mapper.MemberMapper;
 import com.triplan.service.inf.MemberService;
 import com.triplan.util.AttachmentUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -22,8 +22,10 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
     private final AttachmentMapper attachmentMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public void register(MemberVO memberVO) {
+        memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
         memberMapper.insert(memberVO);
     }
 
@@ -58,6 +60,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public void delete(Integer memberId) {
         memberMapper.delete(memberId);
     }
@@ -76,17 +79,28 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberVO updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> files) throws IOException {
-        if(files.size() > 0){
-            AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.MEMBER, memberProfileDTO.getMemberId());
-
-            attachmentMapper.insert(attachmentVO);
-
-            memberProfileDTO.setProfileImg(attachmentVO.getUrl());
-            memberMapper.updateBasicInfo(memberProfileDTO.toVO());
+    public void updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> files) {
+        if (!files.isEmpty()) {
+            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.MEMBER, memberProfileDTO.getMemberId());
+            AttachmentUtil.deleteAttachments(filesToDelete);
+            attachmentMapper.delete(AboutTableType.REVIEW, memberProfileDTO.getMemberId());
+            memberProfileDTO.setProfileImg("");
         }
 
-        return memberMapper.select(memberProfileDTO.getMemberId());
+        AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.MEMBER, memberProfileDTO.getMemberId());
+
+        if (attachmentVO != null) {
+            memberProfileDTO.setProfileImg(attachmentVO.getUrl());
+
+            try {
+                attachmentMapper.insert(attachmentVO);
+            } catch (Exception e) {
+                e.printStackTrace();
+                AttachmentUtil.deleteAttachment(attachmentVO);
+            }
+        }
+
+        memberMapper.updateBasicInfo(memberProfileDTO.toVO());
     }
 
 

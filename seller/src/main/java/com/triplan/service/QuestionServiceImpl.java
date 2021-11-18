@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
-
     private final QuestionMapper questionMapper;
 
     @Override
@@ -39,13 +38,6 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Pagination<QuestionVO> listFromCustomerToAdmin(Integer pageSize, Integer currentPage) {
-        List<QuestionVO> list = questionMapper.listFromCustomerToAdmin(pageSize, currentPage);
-        Integer count = questionMapper.countFromCustomerToAdmin();
-        return new Pagination<>(pageSize, currentPage, count, list);
-    }
-
-    @Override
     public Pagination<QuestionVO> listByItemGroupId(Integer pageSize, Integer currentPage, Integer itemGroupId) {
         List<QuestionVO> questionListByItemGroupIdListPage = questionMapper.listByItemGroupId(pageSize, currentPage, itemGroupId);
 
@@ -55,12 +47,12 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Pagination<QuestionVO> listByMemberId(Integer pageSize, Integer currentPage, Integer memberId) {
-        List<QuestionVO> questionListByMemberIdListPage = questionMapper.listByMemberId(pageSize, currentPage, memberId);
+    public Pagination<QuestionVO> listBySellerId(Integer pageSize, Integer currentPage, Integer sellerId) {
+        List<QuestionVO> questionListBySellerIdListPage = questionMapper.listBySellerId(pageSize, currentPage, sellerId);
 
-        int totalReviews = questionMapper.countByMemberId(memberId);
+        int totalReviews = questionMapper.countBySellerId(QuestionType.SELLER);
 
-        return new Pagination<>(pageSize, currentPage, totalReviews, questionListByMemberIdListPage);
+        return new Pagination<>(pageSize, currentPage, totalReviews, questionListBySellerIdListPage);
     }
 
 }

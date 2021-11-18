@@ -1,6 +1,7 @@
 package com.triplan.service;
 
 import com.triplan.domain.ItemGroupVO;
+import com.triplan.domain.WishlistVO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.dto.response.WishlistResponseDTO;
 import com.triplan.mapper.ItemGroupMapper;
@@ -31,18 +32,21 @@ public class WishlistServiceImpl implements WishlistService {
     @Override
     @Transactional
     public void removeFromWishlist(Integer wishlistId) {
-        ItemGroupVO itemGroupVO = wishlistMapper.selectItemGroupByWishlistId(wishlistId);
+        WishlistVO wishlistVO = wishlistMapper.select(wishlistId);
+
+        ItemGroupVO itemGroupVO = itemGroupMapper.select(wishlistVO.getItemGroupId());
         itemGroupVO.decreaseLikeCount();
         itemGroupMapper.update(itemGroupVO);
+
         wishlistMapper.delete(wishlistId);
     }
 
     @Override
     public Pagination<WishlistResponseDTO> getMemberWishList(Integer memberId, Integer pageSize, Integer currentPage) {
-        List<WishlistResponseDTO> wishlistList = wishlistMapper.list(memberId);
+        List<WishlistResponseDTO> wishlistList = wishlistMapper.list(memberId, pageSize, currentPage);
+        Integer count = wishlistMapper.countByMemberId(memberId);
 
-        return new Pagination<>(pageSize, currentPage, 1, wishlistList);
+        return new Pagination<>(pageSize, currentPage, count, wishlistList);
     }
-
 
 }

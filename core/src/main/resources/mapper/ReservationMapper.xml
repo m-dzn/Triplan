@@ -91,14 +91,14 @@
           AND   usage1   != 1
     </select>
 
-    <insert id="useCoupon">
+    <update id="useCoupon">
         UPDATE  member_coupon
         SET
                 usage1  = 1,
                 res_id  = #{resId},
                 used_at = CURRENT_TIMESTAMP
         WHERE   member_coupon_id = #{memberCouponId}
-    </insert>
+    </update>
 
     <update id="cancel">
         UPDATE  reservation
@@ -172,7 +172,5 @@
           AND       cancellation = 1
         ORDER BY    updated_at DESC
     </select>
-
-
 
 </mapper>

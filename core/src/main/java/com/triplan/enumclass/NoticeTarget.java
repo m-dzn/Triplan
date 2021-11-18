@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Target implements BaseEnum{
+public enum NoticeTarget implements BaseEnum {
 
     MEMBER("회원"),
     SELLER("판매자");

@@ -20,17 +20,11 @@ public class QuestionController {
         return "qna";
     }
 
-
-
     @PutMapping("/{questionId}")
     public String update(@PathVariable Integer questionId, @RequestBody QuestionVO questionVO) {
         questionService.update(questionId, questionVO);
         return "수정 완료";
     }
-
-
-
-
 
 }
 
