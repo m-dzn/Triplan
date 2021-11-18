@@ -18,9 +18,7 @@ public interface AttachmentMapper {
 
     void deleteAllByAttachmentId(@Param("attachmentIdList") List<Integer> attachmentIdList);
 
-    AttachmentVO select(@Param("aboutTableType") AboutTableType aboutTableType, @Param("idInTableType") Integer idInTableType);
-
-    List<AttachmentVO> selectAll(@Param("aboutTableType") AboutTableType aboutTableType, @Param("idInTableType") Integer idInTableType);
+    List<AttachmentVO> select(@Param("aboutTableType") AboutTableType aboutTableType, @Param("idInTableType") Integer idInTableType);
 
     List<AttachmentVO> selectAllByAttachmentId(List<Integer> attachmentIdList);
 
