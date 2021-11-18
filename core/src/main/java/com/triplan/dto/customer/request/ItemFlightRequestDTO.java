@@ -8,6 +8,11 @@ import com.triplan.enumclass.ItemCategory;
 import com.triplan.enumclass.SeatClass;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+
 @Getter
 @Setter
 @ToString
@@ -17,25 +22,39 @@ import lombok.*;
 public class ItemFlightRequestDTO {
 
     private Integer itemId;
-
+    @NotNull
+    @NotBlank
     private String name;
+    @NotBlank
     private String explain;
+    @NotBlank
     private ItemCategory itemCategory;
 
+    @PositiveOrZero
+    @NotBlank
     private Integer baseStock;
     private Integer salesVolume;
     private String detailImg;
 
+    @NotBlank
+    @NotNull
+    @Positive
     private Integer itemGroupId;
 /////////////////////////////////////
     private Integer flightId;
 
+    @NotBlank
     private String departure;
+    @NotBlank
     private String destination;
+    @NotBlank
     private FlightType flightType;
+    @NotBlank
     private SeatClass seatClass;
 
+    @PositiveOrZero
     private Integer minAge;
+    @PositiveOrZero
     private Integer maxAge;
 
     public ItemVO toItemVO() {

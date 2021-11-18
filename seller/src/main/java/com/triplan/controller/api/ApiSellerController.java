@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,8 +18,8 @@ public class ApiSellerController {
     private final SellerService sellerService;
 
     @PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
-    public String register(@RequestPart("seller") SellerVO sellerVO,
-                           @RequestPart("file") List<MultipartFile> files) {
+    public String register(@Valid @RequestPart("seller") SellerVO sellerVO,
+                           @Valid @RequestPart("file") List<MultipartFile> files) {
         sellerService.register(sellerVO, files);
         return "판매자 추가 성공";
     }
@@ -29,7 +30,7 @@ public class ApiSellerController {
     }
 
     @PutMapping("/{sellerId}")
-    public String update(@PathVariable Integer sellerId, @RequestBody SellerVO sellerVO) {
+    public String update(@Valid @PathVariable Integer sellerId,@Valid @RequestBody SellerVO sellerVO) {
         sellerService.update(sellerId, sellerVO);
         return "판매자 수정 성공";
     }

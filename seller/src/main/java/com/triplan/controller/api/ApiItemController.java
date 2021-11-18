@@ -12,6 +12,7 @@ import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -54,24 +55,24 @@ public class ApiItemController {
     }
 
     @PostMapping("/room")
-    public String insertItemRoom(@RequestBody ItemRoomRequestDTO itemRoomRequestDTO){
+    public String insertItemRoom(@Valid @RequestBody ItemRoomRequestDTO itemRoomRequestDTO){
         return itemService.insertItemRoom(itemRoomRequestDTO,ItemCategory.ROOM);
     }
 
     @PostMapping("/flight")
-    public String insertItemFlight(@RequestBody ItemFlightRequestDTO itemFlightRequestDTO){
+    public String insertItemFlight(@Valid @RequestBody ItemFlightRequestDTO itemFlightRequestDTO){
         return itemService.insertItemFlight(itemFlightRequestDTO, ItemCategory.FLIGHT);
 
     }
 
     @PutMapping("/room/{itemId}")
-    public String updateRoomItem(@PathVariable Integer itemId, @RequestBody ItemRoomRequestDTO itemRoomRequestDTO){
+    public String updateRoomItem(@Valid @PathVariable Integer itemId,@Valid @RequestBody ItemRoomRequestDTO itemRoomRequestDTO){
         return itemService.updateRoomItem(itemId, itemRoomRequestDTO, ItemCategory.ROOM);
 
     }
 
     @PutMapping("/flight/{itemId}")
-    public String updateFlightItem(@PathVariable Integer itemId, @RequestBody ItemFlightRequestDTO itemFlightRequestDTO){
+    public String updateFlightItem(@Valid @PathVariable Integer itemId,@Valid @RequestBody ItemFlightRequestDTO itemFlightRequestDTO){
         return itemService.updateFlightItem(itemId, itemFlightRequestDTO, ItemCategory.FLIGHT);
     }
 
