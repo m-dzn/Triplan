@@ -12,11 +12,10 @@ public class ApiPaymentController {
 
     private final PaymentService paymentService;
 
-    @PostMapping
-    public String create(@RequestBody PaymentVO paymentVO){
-        Integer memberId = 1;
+    @PostMapping("/{memberId}")
+    public Integer create(@RequestBody PaymentVO paymentVO, @PathVariable Integer memberId){
         paymentService.create(paymentVO, memberId);
-        return "결제정보입력";
+        return paymentVO.getPaymentId();
     }
 
     @GetMapping("/{paymentId}")
