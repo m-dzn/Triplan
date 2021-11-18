@@ -27,6 +27,7 @@ public class PaymentVO extends BaseVO {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime paymentDeadline;
+    private LocalDateTime paidAt;
 
     // Default 값이 있는 NOT NULL 필드
     private PaymentState state;

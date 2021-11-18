@@ -1,38 +1,41 @@
 package com.triplan.controller.api;
 
-import com.triplan.domain.SellerVO;
-import com.triplan.service.inf.SellerService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestController
-@RequestMapping("/sellers")
-@RequiredArgsConstructor
+@Controller
+@RequestMapping("/seller")
 public class SellerController {
 
-    private final SellerService sellerService;
-
-    @PostMapping
-    public String register(@RequestBody SellerVO sellerVO) {
-        sellerService.register(sellerVO);
-        return "판매자 추가 성공";
+    @GetMapping("item-management")
+    public String itemManagement() {
+        return "/page/itemManagement";
     }
 
-    @GetMapping("/{sellerId}")
-    public SellerVO getSeller(@PathVariable Integer sellerId) {
-        return sellerService.getSeller(sellerId);
+    @GetMapping("item-group-register")
+    public String itemGroupRegister() {
+        return "/page/itemGroupRegister";
     }
 
-    @PutMapping("/{sellerId}")
-    public String update(@PathVariable Integer sellerId, @RequestBody SellerVO sellerVO) {
-        sellerService.update(sellerId, sellerVO);
-        return "판매자 수정 성공";
+    @GetMapping("question-management")
+    public String questionManagement() {
+        return "/page/questionManagement";
     }
 
-    @DeleteMapping("/{sellerId}")
-    public String delete(@PathVariable Integer sellerId) {
-        sellerService.delete(sellerId);
-        return "판매자 삭제 성공";
+    @GetMapping("question-answer")
+    public String questionAnswer() {
+        return "/page/questionAnswer";
+    }
+
+    @GetMapping("reservation-management")
+    public String reservationManagement() {
+        return "/page/reservationManagement";
+    }
+
+    @GetMapping("home")
+    public String home() {
+        return "home";
     }
 
 }

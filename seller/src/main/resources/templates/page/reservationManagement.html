@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+<th:block layout:fragment="content">
+    <h2>예약 관리</h2>
+    <div class="row mt-5">
+        <div class="col-12">
+            <th:block th:replace="fragment/managementTable.html :: reservation-table" />
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <th:block th:replace="fragment/pagination.html :: pagination"/>
+        </div>
+    </div>
+</th:block>
+</html>
