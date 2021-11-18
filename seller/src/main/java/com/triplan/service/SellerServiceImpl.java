@@ -49,14 +49,43 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public void update(Integer sellerId, SellerVO sellerVO) {
+    @Transactional
+    public void update(Integer sellerId, SellerVO sellerVO, List<MultipartFile> files) {
         sellerVO.setSellerId(sellerId);
+
+        if (!files.isEmpty()) {
+            // 기존 파일 삭제
+            AttachmentVO oldAttachmentVO = attachmentMapper.select(AboutTableType.SELLER, sellerVO.getSellerId());
+            AttachmentUtil.deleteAttachment(oldAttachmentVO);
+            attachmentMapper.delete(AboutTableType.SELLER, sellerVO.getSellerId());
+            sellerVO.setSellerImg("");
+
+            // 새 파일 등록
+            AttachmentVO newAttachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.SELLER, sellerVO.getSellerId());
+
+            if (newAttachmentVO != null) {
+                sellerVO.setSellerImg(newAttachmentVO.getUrl());
+
+                try {
+                    attachmentMapper.insert(newAttachmentVO);
+                } catch (Exception e){
+                    e.printStackTrace();
+                    AttachmentUtil.deleteAttachment(newAttachmentVO);
+                }
+            }
+        }
+
         sellerMapper.update(sellerVO);
     }
 
     @Override
     public void delete(Integer sellerId) {
         sellerMapper.delete(sellerId);
+        AttachmentVO attachmentVO = attachmentMapper.select(AboutTableType.SELLER, sellerId);
+        AttachmentUtil.deleteAttachment(attachmentVO);
+
+        attachmentMapper.delete(AboutTableType.SELLER, sellerId);
+
     }
 
 }

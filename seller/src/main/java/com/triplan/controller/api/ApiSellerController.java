@@ -29,8 +29,10 @@ public class ApiSellerController {
     }
 
     @PutMapping("/{sellerId}")
-    public String update(@PathVariable Integer sellerId, @RequestBody SellerVO sellerVO) {
-        sellerService.update(sellerId, sellerVO);
+    public String update(@PathVariable Integer sellerId,
+                         @RequestBody SellerVO sellerVO,
+                         @RequestParam("file") List<MultipartFile> files) {
+        sellerService.update(sellerId, sellerVO, files);
         return "판매자 수정 성공";
     }
 

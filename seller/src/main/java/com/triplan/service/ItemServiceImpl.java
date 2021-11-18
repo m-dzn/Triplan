@@ -1,5 +1,6 @@
 package com.triplan.service;
 
+import com.triplan.domain.AttachmentVO;
 import com.triplan.domain.FlightVO;
 import com.triplan.domain.ItemVO;
 import com.triplan.domain.RoomVO;
@@ -8,13 +9,18 @@ import com.triplan.dto.customer.request.ItemRoomRequestDTO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.dto.response.Pagination;
+import com.triplan.enumclass.AboutTableType;
 import com.triplan.enumclass.ItemCategory;
+import com.triplan.mapper.AttachmentMapper;
 import com.triplan.mapper.FlightMapper;
 import com.triplan.mapper.ItemMapper;
 import com.triplan.mapper.RoomMapper;
 import com.triplan.service.inf.ItemService;
+import com.triplan.util.AttachmentUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,10 +33,16 @@ public class ItemServiceImpl implements ItemService {
     private final ItemMapper itemMapper;
     private final FlightMapper flightMapper;
     private final RoomMapper roomMapper;
+    private final AttachmentMapper attachmentMapper;
+
 
     @Override
     public void itemRemove(Integer itemId) {
         itemMapper.delete(itemId);
+        AttachmentVO attachmentVO = attachmentMapper.select(AboutTableType.ITEM, itemId);
+        AttachmentUtil.deleteAttachment(attachmentVO);
+
+        attachmentMapper.delete(AboutTableType.ITEM, itemId);
     }
 
     @Override
@@ -75,46 +87,97 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public String insertItemRoom(ItemRoomRequestDTO itemRoomRequestDTO, ItemCategory room) {
+    @Transactional
+    public void insertItemRoom(ItemRoomRequestDTO itemRoomRequestDTO, ItemCategory room, List<MultipartFile> files) {
 
         ItemVO itemVO = itemRoomRequestDTO.toItemVO();
         RoomVO roomVO = itemRoomRequestDTO.toRoomVO();
 
-        if(itemVO.getItemCategory().equals(room)) {
+
+        if (files.isEmpty()) return;
+
+        AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.ROOM, itemVO.getItemId());
+
+        if (attachmentVO != null) {
+            itemVO.setDetailImg(attachmentVO.getUrl());
+
+            try {
+                attachmentMapper.insert(attachmentVO);
+                itemMapper.update(itemVO);
+            } catch (Exception e) {
+                e.printStackTrace();
+                AttachmentUtil.deleteAttachment(attachmentVO);
+            }
+        }
+
+        if (itemVO.getItemCategory().equals(room)) {
             itemMapper.insert(itemVO);
             roomVO.setItemId(itemVO.getItemId());
             roomMapper.insert(roomVO);
 
-            return "ItemCatgory MACTH insert Success";
         }
-        else
-            return "ItemCatgory MISMACTH insert Fail";
-
     }
 
     @Override
-    public String insertItemFlight(ItemFlightRequestDTO itemFlightRequestDTO, ItemCategory flight) {
+    @Transactional
+    public void insertItemFlight(ItemFlightRequestDTO itemFlightRequestDTO, ItemCategory flight, List<MultipartFile> files)
+        {
 
-        ItemVO itemVO = itemFlightRequestDTO.toItemVO();
-        FlightVO flightVO = itemFlightRequestDTO.toFlightVO();
+            ItemVO itemVO = itemFlightRequestDTO.toItemVO();
+            FlightVO flightVO = itemFlightRequestDTO.toFlightVO();
 
-        if(itemVO.getItemCategory().equals(flight)) {
-            itemMapper.insert(itemVO);
-            flightVO.setItemId(itemVO.getItemId());
-            flightMapper.insert(flightVO);
+            if (files.isEmpty()) return;
 
-            return "ItemCatgory MACTH Insert Success";
+            AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.ITEM, itemVO.getItemId());
+
+            if (attachmentVO != null) {
+                itemVO.setDetailImg(attachmentVO.getUrl());
+
+                try {
+                    attachmentMapper.insert(attachmentVO);
+                    itemMapper.update(itemVO);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    AttachmentUtil.deleteAttachment(attachmentVO);
+                }
+            }
+
+            if (itemVO.getItemCategory().equals(flight)) {
+                itemMapper.insert(itemVO);
+                flightVO.setItemId(itemVO.getItemId());
+                flightMapper.insert(flightVO);
+            }
         }
-        else
-            return "ItemCatgory MISMACTH Insert Fail";
-
-    }
 
     @Override
-    public String  updateRoomItem(Integer itemId, ItemRoomRequestDTO itemRoomRequestDTO, ItemCategory room) {
+    @Transactional
+    public void updateRoomItem(Integer itemId, ItemRoomRequestDTO itemRoomRequestDTO, ItemCategory room, List<MultipartFile> files) {
 
         ItemVO itemVO = itemRoomRequestDTO.toItemVO();
         RoomVO roomVO = itemRoomRequestDTO.toRoomVO();
+
+        if (!files.isEmpty()) {
+            // 기존 파일 삭제
+            AttachmentVO oldAttachmentVO = attachmentMapper.select(AboutTableType.ROOM, itemVO.getItemId());
+            AttachmentUtil.deleteAttachment(oldAttachmentVO);
+            attachmentMapper.delete(AboutTableType.ROOM, itemVO.getItemId());
+            itemVO.setDetailImg("");
+
+            // 새 파일 등록
+            AttachmentVO newAttachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.ROOM, itemVO.getItemId());
+
+            if (newAttachmentVO != null) {
+                itemVO.setDetailImg(newAttachmentVO.getUrl());
+
+                try {
+                    attachmentMapper.insert(newAttachmentVO);
+                } catch (Exception e){
+                    e.printStackTrace();
+                    AttachmentUtil.deleteAttachment(newAttachmentVO);
+                }
+            }
+
+        }
 
         if(itemVO.getItemCategory().equals(room)) {
 
@@ -123,18 +186,39 @@ public class ItemServiceImpl implements ItemService {
             roomVO.setItemId(itemVO.getItemId());
             roomMapper.updateByItemId(roomVO);
 
-            return "ItemCatgory MACTH Update Success";
         }
-        else
-            return "ItemCatgory MISMACTH Update Fail";
 
     }
 
     @Override
-    public String updateFlightItem(Integer itemId, ItemFlightRequestDTO itemFlightRequestDTO,ItemCategory flight) {
+    @Transactional
+    public void updateFlightItem(Integer itemId, ItemFlightRequestDTO itemFlightRequestDTO,ItemCategory flight, List<MultipartFile> files) {
 
         ItemVO itemVO = itemFlightRequestDTO.toItemVO();
         FlightVO flightVO = itemFlightRequestDTO.toFlightVO();
+
+        if (!files.isEmpty()) {
+            // 기존 파일 삭제
+            AttachmentVO oldAttachmentVO = attachmentMapper.select(AboutTableType.ITEM, itemVO.getItemId());
+            AttachmentUtil.deleteAttachment(oldAttachmentVO);
+            attachmentMapper.delete(AboutTableType.ITEM, itemVO.getItemId());
+            itemVO.setDetailImg("");
+
+            // 새 파일 등록
+            AttachmentVO newAttachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.ITEM, itemVO.getItemId());
+
+            if (newAttachmentVO != null) {
+                itemVO.setDetailImg(newAttachmentVO.getUrl());
+
+                try {
+                    attachmentMapper.insert(newAttachmentVO);
+                } catch (Exception e){
+                    e.printStackTrace();
+                    AttachmentUtil.deleteAttachment(newAttachmentVO);
+                }
+            }
+
+        }
 
         if(itemVO.getItemCategory().equals(flight)) {
 
@@ -142,11 +226,7 @@ public class ItemServiceImpl implements ItemService {
             itemMapper.update(itemVO);
             flightVO.setItemId(itemVO.getItemId());
             flightMapper.updateByItemId(flightVO);
-
-            return "ItemCatgory MACTH Update Success";
         }
-        else
-            return "ItemCatgory MISMACTH Update Fail";
 
     }
 

@@ -85,12 +85,10 @@ public class ItemGroupServiceImpl implements ItemGroupService {
             }
         }
 
-
         itemGroupVO.setItemGroupId(itemGroupId);
         itemGroupMapper.update(itemGroupVO);
         tagMapper.delete(itemGroupId);
         tagMapper.RegisterAddTagIdList(itemGroupVO.getItemGroupId(),itemGroupRequestDTO.getTagIdList());
-
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface SellerService {
 
     SellerVO getSeller(Integer sellerId);
 
-    void update(Integer sellerId, SellerVO sellerVO);
+    void update(Integer sellerId, SellerVO sellerVO, List<MultipartFile> files);
 
     void delete(Integer sellerId);
 
