@@ -49,7 +49,7 @@
                     </div>
                     <div class="row">
                         <label>연락처
-                            <input  type="text" class="form-control" name="phone"></input>
+                            <input  type="text" class="form-control" name="tel"></input>
                         </label>
                     </div>
                     <!--예약 테이블 ERD에 이메일 제외되서 비활성화 시켜놓음-->
@@ -73,6 +73,11 @@
                         </label>
                     </div>
                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="payment_type" id="phone">
+                        <label class="form-check-label" for="phone"> 네이버페이
+                        </label>
+                    </div>
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="payment_type" id="naverPay">
                         <label class="form-check-label" for="naverPay"> 네이버페이
                         </label>
@@ -80,11 +85,6 @@
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="payment_type" id="kakaoPay">
                         <label class="form-check-label" for="kakaoPay"> 카카오페이
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment_type" id="payco">
-                        <label class="form-check-label" for="payco"> 페이코
                         </label>
                     </div>
 
@@ -122,6 +122,10 @@
             // var phone = document.getElementById('tel').value(); // value값
             // var memberId = document.getElementById('member-id').innerText;
             // var sellerId = document.getElementById('seller-id').innerText;
+            // var itemScheduleId;
+            // var memberCouponId;
+            // var totalDiscountPrice;
+            // var paidAt;
 
             // 예약/결제정보 줍줍
             var itemCategory // 상품그룹
