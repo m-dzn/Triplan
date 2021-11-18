@@ -55,8 +55,8 @@ public class SellerServiceImpl implements SellerService {
 
         if (!files.isEmpty()) {
             // 기존 파일 삭제
-            AttachmentVO oldAttachmentVO = attachmentMapper.select(AboutTableType.SELLER, sellerVO.getSellerId());
-            AttachmentUtil.deleteAttachment(oldAttachmentVO);
+            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.SELLER, sellerVO.getSellerId());
+            AttachmentUtil.deleteAttachments(filesToDelete);
             attachmentMapper.delete(AboutTableType.SELLER, sellerVO.getSellerId());
             sellerVO.setSellerImg("");
 
@@ -81,11 +81,10 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public void delete(Integer sellerId) {
         sellerMapper.delete(sellerId);
-        AttachmentVO attachmentVO = attachmentMapper.select(AboutTableType.SELLER, sellerId);
-        AttachmentUtil.deleteAttachment(attachmentVO);
+        List<AttachmentVO> attachmentVO = attachmentMapper.select(AboutTableType.SELLER, sellerId);
+        AttachmentUtil.deleteAttachments(attachmentVO);
 
         attachmentMapper.delete(AboutTableType.SELLER, sellerId);
-
     }
 
 }
