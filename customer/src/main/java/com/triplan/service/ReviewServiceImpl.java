@@ -27,7 +27,7 @@ public class ReviewServiceImpl implements ReviewService {
     public void reviewInsert(ReviewVO reviewVO, List<MultipartFile> files) {
         reviewMapper.insert(reviewVO);
 
-        if (!files.isEmpty()) return;
+        if (files.isEmpty()) return;
 
         AttachmentVO attachmentVO
                 = AttachmentUtil.getAttachment(files.get(0), AboutTableType.REVIEW, reviewVO.getReviewId());

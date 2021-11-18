@@ -25,6 +25,7 @@ public class ItemGroupVO extends BaseVO {
 
     // Default 값이 있는 NOT NULL 필드
     private Integer likeCount;
+    private Integer reviewCount;
 
     // Nullable 필드
     private String addressDetail;

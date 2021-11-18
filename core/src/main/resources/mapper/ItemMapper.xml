@@ -57,8 +57,6 @@
          WHERE item_id = #{itemId} AND item_category = #{room}
     </select>
 
-
-
     <select id="getItemByItemGroupId" resultType="ItemVO">
         SELECT *
         FROM item

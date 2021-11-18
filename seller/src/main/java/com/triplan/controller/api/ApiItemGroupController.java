@@ -6,7 +6,9 @@ import com.triplan.dto.customer.response.ItemGroupResponseDTO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.service.inf.ItemGroupService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
@@ -17,6 +19,13 @@ import java.util.List;
 public class ApiItemGroupController {
 
     private final ItemGroupService itemGroupService;
+
+    @PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
+    public String ItemGroupAddTags(@RequestPart("itemGroup") ItemGroupRequestDTO itemGroupRequestDTO,
+                                   @RequestPart("file") List<MultipartFile> files) {
+        itemGroupService.ItemGroupRegisterAddTags(itemGroupRequestDTO, files);
+        return "addTag";
+    }
 
     @DeleteMapping("{itemGroupId}")
     public String deleteItemGroup(@PathVariable Integer itemGroupId){
@@ -29,16 +38,14 @@ public class ApiItemGroupController {
         return itemGroupService.getItemList(itemGroupId);
     }
 
-    @PostMapping
-    public String ItemGroupAddTags(@RequestBody ItemGroupRequestDTO itemGroupRequestDTO){
-        itemGroupService.ItemGroupRegisterAddTags(itemGroupRequestDTO);
-        return "addTag";
-    }
+
 
     @PutMapping("/{itemGroupId}")
     public String ItemGroupUpdateTags(@PathVariable Integer itemGroupId,
-                                      @RequestBody ItemGroupRequestDTO itemGroupRequestDTO){
-        itemGroupService.updateItemGroupTags(itemGroupId,itemGroupRequestDTO);
+                                      @RequestBody ItemGroupRequestDTO itemGroupRequestDTO,
+                                      @RequestParam("file") List<MultipartFile> files){
+        itemGroupRequestDTO.setItemGroupId(itemGroupId);
+        itemGroupService.updateItemGroupTags(itemGroupId,itemGroupRequestDTO, files);
         return "Update Tags";
     }
 
