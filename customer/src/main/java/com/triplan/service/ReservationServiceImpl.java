@@ -77,8 +77,10 @@ public class ReservationServiceImpl implements ReservationService {
             }
         }
 
-        return result;
+//        return result;
+        return resId;
     }
+
 
     @Override
     public Integer cancel(Integer resId, ReservationDTO reservationDTO) {
