@@ -54,12 +54,29 @@
         WHERE   question_id = #{questionId}
     </delete>
 
+    <!-- Customer To Admin 페이징 -->
+    <select id="listFromCustomerToAdmin" resultType="QuestionVO">
+        SELECT  *
+        FROM    question
+        WHERE   type = 'CUSTOMER'
+        AND   item_group_id IS NULL
+        ORDER BY created_at DESC
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="countFromCustomerToAdmin" resultType="Integer">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ount" resultType="int">
+        SELECT  COUNT(*)
+        FROM    question
+        WHERE   type = 'CUSTOMER'
+        AND   item_group_id IS NULL
+    </select>
+
     <!-- 페이징 -->
     <select id="listByItemGroupId" resultType="QuestionVO">
         SELECT  *
         FROM    question
         WHERE   type = 'CUSTOMER'
-          AND   item_group_id = #{itemGroupId}
+        AND   item_group_id = #{itemGroupId}
         ORDER BY created_at DESC
         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
     </select>
@@ -68,7 +85,7 @@
         SELECT  COUNT(*)
         FROM    question
         WHERE   type = 'CUSTOMER'
-          AND   item_group_id = #{itemGroupId}
+        AND   item_group_id = #{itemGroupId}
     </select>
 
     <!-- 판매자에게 물어보는 고객의 질문 목록 가져오기 -->
