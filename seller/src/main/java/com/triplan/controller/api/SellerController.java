@@ -33,4 +33,9 @@ public class SellerController {
         return "/page/reservationManagement";
     }
 
+    @GetMapping("home")
+    public String home() {
+        return "home";
+    }
+
 }

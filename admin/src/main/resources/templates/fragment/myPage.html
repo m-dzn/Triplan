@@ -1,0 +1,83 @@
+<div    th:fragment="mypage_top"
+        class="border bg-white rounded-3 border-2 py-5 mb-3">
+    <div class="d-flex justify-content-center">
+        <img src="img/광안리.jpg" class="rounded-circle pro-pho" alt="...">
+    </div>
+    <div class="align-items-start" id="myp-sns">연동SNS :</div>
+
+</div>
+
+<div    th:fragment="mypage_bottom"
+        class="border bg-white rounded-3 border-2">
+
+</div>
+
+<div    th:fragment="modify"
+        class="border bg-white rounded-3 border-2 tit-win-mag">
+
+    <th:block th:replace="fragment/title :: title_2('프로필 관리')"></th:block>
+    <div class="row">
+        <div class="col">
+            <form class="txt-end txt-bold">
+                <div class="row" id="myp-mod">
+                    <label for="name" class="col-2 col-form-label">이름</label>
+                    <div class="col-9">
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                </div>
+                <div class="row" id="myp-mod">
+                    <label for="name" class="col-2 col-form-label">닉네임</label>
+                    <div class="col-9">
+                        <input type="text" class="form-control" id="nickname">
+                    </div>
+                </div>
+                <div class="row" id="myp-mod">
+                    <label for="tel" class="col-2 col-form-label">연락처</label>
+                    <div class="col-9">
+                        <input type="text" class="form-control" id="mobile">
+                    </div>
+                </div>
+                <div class="row" id="myp-mod">
+                    <label for="birth" class="col-2 col-form-label">생년월일</label>
+                    <div class="col-9">
+                        <input type="date" class="form-control" id="birthday">
+                    </div>
+                </div>
+                <div class="row" id="myp-mod">
+                    <span for="email" class="col-2">SNS 연동</span> <!--아이콘으로 대체 예정-->
+                    <div class="d-flex justify-content-between col-9 txt-normal" id="myp-sns-set">
+                        <div class="row">
+                            <label class="form-check-label col-auto">네이버</label>
+                            <div class="form-check form-switch col-auto">
+                                <input class="form-check-input" type="checkbox">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="form-check-label col-auto">카카오</label>
+                            <div class="form-check form-switch col-auto">
+                                <input class="form-check-input" type="checkbox">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="form-check-label col-auto">페이스북</label>
+                            <div class="form-check form-switch col-auto">
+                                <input class="form-check-input" type="checkbox">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="form-check-label col-auto">구글</label>
+                            <div class="form-check form-switch col-auto">
+                                <input class="form-check-input" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div><!--sns연동 묶음 div-->
+                <div class="row col-11 pt-4 d-flex justify-content-between m-0">
+                    <a class="col-auto txt-5 txt-gray txt-normal" href="#">회원 탈퇴</a>
+                    <th:block th:replace="fragment/button :: solid(저장)"></th:block>
+                </div>
+            </form>
+        </div><!--col-->
+    </div><!--row-->
+
+</div><!--프로필 관리 창-->

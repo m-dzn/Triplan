@@ -3,7 +3,11 @@ package com.triplan.controller.api;
 import com.triplan.domain.SellerVO;
 import com.triplan.service.inf.SellerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/sellers")
@@ -12,9 +16,10 @@ public class ApiSellerController {
 
     private final SellerService sellerService;
 
-    @PostMapping
-    public String register(@RequestBody SellerVO sellerVO) {
-        sellerService.register(sellerVO);
+    @PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
+    public String register(@RequestPart("seller") SellerVO sellerVO,
+                           @RequestPart("file") List<MultipartFile> files) {
+        sellerService.register(sellerVO, files);
         return "판매자 추가 성공";
     }
 

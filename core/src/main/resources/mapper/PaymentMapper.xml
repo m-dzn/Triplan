@@ -8,12 +8,16 @@
         INSERT INTO payment (
             type,
             total_payment,
+            account_bank,
+            account_number,
             payment_deadline,
             state,
             res_id
         ) VALUES (
             #{type},
             #{totalPayment},
+            #{accountBank},
+            #{accountNumber},
             #{paymentDeadline},
             #{state},
             #{resId}
@@ -43,6 +47,17 @@
         FROM    payment
         WHERE   payment_id = ${paymentId}
     </delete>
+
+    <select id="getYearPayment" resultType="Long">
+        <![CDATA[
+            SELECT  SUM(total_payment)
+            FROM    payment p JOIN reservation r
+            ON      p.res_id = r.res_id
+            WHERE   r.member_id = #{memberId}
+              AND   ABS(DATEDIFF(MONTH, paid_at, current_timestamp)) <= 12;
+        ]]>
+
+    </select>
 
     <select id="getPaymentBySellerId" resultType="PaymentVO">
         SELECT sum(total_payment) total_payment, FORMATDATETIME(paid_at, 'yyyy-MM-dd') paid_at

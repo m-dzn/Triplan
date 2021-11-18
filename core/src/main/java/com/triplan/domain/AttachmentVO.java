@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDateTime;
 
@@ -14,15 +13,6 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 public class AttachmentVO {
-
-    private static String COMMON_URL;
-
-    @Value("@{app.resources.commonUrl}")
-    public void setCommonUrl(String COMMON_URL) {
-        AttachmentVO.COMMON_URL = COMMON_URL;
-    }
-
-
 
     // 식별자 필드
     private Integer attachmentId;

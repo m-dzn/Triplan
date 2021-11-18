@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD//Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.WishlistMapper">
+
+    <insert id="insert">
+        INSERT INTO wishlist(
+            item_group_id,
+            member_id
+        ) VALUES (
+            #{itemGroupId},
+            #{memberId}
+        )
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM    wishlist
+        WHERE   wishlist_id = #{wishlistId}
+    </delete>
+
+    <select id="list" resultType="com.triplan.dto.response.WishlistResponseDTO">
+        SELECT  wishlist_id, name, item_category, location, like_count, wl.created_at
+        FROM    wishlist wl JOIN item_group ig
+                ON wl.item_group_id = ig.item_group_id
+        WHERE   member_id = #{memberId}
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="exist" resultType="boolean">
+        SELECT EXISTS (
+            SELECT  COUNT(*)
+            FROM    wishlist
+            WHERE   item_group_id = #{itemGroupId}
+              AND   member_id = #{memberId}
+        )
+    </select>
+
+    <select id="selectItemGroupByWishlistId" resultType="ItemGroupVO">
+        SELECT  *
+        FROM    item
+        WHERE   item_id = (
+                SELECT  item_id
+                FROM    wishlist
+                WHERE   wishlist_id = #{wishlistId}
+        )
+    </select>
+
+</mapper>

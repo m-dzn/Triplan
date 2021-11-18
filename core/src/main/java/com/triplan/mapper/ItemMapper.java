@@ -40,4 +40,5 @@ public interface ItemMapper {
 
     int countFlight(@Param("sellerId") Integer sellerId, @Param("flight") ItemCategory flight);
 
+    List<ItemVO> getItemVOList(ItemCategory room);
 }

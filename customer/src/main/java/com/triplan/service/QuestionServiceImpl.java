@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
     private final QuestionMapper questionMapper;
+    private Integer memberId;
 
     @Override
     public void create(QuestionVO questionVO) {
@@ -40,8 +41,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionDTO> questionList(Integer itemGroupId) {
-        List<QuestionVO> listVO = questionMapper.getQuestionList(itemGroupId);
+    public List<QuestionDTO> questionListByItemGroupId(Integer itemGroupId) {
+        List<QuestionVO> listVO = questionMapper.getQuestionListByItemGroupId(itemGroupId);
         List<QuestionDTO> res = listVO.stream().map(QuestionDTO::of).collect(Collectors.toList());
         return res;
     }
@@ -53,23 +54,37 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionVO> questionListByItemGId(Integer itemGroupId)  {
-        List<QuestionVO> listVO = questionMapper.getQuestionByItemGId(itemGroupId);
-        return listVO;
-    }
-
-    @Override
     public List<QuestionVO> questionListByMemberId(Integer memberId) {
         List<QuestionVO> listVO = questionMapper.getQuestionListByMemberId(memberId);
         return listVO;
     }
 
     @Override
-    public Pagination<QuestionVO> list(Integer pageSize, Integer currentPage) {
-        List<QuestionVO> questionList = questionMapper.list(pageSize, currentPage);
+    public Pagination<QuestionVO> questionListByItemGroupIdListPage(Integer pageSize, Integer currentPage) {
+        List<QuestionVO> questionListByItemGroupIdListPage = questionMapper.questionListByItemGroupIdListPage(pageSize, currentPage);
 
-        int totalQuestions = questionMapper.count(QuestionType.CUSTOMER.toString());
-        return new Pagination<>(pageSize, currentPage, totalQuestions, questionList);
+        int totalReviews = questionMapper.questionListByItemGroupIdCountPage("CUSTOMER");
+
+        return new Pagination<>(pageSize, currentPage, totalReviews, questionListByItemGroupIdListPage);
     }
+
+    @Override
+    public Pagination<QuestionVO> questionListBySellerIdListPage(Integer pageSize, Integer currentPage) {
+        List<QuestionVO> questionListBySellerIdListPage = questionMapper.questionListByItemGroupIdListPage(pageSize, currentPage);
+
+        int totalReviews = questionMapper.questionBySellerIdCountPage("SELLER");
+
+        return new Pagination<>(pageSize, currentPage, totalReviews, questionListBySellerIdListPage);
+    }
+
+    @Override
+    public Pagination<QuestionVO> questionListByMemberIdListPage(Integer memberId, Integer pageSize, Integer currentPage) {
+        List<QuestionVO> questionListByMemberIdListPage = questionMapper.questionListByMemberIdListPage(memberId, pageSize, currentPage);
+
+        int totalReviews = questionMapper.questionListByMemberIdCountPage(memberId);
+
+        return new Pagination<>(pageSize, currentPage, totalReviews, questionListByMemberIdListPage);
+    }
+
 
 }

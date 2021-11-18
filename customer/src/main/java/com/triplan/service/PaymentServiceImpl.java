@@ -1,20 +1,26 @@
 package com.triplan.service;
 
 import com.triplan.domain.PaymentVO;
+import com.triplan.mapper.MemberMapper;
 import com.triplan.mapper.PaymentMapper;
 import com.triplan.service.inf.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentMapper paymentMapper;
+    private final MemberMapper memberMapper;
 
     @Override
-    public void create(PaymentVO paymentVO) {
+    @Transactional
+    public void create(PaymentVO paymentVO, Integer memberId) {
         paymentMapper.insert(paymentVO);
+        Long yearPayment = paymentMapper.getYearPayment(memberId);
+        memberMapper.updateGrade(memberId,yearPayment);
     }
 
     @Override
