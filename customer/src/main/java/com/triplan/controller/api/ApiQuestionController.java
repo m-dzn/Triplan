@@ -46,6 +46,14 @@ public class ApiQuestionController {
 
     /* 리스트 조회 메서드 -> 다 페이징 */
     // 상품 상세 페이지 : CUSTOMER to ADMIN 문의 사항 목록
+    @GetMapping
+    public Pagination<QuestionVO> listFromCustomerToAdmin(
+            @RequestParam("pageSize") Integer pageSize,
+            @RequestParam("currentPage") Integer currentPage
+    ) {
+        return questionService.listFromCustomerToAdmin(pageSize, currentPage);
+    }
+
     @GetMapping("/itemGroups/{itemGroupId}")
     public Pagination<QuestionVO> questionListByItemGroupId(
             @PathVariable Integer itemGroupId,
