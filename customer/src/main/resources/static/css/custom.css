@@ -9,7 +9,9 @@
   border-color: var(--primary);
 }
 
-
+textarea {
+  resize: none;
+}
 
 #button_solid:hover {
   /* 배경색만 있는 버튼 */
@@ -32,10 +34,10 @@
   border-color: var(--primary);
 }
 
-#couponTable td{
-  border: 1px;
-  border-style: solid;
-}
+/*#couponTable td{*/
+/*  border: 1px;*/
+/*  border-style: solid;*/
+/*}*/
 
 .dropdown-toggle::after {
   /* 메뉴 화살표 버튼(none으로 안 뜨게 해놓음) 기본값 : inline-block */
@@ -452,4 +454,176 @@ h1::before{ /* 추가요소::before */
   width: 40px;
   height: 40px;
   position: fixed;
+}
+
+<!--지혜 테이블-->
+
+#couponTable tbody tr:nth-of-type(1) {
+      background-color : #FAFAFA;
+}
+
+pre {
+  margin: 0;
+}
+
+
+#product-Table tr:nth-of-type(1) {
+  background-color : #FAFAFA;
+}
+
+#product-Table th:first-child, td:first-child {
+  border-left: none;
+}
+
+#product-Table th:last-child, td:last-child {
+  border-right: none;
+}
+
+#product-Table tr td:nth-child(1) {
+  width: calc(var(--unit)*50);
+  text-align: center;
+}
+
+#product-Table tr td:nth-child(2) {
+  width: calc(var(--unit)*450);
+}
+
+#product-Table tr td:nth-child(3) {
+  width: calc(var(--unit)*80);
+  text-align: center;
+}
+
+#product-Table tr td:nth-child(4) {
+  width: calc(var(--unit)*80);
+  text-align: center;
+}
+
+#qnaTable th:first-child, td:first-child {
+  border-left: none;
+}
+
+#qnaTable th:last-child, td:last-child {
+  border-right: none;
+}
+
+#qnaTable tr:nth-of-type(1) {
+  background-color : #FAFAFA;
+}
+
+#qnaTable tr:nth-child(1) td {
+  padding: calc(var(--unit)*12);
+}
+
+#qnaTable tr td:nth-child(1) {
+  width: calc(var(--unit)*50);
+  text-align: center;
+}
+
+#qnaTable tr td:nth-child(2) {
+  width: calc(var(--unit)*450);
+}
+
+#qnaTable tr td:nth-child(3) {
+  width: calc(var(--unit)*80);
+  text-align: center;
+}
+
+#qnaTable tr td:nth-child(4) {
+  width: calc(var(--unit)*80);
+  text-align: center;
+}
+
+#qnaTable tr td:nth-child(5) {
+  width: calc(var(--unit)*60);
+  text-align: center;
+}
+
+#qnaconTable tr td:nth-child(1) {
+  width: calc(var(--unit)*40);
+  padding-top: calc(var(--unit)*8);
+  padding-bottom: calc(var(--unit)*8);
+}
+
+#qnaconTable tr td:nth-child(2) {
+  width: calc(var(--unit)*450);
+  padding-top: calc(var(--unit)*8);
+  padding-left: calc(var(--unit)*24);
+  padding-bottom: calc(var(--unit)*8);
+}
+
+#qnaconTable tr td:nth-child(3) {
+  width: calc(var(--unit)*80);
+  text-align: center;
+}
+
+#qnaconTable tr td:nth-child(4) {
+  width: calc(var(--unit)*80);
+  text-align: center;
+}
+
+#qnaconTable tr td:nth-child(5) {
+  width: calc(var(--unit)*60);
+  text-align: center;
+}
+
+#qnaup-table {
+  margin: auto;
+}
+
+#qnaup-table td:nth-of-type(1) {
+  text-align: left;
+  width: calc(var(--unit)*72);
+}
+
+#qnaup-table tr:nth-child(4) {
+  text-align: end;
+}
+
+#qnaup-table td:nth-of-child(1) {
+  padding-top: calc(var(--unit)*16);
+}
+
+#qnaup-table tr td:nth-child(3) {
+  text-align: right;
+  padding-right: calc(var(--unit)*36);
+}
+
+#qnaup-table tr td:nth-child(4) {
+  width: calc(var(--unit)*50);
+  text-align: right;
+}
+
+
+
+
+#noticeTable tr:nth-of-type(1) {
+  background-color : #FAFAFA;
+}
+
+#noticeTable tr:nth-child(1) td {
+  padding: calc(var(--unit)*12);
+}
+
+#noticeTable tr td:nth-child(1) {
+  width: calc(var(--unit)*50);
+  text-align: center;
+}
+
+#noticeTable tr td:nth-child(2) {
+  width: calc(var(--unit)*460);
+}
+
+#noticeTable tr td:nth-child(3) {
+  width: calc(var(--unit)*80);
+  text-align: center;
+}
+
+#noticeTable tr td:nth-child(4) {
+  width: calc(var(--unit)*60);
+  text-align: center;
+}
+
+#noticeTable tr td:nth-child(5) {
+  width: calc(var(--unit)*40);
+  text-align: center;
 }

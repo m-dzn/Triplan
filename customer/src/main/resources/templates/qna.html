@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns=""
       layout:decorator="layout/layout">
 
 <div layout:fragment="content">
-    <h1 class="font-size-32 margin-window-title-board margin-title col-auto margin-bottom-24">공지사항</h1>
+    <h1 class="font-size-32 margin-window-title-board margin-title col-auto margin-bottom-24">1:1문의</h1>
 
-    <div class="border-top padding-top-40">
+    <div class="row border-top padding-top-40">
 
-        <table class="table table-bordered" id="noticeTable">
+
+        <table class="table table-bordered" id="qnaTable">
             <thead>
                 <tr class="text-align-center">
                     <td class="font-size-16">글번호</td>
                     <td class="font-size-16">제목</td>
                     <td class="font-size-16">작성일</td>
+                    <td class="font-size-16">문의사항 종류</td>
                     <td class="font-size-16">작성자</td>
-<!--                    <td class="font-size-16">조회수</td>-->
                 </tr>
             </thead>
             <tbody>
@@ -24,12 +25,12 @@
 
         <!--페이지-->
         <nav class="margin-top-16" aria-label="Page navigation example">
-            <ul class="pagination pagination-sm justify-content-end" id="noticePagingBtnGroup">
+            <ul class="pagination pagination-sm justify-content-end" id="qnaPagingBtnGroup">
             </ul>
         </nav>
         <!--페이지 끝-->
 
-        <button type="button" class="btn col-auto btn-primary background-color-primary" id="button_solid"><a href="notwri" class="color-white a-button-solid">글 쓰기</a></button>
+        <button type="button" class="btn col-auto btn-primary background-color-primary" id="button_solid"><a href="qnawri" class="color-white a-button-solid">글 쓰기</a></button>
 
     </div>
 
@@ -40,57 +41,58 @@
                 var DEFAULT_PAGE_SIZE = 10;
 
                 // 데이터를 담을 태그를 선택자로 가져오는 영역
-                var noticeTable = document.getElementById("noticeTable");
-                var noticePagingBtnGroup = document.getElementById("noticePagingBtnGroup");
+                var qnaTable = document.getElementById("qnaTable");
+                var qnaPagingBtnGroup = document.getElementById("qnaPagingBtnGroup");
 
                 var url = new URL(location.href);
                 var currentPage = url.searchParams.get("currentPage");
                 var pageSize = url.searchParams.get("pageSize");
 
                 // 비동기 AJAX 통신으로 DB 데이터를 가져오는 영역
-                fetch(`${BASE_URL}/api/notices/list/member?currentPage=${currentPage || 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}`, {
+                fetch(`${BASE_URL}/api/questions?currentPage=${currentPage || 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}`, {
                     method: 'GET'
                 }).then(response => {
                     // 데이터 전처리
                     if (response.ok) {
                         return response.json();
                     }
-                }).then(noticePagination => {
-                    console.log(noticePagination)
+                }).then(qnaPagination => {
+                    console.log(qnaPagination)
                     // 실제 프론트 로직이 들어갈 영역
                     // 태그 엘리먼트에 데이터를 붙여주면 됨
-                    var noticeTBody = noticeTable.getElementsByTagName("tbody")[0];
-                    var commonPath = "/notices/noticeBoard";
+                    var qnaTBody = qnaTable.getElementsByTagName("tbody")[0];
+                    var commonPath = "/questions/qnaBoard";
 
-                    noticeTBody.innerHTML = noticePagination.list.map(notice => {
+                    qnaTBody.innerHTML = qnaPagination.list.map(qna => {
                         return `<tr>`
-                            + `<td>${notice.noticeId}</td>`
-                            + `<td><a href="/notices?noticeId=${notice.noticeId}">${notice.title}</a></td>`
-                            + `<td>${moment(notice.creatdAt).format(DATE_FORMAT_KOR)}</td>`
-                            + `<td>${notice.nickname}</td>`
+                            + `<td>${qna.questionId}</td>`
+                            + `<td><a href="/questions?questionId=${qna.questionId}">${qna.title}</a></td>`
+                            + `<td>${moment(qna.creatdAt).format(DATE_FORMAT_KOR)}</td>`
+                            + `<td>${qna.type}</td>`
+                            + `<td>${qna.nickname}</td>`
                             + `</tr>`
                     }).join('');
 
                     // 페이지 버튼이랑 연결
                     var _html = `
-                    <li class="page-item ${noticePagination.hasPrev ? '' : 'disabled'}">
-                        <a class="page-link" href="${commonPath}?currentPage=${noticePagination.startPage - 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}" aria-label="Previous">
+                    <li class="page-item ${qnaPagination.hasPrev ? '' : 'disabled'}">
+                        <a class="page-link" href="${commonPath}?currentPage=${qnaPagination.startPage - 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>`;
 
-                    for (var i = noticePagination.startPage; i <= noticePagination.endPage; i++) {
+                    for (var i = qnaPagination.startPage; i <= qnaPagination.endPage; i++) {
                         _html += `<li class="page-item ${currentPage == i ? 'active' : ''}"><a class="page-link" href="${commonPath}?currentPage=${i}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}">${i}</a></li>`;
                     }
 
                     _html += `
-                    <li class="page-item ${noticePagination.hasNext ? '' : 'disabled'}">
-                        <a class="page-link" href="${commonPath}?currentPage=${noticePagination.endPage + 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}" aria-label="Next">
+                    <li class="page-item ${qnaPagination.hasNext ? '' : 'disabled'}">
+                        <a class="page-link" href="${commonPath}?currentPage=${qnaPagination.endPage + 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>`;
 
-                    noticePagingBtnGroup.innerHTML = _html;
+                    qnaPagingBtnGroup.innerHTML = _html;
                 });
             });
         </script>
