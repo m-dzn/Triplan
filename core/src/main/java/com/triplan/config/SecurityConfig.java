@@ -1,10 +1,6 @@
 package com.triplan.config;
 
-import com.triplan.security.JwtTokenCheckFilter;
 import com.triplan.security.MemberDetailsService;
-import com.triplan.security.OAuth2RequestCookieRepository;
-import com.triplan.security.oauth2.OAuth2FailureHandler;
-import com.triplan.security.oauth2.OAuth2SuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @EnableWebSecurity(debug = true)
 @EnableGlobalMethodSecurity(
@@ -30,16 +25,10 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MemberDetailsService memberDetailsService;
-
-    private final OAuth2RequestCookieRepository oAuth2RequestCookieRepository;
     private final DefaultOAuth2UserService oAuth2UserService;
-    private final OAuth2FailureHandler oAuth2FailureHandler;
-    private final OAuth2SuccessHandler oAuth2SuccessHandler;
-
-    private final JwtTokenCheckFilter jwtTokenCheckFilter;
 
     @Value("${app.resources.commonUrl}")
-    private final String RESOURCES_COMMON_URL;
+    private String RESOURCES_COMMON_URL;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -50,21 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/**").permitAll();
 
-        http.oauth2Login()
-                .authorizationEndpoint()
-                    .baseUri("/oauth2/authorize")
-                    .authorizationRequestRepository(oAuth2RequestCookieRepository)
-                    .and()
-                .redirectionEndpoint()
-                    .baseUri("/oauth2/callback/*")
-                    .and()
-                .failureHandler(oAuth2FailureHandler)
-                    .userInfoEndpoint()
-                    .userService(oAuth2UserService)
-                    .and()
-                .successHandler(oAuth2SuccessHandler);
-
-        http.addFilterAt(jwtTokenCheckFilter, BasicAuthenticationFilter.class);
+//        http.oauth2Login()
+//                .userInfoEndpoint()
+//                .userService(oAuth2UserService);
     }
 
     @Override
