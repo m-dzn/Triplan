@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface AttachmentMapper {
 
-    void insert(AttachmentVO attachment);
+    void insert(AttachmentVO attachmentList);
 
     void insertAll(List<AttachmentVO> attachmentList);
 

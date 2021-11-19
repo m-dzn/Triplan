@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.triplan.mapper.SellerMapper">
 
-     <insert id="insert">
+     <insert id="insert" useGeneratedKeys="true" keyProperty="sellerId">
         INSERT INTO seller (
             business_license_number,
             business_name,

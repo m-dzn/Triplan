@@ -39,8 +39,8 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void itemRemove(Integer itemId) {
         itemMapper.delete(itemId);
-        List<AttachmentVO> list = attachmentMapper.select(AboutTableType.ITEM, itemId);
-        AttachmentUtil.deleteAttachments(list);
+        AttachmentVO attachmentVO = attachmentMapper.select(AboutTableType.ITEM, itemId);
+        AttachmentUtil.deleteAttachment(attachmentVO);
 
         attachmentMapper.delete(AboutTableType.ITEM, itemId);
     }
@@ -158,8 +158,8 @@ public class ItemServiceImpl implements ItemService {
 
         if (!files.isEmpty()) {
             // 기존 파일 삭제
-            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.ROOM, itemVO.getItemId());
-            AttachmentUtil.deleteAttachments(filesToDelete);
+            AttachmentVO oldAttachmentVO = attachmentMapper.select(AboutTableType.ROOM, itemVO.getItemId());
+            AttachmentUtil.deleteAttachment(oldAttachmentVO);
             attachmentMapper.delete(AboutTableType.ROOM, itemVO.getItemId());
             itemVO.setDetailImg("");
 
@@ -199,8 +199,8 @@ public class ItemServiceImpl implements ItemService {
 
         if (!files.isEmpty()) {
             // 기존 파일 삭제
-            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.ITEM, itemVO.getItemId());
-            AttachmentUtil.deleteAttachments(filesToDelete);
+            AttachmentVO oldAttachmentVO = attachmentMapper.select(AboutTableType.ITEM, itemVO.getItemId());
+            AttachmentUtil.deleteAttachment(oldAttachmentVO);
             attachmentMapper.delete(AboutTableType.ITEM, itemVO.getItemId());
             itemVO.setDetailImg("");
 

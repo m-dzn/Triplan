@@ -18,6 +18,9 @@ public interface ReservationMapper {
 
     void delete(Integer resId);
 
+    //Seller Main 페이지
+    Integer selectCount(Integer sellerId);
+
     List<ReservationVO> myResList(Integer memberId);
 
     List<ReservationVO> myUpcomingResList(Integer memberId);

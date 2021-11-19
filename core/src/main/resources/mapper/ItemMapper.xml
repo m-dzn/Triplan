@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.triplan.mapper.ItemMapper">
 
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="itemId">
         INSERT INTO item (
             name,
             explain,
@@ -30,7 +30,7 @@
         WHERE   item_id = #{itemId}
     </select>
 
-    <update id="update">
+    <update id="update" useGeneratedKeys="true" keyProperty="itemId">
         UPDATE  item
         SET
                 name            = IFNULL(     #{name},            name            ),
@@ -51,4 +51,99 @@
         WHERE   item_id = #{itemId}
     </delete>
 
+    <select id="getItemByItemId" parameterType="map" resultType="ItemVO">
+        SELECT *
+          FROM item
+         WHERE item_id = #{itemId} AND item_category = #{room}
+    </select>
+
+    <select id="getItemByItemGroupId" resultType="ItemVO">
+        SELECT *
+        FROM item
+        WHERE item_group_id = #{itemGroupId}
+    </select>
+
+    <select id="getItemId" resultType="Integer">
+        SELECT MAX(item_id) as item_id
+          FROM item
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT  COUNT(*)
+        FROM    item
+        WHERE   item_group_id IN (  SELECT  item_group_id
+                                    FROM    item_group
+                                    WHERE   seller_id = #{sellerId} )
+    </select>
+
+    <select id="getItemList" resultType="ItemVO">
+        SELECT *
+        FROM   item
+        WHERE  item_id = #{itemId}
+    </select>
+
+    <select id="getItemBySellerId" resultType="ItemVO">
+        SELECT name, sales_volume
+        FROM   item
+        WHERE  item_group_id IN (   SELECT seller_id
+                                    FROM   item_group
+                                    WHERE  seller_id = #{sellerId} )
+        ORDER BY sales_volume DESC
+    </select>
+
+
+    <update id="updateByItemGroupId">
+        UPDATE item
+           SET item_group_id = #{itemGroupId}
+         WHERE item_group_id = #{itemGroupId}
+    </update>
+
+    <select id="getItemRoomBySellerId" resultType="ItemVO">
+        SELECT *
+          FROM item
+         WHERE item_category = #{room}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+        ORDER BY created_at DESC
+         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+
+    </select>
+
+    <select id="getItemFlightBySellerId" resultType="ItemVO">
+        SELECT *
+          FROM item
+         WHERE item_category = #{flight}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+        ORDER BY created_at DESC
+         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="countRoom" resultType="Integer">
+        SELECT count(*)
+          FROM item
+         WHERE item_category = #{room}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+
+    </select>
+
+    <select id="countFlight" resultType="Integer">
+        SELECT count(*)
+        FROM item
+        WHERE item_category = #{flight}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+
+    </select>
+
+    <select id="getItemVOList" resultType="ItemVO">
+        SELECT *
+        FROM item
+        WHERE item_category = #{room}
+    </select>
 </mapper>

@@ -1,7 +1,7 @@
 package com.triplan.controller;
 
 import com.triplan.domain.MemberVO;
-import com.triplan.util.JwtUtils;
+import com.triplan.security.MemberPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-    private final JwtUtils jwtUtils;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody MemberVO memberVO) {
@@ -33,9 +32,8 @@ public class AuthController {
 
             SecurityContextHolder.getContext().setAuthentication(auth);
 
-            String jwt = jwtUtils.generateToken(auth);
-
-            return ResponseEntity.ok(jwt);
+            MemberPrincipal memberPrincipal = (MemberPrincipal) auth.getPrincipal();
+            return ResponseEntity.ok(memberPrincipal.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }

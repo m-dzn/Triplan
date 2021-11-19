@@ -65,8 +65,8 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 
         if (!files.isEmpty()) {
             // 기존 파일 삭제
-            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.ITEM, itemGroupVO.getItemGroupId());
-            AttachmentUtil.deleteAttachments(filesToDelete);
+            AttachmentVO oldAttachmentVO = attachmentMapper.select(AboutTableType.ITEM, itemGroupVO.getItemGroupId());
+            AttachmentUtil.deleteAttachment(oldAttachmentVO);
             attachmentMapper.delete(AboutTableType.ITEM, itemGroupVO.getItemGroupId());
             itemGroupVO.setItemImg("");
 
@@ -94,8 +94,8 @@ public class ItemGroupServiceImpl implements ItemGroupService {
     @Override
     public void deleteItemGroup(Integer itemGroupId) {
         itemGroupMapper.delete(itemGroupId);
-        List<AttachmentVO> list = attachmentMapper.select(AboutTableType.ITEM, itemGroupId);
-        AttachmentUtil.deleteAttachments(list);
+        AttachmentVO attachmentVO = attachmentMapper.select(AboutTableType.ITEM, itemGroupId);
+        AttachmentUtil.deleteAttachment(attachmentVO);
 
         attachmentMapper.delete(AboutTableType.ITEM, itemGroupId);
     }

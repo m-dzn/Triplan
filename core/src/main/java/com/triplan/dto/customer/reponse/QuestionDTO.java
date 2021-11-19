@@ -4,6 +4,8 @@ import com.triplan.domain.QuestionVO;
 import com.triplan.enumclass.QuestionType;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,7 +17,10 @@ import java.time.LocalDateTime;
 public class QuestionDTO {
 
     private Integer questionId;
+    @NotBlank
+    @Size(max = 100)
     private String title;
+    @NotBlank
     private String content;
     private LocalDateTime createdAt;
     private Boolean hide;
@@ -23,6 +28,7 @@ public class QuestionDTO {
     private Integer qnaCategoryId;
     private Integer itemGroupId;
     private QuestionType type;
+    private Boolean isAnswered;
 
     public static QuestionDTO of(QuestionVO vo) {
 
