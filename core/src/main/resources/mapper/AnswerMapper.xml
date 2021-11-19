@@ -32,4 +32,11 @@
         WHERE   question_id = #{questionId}
     </delete>
 
+    <select id="isAnswered" resultType="Boolean">
+        SELECT exists(
+                        SELECT COUNT(*)
+                        FROM answer
+                        WHERE question_id = #{questionId}
+        )
+    </select>
 </mapper>

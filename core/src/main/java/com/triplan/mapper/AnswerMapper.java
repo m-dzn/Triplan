@@ -15,4 +15,6 @@ public interface AnswerMapper {
 
     void delete(Integer questionId);
 
+    Boolean isAnswered(Integer questionId);
+
 }

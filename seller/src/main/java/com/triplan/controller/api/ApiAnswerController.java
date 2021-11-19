@@ -2,8 +2,6 @@ package com.triplan.controller.api;
 
 
 import com.triplan.domain.AnswerVO;
-import com.triplan.dto.customer.reponse.QuestionDTO;
-import com.triplan.dto.response.Pagination;
 import com.triplan.service.inf.AnswerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

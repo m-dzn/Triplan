@@ -25,7 +25,7 @@ public class ApiQuestionController {
 
     // 문의 글 하나 상세 조회
     @GetMapping("/{questionId}")
-    public QuestionVO getQuestion(@PathVariable int questionId) {
+    public QuestionDTO getQuestion(@PathVariable int questionId) {
         System.out.println(" C : getQ 실행@@@@@@@@@@@@");
 
         return questionService.getQuestion(questionId);
@@ -46,9 +46,9 @@ public class ApiQuestionController {
     }
 
     /* 리스트 조회 메서드 -> 다 페이징 */
-    // 상품 상세 페이지 : SELLER to ADMIN 문의 사항 목록
+    // 상품 상세 페이지 :CUSTOMER to SELLER  문의 사항 목록
     @GetMapping("/itemGroups/{itemGroupId}")
-    public Pagination<QuestionVO> questionListByItemGroupId(
+    public Pagination<QuestionDTO> questionListByItemGroupId(
             @PathVariable Integer itemGroupId,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "1") Integer currentPage
@@ -58,13 +58,15 @@ public class ApiQuestionController {
 
     // 판매자 페이지 : 판매자에게 물어보는 고객의 질문 목록
     @GetMapping("/sellers/{sellerId}")
-    public Pagination<QuestionVO> questionListBySellerId(
+    public Pagination<QuestionDTO> questionListBySellerId(
             @PathVariable Integer sellerId,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "1") Integer currentPage
     ) {
         return questionService.listBySellerId(pageSize, currentPage, sellerId);
     }
+
+
 
 }
 

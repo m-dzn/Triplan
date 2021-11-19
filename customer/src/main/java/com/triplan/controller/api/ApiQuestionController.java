@@ -1,6 +1,7 @@
 package com.triplan.controller.api;
 
 import com.triplan.domain.QuestionVO;
+import com.triplan.dto.customer.reponse.QuestionDTO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.service.inf.QuestionService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class ApiQuestionController {
 
     // 문의 글 하나 상세 조회
     @GetMapping("/{questionId}")
-    public QuestionVO getQuestion(@PathVariable int questionId) {
+    public QuestionDTO getQuestion(@PathVariable int questionId) {
         System.out.println(" C : getQ 실행@@@@@@@@@@@@");
 
         return questionService.getQuestion(questionId);
@@ -47,7 +48,7 @@ public class ApiQuestionController {
     /* 리스트 조회 메서드 -> 다 페이징 */
     // 상품 상세 페이지 : CUSTOMER to ADMIN 문의 사항 목록
     @GetMapping
-    public Pagination<QuestionVO> listFromCustomerToAdmin(
+    public Pagination<QuestionDTO> listFromCustomerToAdmin(
             @RequestParam("pageSize") Integer pageSize,
             @RequestParam("currentPage") Integer currentPage
     ) {
@@ -55,7 +56,7 @@ public class ApiQuestionController {
     }
 
     @GetMapping("/itemGroups/{itemGroupId}")
-    public Pagination<QuestionVO> questionListByItemGroupId(
+    public Pagination<QuestionDTO> questionListByItemGroupId(
             @PathVariable Integer itemGroupId,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "1") Integer currentPage
@@ -65,7 +66,7 @@ public class ApiQuestionController {
 
     // 회원 정보 페이지 : 자기가 작성한 문의 글 목록
     @GetMapping("/members")
-    public Pagination<QuestionVO> questionLIstByMemberId(
+    public Pagination<QuestionDTO> questionLIstByMemberId(
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "1") Integer currentPage
     ) {
@@ -73,26 +74,7 @@ public class ApiQuestionController {
         return questionService.listByMemberId(pageSize, currentPage, memberId);
 
     }
-
-//    @GetMapping
-//    public Pagination<QuestionVO> questionListBySellerIdPage(
-//            @RequestParam(defaultValue = "10") Integer pageSize,
-//            @RequestParam(defaultValue = "1") Integer currentPage)
-//    {
-//        return questionService.questionListBySellerIdListPage(pageSize, currentPage);
-//    }
-
-//    @GetMapping
-//    public Pagination<QuestionVO> questionListByMemberIdListPage(
-//            @PathVariable Integer memberId,
-//            @RequestParam(defaultValue = "10") Integer pageSize,
-//            @RequestParam(defaultValue = "1") Integer currentPage)
-//    {
-//        return questionService.questionListByMemberIdListPage(memberId, pageSize, currentPage);
-//    }
 }
-
-
 
 
 

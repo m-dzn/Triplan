@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 @Getter
 @Setter
 @ToString
@@ -16,7 +19,10 @@ public class QuestionVO extends BaseVO {
     private Integer questionId;
 
     // 필수 입력 필드 : Default 없는 NOT NULL 필드
+    @NotBlank
+    @Size(max = 100)
     private String title;
+    @NotBlank
     private String content;
     private QuestionType type;
 
