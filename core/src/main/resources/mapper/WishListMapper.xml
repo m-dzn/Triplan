@@ -14,7 +14,7 @@
         )
     </insert>
 
-    <select id="select" resultType="ItemGroupVO">
+    <select id="select" resultType="WishlistVO">
         SELECT  *
         FROM    wishlist
         WHERE   wishlist_id = #{wishlistId}
