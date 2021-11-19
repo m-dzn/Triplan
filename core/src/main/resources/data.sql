@@ -12,6 +12,13 @@ VALUES ('1', 'Com. Trip', '010-1111-1111', '손명진', 'smj@gmail.com', '00-000
 INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id)
 VALUES ('부산 해운대 하얏트 호텔', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1);
 
+INSERT INTO wishlist (member_id, item_group_id)
+VALUES (1, 1);
+INSERT INTO wishlist (member_id, item_group_id)
+VALUES (1, 1);
+INSERT INTO wishlist (member_id, item_group_id)
+VALUES (1, 1);
+
 INSERT INTO item (name, `explain`, item_category, item_group_id)
 VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 1);
 INSERT INTO item (name, `explain`, item_category, item_group_id)

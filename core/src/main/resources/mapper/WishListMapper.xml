@@ -33,6 +33,8 @@
                 item_category,
                 location,
                 like_count,
+                review_count,
+                item_img,
                 wl.created_at
         FROM
                 wishlist wl JOIN item_group ig
