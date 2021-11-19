@@ -41,7 +41,7 @@
         WHERE
                 member_id = #{memberId}
         ORDER BY
-                created_at DESC
+                wl.created_at DESC
         LIMIT
                 (#{currentPage} - 1) * #{pageSize}, #{pageSize}
     </select>
@@ -55,8 +55,6 @@
                 wl.item_group_id = ig.item_group_id
         WHERE
                 member_id = #{memberId}
-        ORDER BY
-                wl.created_at DESC
     </select>
 
     <select id="exist" resultType="boolean">
