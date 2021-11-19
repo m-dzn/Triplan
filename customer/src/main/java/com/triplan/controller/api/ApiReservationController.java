@@ -44,7 +44,7 @@ public class ApiReservationController {
     @PostMapping("/reserve/{itemScheduleId}/{memberCouponId}")
     public Integer reserve(@PathVariable Integer itemScheduleId, @PathVariable Integer memberCouponId,
                           @Valid @RequestBody ReservationDTO reservationDTO) {
-        Integer result = reservationService.reserve(itemScheduleId, memberCouponId, reservationDTO);
+        Integer resId = reservationService.reserve(itemScheduleId, memberCouponId, reservationDTO);
         // * 받아와야할 거
         // - 상품 : itemCategory, totalPrice, startDate, endDate + itemScheduleId
         // - 사용자 입력 : name, phone
@@ -52,7 +52,7 @@ public class ApiReservationController {
         // - 회원 로그인 정보 : memberId
 
         // result : -1(예약 실패), 0(예약 실패-쿠폰 사용 불가), 1(예약 성공)
-        return result;
+        return resId;
     }
 
     // 예약 취소 : cancellation 0 -> 1

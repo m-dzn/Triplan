@@ -3,24 +3,57 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/layout">
 
-<div layout:fragment="content">
-    <table>
-        <tr>
-            <td>글번호</td>
-            <td>글 번호 불러오는 메소드 넣어주세요</td>
-            <td>작성일</td>
-            <td>작성일 불러오는 메소드 넣어주세요</td>
+<div layout:fragment="content" class="margin-top-40">
+    <table style="width: 45%;"class="table table-bordered table-margin-auto">
+        <tr class="text-align-center">
+            <td style="width: 13%"  class="font-size-16">글번호</td>
+            <td style="width: 12%" class="font-size-16" id="noticeId">1</td>
+            <td style="width: 14%" class="font-size-16">작성일</td>
+            <td style="width: 20%"  class="font-size-16" id="noticeCreatedAt">2011-11-11</td>
         </tr>
         <tr>
-            <td>제목</td>
-            <td colspan="3">제목 불러오는 메소드 넣어주세요</td>
+            <td class="text-align-center">제목</td>
+            <td colspan="3" id="noticeTitle">제목 불러오는 메소드 넣어주세요</td>
         </tr>
         <tr>
-            <td>내용</td>
-            <td colspan="3">내용 불러오는 메소드 넣어주세요</td>
+            <td class="text-align-center">내용</td>
+            <td colspan="3" id="noticeContent">내용 불러오는 메소드 넣어주세요</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <button><a href="notupd">글 수정</a></button>
+                <button><a href="warning">글 삭제</a></button>
+            </td>
         </tr>
     </table>
-    <button><a href="notupd">글 수정</a></button>
-    <button><a href="warning">글 삭제</a></button>
 </div>
+
+<th:block layout:fragment="script">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var noticeId = document.getElementById("noticeId");
+            var noticeTitle = document.getElementById("noticeTitle");
+            var noticeContent = document.getElementById("noticeContent");
+            var noticeCreatedAt = document.getElementById("noticeCreatedAt");
+
+            // JS로 URL의 쿼리 파라미터 가져오기
+            var url = new URL(location.href);
+            var noticeUrlId = url.searchParams.get("noticeId");
+
+            fetch(`${BASE_URL}/api/notices/${noticeUrlId}`, {
+                method: 'GET'
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+            }).then(notice => {
+                // 태그 엘리먼트에 데이터를 붙여주면 됨
+                noticeId.innerText = notice.noticeId;
+                noticeTitle.innerText = notice.title;
+                noticeContent.innerText = notice.content;
+                noticeCreatedAt.innerText = moment(notice.createdAt).format(DATE_FORMAT_KOR);
+            });
+        });
+    </script>
+</th:block>
 </html>

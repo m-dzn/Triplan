@@ -11,6 +11,10 @@
     */
 }
 
+.table-margin-auto {
+    margin: auto;
+}
+
 .nav-link {
     font-size: 20px;
     font-weight: bold;
@@ -50,7 +54,9 @@
     color: gray;
 }
 
-
+.color-purple{
+    color: #9c27b0cc;
+}
 
 .font-weight-normal{
     font-weight: normal;
