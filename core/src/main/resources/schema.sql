@@ -1,7 +1,7 @@
 CREATE TABLE `Member` (
 	`member_id`	INT AUTO_INCREMENT	NOT NULL,
 	`email`	VARCHAR(50)	NOT NULL,
-	`password`	VARCHAR(255)	NOT NULL,
+	`password`	VARCHAR(255)	NULL,
 	`nickname`	VARCHAR(20)	NOT NULL,
 	`email_confirm`	TINYINT	NOT NULL	DEFAULT 0	COMMENT 'Boolean',
 	`state`	VARCHAR(20)	NOT NULL	DEFAULT 'REGISTER',
