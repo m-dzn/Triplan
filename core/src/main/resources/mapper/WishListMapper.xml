@@ -14,7 +14,7 @@
         )
     </insert>
 
-    <select id="select" resultType="ItemGroupVO">
+    <select id="select" resultType="WishlistVO">
         SELECT  *
         FROM    wishlist
         WHERE   wishlist_id = #{wishlistId}
@@ -33,6 +33,8 @@
                 item_category,
                 location,
                 like_count,
+                review_count,
+                item_img,
                 wl.created_at
         FROM
                 wishlist wl JOIN item_group ig
@@ -41,7 +43,7 @@
         WHERE
                 member_id = #{memberId}
         ORDER BY
-                created_at DESC
+                wl.created_at DESC
         LIMIT
                 (#{currentPage} - 1) * #{pageSize}, #{pageSize}
     </select>
@@ -55,8 +57,6 @@
                 wl.item_group_id = ig.item_group_id
         WHERE
                 member_id = #{memberId}
-        ORDER BY
-                created_at DESC
     </select>
 
     <select id="exist" resultType="boolean">

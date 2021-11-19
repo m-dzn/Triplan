@@ -39,6 +39,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public Pagination<QuestionVO> listFromCustomerToAdmin(Integer pageSize, Integer currentPage) {
+        List<QuestionVO> list = questionMapper.listFromCustomerToAdmin(pageSize, currentPage);
+        Integer count = questionMapper.countFromCustomerToAdmin();
+        return new Pagination<>(pageSize, currentPage, count, list);
+    }
+
+    @Override
     public Pagination<QuestionVO> listByItemGroupId(Integer pageSize, Integer currentPage, Integer itemGroupId) {
         List<QuestionVO> questionListByItemGroupIdListPage = questionMapper.listByItemGroupId(pageSize, currentPage, itemGroupId);
 

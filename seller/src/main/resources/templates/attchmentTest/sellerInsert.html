@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="sellerInsert">
+    businessLicenseNumber<input name="businessLicenseNumber" value="1"> <br>
+    businessName<input name="businessName" value="1"> <br>
+    tel<input name="tel" value="1"> <br>
+    ownerName<input name="ownerName" value="1"> <br>
+    email<input name="email" value="1"> <br>
+    businessAccount<input name="businessAccount" value="1"> <br>
+    privateBusiness<input name="privateBusiness" type="checkbox" checked> <br>
+    zipCode<input name="zipCode" value="1"> <br>
+    address<input name="address" value="1"> <br>
+    file<input name="file" type="file">
+    <input name="memberId" type="hidden" value="1">
+</form>
+<button id="testBtn">제출</button>
+<h3>수정</h3>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var testBtn = document.getElementById("testBtn");
+
+            console.log("pri boolean: ",  document.sellerInsert.privateBusiness.checked);
+            var formData = new FormData();
+
+            testBtn.addEventListener("click", function() {
+                formData.append("file", document.sellerInsert.file.files[0]);
+                formData.append("seller", new Blob([
+                    JSON.stringify({
+                        "businessLicenseNumber": document.sellerInsert.businessLicenseNumber.value,
+                        "businessName": document.sellerInsert.businessName.value,
+                        "tel": document.sellerInsert.tel.value,
+                        "ownerName": document.sellerInsert.ownerName.value,
+                        "email": document.sellerInsert.email.value,
+                        "businessAccount": document.sellerInsert.businessAccount.value,
+                        "privateBusiness": document.sellerInsert.privateBusiness.checked,
+                        "zipCode": document.sellerInsert.zipCode.value,
+                        "address": document.sellerInsert.address.value,
+                        "memberId": document.sellerInsert.memberId.value
+                    })
+                ], { type: "application/json" }));
+
+                fetch(`http://localhost:8083/api/sellers`, {
+                    method: 'POST',
+                    body: formData
+                }).then(response => console.log(response));
+            });
+        });
+    </script>
+</body>
+</html>

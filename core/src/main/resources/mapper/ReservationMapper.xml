@@ -34,6 +34,14 @@
         WHERE   res_id = #{resId}
     </select>
 
+    <!--메인페이지 예약건수 조회-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT  count(res_id)
+        FROM    reservation
+        WHERE   seller_id = #{sellerId}
+    </select>
+
+
     <update id="update">
         UPDATE  reservation
         SET

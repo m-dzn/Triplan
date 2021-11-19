@@ -9,6 +9,7 @@ import com.triplan.mapper.MemberMapper;
 import com.triplan.service.inf.MemberService;
 import com.triplan.util.AttachmentUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,8 +22,10 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
     private final AttachmentMapper attachmentMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public void register(MemberVO memberVO) {
+        memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
         memberMapper.insert(memberVO);
     }
 
@@ -97,7 +100,7 @@ public class MemberServiceImpl implements MemberService {
             }
         }
 
-            memberMapper.updateBasicInfo(memberProfileDTO.toVO());
+        memberMapper.updateBasicInfo(memberProfileDTO.toVO());
     }
 
 

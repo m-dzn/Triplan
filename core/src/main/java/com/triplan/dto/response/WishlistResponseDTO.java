@@ -19,6 +19,8 @@ public class WishlistResponseDTO {
     private ItemCategory itemCategory;
     private String location;
     private Integer likeCount;
+    private Integer reviewCount;
+    private String itemImg;
     private LocalDateTime createdAt; // 찜 등록일
 
 }

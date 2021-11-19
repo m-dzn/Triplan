@@ -27,4 +27,8 @@ public interface QuestionMapper {
     List<QuestionVO> listByMemberId(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage, @Param("memberId") Integer memberId);
     int countByMemberId(Integer memberId);
 
+    List<QuestionVO> listFromCustomerToAdmin(Integer pageSize, Integer currentPage);
+
+    Integer countFromCustomerToAdmin();
+
 }

@@ -27,6 +27,7 @@ public class PaymentVO extends BaseVO {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime paymentDeadline;
+    private LocalDateTime paidAt;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime paidAt;

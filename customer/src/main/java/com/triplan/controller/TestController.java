@@ -131,4 +131,15 @@ public class TestController {
     public String proqnaupd() {
         return "product_detail_qna_update";
     }
+
+    @GetMapping({"/payAfter"})
+    public String payAfter() {
+        return "payAfter";
+    }
+
+    @GetMapping({"/myReservation"})
+    public String myReservation() {
+        return "mypage_reservation";
+    }
+
 }
