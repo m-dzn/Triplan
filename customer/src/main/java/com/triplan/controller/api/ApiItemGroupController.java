@@ -19,17 +19,17 @@ public class ApiItemGroupController {
     private final ItemGroupService itemGroupService;
 
     @GetMapping("/{itemGroupId}")
-    public ItemGroupVO getItemGroup(@PathVariable Integer itemGroupId){
+    public ItemGroupVO getItemGroup(@PathVariable Integer itemGroupId) {
         ItemGroupVO itemGroupVO = itemGroupService.getItemGroup(itemGroupId);
         return itemGroupVO;
     }
 
     @GetMapping("/{itemGroupId}/items")
-    public ItemGroupResponseDTO getItemGroupByItemGroupId(@PathVariable Integer itemGroupId){
+    public ItemGroupResponseDTO getItemGroupByItemGroupId(@PathVariable Integer itemGroupId) {
         return itemGroupService.getItemList(itemGroupId);
     }
 
-    @GetMapping("/filter")//
+    @GetMapping("/filter")
     public Pagination<ItemGroupVO> getSearchFilterDate(@RequestParam(value = "startDate", required = false, defaultValue = "2000-01-01 00:00:00") String FomstartDate,
                                                        @RequestParam(value = "endDate", required = false, defaultValue = "9999-12-30 11:59:59" ) String FomendDate,
                                                        @RequestParam(value = "underPrice", required = false) Integer underPrice,
@@ -37,14 +37,12 @@ public class ApiItemGroupController {
                                                        @RequestParam(value = "tags",required = false) List<Integer> tags,
                                                        @RequestParam(value = "sortType",required = false) String sortType,
                                                        @RequestParam(defaultValue = "5") Integer pageSize,
-                                                       @RequestParam(defaultValue = "1") Integer currentPage){
-
+                                                       @RequestParam(defaultValue = "1") Integer currentPage) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime startDate = LocalDateTime.parse(FomstartDate, formatter);
         LocalDateTime endDate = LocalDateTime.parse(FomendDate, formatter);
 
         return itemGroupService.getFilterAsDate(startDate,endDate,underPrice,overPrice,tags,sortType,pageSize,currentPage);
     }
-
 
 }

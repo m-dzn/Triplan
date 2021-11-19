@@ -38,8 +38,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 
         List<ItemVO> itemVO = itemMapper.getItemByItemGroupId(itemGroupId);
 
-        if(itemVO.get(0).getItemCategory().equals(ItemCategory.ROOM)){
-            System.out.println("room");
+        if (itemVO.get(0).getItemCategory().equals(ItemCategory.ROOM)){
             List<ItemRoomResponseDTO> itemRoomResponseDTO = itemVO.stream()
                     .map(ItemRoomResponseDTO::of).collect(Collectors.toList());
 
@@ -52,7 +51,6 @@ public class ItemGroupServiceImpl implements ItemGroupService {
             return itemGroupResponseDTO;
         }
         else if(itemVO.get(0).getItemCategory().equals(ItemCategory.FLIGHT)){
-            System.out.println("flight");
             List<ItemFlightResponseDTO> itemFlightResponseDTO = itemVO.stream()
                     .map(ItemFlightResponseDTO::of).collect(Collectors.toList());
 
@@ -84,7 +82,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
         List<ItemGroupVO> itemGroupVOS = null;
         Integer count = 0;
 
-        if(sortType != null){
+        if(sortType != null) {
             List<ItemGroupVO> sortItemGroupId = itemSearchMapper.getFilterAndSort(startDate, endDate, underPrice, overPrice, tags,sortType, pageSize, currentPage, Data);
             itemGroupVOS = itemGroupMapper.selectAllSort(sortItemGroupId,sortType);
             count = itemSearchMapper.getCount(startDate, endDate, underPrice, overPrice, tags, Data);

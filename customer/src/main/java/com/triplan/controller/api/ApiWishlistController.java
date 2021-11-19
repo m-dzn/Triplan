@@ -14,9 +14,9 @@ public class ApiWishlistController {
     private final WishlistService wishListService;
 
     @PostMapping
-    public String addToWishList(@RequestParam Integer itemId) {
+    public String addToWishList(@RequestParam Integer itemGroupId) {
         Integer memberId = 1;
-        wishListService.addToWishlist(memberId, itemId);
+        wishListService.addToWishlist(memberId, itemGroupId);
         return "위시리스트 추가 성공";
     }
 

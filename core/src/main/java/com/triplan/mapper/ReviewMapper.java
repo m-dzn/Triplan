@@ -1,6 +1,7 @@
 package com.triplan.mapper;
 
 import com.triplan.domain.ReviewVO;
+import com.triplan.dto.ReviewDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,8 +20,8 @@ public interface ReviewMapper {
 
     List<ReviewVO> list();
 
-    List<ReviewVO> page(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
+    List<ReviewDTO> listByItemGroupId(@Param("itemGroupId") Integer itemGroupId, @Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
 
-    int count(Integer itemId);
+    int countByItemGroupId(Integer itemId);
 
 }

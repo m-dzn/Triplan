@@ -1,8 +1,8 @@
 package com.triplan.service.inf;
 
 import com.triplan.domain.ReviewVO;
+import com.triplan.dto.ReviewDTO;
 import com.triplan.dto.response.Pagination;
-import com.triplan.enumclass.AboutTableType;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public interface ReviewService {
 
     List<ReviewVO> reviewList();
 
-    Pagination<ReviewVO> page(Integer itemId, Integer pageSize, Integer currentPage);
+    Pagination<ReviewDTO> listByItemGroupId(Integer itemGroupId, Integer pageSize, Integer currentPage);
 
     void reviewDelete(Integer reviewId);
 

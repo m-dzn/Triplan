@@ -2,6 +2,7 @@ package com.triplan.service;
 
 import com.triplan.domain.AttachmentVO;
 import com.triplan.domain.ReviewVO;
+import com.triplan.dto.ReviewDTO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.AboutTableType;
 import com.triplan.mapper.AttachmentMapper;
@@ -93,9 +94,9 @@ public class ReviewServiceImpl implements ReviewService {
 
     /* 페이징 처리 */
     @Override
-    public Pagination<ReviewVO> page(Integer itemId, Integer pageSize, Integer currentPage) {
-        List<ReviewVO> reviewPage = reviewMapper.page(pageSize,currentPage);
-        int totalReviews = reviewMapper.count(itemId);
+    public Pagination<ReviewDTO> listByItemGroupId(Integer itemGroupId, Integer pageSize, Integer currentPage) {
+        List<ReviewDTO> reviewPage = reviewMapper.listByItemGroupId(itemGroupId, pageSize,currentPage);
+        int totalReviews = reviewMapper.countByItemGroupId(itemGroupId);
 
         return new Pagination<>(pageSize,currentPage,totalReviews,reviewPage);
     }

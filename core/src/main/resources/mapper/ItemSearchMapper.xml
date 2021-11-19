@@ -14,7 +14,7 @@
         FROM item
         JOIN item_group
         ON item.item_group_id = item_group.item_group_id
-        JOIN item_group_tag
+        LEFT OUTER JOIN item_group_tag
         ON item_group.item_group_id = item_group_tag.item_group_id
         WHERE item_id in(
         SELECT DISTINCT item_id
@@ -32,7 +32,6 @@
             #{item}
         </foreach> )
         </if>
-
         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
 
     </select>
@@ -42,7 +41,7 @@
         FROM item
         JOIN item_group
         ON item.item_group_id = item_group.item_group_id
-        JOIN item_group_tag
+        LEFT OUTER JOIN item_group_tag
         ON item_group.item_group_id = item_group_tag.item_group_id
         WHERE item_id in(
         SELECT DISTINCT item_id
@@ -68,7 +67,7 @@
         FROM item
         JOIN item_group
         ON item.item_group_id = item_group.item_group_id
-        JOIN item_group_tag
+        LEFT OUTER JOIN item_group_tag
         ON item_group.item_group_id = item_group_tag.item_group_id
         WHERE item_id in(
             SELECT DISTINCT item_id
@@ -82,7 +81,7 @@
             </if>
                 )
         <if test="tags != null">
-        AND tag_id in( <foreach collection="tags" item="item" index="idx" separator=",">
+        AND tag_id in ( <foreach collection="tags" item="item" index="idx" separator=",">
             #{item}
             </foreach> )
         </if>
