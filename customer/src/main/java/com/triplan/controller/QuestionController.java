@@ -19,7 +19,7 @@ public class QuestionController {
     public String register(QuestionVO questionVO) {
         questionService.create(questionVO);
         System.out.println(" C : Create 실행");
-        return "qna";
+        return "redirect:/questions/qnaBoard";
     }
 
     @PutMapping("/{questionId}")
@@ -42,6 +42,11 @@ public class QuestionController {
     {
         model.addAttribute("pagination", questionService.listFromCustomerToAdmin(pageSize, currentPage));
         return "qna";
+    }
+
+    @GetMapping({"/qnawri"})
+    public String qnawri() {
+        return "qna_write";
     }
 }
 
