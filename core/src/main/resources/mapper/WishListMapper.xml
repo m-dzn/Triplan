@@ -56,7 +56,7 @@
         WHERE
                 member_id = #{memberId}
         ORDER BY
-                created_at DESC
+                wl.created_at DESC
     </select>
 
     <select id="exist" resultType="boolean">
