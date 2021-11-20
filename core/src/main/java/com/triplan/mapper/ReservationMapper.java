@@ -46,4 +46,7 @@ public interface ReservationMapper {
 
     void giveBackCoupon(@Param("resId") Integer resId, @Param("memberId") Integer memberId);
 
+    void updateStockByItemSchedule(Integer itemScheduleId);
+
+    void updateSalesVolumeByItem(Integer itemScheduleId);
 }

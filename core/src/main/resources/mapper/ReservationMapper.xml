@@ -173,4 +173,16 @@
         ORDER BY    updated_at DESC
     </select>
 
+    <update id="updateStockByItemSchedule">
+        UPDATE  item_schedule
+        SET
+        stock = stock-1
+        WHERE   item_schedule_id  = #{itemScheduleId}
+    </update>
+
+    <update id="updateSalesVolumeByItem">
+        UPDATE item
+        SET sales_volume = sales_volume+1
+        where item_id = (select item_id from item_schedule where item_schedule_id = #{itemScheduleId})
+    </update>
 </mapper>

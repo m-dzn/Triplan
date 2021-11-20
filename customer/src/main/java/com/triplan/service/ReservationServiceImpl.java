@@ -77,6 +77,10 @@ public class ReservationServiceImpl implements ReservationService {
             }
         }
 
+        // 저장 작업 완료 후
+        reservationMapper.updateStockByItemSchedule(itemScheduleId);
+        reservationMapper.updateSalesVolumeByItem(itemScheduleId);
+
 //        return result;
         return resId;
     }
