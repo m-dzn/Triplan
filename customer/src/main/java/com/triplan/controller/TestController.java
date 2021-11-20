@@ -5,11 +5,34 @@
 
 package com.triplan.controller;
 
+import com.triplan.domain.ItemGroupVO;
+import com.triplan.dto.MemberCouponDTO;
+import com.triplan.dto.customer.response.ItemRoomResponseDTO;
+import com.triplan.enumclass.ItemCategory;
+import com.triplan.service.inf.ItemGroupService;
+import com.triplan.service.inf.ItemService;
+import com.triplan.service.inf.MemberCouponService;
+import com.triplan.service.inf.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class TestController {
+
+    @Autowired
+    MemberCouponService memberCouponService;
+    @Autowired
+    ItemGroupService itemGroupService;
+    @Autowired
+    ItemService itemService;
+    @Autowired
+    PaymentService paymentService;
+
     public TestController() {
     }
 
@@ -47,8 +70,35 @@ public class TestController {
         return "join";
     }
 
-    @GetMapping({"/pay"})
-    public String pay() {
+    @GetMapping({"/pay"}) // 예약/결제창
+    public String pay(Model model) {
+    // URL로 받아올거 : memberId, sellerId, itemScheduleId, itemId, itemGroupId, choid_set[begin_at, end_at]
+        // 테스트 데이터
+        Integer memberId = 1; Integer sellerId = 1; Integer itemScheduleId = 1; Integer itemId = 1; Integer itemGroupId = 1;
+        String startDate = "2021-12-1"; String endDate = "2021-12-5";
+
+    // 프론트로 넘겨줄거 :  쿠폰목록, 아이템그룹정보, 아이템정보, 상품 시작, 종료기간 memberId, sellerId, itemScheduleId, itemId, itemGroupId
+        // 테스트 데이터
+
+        // 내 쿠폰 목록 - 쿠폰id, 쿠폰명, 할인금액
+        List<MemberCouponDTO> couponList = memberCouponService.myAvailableCouponList(memberId);
+        model.addAttribute("couponList", couponList);
+        // 아이템 그륩 정보 - 상품그룹명
+        ItemGroupVO itemGroupVO = itemGroupService.getItemGroup(itemGroupId);
+        model.addAttribute("itemGroup", itemGroupVO);
+        // 아이템 정보 - 상품명
+        ItemRoomResponseDTO itemRoomResponseDTO = itemService.getDetailRoomByItemId(ItemCategory.ROOM, itemId);
+        model.addAttribute("item", itemRoomResponseDTO);
+        // 상품 시작, 종료 기간
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        // memberId
+        model.addAttribute("memberId", memberId);
+        // sellerId
+        model.addAttribute("sellerId", sellerId);
+        // itemSchedule Id
+        model.addAttribute("itemScheduleId" , itemScheduleId);
+
         return "pay";
     }
 
