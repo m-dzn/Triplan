@@ -5,6 +5,7 @@ import com.triplan.domain.ItemVO;
 import com.triplan.domain.RoomVO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
+import com.triplan.dto.response.RoomCardResponseDTO;
 import com.triplan.enumclass.ItemCategory;
 import com.triplan.mapper.FlightMapper;
 import com.triplan.mapper.ItemMapper;
@@ -13,6 +14,9 @@ import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -56,6 +60,11 @@ public class ItemServiceImpl implements ItemService {
         itemFlightResponseDTO.setFlightVO(flightVO);
 
         return itemFlightResponseDTO;
+    }
+
+    @Override
+    public List<RoomCardResponseDTO> getItemsByItemGroupId(Integer itemGroupId, LocalDate startDate, LocalDate endDate) {
+        return itemMapper.getItemsByItemGroupId(itemGroupId, startDate, endDate);
     }
 
 }

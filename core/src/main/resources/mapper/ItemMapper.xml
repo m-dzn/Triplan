@@ -146,7 +146,7 @@
         WHERE item_category = #{room}
     </select>
 
-    <select id="getItemsByItemGroupId" resultType="ItemVO">
+    <select id="getItemsByItemGroupId" resultType="com.triplan.dto.response.RoomCardResponseDTO">
         SELECT *
         FROM item
         JOIN (
@@ -154,14 +154,16 @@
                 item_id,
                 MIN(start_date) start_date,
                 MAX(end_date) end_date,
-                AVG(price) price
+                AVG(price) price_per_day,
+                AVG(discount_price) discount_per_day,
+                SUM(price) total_price,
+                SUM(discount_price) total_discount_price
             FROM    item_schedule
-            GROUP `BY item_id
+            WHERE   start_date &gt;= #{startDate}
+              AND   end_date &lt;= #{endDate}
+            GROUP BY item_id
         ) USING (item_id)
         WHERE   item_group_id = #{itemGroupId}
-        AND     start_date &gt;= #{startDate}
-        AND     end_date &lt;= #{endDate}
-        AND     price &gt;= #{overPrice}
     </select>
 
 </mapper>

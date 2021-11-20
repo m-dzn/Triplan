@@ -8,18 +8,25 @@ var productDetail = {
     reviewContainer: $("#reviewContainer"),
     reviewPaginationGroup: $("#reviewPaginationGroup"),
 
+    itemGroupId: null,
+    startDate: null,
+    endDate: null,
+
     init: function() {
         var url = new URL(location.href);
-        var itemGroupId = url.searchParams.get("itemGroupId");
+        this.itemGroupId = url.searchParams.get("itemGroupId");
+        this.startDate = url.searchParams.get("startDate");
+        this.endDate = url.searchParams.get("endDate");
 
-        this.fetchItemGroupDetail(itemGroupId);
-        this.fetchReviewList(itemGroupId);
+        this.fetchItemGroupDetail();
+        this.fetchItemCards();
+        this.fetchReviewList();
     },
 
-    fetchItemGroupDetail: (itemGroupId) => {
+    fetchItemGroupDetail: function() {
         $.ajax({
             type: "GET",
-            url: `${BASE_URL}/api/item-groups/${itemGroupId}/items`,
+            url: `${BASE_URL}/api/item-groups/${this.itemGroupId}/items`,
             dataType: "json",
             success: (itemGroup) => {
                 console.log(itemGroup);
@@ -32,13 +39,28 @@ var productDetail = {
         })
     },
 
-    fetchReviewList: (itemGroupId) => {
+    fetchItemCards: function() {
         $.ajax({
             type: "GET",
-            url: `${BASE_URL}/api/reviews/item-groups/${itemGroupId}`,
+            url: `${BASE_URL}/api/items/item-groups/${this.itemGroupId}?${this.startDate ? `startDate=${this.startDate}&`:``}${this.endDate ? `endDate=${this.endDate}` : ``}`,
+            dataType: "json",
+            success: (item) => {
+                console.log(item);
+            }
+        })
+    },
+
+    fetchReviewList: function() {
+        $.ajax({
+            type: "GET",
+            url: `${BASE_URL}/api/reviews/item-groups/${this.itemGroupId}`,
             dataType: "json",
             success: (pagination) => {
                 console.log(pagination);
+
+                var pageSize = 10;
+                var currentPage = 1;
+
                 reviewContainer.innerHTML = pagination.list.map(review => `<div class="row mt-3 p-2">
                       <div class="col-12 d-flex">
                           <div>
@@ -73,8 +95,8 @@ var productDetail = {
 
                 reviewPaginationGroup.innerHTML = _html;
             }
-        })
-            fetch(`${BASE_URL}/api/reviews/item-groups/${itemGroupId}`, {
+        });
+            fetch(`${BASE_URL}/api/reviews/item-groups/${this.itemGroupId}`, {
                 method: 'GET'
             }).then(response => {
                 if (response.ok) {

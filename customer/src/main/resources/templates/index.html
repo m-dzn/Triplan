@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+
     <form name="profile">
         <input type="file" name="file">
     </form>
@@ -13,7 +14,6 @@
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("submit").addEventListener("click", () => {
-            console.log("memberImg");
             const formData = new FormData();
             formData.append("files", document.profile.file.files[0]);
 
