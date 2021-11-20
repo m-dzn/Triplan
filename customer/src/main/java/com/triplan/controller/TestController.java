@@ -6,19 +6,18 @@
 package com.triplan.controller;
 
 import com.triplan.domain.ItemGroupVO;
+import com.triplan.domain.PaymentVO;
 import com.triplan.dto.MemberCouponDTO;
+import com.triplan.dto.ReservationDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.enumclass.ItemCategory;
-import com.triplan.service.inf.ItemGroupService;
-import com.triplan.service.inf.ItemService;
-import com.triplan.service.inf.MemberCouponService;
-import com.triplan.service.inf.PaymentService;
+import com.triplan.service.inf.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -32,6 +31,8 @@ public class TestController {
     ItemService itemService;
     @Autowired
     PaymentService paymentService;
+    @Autowired
+    ReservationService reservationService;
 
     public TestController() {
     }
@@ -100,6 +101,17 @@ public class TestController {
         model.addAttribute("itemScheduleId" , itemScheduleId);
 
         return "pay";
+    }
+
+    @GetMapping("pay/payInfo/{paymentId}/{itemId}")
+    public String paymentCheck(@PathVariable("paymentId") Integer paymentId, @PathVariable("itemId") Integer itemId, Model model) {
+        PaymentVO paymentVO = paymentService.read(paymentId); // 결제테이블 정보
+        ReservationDTO reservationDTO = reservationService.select(paymentVO.getResId()); // 예약테이블 정보
+        String name = paymentService.readNameByItem(itemId); // 상품이름
+        model.addAttribute("payment" , paymentVO);
+        model.addAttribute("reservation", reservationDTO);
+        model.addAttribute("itemName", name);
+        return "payAfter";
     }
 
     @GetMapping({"/prodet"})
