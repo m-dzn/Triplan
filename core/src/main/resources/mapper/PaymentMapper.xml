@@ -71,4 +71,9 @@
         GROUP BY FORMATDATETIME(paid_at, 'yyyy-MM-dd');
     </select>
 
+    <select id="getNameByItem" resultType="String">
+        SELECT name
+        FROM item
+        WHERE item_id  = #{itemId}
+    </select>
 </mapper>

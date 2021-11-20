@@ -17,17 +17,19 @@
                         <div class="col-auto" style="
     padding-left: 16px;
 ">
-                            <div class="row 4 font-size-20 font-weight-bold">
-                                상품 그룹 이름 전달 받는 메소드는 이 곳에
+                            <div class="row 4 font-size-20 font-weight-bold" id="itemGroupName" th:text="${itemGroup.name}">
                             </div>
                             <div class="row font-size-16">
-                                <span class="offset-1">옵션 : (옵션 전달 받는 메소드는 이 곳에)</span>
+                                <span class="offset-1" id="item-name" th:text="${item.name}"></span>
+                            </div>
+<!--                            <div class="row font-size-16">-->
+<!--                                <span class="offset-1">수량(인원) : (수량 전달 받는 메소드는 이 곳에)</span>-->
+<!--                            </div>-->
+                            <div class="row font-size-16">
+                                <span class="offset-1" id="start-date" th:text="${startDate}"></span>
                             </div>
                             <div class="row font-size-16">
-                                <span class="offset-1">수량(인원) : (수량 전달 받는 메소드는 이 곳에)</span>
-                            </div>
-                            <div class="row font-size-16">
-                                <span class="offset-1">예약날짜 : (예약 날짜 전달 받는 메소드는 이 곳에)</span>
+                                <span class="offset-1" id="end-date" th:text="${endDate}"></span>
                             </div>
                         </div>
                     </div>
@@ -35,7 +37,42 @@
                 <div class="border bg-white rounded-3 border-2 d-flex justify-content-between margin-window padding-16">
 
                     <div class="col-auto">총 금액</div>
-                    <div class="col-auto">(총 금액 전달 받는 메소드 여기에)원</div>
+                    <div class="col-auto font-weight-bold" id="item-price" th:text="'50000 원'"></div>
+
+                </div>
+                <div class="border bg-white rounded-3 border-2 margin-window padding-16">
+
+                    <th:block th:replace="fragment/title :: title_2('할인 쿠폰')"></th:block>
+
+                    <div class="margin-x-16 margin-bottom-16">
+                        <div class="row margin-bottom-32">
+
+                            <label>쿠폰
+                                <select class="form-select test margin-top-8" name="name" id="coupon-select" aria-label="coupon" onchange="changeDiscountPrice()">
+                                    <option selected th:value=0
+                                                    th:data-couponId = 0>쿠폰을 선택하세요.</option>
+                                    <option th:each="coupon : ${couponList}"
+                                            th:value="${coupon?.price}"
+                                            th:text="${coupon?.name}"
+                                            th:data-couponId = "${coupon?.memberCouponId}">
+                                    </option>
+<!--                                    <option value="1">name</option>-->
+<!--                                    <option value="2">name</option>-->
+                                </select>
+                            </label>
+                        </div>
+                        <div class="row d-flex justify-content-between border-bottom padding-bottom-8">
+                            <span class="col-auto">할인 금액</span>
+                            <span class="col-auto font-weight-bold" id="discount-price">0 원</span>
+                        </div>
+                        <div class="row d-flex justify-content-between padding-top-8">
+                            <span class="col-auto">최종 결제 금액</span>
+                            <span class="col-auto font-weight-bold"  id="total-price" th:text="'50000 원'"></span>
+                        </div>
+
+                    </div>
+
+
 
                 </div>
             </section>
@@ -44,12 +81,14 @@
                     <th:block th:replace="fragment/title :: title_2('예약자 정보')"></th:block>
                     <div class="row">
                         <label>이름
-                            <input  type="text" class="form-control" name="name"></input>
+                            <input  type="text" class="form-control" name="name" id="name"></input>
                         </label>
                     </div>
                     <div class="row">
                         <label>연락처
-                            <input  type="text" class="form-control" name="tel"></input>
+                            <input  type="text" class="form-control"
+                                    name="phone" id="tel"
+                                    placeholder="'-'을 포함해서 입력해주세요"></input>
                         </label>
                     </div>
                     <!--예약 테이블 ERD에 이메일 제외되서 비활성화 시켜놓음-->
@@ -59,40 +98,41 @@
                     <!--        </label>-->
                     <!--    </div>-->
                 </div>
+
                 <div class="border bg-white rounded-3 border-2  padding-16 margin-window">
                     <th:block th:replace="fragment/title :: title_2('결제 수단')"></th:block>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment_type" id="creditCard">
+                        <input class="form-check-input" type="radio" name="payment-type" id="creditCard">
                         <label class="form-check-label" for="creditCard"> 신용/체크카드
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment_type" id="vbank">
-                        <label class="form-check-label" for="vbank"> 무통장입금
+                        <input class="form-check-input" type="radio" name="payment-type" id="vbank">
+                        <label class="form-check-label" for="vbank"> 무통장 입금
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment_type" id="phone">
-                        <label class="form-check-label" for="phone"> 네이버페이
+                        <input class="form-check-input" type="radio" name="payment-type" id="phone">
+                        <label class="form-check-label" for="phone"> 모바일 결제
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment_type" id="naverPay">
+                        <input class="form-check-input" type="radio" name="payment-type" id="naverPay">
                         <label class="form-check-label" for="naverPay"> 네이버페이
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment_type" id="kakaoPay">
+                        <input class="form-check-input" type="radio" name="payment-type" id="kakaoPay">
                         <label class="form-check-label" for="kakaoPay"> 카카오페이
                         </label>
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <input  class="col-auto btn btn-primary margin-top-16"
+                        <input  class="col btn btn-primary margin-top-16"
                                 id="button_solid"
                                 href="#"
-                                value="(결제 금액 불러오는 메소드)원 결제"
+                                th:value="'50000원 결제'"
                                 type="button"/>
                     </div>
                 </div>
@@ -106,177 +146,222 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 
     <script th:inline="javascript">
-    $(document).ready(function () {
 
-        $('#button_solid').click(function (e) {
-
-
-
-            // 예약/결제정보 줍줍
-            // var itemCategory = document.getElementById('item-category').innerText;
-            // var itemName = document.getElementById('item-name').innerText;
-            // var totalPrice = document.getElementById('total-price').innerText;
-            // var startDate = document.getElementById('start-day').innerText;
-            // var endDate = document.getElementById('end-date').innerText;
-            // var name = document.getElementById('name').value(); // value값
-            // var phone = document.getElementById('tel').value(); // value값
-            // var memberId = document.getElementById('member-id').innerText;
-            // var sellerId = document.getElementById('seller-id').innerText;
-            // var itemScheduleId;
-            // var memberCouponId;
-            // var totalDiscountPrice;
-            // var paidAt;
-
-            // 예약/결제정보 줍줍
-            var itemCategory // 상품그룹
-            var itemName; // 결제창에서 보여질 상품이름
-            var totalPrice; // 총 결제금액
-            var startDate; // 시작날짜(ex 체크인)
-            var endDate; // 끝나는날짜(ex 체크아웃)
-            var name; // 예약자이름
-            var phone; // 예약자 전화번호
-            var memberId = 1; // 회원id
-            var sellerId; // 판매자id
-            var itemScheduleId; // 아이템스케줄id
-            var memberCouponId; // 쿠폰id
-            var totalDiscountPrice; // 총 할인금
-            var paidAt; // 결제일
-
-            if(!memberCouponId) {
-                memberCoupoinId = 0;
+        var itemCategory // 상품카테고리
+        var itemName; // 결제창에서 보여질 상품이름
+        var itemPriceArr = document.getElementById("item-price").innerText.split(' '); // 상품 원래 가격
+        var itemPrice = itemPriceArr[0];
+        var totalDiscountPrice = 0; // 총 할인금
+        var totalPrice = itemPrice - totalDiscountPrice; // 총 결제금액
+        var startDate; // 시작날짜(ex 체크인)
+        var endDate; // 끝나는날짜(ex 체크아웃)
+        var name; // 예약자이름
+        var phone; // 예약자 전화번호
+        var memberId = [[${memberId}]]; // 회원id
+        var sellerId = [[${sellerId}]]; // 판매자id
+        var itemScheduleIdList = [[${itemScheduleIdList}]]; // 아이템스케줄id
+        var itemScheduleId="";
+        for(var i = 0; i < itemScheduleIdList.length; i++) {
+            itemScheduleId += itemScheduleIdList[i];
+            if(i !== itemScheduleIdList.length-1) {
+               itemScheduleId += ',';
             }
+        }
+        var memberCouponId = 0; // 쿠폰id
+        var paidAt; // 결제일
+        var submitButton = document.getElementById("button_solid"); // 결제버튼
+
+         function changeDiscountPrice() {
+            var couponSelect = document.getElementById("coupon-select");
+            totalDiscountPrice = couponSelect.options[couponSelect.selectedIndex].value;
+            var discountPriceObj = document.getElementById("discount-price");
+            discountPriceObj.innerHTML = totalDiscountPrice + ' 원';
+
+            totalPrice = itemPrice - totalDiscountPrice;
+            document.getElementById("total-price").innerHTML = totalPrice + ' 원';
+
+            memberCouponIdObj = couponSelect.options[couponSelect.selectedIndex];
+            memberCouponId = parseInt(memberCouponIdObj.dataset.couponid);
+
+            submitButton.value = totalPrice + '원 결제';
+         }
 
 
-            var paymentType = document.getElementsByName('payment_type'); // 결제방법들
-            var resId; // 예약번호
-            var state = 'UNPAID'; // 결제상태
 
-            var payMethod; // 선택한 결제방법(카드, 무통장 등)으로 설정
-            for(var i=0; i<paymentType.length; i++) {
-                if(paymentType[i].checked) {
-                    if(paymentType[i].id === 'creditCard') {
-                        payMethod = 'card';
-                    } else {
-                        payMethod = paymentType[i].id;
-                    }
-                    if(payMethod !== 'vbank') {
-                        state = 'PAID';
+
+        $(document).ready(function () {
+
+            $('#button_solid').click(function (e) {
+                // 예약/결제정보 줍줍
+                // itemCategory = document.getElementById('item-category').innerText;
+                itemCategory = 'ROOM';
+                itemName = document.getElementById('item-name').innerText;
+                startDate = new Date(document.getElementById('start-date').innerText);
+                endDate = new Date(document.getElementById('end-date').innerText);
+                name = document.getElementById('name').value.trim(); // value값
+                phone = document.getElementById('tel').value.trim(); // value값
+
+                if(!name) {
+                    alert('이름은 필수로 입력해야 합니다.');
+                    document.getElementById('name').focus();
+                    return;
+                } else if(!phone) {
+                    alert('연락처는 필수로 입력해야 합니다.');
+                    document.getElementById('tel').focus();
+                    return;
+                }
+
+                // 연락처 유효성검사
+                 var regPhone = /^\d{3}-\d{3,4}-\d{4}$/;
+                 var regTel = /^\d{2,3}-\d{3,4}-\d{4}$/;
+
+                 if (!regPhone.test(phone)|| !regTel.test(phone)) {
+                    alert('연락처의 형식이 올바르지 않습니다.');
+                    return;
+                 }
+
+                var paymentType = document.getElementsByName('payment-type'); // 결제방법들
+                var resId; // 예약번호
+                var state = 'UNPAID'; // 결제상태
+
+                var payMethod; // 선택한 결제방법(카드, 무통장 등)으로 설정
+                for(var i=0; i<paymentType.length; i++) {
+                    if(paymentType[i].checked) {
+                        if(paymentType[i].id === 'creditCard') {
+                            payMethod = 'card';
+                        } else {
+                            payMethod = paymentType[i].id;
+                        }
+                        if(payMethod !== 'vbank') {
+                            state = 'PAID';
+                        }
                     }
                 }
-            }
+                if(!payMethod) {
+                    alert('결제 방법을 선택하세요');
+                    return;
+                }
 
 
-            var paymentType; // db에 들어갈 결제타입 설정
-            if(payMethod === 'card') {
-                paymentType = 'CREDIT_CARD';
-            } else if(payMethod == 'vbank') {
-                paymentType = 'TRANSFER_WITHOUT_ACCOUNT';
-            } else if(payMethod == 'phone') {
-                paymentType = 'CELL_PHONE'
-            } else if(payMethod === 'kakaopay') {
-                paymentType = 'KAKAO_PAY';
-            } else if(payMethod === 'naverpay') {
-                paymentType = 'NAVER_PAY';
-            }
+                var paymentType; // db에 들어갈 결제타입 설정
+                if(payMethod === 'card') {
+                    paymentType = 'CREDIT_CARD';
+                } else if(payMethod == 'vbank') {
+                    paymentType = 'TRANSFER_WITHOUT_ACCOUNT';
+                } else if(payMethod == 'phone') {
+                    paymentType = 'CELL_PHONE'
+                } else if(payMethod === 'kakaopay') {
+                    paymentType = 'KAKAO_PAY';
+                } else if(payMethod === 'naverpay') {
+                    paymentType = 'NAVER_PAY';
+                }
 
 
 
-        // 결제API
-            IMP.init('imp95175119'); //가맹점 식별코드
-            IMP.request_pay({
-                pg: 'html5_inicis',
-                pay_method: payMethod,
-                merchant_uid: 'merchant_' + new Date().getTime(),
-                name: itemName, // 결제창에 보여질 상품이름
-                amount: totalPrice, // 결제창에 보여질 총 결제 금액
-                buyer_name: name,
-                buyer_tel: phone
+            // 결제API
+                IMP.init('imp95175119'); //가맹점 식별코드
+                IMP.request_pay({
+                    pg: 'html5_inicis',
+                    pay_method: payMethod,
+                    merchant_uid: 'merchant_' + new Date().getTime(),
+                    name: itemName, // 결제창에 보여질 상품이름
+                    amount: totalPrice, // 결제창에 보여질 총 결제 금액
+                    buyer_name: name,
+                    buyer_tel: phone
 
-            }, function (rsp) {
-                console.log(rsp);
-                if (rsp.success) { // 결제성공시
+                }, function (rsp) {
+                    console.log(rsp);
+                    if (rsp.success) { // 결제성공시
 
-                    // 예약정보 객체 생성
-                    var reservation = {
-                        itemCategory : itemCategory,
-                        totalPrice : totalPrice,
-                        startDate : startDate,
-                        endDate : endDate,
-                        name : name,
-                        phone : phone,
-                        memberId : memberId,
-                        sellerId : sellerId,
-                        totalDiscountPrice : totalDiscountPrice
-                    }
+                        // 예약정보 객체 생성
+                        var reservation = {
+                            itemCategory : itemCategory,
+                            totalPrice : totalPrice,
+                            startDate : startDate,
+                            endDate : endDate,
+                            name : name,
+                            phone : phone,
+                            memberId : memberId,
+                            sellerId : sellerId,
+                            totalDiscountPrice : totalDiscountPrice
+                        }
 
 
-                    $.ajax({ // 예약정보 db에 저장
-                        url: '/api/res/reserve/'+1+'/'+0,
-                        type: 'POST',
-                        data: JSON.stringify(reservation),
-                        contentType: 'application/json;charset=utf-8',
-                        async: false,
-
-                        success: function(resId){ // ajax통신 성공
-
-                            if(resId > 0){ // 예약성공
-
-                                if(payMethod != 'vbank') {
-                                    paidAt = new Date();
+                        $.ajax({ // 예약정보 db에 저장
+                            url: '/api/res/reserve/'+memberCouponId+'?itemScheduleId='+itemScheduleId,
+                            /*
+                            for(var i = 0; i < itemScheduleIdList.length; i++) {
+                                itemScheduleId += itemScheduleIdList[i];
+                                if(i !== itemScheduleIdList.length-1) {
+                                   itemScheduleId += ',';
                                 }
+                            },
+                            */
+                            type: 'POST',
+                            data: JSON.stringify(reservation),
+                            contentType: 'application/json;charset=utf-8',
+                            async: false,
 
-                                // 결제정보 객체 생성
-                                var payment = {
-                                    type : paymentType,
-                                    totalPayment : totalPrice,
-                                    paymentDeadline : new Date(rsp.vbank_date), // 결제 데드라인날짜
-                                    resId: resId,
-                                    accountBank: rsp.vbank_name,
-                                    accountNumber: rsp.vbank_num,
-                                    state: state,
-                                    paidAt: paidAt
-                                }
+                            success: function(resId){ // ajax통신 성공
 
+                                if(resId > 0){ // 예약성공
 
-                                $.ajax({// 결제정보 db에 저장
-                                    url: '/api/payments/'+memberId,
-                                    type: 'POST',
-                                    data: JSON.stringify(payment),
-                                    contentType: 'application/json;charset=utf-8',
-                                    success: function(paymentId) {
-                                        console.log('결제정보 저장 완료');
-
-                                        // 성공하면 결제 번호를 반환받옴
-                                        // 반환받은 결제번호로 결제확인 페이지로 이동
-                                        location.href ='/payment/paymentInfo?paymentId='+paymentId;
-                                    },
-                                    error:function(e) {
-                                        console.log('결제정보 저장 실패');
+                                    if(payMethod != 'vbank') {
+                                        paidAt = new Date();
                                     }
 
-                                }); // ajax
+                                    // 결제정보 객체 생성
+                                    var payment = {
+                                        type : paymentType,
+                                        totalPayment : totalPrice,
+                                        paymentDeadline : new Date(rsp.vbank_date), // 결제 데드라인날짜
+                                        resId: resId,
+                                        accountBank: rsp.vbank_name,
+                                        accountNumber: rsp.vbank_num,
+                                        state: state,
+                                        paidAt: paidAt
+                                    }
 
-                            }else{
-                                console.log("에약 실패");
-                            }
-                        }, // success
-                        error:function(e){
-                            console.log(e);
-                            console.log("Insert ajax 통신 실패!!!");
-                        } // error
-                    }) // ajax
+
+                                    $.ajax({// 결제정보 db에 저장
+                                        url: '/api/payments/'+memberId,
+                                        type: 'POST',
+                                        data: JSON.stringify(payment),
+                                        contentType: 'application/json;charset=utf-8',
+                                        success: function(paymentId) {
+                                            console.log('결제정보 저장 완료');
+
+                                            // 성공하면 결제 번호를 반환받옴
+                                            // 반환받은 결제번호로 결제확인 페이지로 이동
+                                            location.href ='/pay/payInfo/'+parseInt(paymentId)+'/'+memberId;
+                                        },
+                                        error:function(e) {
+                                            console.log('결제정보 저장 실패');
+                                        }
+
+                                    }); // ajax
+
+                                }else{
+                                    console.log("에약 실패");
+                                }
+                            }, // success
+                            error:function(e){
+                                console.log(e);
+                                console.log("Insert ajax 통신 실패!!!");
+                            } // error
+                        }) // ajax
 
 
-                } else { // 결제실패
-                    var msg = '결제에 실패하였습니다.';
-                    msg += '에러내용 : ' + rsp.error_msg;
-                }
+                    } else { // 결제실패
+                        var msg = '결제에 실패하였습니다.';
+                        msg += '에러내용 : ' + rsp.error_msg;
+                    }
 
-            }); // request_pay
+                }); // request_pay
 
-        }); // click
-    });  // ready
-</script>
+            }); // click
+        });  // ready
+    </script>
 
 
 

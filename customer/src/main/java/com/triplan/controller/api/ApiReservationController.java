@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,10 +42,16 @@ public class ApiReservationController {
     }
 
     // 예약하기 -> 프론트에서 쿠폰 적용 안 할 시 memberCouponId == 0 으로 넘기기
-    @PostMapping("/reserve/{itemScheduleId}/{memberCouponId}")
-    public Integer reserve(@PathVariable Integer itemScheduleId, @PathVariable Integer memberCouponId,
+    @PostMapping("/reserve/{memberCouponId}")
+    public Integer reserve(@RequestParam String itemScheduleId, @PathVariable Integer memberCouponId,
                           @Valid @RequestBody ReservationDTO reservationDTO) {
-        Integer resId = reservationService.reserve(itemScheduleId, memberCouponId, reservationDTO);
+        List<Integer> itemScheduleIdList = new ArrayList<>();
+        String splitArr[] = itemScheduleId.split(",");
+        for(int i=0; i<splitArr.length; i++) {
+            itemScheduleIdList.add(Integer.parseInt(splitArr[i]));
+        }
+
+        Integer resId = reservationService.reserve(itemScheduleIdList, memberCouponId, reservationDTO);
         // * 받아와야할 거
         // - 상품 : itemCategory, totalPrice, startDate, endDate + itemScheduleId
         // - 사용자 입력 : name, phone

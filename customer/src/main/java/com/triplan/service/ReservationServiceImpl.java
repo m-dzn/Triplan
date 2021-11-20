@@ -1,5 +1,6 @@
 package com.triplan.service;
 
+import com.triplan.domain.ItemScheduleVO;
 import com.triplan.domain.ReservationVO;
 import com.triplan.dto.ReservationDTO;
 import com.triplan.mapper.ReservationMapper;
@@ -44,10 +45,13 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Integer reserve(Integer itemScheduleId, Integer memberCouponId, ReservationDTO reservationDTO) {
+    public Integer reserve(List<Integer> itemScheduleIdList, Integer memberCouponId, ReservationDTO reservationDTO) {
         Integer result = -1;
         ReservationVO reservationVO = reservationDTO.toVO();
         Integer resId = null;
+        ItemScheduleVO itemScheduleVO = new ItemScheduleVO();
+        Integer itemId;
+
 
         // 쿠폰 사용 처리
         if (memberCouponId != null) {
@@ -57,7 +61,7 @@ public class ReservationServiceImpl implements ReservationService {
                 // 생성된 res_id 불러오기
                 resId = reservationVO.getResId();
                 // resId - resId 매칭하여 RESERVATION_ITEM 테이블에 insert
-                reservationMapper.insertResItem(resId, itemScheduleId);
+//                reservationMapper.insertResItem(resId, itemScheduleId);
                 result = 1;
             } else {
                 // 쿠폰 적용 한 경우 : 사용 가능한 쿠폰인지 확인(유효 기간, 사용 여부)
@@ -70,12 +74,20 @@ public class ReservationServiceImpl implements ReservationService {
                         // result == 1 : 쿠폰 사용 처리(MEMBER_COUPON)
                         reservationMapper.insert(reservationVO);
                         resId = reservationVO.getResId();
-                        reservationMapper.insertResItem(resId, itemScheduleId);
+//                        reservationMapper.insertResItem(resId, itemScheduleId);
                         reservationMapper.useCoupon(resId, memberCouponId, memberId);
                     }
                 }
             }
+            
+            // 저장완료 후 아이템 스케줄 추가 + 상품 수량 설정
+            for (Integer itemScheduleId : itemScheduleIdList) {
+                reservationMapper.insertResItem(resId, itemScheduleId);
+                reservationMapper.updateStockByItemSchedule(itemScheduleId);
+                reservationMapper.updateSalesVolumeByItem(itemScheduleId);
+            }
         }
+
 
 //        return result;
         return resId;
