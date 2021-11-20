@@ -114,7 +114,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 
             ItemGroupResponseDTO itemGroupResponseDTO = ItemGroupResponseDTO.of(itemGroupVO);
             itemGroupResponseDTO.setItemRoomList(itemRoomResponseDTO);
-            itemGroupResponseDTO.setTagIdList(tagMapper.getIdList(itemGroupId));
+            itemGroupResponseDTO.setTagList(tagMapper.list(itemGroupId));
 
             return itemGroupResponseDTO;
         }
@@ -127,7 +127,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 
             ItemGroupResponseDTO itemGroupResponseDTO = ItemGroupResponseDTO.of(itemGroupVO);
             itemGroupResponseDTO.setItemFlightList(itemFlightResponseDTO);
-            itemGroupResponseDTO.setTagIdList(tagMapper.getIdList(itemGroupId));
+            itemGroupResponseDTO.setTagList(tagMapper.list(itemGroupId));
 
             return itemGroupResponseDTO;
         }
@@ -135,11 +135,11 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 
     }
 
-
     @Override
     public Pagination<ItemGroupVO> itemGroupListBySellerId(Integer sellerId, Integer pageSize, Integer currentPage) {
         List<ItemGroupVO> itemGroupList = itemGroupMapper.getItemGroupBySellerId(sellerId, pageSize, currentPage);
         int totalReviews = itemGroupMapper.count(sellerId);
         return new Pagination<>(pageSize, currentPage, totalReviews, itemGroupList);
     }
+
 }

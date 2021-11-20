@@ -4,8 +4,10 @@ import com.triplan.domain.MemberVO;
 import com.triplan.service.inf.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/members")
@@ -69,6 +71,13 @@ public class ApiMemberController {
     public Boolean nicknameCheck(@RequestParam("nickname") String nickname) {
         Boolean result = memberService.nicknameCheck(nickname);
         return result;
+    }
+
+    @PatchMapping("/updateProfileImg")
+    public String updateMemberProfile(@RequestPart("files") List<MultipartFile> files) {
+        Integer memberId = 1;
+        memberService.updateProfileImg(files, memberId);
+        return "정보 입력 성공";
     }
 
 }

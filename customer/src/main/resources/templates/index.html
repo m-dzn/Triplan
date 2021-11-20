@@ -5,16 +5,24 @@
     <title>Title</title>
 </head>
 <body>
-  <script>
+    <form name="profile">
+        <input type="file" name="file">
+    </form>
+    <button id="submit">제출</button>
+
+    <script>
       document.addEventListener('DOMContentLoaded', () => {
-        fetch(`http://localhost:8082/api/wishlists?pageSize=10&currentPage=1`, {
-            method: 'GET'
-        }).then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-        }).then(data => console.log(data));
+        document.getElementById("submit").addEventListener("click", () => {
+            console.log("memberImg");
+            const formData = new FormData();
+            formData.append("files", document.profile.file.files[0]);
+
+            fetch(`http://localhost:8082/api/members/updateProfileImg`, {
+                method: "PATCH",
+                body: formData
+            });
+        });
       });
-  </script>
+    </script>
 </body>
 </html>

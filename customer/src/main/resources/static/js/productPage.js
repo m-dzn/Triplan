@@ -14,6 +14,8 @@ var product = {
         this.sortType = url.searchParams.get("sortType") || "";
         this.tags = url.searchParams.get("tags") || "";
 
+        var startDate = url.searchParams.get("startDate");
+
         console.log(this);
         this.fetchProductList();
     },

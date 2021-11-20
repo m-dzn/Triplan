@@ -2,7 +2,6 @@ package com.triplan.service;
 
 import com.triplan.domain.AttachmentVO;
 import com.triplan.domain.MemberVO;
-import com.triplan.dto.MemberProfileDTO;
 import com.triplan.enumclass.AboutTableType;
 import com.triplan.mapper.AttachmentMapper;
 import com.triplan.mapper.MemberMapper;
@@ -79,18 +78,21 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public void updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> files) {
+    public void updateProfileImg(List<MultipartFile> files, Integer memberId) {
+        MemberVO memberVO = new MemberVO();
+        memberVO.setMemberId(memberId);
+
         if (!files.isEmpty()) {
-            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.MEMBER, memberProfileDTO.getMemberId());
+            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.MEMBER, memberId);
             AttachmentUtil.deleteAttachments(filesToDelete);
-            attachmentMapper.delete(AboutTableType.REVIEW, memberProfileDTO.getMemberId());
-            memberProfileDTO.setProfileImg("");
+            attachmentMapper.delete(AboutTableType.REVIEW, memberId);
+            memberVO.setProfileImg("");
         }
 
-        AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.MEMBER, memberProfileDTO.getMemberId());
+        AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.MEMBER, memberId);
 
         if (attachmentVO != null) {
-            memberProfileDTO.setProfileImg(attachmentVO.getUrl());
+            memberVO.setProfileImg(attachmentVO.getUrl());
 
             try {
                 attachmentMapper.insert(attachmentVO);
@@ -100,8 +102,7 @@ public class MemberServiceImpl implements MemberService {
             }
         }
 
-        memberMapper.updateBasicInfo(memberProfileDTO.toVO());
+        memberMapper.updateBasicInfo(memberVO);
     }
-
 
 }
