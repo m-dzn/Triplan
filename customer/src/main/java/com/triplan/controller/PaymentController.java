@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@Controller()
+@Controller
 @RequiredArgsConstructor
 public class PaymentController {
 
-    private final PaymentService paymentService;
-    private final ReservationService reservationService;
+//    private final PaymentService paymentService;
+//    private final ReservationService reservationService;
 
 
 //    @GetMapping("pay/payInfo/{paymentId}/{itemId}")

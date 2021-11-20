@@ -12,6 +12,7 @@ import com.triplan.dto.ReservationDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.enumclass.ItemCategory;
 import com.triplan.service.inf.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,21 +22,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class TestController {
 
-    @Autowired
-    MemberCouponService memberCouponService;
-    @Autowired
-    ItemGroupService itemGroupService;
-    @Autowired
-    ItemService itemService;
-    @Autowired
-    PaymentService paymentService;
-    @Autowired
-    ReservationService reservationService;
 
-    public TestController() {
-    }
+    private final MemberCouponService memberCouponService;
+    private final ItemGroupService itemGroupService;
+    private final ItemService itemService;
+    private final PaymentService paymentService;
+    private final ReservationService reservationService;
 
     @GetMapping({"/warning"})
     public String warning() {
