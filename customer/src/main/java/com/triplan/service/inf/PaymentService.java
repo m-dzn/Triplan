@@ -12,4 +12,5 @@ public interface PaymentService {
 
     void delete(Integer paymentId);
 
+    String readNameByItem(Integer resId);
 }
