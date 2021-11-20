@@ -91,7 +91,6 @@
         ORDER BY sales_volume DESC
     </select>
 
-
     <update id="updateByItemGroupId">
         UPDATE item
            SET item_group_id = #{itemGroupId}
@@ -146,4 +145,23 @@
         FROM item
         WHERE item_category = #{room}
     </select>
+
+    <select id="getItemsByItemGroupId" resultType="ItemVO">
+        SELECT *
+        FROM item
+        JOIN (
+            SELECT
+                item_id,
+                MIN(start_date) start_date,
+                MAX(end_date) end_date,
+                AVG(price) price
+            FROM    item_schedule
+            GROUP `BY item_id
+        ) USING (item_id)
+        WHERE   item_group_id = #{itemGroupId}
+        AND     start_date &gt;= #{startDate}
+        AND     end_date &lt;= #{endDate}
+        AND     price &gt;= #{overPrice}
+    </select>
+
 </mapper>

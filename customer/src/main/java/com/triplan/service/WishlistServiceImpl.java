@@ -42,6 +42,16 @@ public class WishlistServiceImpl implements WishlistService {
     }
 
     @Override
+    @Transactional
+    public void removeByItemGroupId(Integer itemGroupId) {
+        ItemGroupVO itemGroupVO = itemGroupMapper.select(itemGroupId);
+        itemGroupVO.decreaseLikeCount();
+        itemGroupMapper.update(itemGroupVO);
+
+        wishlistMapper.deleteByItemGroupId(itemGroupId);
+    }
+
+    @Override
     public Pagination<WishlistResponseDTO> getMemberWishList(Integer memberId, Integer pageSize, Integer currentPage) {
         List<WishlistResponseDTO> wishlistList = wishlistMapper.list(memberId, pageSize, currentPage);
         Integer count = wishlistMapper.countByMemberId(memberId);

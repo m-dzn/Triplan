@@ -138,7 +138,6 @@
         </div>
 
         <div class="d-flex flex-column" id="productCardContainer">
-          <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
         </div>
 
         <nav aria-label="Page navigation example">
@@ -151,114 +150,6 @@
     </div>
   </div>
   <th:block layout:fragment="script">
-    <script>
-      function clickWishlist(itemGroupId) {
-        alert("click 위시리스트");
-        fetch(`${BASE_URL}/api/wishlists?itemGroupId=${itemGroupId}`, {
-          method: "POST",
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.text();
-            }
-          })
-          .then((msg) => console.log(msg));
-      }
-
-      document.addEventListener("DOMContentLoaded", () => {
-        var productCardContainer = document.getElementById(
-          "productCardContainer"
-        );
-        var productPaginationGroup = document.getElementById(
-          "productPaginationGroup"
-        );
-
-        var url = new URL(location.href);
-        var pageSize = url.searchParams.get("pageSize") || 10;
-        var currentPage = url.searchParams.get("currentPage") || 1;
-        var sortType = url.searchParams.get("sortType") || "";
-
-        fetch(
-          `${BASE_URL}/api/item-groups/filter?pageSize=${pageSize}&currentPage=${currentPage}&sortType=${sortType}`,
-          {
-            method: "GET",
-          }
-        )
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            }
-          })
-          .then((pagination) => {
-            console.log(pagination);
-
-            var productCardList = [];
-
-            pagination.list.forEach((itemGroup) => {
-              productCardList.push(`<a href="prodet" th:fragment="thumbnail_Card_a">
-                    <div class="row border bg-white rounded-3 border-2 margin-window margin-top-16">
-
-                        <div class="col-auto p-0">
-                            <img src="${BASE_URL}/resources${itemGroup.itemImg}" class="" id="thumbnailCard-img" alt="...">
-                        </div>
-                        <div class="col margin-card">
-                            <div class="row d-flex justify-content-between">
-                                <div class="col-auto font-weight-bold font-size-20">${itemGroup.name}</div>
-                                <div class="col-auto">
-                                    <input name="wish" id="heart" type="checkbox" th:fragment="heart" onclick="clickWishlist(${itemGroup.itemGroupId})">
-                                    <label for="heart">🖤</label>
-                                </div>
-                            </div>
-                            <div class="row margin-top-16">
-                                <div class="col-auto">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                                    </svg>
-                                    ${itemGroup.address}
-                                </div>
-                            </div>
-                            <div class="row margin-top-40 d-flex justify-content-between">
-                                <div class="col-auto"><img src="img/star-signature.png" width="16" height="16">(3.96)</div>
-                                <div class="col-auto d-flex">
-                                    <div class="col-auto font-weight-bold">39,800원</div>
-                                    <div class="col-auto font-size-14 font-weight-bold color-primary">↓20%</div>
-                                    <div class="col-auto font-size-14 margin-left-8 color-gray text-decoration-line-through">50,000원</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>`);
-
-              productCardContainer.innerHTML = productCardList.join("");
-
-              // 페이지네이션
-              var _html = `<li class="page-item ${
-                pagination.hasPrev ? "" : "disabled"
-              }">
-                  <a class="page-link" href="${BASE_URL}/product?pageSize=${pageSize}&currentPage=${
-                pagination.startPage - 1
-              }" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>`;
-
-              for (var i = pagination.startPage; i <= pagination.endPage; i++) {
-                _html += `<li class="page-item"><a class="page-link" href="${BASE_URL}/product?pageSize=${pageSize}&currentPage=${i}">${i}</a></li>`;
-              }
-
-              _html += `<li class="page-item ${
-                pagination.hasNext ? "" : "disabled"
-              }">
-                    <a class="page-link" href="${BASE_URL}/product?pageSize=${pageSize}&currentPage=${
-                pagination.endPage + 1
-              }" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>`;
-              productPaginationGroup.innerHTML = _html;
-            });
-          });
-      });
-    </script>
+    <script src="/js/productPage.js"></script>
   </th:block>
 </html>

@@ -26,6 +26,12 @@
         WHERE   wishlist_id = #{wishlistId}
     </delete>
 
+    <delete id="deleteByItemGroupId">
+        DELETE
+        FROM    wishlist
+        WHERE   item_group_id = #{itemGroupId}
+    </delete>
+
     <select id="list" resultType="com.triplan.dto.response.WishlistResponseDTO">
         SELECT
                 wishlist_id,
@@ -61,7 +67,7 @@
 
     <select id="exist" resultType="boolean">
         SELECT EXISTS (
-            SELECT  COUNT(*)
+            SELECT  wishlist_id
             FROM    wishlist
             WHERE   item_group_id = #{itemGroupId}
               AND   member_id = #{memberId}

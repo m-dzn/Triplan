@@ -11,4 +11,6 @@ public interface WishlistService {
 
     Pagination<WishlistResponseDTO> getMemberWishList(Integer memberId, Integer pageSize, Integer currentPage);
 
+    void removeByItemGroupId(Integer itemGroupId);
+
 }

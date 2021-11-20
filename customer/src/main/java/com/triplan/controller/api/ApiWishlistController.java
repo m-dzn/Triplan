@@ -20,6 +20,12 @@ public class ApiWishlistController {
         return "위시리스트 추가 성공";
     }
 
+    @DeleteMapping
+    public String removeByItemGroupId(@RequestParam Integer itemGroupId) {
+        wishListService.removeByItemGroupId(itemGroupId);
+        return "위시리스트 제거 성공";
+    }
+
     @DeleteMapping("/{wishListId}")
     public String removeFromWishList(@PathVariable Integer wishListId) {
         wishListService.removeFromWishlist(wishListId);

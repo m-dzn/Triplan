@@ -52,7 +52,7 @@
                 item_img        = IFNULL(   #{itemImg},         item_img            ),
                 detail_img      = IFNULL(   #{detailImg},       detail_img          ),
                 location        = IFNULL(   #{location},        location            ),
-                like_count      = IFNULL(   #{likeCount},      like_count          ),
+                like_count      = IFNULL(   #{likeCount},       like_count          ),
                 lat             = IFNULL(   #{lat},             lat                 ),
                 lng             = IFNULL(   #{lng},             lng                 ),
                 updated_at      = CURRENT_TIMESTAMP <!-- BaseVO를 상속 받은 테이블에 들어가는 공통 구문 -->
