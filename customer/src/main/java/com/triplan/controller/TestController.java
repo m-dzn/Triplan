@@ -13,12 +13,12 @@ import com.triplan.dto.customer.response.ItemRoomResponseDTO;
 import com.triplan.enumclass.ItemCategory;
 import com.triplan.service.inf.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -70,7 +70,7 @@ public class TestController {
     public String pay(Model model) {
     // URL로 받아올거 : memberId, sellerId, itemScheduleId, itemId, itemGroupId, choid_set[begin_at, end_at]
         // 테스트 데이터
-        Integer memberId = 1; Integer sellerId = 1; Integer itemScheduleId = 1; Integer itemId = 1; Integer itemGroupId = 1;
+        Integer memberId = 1; Integer sellerId = 1; Integer itemId = 1; Integer itemGroupId = 1;
         String startDate = "2021-12-1"; String endDate = "2021-12-5";
 
     // 프론트로 넘겨줄거 :  쿠폰목록, 아이템그룹정보, 아이템정보, 상품 시작, 종료기간 memberId, sellerId, itemScheduleId, itemId, itemGroupId
@@ -93,7 +93,13 @@ public class TestController {
         // sellerId
         model.addAttribute("sellerId", sellerId);
         // itemSchedule Id
-        model.addAttribute("itemScheduleId" , itemScheduleId);
+        List<Integer> itemScheduleIdList = new ArrayList<>();
+        itemScheduleIdList.add(1);
+        itemScheduleIdList.add(2);
+        itemScheduleIdList.add(3);
+        itemScheduleIdList.add(4);
+        itemScheduleIdList.add(5);
+        model.addAttribute("itemScheduleIdList" , itemScheduleIdList);
 
         return "pay";
     }

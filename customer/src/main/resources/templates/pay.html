@@ -159,7 +159,14 @@
         var phone; // 예약자 전화번호
         var memberId = [[${memberId}]]; // 회원id
         var sellerId = [[${sellerId}]]; // 판매자id
-        var itemScheduleId = [[${itemScheduleId}]]; // 아이템스케줄id
+        var itemScheduleIdList = [[${itemScheduleIdList}]]; // 아이템스케줄id
+        var itemScheduleId="";
+        for(var i = 0; i < itemScheduleIdList.length; i++) {
+            itemScheduleId += itemScheduleIdList[i];
+            if(i !== itemScheduleIdList.length-1) {
+               itemScheduleId += ',';
+            }
+        }
         var memberCouponId = 0; // 쿠폰id
         var paidAt; // 결제일
         var submitButton = document.getElementById("button_solid"); // 결제버튼
@@ -174,7 +181,7 @@
             document.getElementById("total-price").innerHTML = totalPrice + ' 원';
 
             memberCouponIdObj = couponSelect.options[couponSelect.selectedIndex];
-            memberCouponId = memberCouponIdObj.dataset.couponid;
+            memberCouponId = parseInt(memberCouponIdObj.dataset.couponid);
 
             submitButton.value = totalPrice + '원 결제';
          }
@@ -281,7 +288,15 @@
 
 
                         $.ajax({ // 예약정보 db에 저장
-                            url: '/api/res/reserve/'+itemScheduleId+'/'+parseInt(memberCouponId),
+                            url: '/api/res/reserve/'+memberCouponId+'?itemScheduleId='+itemScheduleId,
+                            /*
+                            for(var i = 0; i < itemScheduleIdList.length; i++) {
+                                itemScheduleId += itemScheduleIdList[i];
+                                if(i !== itemScheduleIdList.length-1) {
+                                   itemScheduleId += ',';
+                                }
+                            },
+                            */
                             type: 'POST',
                             data: JSON.stringify(reservation),
                             contentType: 'application/json;charset=utf-8',

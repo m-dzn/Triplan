@@ -183,6 +183,6 @@
     <update id="updateSalesVolumeByItem">
         UPDATE item
         SET sales_volume = sales_volume+1
-        where item_id = (select item_id from item_schedule where item_schedule_id = #{itemScheduleId})
+        WHERE item_id = (SELECT item_id FROM item_schedule WHERE item_schedule_id = #{itemScheduleId} )
     </update>
 </mapper>
