@@ -3,27 +3,26 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/layout">
 
-<div layout:fragment="content">
-    <form name="qnaWriteForm">
-    <table>
-        <tr>
-            <td>제목</td>
-            <td><input type="text" name="title" style="width: 100%;" placeholder="제목을 입력하세요"></td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td style="width: 97%;"><textarea name="content" rows=10 style="height: 100%;width:100%;" placeholder="내용을 입력하세요"></textarea></td>
-        </tr>
-        <tr>
-            <td>비밀글</td>
-            <td><input type="checkbox" name="hide"></td>
-        </tr>
-    </table>
-        <input type="submit" value="글쓰기">
-        <button type="button" onclick="history.back();">취소</button>
+<div layout:fragment="content" class="padding-top-40">
+    <form action="warning">
+        <table class="table-margin-auto" style="width: 60%">
+            <tr>
+                <td style="white-space:nowrap">제목</td>
+                <td><input type="text" class="margin-top-16 margin-bottom-16 margin-left-8" name="subject" style="width: 100%;"> </td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td style="width: 97%;"><textarea name="content" class="margin-left-8"rows=10 style="height: 100%; width:100%;"> </textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="width: 97%; text-align: end;">
+                    <a class="btn btn-primary col-auto margin-top-8 margin-right-16" href="notupd" id="button_solid" role="button">글 수정</a>
+                    <a class="btn btn-primary col-auto margin-top-8" href="notice" id="button_solid" role="button">취소</a>
+                </td>
+            </tr>
+        </table>
+
     </form>
 </div>
-<th:block layout:fragment="script">
-    <script src="/js/qnaWritePage.js"></script>
-</th:block>
 </html>

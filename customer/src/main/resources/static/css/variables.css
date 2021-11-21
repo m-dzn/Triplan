@@ -11,6 +11,92 @@
     */
 }
 
+.background-100{
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.slickButton{
+    width: calc(var(--unit)*48);
+}
+
+.tag-style {
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 4px 10px;
+    cursor: pointer;
+     background-color: #ffdbdb;
+}
+
+.tag:checked + label{
+    background-color: #ff9e9e
+}
+
+.input-gray{
+    border: 0px;
+    border-radius: calc(var(--unit)*24);
+    background-color: #d3d3d333;
+}
+
+.mypNavText{/*마이페이지 포인터*/
+    position: relative;
+}
+
+.mypNavText::before{ /* 추가요소::before */
+    content: "";
+    position: absolute;
+    display: block;
+    left: calc(var(--unit)*1);
+    background-color: var(--primary);
+    width: calc(var(--unit)*4);
+    height: calc(var(--unit)*24);
+    border-radius: calc(var(--unit)*3);;
+}
+
+.mypNavText-24{/*마이페이지 포인터*/
+    position: relative;
+}
+
+.mypNavText-24::before{ /* 추가요소::before */
+    content: "";
+    position: absolute;
+    display: block;
+    left: calc(var(--unit)*1);
+    background-color: var(--primary);
+    width: calc(var(--unit)*4);
+    height: calc(var(--unit)*28);
+    border-radius: calc(var(--unit)*3);;
+}
+
+.mypNavText-32{/*마이페이지 포인터*/
+     position: relative;
+}
+
+.mypNavText-32::before{ /* 추가요소::before */
+    content: "";
+    position: absolute;
+    display: block;
+    left: calc(var(--unit)*1);
+    background-color: var(--primary);
+    width: calc(var(--unit)*4);
+    height: calc(var(--unit)*36);
+    border-radius: calc(var(--unit)*3);;
+}
+
+.slick-prev {
+    position: absolute;
+    z-index: 99;
+    top:120px;
+    left: -50px;
+}
+.slick-next {
+    position: absolute;
+    z-index: 99;
+    top:120px;
+    right: -50px;
+}
+
 .table-margin-auto {
     margin: auto;
 }
@@ -112,6 +198,10 @@
 
 .margin-card{
     padding: calc(var(--unit)*16);
+}
+
+.margin-prodet{
+    margin-bottom:calc(var(--unit)*24);
 }
 
 .padding-detail-sector{
@@ -412,6 +502,7 @@
 .pro-pho{
     width: calc(var(--unit)*120);
     height: calc(var(--unit)*120);
+    border-radius: 100%;
 }
 
 
@@ -438,4 +529,51 @@
 
 .carousel-inner{
     height: calc(var(--unit)*560);
+}
+/******************************* 버튼 리뉴얼 ***********************************/
+.button-solid {
+    /* 배경색이 있는 버튼 */
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.button-solid:hover {
+    /* 배경색만 있는 버튼 */
+    background-color: #25A1FA;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.button-solid:active {
+    /* 배경색만 있는 버튼 */
+    background-color: #0C97FA;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.button-outline {
+    /* 테두리만 있는 버튼 */
+    background-color: #fff;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.button-outline:hover {
+    /* 배경색만 있는 버튼 */
+    background-color: #25A1FA;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.button-outline:active {
+    /* 배경색만 있는 버튼 */
+    background-color: #0C97FA;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.profile-image img{
+    height: calc(var(--unit)*48);
+    width: calc(var(--unit)*48);
+    border-radius: 100%;
 }

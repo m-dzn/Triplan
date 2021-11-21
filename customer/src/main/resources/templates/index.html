@@ -1,28 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
 
-    <form name="profile">
-        <input type="file" name="file">
-    </form>
-    <button id="submit">제출</button>
+<div layout:fragment="content">
+    <section class="margin-section">
+        <h1 class="font-size-32 margin-window-title  col"
+            id="title_2">인기 카테고리</h1>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById("submit").addEventListener("click", () => {
-            const formData = new FormData();
-            formData.append("files", document.profile.file.files[0]);
+            <div class="testSlick"  >
 
-            fetch(`http://localhost:8082/api/members/updateProfileImg`, {
-                method: "PATCH",
-                body: formData
-            });
+                <th:block th:replace="fragment/card :: card('인기 카테고리1')"></th:block>
+                <th:block th:replace="fragment/card :: card('인기 카테고리2')"></th:block>
+                <th:block th:replace="fragment/card :: card('인기 카테고리3')"></th:block>
+                <th:block th:replace="fragment/card :: card('인기 카테고리4')"></th:block>
+                <th:block th:replace="fragment/card :: card('인기 카테고리5')"></th:block>
+
+                <th:block th:replace="fragment/card :: card('인기 카테고리6')"></th:block>
+                <th:block th:replace="fragment/card :: card('인기 카테고리7')"></th:block>
+                <th:block th:replace="fragment/card :: card('인기 카테고리8')"></th:block>
+                <th:block th:replace="fragment/card :: card('인기 카테고리9')"></th:block>
+                <th:block th:replace="fragment/card :: card('인기 카테고리10')"></th:block>
+                <th:block th:replace="fragment/card :: card('인기 카테고리11')"></th:block>
+                <th:block th:replace="fragment/card :: card('인기 카테고리12')"></th:block>
+
+            </div>
+
+
+        <script>
+        $('.testSlick').slick({
+        infinite: true,
+        slidesToShow: 6,
+        slidesToScroll: 6,
+            prevArrow: '<a class="slick-prev" href="#"><img class="slickButton" src="img/wblleft.png/"></a>',
+            nextArrow: '<a class="slick-next" href="#"><img class="slickButton" src="img/wblright.png/"></a>'
         });
-      });
-    </script>
-</body>
+        </script>
+
+<!--        <input id="heart" type="checkbox" th:fragment="heart">-->
+<!--        <label for="heart">🖤</label>-->
+        <!--❤🧡💛💚💙💜🖤-->
+<!--        <th:block th:replace="fragment/starPoint :: star_2"></th:block>-->
+<!--        <div class="d-flex">-->
+<!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
+<!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
+<!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
+<!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
+<!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
+<!--        </div>-->
+    </section>
+
+    <section class="margin-section">
+        <th:block th:replace="fragment/banner :: banner"></th:block>
+    </section>
+
+    <section class="margin-section">
+        <th:block th:replace="fragment/title :: title_2('인기 카테고리')"></th:block>
+        <div class="testSlick_2"  >
+
+            <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티1')"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티2')"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티3')"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티4')"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티5')"></th:block>
+
+            <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티6')"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티7')"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티8')"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티9')"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티10')"></th:block>
+        </div>
+
+        <script>
+            $('.testSlick_2').slick({
+                infinite: true,
+                slidesToShow: 5,
+                slidesToScroll: 5,
+                prevArrow: '<a class="slick-prev" href="#"><img class="slickButton" src="img/wblleft.png/"></a>',
+                nextArrow: '<a class="slick-next" href="#"><img class="slickButton" src="img/wblright.png/"></a>'
+            });
+        </script>
+    </section>
+</div>
 </html>

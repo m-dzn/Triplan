@@ -1,155 +1,159 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorator="layout/layout"
->
-  <div layout:fragment="content">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
     <div style="position: relative">
-      <img
-        src="img/topImage.jpg"
-        style="height: 240px; width: 100%; opacity: 80%"
-      />
-      <div
-        class="font-weight-bold font-size-40 color-white font-family-noto"
-        style="position: absolute; top: 50%; left: 50%; opacity: 93%"
-      >
-        제주
-      </div>
+        <img src="img/topImage.jpg" style="height: 240px;width: 100%;opacity: 80%;">
+        <div class="font-weight-bold font-size-40 color-white font-family-noto"
+             style="position: absolute;transform: translate( -50%, -50% );top: 50%;left: 50%;opacity: 93%">제주</div>
     </div>
 
     <!--브레드 크럼-->
-    <!--    <nav style="&#45;&#45;bs-breadcrumb-divider: '>';" aria-label="breadcrumb">-->
-    <!--        <ol class="breadcrumb margin-top-8">-->
-    <!--            <li class="breadcrumb-item"><a href="#">예약</a></li>-->
-    <!--            <li class="breadcrumb-item active" aria-current="page">액티비티</li>-->
-    <!--        </ol>-->
-    <!--    </nav>-->
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb margin-top-8 margin-left-8">
+            <li class="breadcrumb-item"><a href="#">예약</a></li>
+            <li class="breadcrumb-item active" aria-current="page">액티비티</li>
+        </ol>
+    </nav>
     <!--브레드 크럼 끝-->
 
-    <div class="row margin-section">
-      <section class="col-3">
-        <!--필터링 아코디언-->
-        <div class="accordion" id="accordionPanelsStayOpenExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseOne"
-              >
-                지역(필터링 후순위 구현)
-              </button>
-            </h2>
-            <div
-              id="panelsStayOpen-collapseOne"
-              class="accordion-collapse collapse"
-              aria-labelledby="panelsStayOpen-headingOne"
-            >
-              <div class="accordion-body">123</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseTwo"
-              >
-                날짜(필터링 후순위 구현)
-              </button>
-            </h2>
-            <div
-              id="panelsStayOpen-collapseTwo"
-              class="accordion-collapse collapse"
-              aria-labelledby="panelsStayOpen-headingTwo"
-            >
-              <div class="accordion-body">123</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseThree"
-              >
-                가격(필터링 후순위 구현)
-              </button>
-            </h2>
-            <div
-              id="panelsStayOpen-collapseThree"
-              class="accordion-collapse collapse"
-              aria-labelledby="panelsStayOpen-headingThree"
-            >
-              <div class="accordion-body">123</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseFour"
-              >
-                옵션(필터링 후순위 구현)
-              </button>
-            </h2>
-            <div
-              id="panelsStayOpen-collapseFour"
-              class="accordion-collapse collapse"
-              aria-labelledby="panelsStayOpen-headingFour"
-            >
-              <div class="accordion-body">123</div>
-            </div>
-          </div>
-        </div>
-        <!--필터링 아코디언-->
+    <div class="row margin-top-40">
 
-        <!--            <div class="border bg-white rounded-3 border-2  margin-title margin-window">-->
-        <!--                필터링 넣을 곳(후순위 구현)-->
-        <!--            </div>-->
-      </section>
-      <section class="col-9">
-        <!--            <form>&lt;!&ndash;정렬 폼 제출&ndash;&gt;-->
-        <!--                <input class="form-check-input" type="radio" name="alignment" id="new">-->
-        <!--                <input class="form-check-input" type="radio" name="alignment" id="popular">-->
-        <!--                <input class="form-check-input" type="radio" name="alignment" id="star">-->
-        <!--                <input class="form-check-input" type="radio" name="alignment" id="lowPrice">-->
-        <!--                <input class="form-check-input" type="radio" name="alignment" id="highPrice">-->
+        <section class="col-3">
 
-        <!--            정렬 :-->
-        <!--                <label class="form-check-label" for="new"> 등록순</label> |-->
-        <!--                <label class="form-check-label" for="popular"> 인기순</label> |-->
-        <!--                <label class="form-check-label" for="star"> 별점순</label> |-->
-        <!--                <label class="form-check-label" for="lowPrice"> 낮은 가격순</label> |-->
-        <!--                <label class="form-check-label" for="highPrice"> 높은 가격순</label>-->
-        <!--            </form>-->
-        <div class="row d-inline p-0">
-          정렬 : <a href="?">등록순</a> |
-          <a href="?sortType=wish" class="padding-x-8">찜 많은 순</a> |
-          <a href="#" class="padding-x-8">별점순</a> |
-          <a href="?sortType=review" class="padding-x-8">리뷰 많은 순</a> |
-          <a href="#" class="padding-x-8">높은 가격순</a>
-        </div>
+            <!--필터링 아코디언-->
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo">
+                            날짜
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                        <div class="accordion-body">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="my-auto bi bi-calendar-date" viewBox="0 0 16 16">
+                                <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                            </svg>
+                            <input type="text" name="prodetCalender" class="col-auto"/>
 
-        <div class="d-flex flex-column" id="productCardContainer">
-        </div>
+                            <script>
+                                // 다중 날짜 선택용
+                                $(function () {
+                                    $('input[name="prodetCalender"]').daterangepicker({
+                                        "locale": {
+                                            "format": "YYYY-MM-DD",
+                                            "separator": " ~ ",
+                                            "applyLabel": "확인",
+                                            "cancelLabel": "취소",
+                                            "fromLabel": "From",
+                                            "toLabel": "To",
+                                            "customRangeLabel": "Custom",
+                                            "weekLabel": "W",
+                                            "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
+                                            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                                            "firstDay": 1
+                                        },
+                                        "drops": "down"
+                                    }, function (start, end, label) {
+                                        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree">
+                            가격
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                        <div class="accordion-body">
+                            <div class="row d-flex justify-content-center text-align-center">
+                                <input type="text" class="col-5 input-gray" value="0">
+                                <span class="col-auto">~</span>
+                                <input type="text" class="col-5 input-gray" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour">
+                            옵션
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                        <div class="accordion-body">
+                            <input class="form-check-input tag d-none" type="checkbox" name="tag" value="1" id="tag1">
+                            <label class="tag-style" for="tag1">
+                                조식
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--필터링 아코디언-->
 
-        <nav aria-label="Page navigation example">
-          <ul
-            class="pagination justify-content-end"
-            id="productPaginationGroup"
-          ></ul>
-        </nav>
-      </section>
+        </section>
+        <section class="col-9">
+
+<!--            <form>&lt;!&ndash;정렬 폼 제출&ndash;&gt;-->
+<!--                <input class="form-check-input" type="radio" name="alignment" id="new">-->
+<!--                <input class="form-check-input" type="radio" name="alignment" id="popular">-->
+<!--                <input class="form-check-input" type="radio" name="alignment" id="star">-->
+<!--                <input class="form-check-input" type="radio" name="alignment" id="lowPrice">-->
+<!--                <input class="form-check-input" type="radio" name="alignment" id="highPrice">-->
+
+<!--            정렬 :-->
+<!--                <label class="form-check-label" for="new"> 등록순</label> |-->
+<!--                <label class="form-check-label" for="popular"> 인기순</label> |-->
+<!--                <label class="form-check-label" for="star"> 별점순</label> |-->
+<!--                <label class="form-check-label" for="lowPrice"> 낮은 가격순</label> |-->
+<!--                <label class="form-check-label" for="highPrice"> 높은 가격순</label>-->
+<!--            </form>-->
+            <div class="row d-inline p-0">
+                정렬 : <a href="#">등록순</a> |
+                <a href="#" class="padding-x-8">인기순</a> |
+                <a href="#" class="padding-x-8">별점순</a> <!--|
+                <a href="#" class="padding-x-8">낮은 가격순</a> |
+                <a href="#" class="padding-x-8">높은 가격순</a>-->
+            </div>
+
+            <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
+            <th:block th:replace="fragment/card :: thumbnail_Card_a"></th:block>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </section>
     </div>
-  </div>
-  <th:block layout:fragment="script">
-    <script src="/js/productPage.js"></script>
-  </th:block>
+</div>
 </html>

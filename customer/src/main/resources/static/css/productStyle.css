@@ -37,12 +37,3 @@
   will-change: font-size;
   animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
 }
-
-.carousel-item {
-    height: 100%;
-}
-
-.carousel-item img {
-    height: 100%;
-    object-fit: cover;
-}

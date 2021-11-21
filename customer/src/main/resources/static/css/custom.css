@@ -13,6 +13,8 @@ textarea {
   resize: none;
 }
 
+#pager{position:absolute; left:0; bottom:0;}
+
 #button_solid:hover {
   /* 배경색만 있는 버튼 */
   background-color: #25A1FA;
@@ -34,10 +36,7 @@ textarea {
   border-color: var(--primary);
 }
 
-/*#couponTable td{*/
-/*  border: 1px;*/
-/*  border-style: solid;*/
-/*}*/
+
 
 .dropdown-toggle::after {
   /* 메뉴 화살표 버튼(none으로 안 뜨게 해놓음) 기본값 : inline-block */
@@ -102,7 +101,7 @@ h1::before{ /* 추가요소::before */
   border-right: none;
 }
 
-#qnaTable tr:nth-of-type(1) {
+#qnaTable > tr:nth-of-type(1) {
   background-color : #FAFAFA;
 }
 
@@ -256,14 +255,9 @@ h1::before{ /* 추가요소::before */
   height: calc(var(--unit)*240);
 }
 
-#productCardContainer > a > div {
-    overflow: hidden;
-}
-
 #thumbnailCard-img{
-  height: calc(var(--unit)*166);
+  height: 100%;
   width: calc(var(--unit)*200);
-  object-fit: cover;
 }
 
 #banner{
@@ -292,6 +286,7 @@ h1::before{ /* 추가요소::before */
 #profile_image img{
   height: calc(var(--unit)*48);
   width: calc(var(--unit)*48);
+  border-radius: 100%;
 }
 
 #qnaTable tr td:nth-child(2){/*qna테이블의 tr요소 각각들의 2번쨰 자식요소인 td*/
@@ -350,6 +345,40 @@ h1::before{ /* 추가요소::before */
 /*}*/
 
 [id="heart"]:checked + label {
+  color: var(--primary);
+  will-change: font-size;
+  animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
+}
+
+/* 좋아요 버튼 */
+[id="heart_wish"] {
+  position: absolute;
+  left: -1000vw;
+}
+
+[for="heart_wish"] {
+  color: var(--primary);
+  cursor: pointer;
+  /*font-size: 6em;*/
+  align-self: center;
+  transition: color 0.2s ease-in-out;
+}
+
+[for="heart_wish"]:hover {
+  color: var(--primary);
+}
+
+[for="heart_wish"]::selection {
+  color: var(--primary);
+  background: transparent;
+}
+
+/*[for="heart"]::moz-selection {*/
+/*  color: var(--primary);*/
+/*  background: transparent;*/
+/*}*/
+
+[id="heart_wish"]:checked + label {
   color: var(--primary);
   will-change: font-size;
   animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
@@ -446,7 +475,7 @@ h1::before{ /* 추가요소::before */
 }
 
 #topBtn {
-  top: 81%;
+  top: 47%;
   left: 97%;
   width: 40px;
   height: 40px;
@@ -454,17 +483,30 @@ h1::before{ /* 추가요소::before */
   z-index: 2;
 }
 #bottomBtn {
-  top: 86%;
+  top: 53%;
   left: 97%;
   width: 40px;
   height: 40px;
   position: fixed;
 }
 
-<!--지혜 테이블-->
+#couponTable td{
+  border: 1px;
+  border-style: solid;
+  border-color: lightgray
+}
 
-#couponTable tbody tr:nth-of-type(1) {
+#couponTable > thead > tr {
+  font-weight: bold;
       background-color : #FAFAFA;
+}
+
+#couponTable td:first-child {
+  border-left: none;
+}
+
+#couponTable td:last-child {
+  border-right: none;
 }
 
 pre {

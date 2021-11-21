@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/layout">
+
 <div layout:fragment="content">
     <form action="warning">
         <table id="qnaup-table">
@@ -44,9 +45,8 @@
                 </td>
             </tr>
         </table>
+
+
     </form>
 </div>
-<th:block layout:fragment="script">
-    <script src="/js/qnaUpdatePage.js"></script>
-</th:block>
 </html>

@@ -16,6 +16,7 @@ var product = {
 
         var startDate = url.searchParams.get("startDate");
 
+        console.log(this);
         this.fetchProductList();
     },
 

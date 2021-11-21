@@ -5,7 +5,8 @@
 
 <div layout:fragment="content">
     <section class="margin-section">
-        <th:block th:replace="fragment/title :: title_2('인기 카테고리')"></th:block>
+        <h1 class="font-size-32 margin-window-title  col"
+            id="title_2">인기 카테고리</h1>
 
             <div class="testSlick"  >
 
@@ -25,11 +26,14 @@
 
             </div>
 
+
         <script>
         $('.testSlick').slick({
         infinite: true,
         slidesToShow: 6,
-        slidesToScroll: 6
+        slidesToScroll: 6,
+            prevArrow: '<a class="slick-prev" href="#"><img class="slickButton" src="img/wblleft.png/"></a>',
+            nextArrow: '<a class="slick-next" href="#"><img class="slickButton" src="img/wblright.png/"></a>'
         });
         </script>
 
@@ -45,9 +49,11 @@
 <!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
 <!--        </div>-->
     </section>
+
     <section class="margin-section">
         <th:block th:replace="fragment/banner :: banner"></th:block>
     </section>
+
     <section class="margin-section">
         <th:block th:replace="fragment/title :: title_2('인기 카테고리')"></th:block>
         <div class="testSlick_2"  >
@@ -69,7 +75,9 @@
             $('.testSlick_2').slick({
                 infinite: true,
                 slidesToShow: 5,
-                slidesToScroll: 5
+                slidesToScroll: 5,
+                prevArrow: '<a class="slick-prev" href="#"><img class="slickButton" src="img/wblleft.png/"></a>',
+                nextArrow: '<a class="slick-next" href="#"><img class="slickButton" src="img/wblright.png/"></a>'
             });
         </script>
     </section>

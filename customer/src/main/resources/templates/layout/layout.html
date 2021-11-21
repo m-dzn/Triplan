@@ -7,7 +7,7 @@
 <body>
 <div style="width: 1280px; margin: 0 auto;"><!--div로 태그 잡으면 width값이 안 먹힘, 일단 main으로 쓰고 추후에 해결하기-->
         <!--헤더-->
-        <th:block th:replace="fragment/header_login :: header">
+        <th:block th:replace="fragment/header :: header">
         </th:block>
 
         <!--메인-->
@@ -25,8 +25,8 @@
 <th:block th:replace="fragment/script :: script"/>
 
 <!--스크롤버튼-->
-<a type="button" onclick="topScrollBtn()"><img id="topBtn" src="img/jhup.png"></a>
-<a type="button" onclick="bottomScrollBtn()"><img id="bottomBtn" src="img/jhdown.png"></a>
+<a type="button" onclick="topScrollBtn()"><img id="topBtn" th:src="@{/img/jhup.png}"></a>
+<a type="button" onclick="bottomScrollBtn()"><img id="bottomBtn" th:src="@{/img/jhdown.png}"></a>
 <script>
         function topScrollBtn() {
                 window.scrollTo(0,0);

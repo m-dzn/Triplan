@@ -7,7 +7,7 @@
 <body>
 <div style="width: 1280px; margin: 0 auto;"><!--div로 태그 잡으면 width값이 안 먹힘, 일단 main으로 쓰고 추후에 해결하기-->
         <!--헤더-->
-        <th:block th:replace="fragment/header_login :: header">
+        <th:block th:replace="fragment/header :: header">
         </th:block>
 
         <!--메인-->
@@ -77,9 +77,5 @@
                 "pluginKey": "acdee5aa-5ad8-493c-86b0-0329531161c4"
         });
 </script>
-
-<th:block layout:fragment="script">
-        <!--이 안에 커스텀 js 스크립트가 들어감-->
-</th:block>
 </body>
 </html>
