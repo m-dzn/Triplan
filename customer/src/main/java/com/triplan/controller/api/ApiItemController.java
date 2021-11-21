@@ -30,8 +30,8 @@ public class ApiItemController {
             @RequestParam String endDate
     ){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDateTime startDateLDT = LocalDateTime.parse(startDate, formatter);
-        LocalDateTime endDateLDT = LocalDateTime.parse(endDate, formatter);
+        LocalDateTime startDateLDT = LocalDate.parse(startDate, formatter).atStartOfDay();
+        LocalDateTime endDateLDT = LocalDate.parse(endDate, formatter).atTime(23,59,59);
 
         return itemService.itemRead(itemId, startDateLDT, endDateLDT);
     }

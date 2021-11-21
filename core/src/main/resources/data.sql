@@ -54,29 +54,29 @@ INSERT INTO reservation_item (res_id, item_schedule_id)
 VALUES (1, 1);
 
 /* Tag 그룹 */
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#ffdbdb','시즌이벤트','1번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#ffeddb','호텔','2번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#ffffdb','감성충만','3번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#edffdb','4번','4번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#dbffdb','5번','5번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#dbffed','선착순이벤트','6번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#dbffff','국내선','7번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#dbedff','마감임박','8번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#dbdbff','9번','9번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#eddbff','10번','10번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#ffdbff','11번','11번');
-INSERT INTO Tag (color,name,icon)
+INSERT INTO Tag (color,name,checked)
 VALUES('#ffdbed','12번','12번');
 
 /* 회원 정보 */
