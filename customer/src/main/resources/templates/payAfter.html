@@ -49,15 +49,15 @@
                 <div class="row  margin-left-32">
                     <div class="row d-flex justify-content-between">
                         <div class="col">예약일시</div>
-                        <div class="col-auto" id="reservation-date" th:text="${reservation.createdAt}">2011-11-11</div>
+                        <div class="col-auto" id="reservation-date" th:text="${reservation.createdAt}"></div>
                     </div>
                     <div class="row d-flex justify-content-between">
                         <div class="col">에약자이름</div>
-                        <div class="col-auto" th:text="${reservation.name}">이민재천재</div>
+                        <div class="col-auto" th:text="${reservation.name}"></div>
                     </div>
                     <div class="row d-flex justify-content-between">
                         <div class="col">예약자연락처</div>
-                        <div class="col-auto" th:text="${reservation.phone}">010-5515-7419</div>
+                        <div class="col-auto" th:text="${reservation.phone}"></div>
                     </div>
                 </div>
             </div>
@@ -67,20 +67,20 @@
                 <div class="row  margin-left-32">
                     <div class="row d-flex justify-content-between">
                         <div class="col">결제상태</div>
-                        <div class="col-auto" id="payment-state" th:text="${payment.state}">결제 성공</div>
+                        <div class="col-auto" id="payment-state" th:text="${payment.state}"></div>
                     </div>
                     <div class="row d-flex justify-content-between">
                         <div class="col">결제수단</div>
-                        <div class="col-auto" id="payment-type" th:text="${payment.type}">체크 카드</div>
+                        <div class="col-auto" id="payment-type" th:text="${payment.type}"></div>
                     </div>
                     <div class="row d-flex justify-content-between">
                         <div class="col">결제일시</div>
-                        <div class="col-auto" id="payment-date" th:text="${payment.paidAt}">2011-11-11</div>
+                        <div class="col-auto" id="payment-date" th:text="${payment.paidAt}"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-8 border bg-white rounded-3 border-2 padding-16 margin-window" id="is-unpaid">
+            <div class="col-8 border bg-white rounded-3 border-2 padding-16 margin-window d-none" id="is-unpaid">
                 <th:block th:replace="fragment/title :: title_3('무통장 정보')"></th:block>
                 <div class="row  margin-left-32">
                     <div class="row d-flex justify-content-between">
@@ -113,6 +113,7 @@
         var reservationDate = document.getElementById('reservation-date');
         var paymentDate = document.getElementById('payment-date');
         var paymentDeadlineDate = document.getElementById('payment-deadline');
+        var isUnpaid = document.getElementById('is-unpaid');
 
         // 상품종류
          if(itemCategory.innerText === 'ROOM') {
@@ -135,6 +136,7 @@
              paymentType.innerText = '신용/체크카드';
          } else if(paymentType.innerText === 'TRANSFER_WITHOUT_ACCOUNT') {
              paymentType.innerText = '무통장 입금';
+             isUnpaid.classList.remove('d-none');
          } else if(paymentType.innerText === 'CELL_PHONE') {
              paymentType.innerText = '모바일 결제';
          } else if(paymentType.innerText === 'NAVER_PAY') {
