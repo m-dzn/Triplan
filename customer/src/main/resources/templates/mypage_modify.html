@@ -51,7 +51,7 @@
                 return response.json();
             }
         }).then(member => {
-            memberPoint.value = member.point;
+            memberPoint.value = member.point.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); /*천 단위 ,(콤마)*/
             point.innerHTML = memberPoint.value;
         });
 
@@ -67,9 +67,9 @@
 
             if(memberPoint.value < 100000){
                 grade.innerHTML = "브론즈";
-            }else if(memberPoint.value >= 100001 && memberPoint.value < 300000){
+            }else if(memberPoint.value >= 100001 && memberPoint.value <= 300000){
                 grade.innerHTML = "실버";
-            }else if(memberPoint.value >= 300001 && memberPoint.value < 500000){
+            }else if(memberPoint.value >= 300001 && memberPoint.value <= 500000){
                 grade.innerHTML = "골드";
             }else if(memberPoint.value >= 500001){
                 grade.innerHTML = "플레티넘";
