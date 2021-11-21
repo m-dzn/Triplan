@@ -73,19 +73,12 @@ public class TestController {
                       @RequestParam String startDate,
                       @RequestParam String endDate
                       ) {
-    // URL로 받아올거 : memberId, sellerId, itemScheduleId, itemId, itemGroupId, startDate, endDate
+    // URL로 받아올거 : memberId, sellerId, itemId, itemGroupId, startDate, endDate
+    // 프론트로 넘겨줄거 :  쿠폰목록, 아이템그룹정보, 아이템정보, 상품 시작/종료기간, memberId, sellerId
         Integer memberId = 1;
         Integer sellerId = itemGroupService.getItemGroup(itemGroupId).getSellerId();
 
-
-//        // 테스트 데이터
-//        Integer memberId = 1; Integer sellerId = 1; Integer itemId = 1; Integer itemGroupId = 1;
-//        String startDate = "2021-12-1"; String endDate = "2021-12-5";
-//
-//    // 프론트로 넘겨줄거 :  쿠폰목록, 아이템그룹정보, 아이템정보, 상품 시작, 종료기간 memberId, sellerId, itemScheduleId, itemId, itemGroupId
-//        // 테스트 데이터
-//
-//        // 내 쿠폰 목록 - 쿠폰id, 쿠폰명, 할인금액
+        // 내 쿠폰 목록 - 쿠폰id, 쿠폰명, 할인금액
         List<MemberCouponDTO> couponList = memberCouponService.myAvailableCouponList(memberId);
         model.addAttribute("couponList", couponList);
         // 아이템 그륩 정보 - 상품그룹명
@@ -101,7 +94,6 @@ public class TestController {
         model.addAttribute("memberId", memberId);
         // sellerId
         model.addAttribute("sellerId", sellerId);
-
         return "pay";
     }
 
