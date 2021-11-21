@@ -21,8 +21,6 @@ public class ItemScheduleVO extends BaseVO {
     // 필수 입력 필드 : Default 없는 NOT NULL 필드
     @PositiveOrZero
     private Long price;
-    @NotBlank
-
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
