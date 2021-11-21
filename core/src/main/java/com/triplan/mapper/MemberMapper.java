@@ -13,6 +13,8 @@ public interface MemberMapper {
 
     void updateEtc(MemberVO memberVO);
 
+    void updateMypage(MemberVO memberVO);
+
     void updateBasicInfo(MemberVO memberVO);
 
     void updateEmail(MemberVO memberVO);

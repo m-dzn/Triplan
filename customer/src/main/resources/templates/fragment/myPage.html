@@ -2,18 +2,19 @@
         class="border bg-white rounded-3 border-2 py-5 mb-3">
     <div class="d-flex justify-content-center position-relative">
         <div class="position-relative">
-            <img src="img/광안리.jpg" class="rounded-circle pro-pho" alt="...">
+            <img src="img/광안리.jpg" class="rounded-circle pro-pho" alt="..." id="changeImg">
             <div class="position-absolute" style="
         top: 95%;
         left: 95%;
         transform: translate( -50%, -50% );
 ">
-                <button style="border: 0px;    background: none;">
+                <label style="border: 0px;    background: none;" for="profileImg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-camera-fill top-100" viewBox="0 0 16 16">
                         <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                         <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
                     </svg>
-                </button>
+                </label>
+                <input type="file" id="profileImg" style="opacity: 0;">
             </div>
         </div>
     </div>
@@ -43,26 +44,31 @@
                     <label for="nickname" class="col-2 col-form-label font-weight-bold text-align-end">닉네임</label>
                     <div class="col-8">
                         <input type="text" class="form-control" id="nickname">
+                        <span id="nicknameMsg"></span>
                     </div>
-                    <a class="btn btn-primary col-auto" href="#" id="button_outline" role="button">중복확인</a>
+                    <a class="btn btn-primary col-auto" href="#" id="check_nickname" role="button">중복확인</a>
                 </div>
                 <div class="row" id="myp-mod">
                     <label for="email" class="col-2 col-form-label font-weight-bold text-align-end">이메일</label>
                     <div class="col-8">
                         <input type="text" class="form-control" id="email">
+                        <span id="emailMsg"></span>
+
                     </div>
-                    <a class="btn btn-primary col-auto" href="#" id="button_outline" role="button">중복확인</a>
+                    <a class="btn btn-primary col-auto" href="#" id="check_email" role="button">중복확인</a>
                 </div>
                 <div class="row" id="myp-mod">
                     <label for="password" class="col-2 col-form-label font-weight-bold text-align-end">비밀번호</label>
                     <div class="col-8">
                         <input type="password" class="form-control" id="password">
+                        <span id="passwordMsg"></span>
                     </div>
                 </div>
                 <div class="row" id="myp-mod">
                     <label for="passwordCheck" class="col-2 col-form-label font-weight-bold text-align-end">비밀번호확인</label>
                     <div class="col-8">
                         <input type="password" class="form-control" id="passwordCheck">
+                        <span id="passwordCheckMsg"></span>
                     </div>
                 </div>
                 <div class="row" id="myp-mod">
@@ -73,7 +79,7 @@
                             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path fill-rule="evenodd" d="M8 13.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
                         </svg>
-                        <span class="margin-left-8 font-weight-bold color-gray">10,000</span>
+                        <span class="margin-left-8 font-weight-bold color-gray" id="point"></span>
                     </div>
                 </div>
                 <div class="row" id="myp-mod">
@@ -82,7 +88,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-gem" viewBox="0 0 16 16">
                             <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z"/>
                         </svg>
-                        <span class="margin-left-8 font-weight-bold color-purple">플래티넘</span>
+                        <span class="margin-left-8 font-weight-bold color-purple" id="grade"></span>
                     </div>
                 </div>
                 <!--                <div class="row" id="myp-mod">-->
@@ -214,7 +220,7 @@
                     <!--                    <th:block th:replace="fragment/button :: solid('회원탈퇴')" />-->
                     <!---->
 
-                    <th:block th:replace="fragment/button :: solid(저장)"></th:block>
+                    <input class="btn btn-primary button-solid" type="button" id="memberUpdateBtn" value="저장">
                 </div>
             </form>
         </div><!--col-->

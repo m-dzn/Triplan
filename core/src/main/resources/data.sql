@@ -2,8 +2,23 @@ INSERT INTO role (name) VALUES ('ADMIN');
 INSERT INTO role (name) VALUES ('SELLER');
 INSERT INTO role (name) VALUES ('USER');
 
-INSERT INTO member (email, password, nickname)
-VALUES ('user@gmail.com', '1111', '사용자1');
+/*Grade 그룹*/
+
+INSERT INTO grade (grade, min_payment, max_payment)
+VALUES ('BRONZE', 0,100000);
+
+INSERT INTO grade (grade, min_payment, max_payment)
+VALUES ('SILVER', 100001,300000);
+
+INSERT INTO grade (grade, min_payment, max_payment)
+VALUES ('GOLD', 300001, 500000);
+
+INSERT INTO grade (grade, min_payment, max_payment)
+VALUES ('PLATINUM', 500001, 2100000000);
+
+
+INSERT INTO member (email, password, nickname, point)
+VALUES ('user@gmail.com', '1111', '사용자1', 9999);
 
 INSERT INTO seller (business_license_number, business_name, tel, owner_name, email, business_account, zip_code, address, member_id)
 VALUES ('1', 'Com. Trip', '010-1111-1111', '손명진', 'smj@gmail.com', '00-000-0000', '000-00', '부산광역시 부산진구', 1);
@@ -18,6 +33,15 @@ INSERT INTO item (name, `explain`, item_category, item_group_id)
 VALUES ('4인용 오션뷰 객실', '가격은 2배', 'ROOM', 1);
 INSERT INTO item (name, `explain`, item_category, item_group_id)
 VALUES ('대회의실', '가격은 4배', 'ROOM', 1);
+
+INSERT INTO wishlist (member_id, item_group_id)
+VALUES (1, 1);
+
+INSERT INTO wishlist (member_id, item_group_id)
+VALUES (1, 2);
+
+INSERT INTO wishlist (member_id, item_group_id)
+VALUES (1, 3);
 
 
 
@@ -142,16 +166,4 @@ VALUES ('테스트 문의3', '테스트 문의 내용', 0, 1, 'CUSTOMER');
 INSERT INTO question (title, content, hide, member_id, type)
 VALUES ('테스트 문의4', '테스트 문의 내용', 0, 1, 'CUSTOMER');
 
-/*Grade 그룹*/
 
-INSERT INTO grade (grade, min_payment, max_payment)
-VALUES ('BRONZE', 0,100000);
-
-INSERT INTO grade (grade, min_payment, max_payment)
-VALUES ('SILVER', 100001,300000);
-
-INSERT INTO grade (grade, min_payment, max_payment)
-VALUES ('GOLD', 300001, 500000);
-
-INSERT INTO grade (grade, min_payment, max_payment)
-VALUES ('PLATINUM', 500001, 2100000000);

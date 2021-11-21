@@ -42,6 +42,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public void updateMypage(Integer memberId, MemberVO memberVO) {
+        memberVO.setMemberId(memberId);
+        memberMapper.updateMypage(memberVO);
+    }
+
+    @Override
     public void updateBasicInfo(Integer memberId, MemberVO memberVO) {
         memberVO.setMemberId(memberId);
         memberMapper.updateBasicInfo(memberVO);
@@ -79,18 +85,21 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public void updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> files) {
+    public String updateProfileImg(List<MultipartFile> files, Integer memberId) {
+        MemberVO memberVO = new MemberVO();
+        memberVO.setMemberId(memberId);
+
         if (!files.isEmpty()) {
-            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.MEMBER, memberProfileDTO.getMemberId());
+            List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.MEMBER, memberId);
             AttachmentUtil.deleteAttachments(filesToDelete);
-            attachmentMapper.delete(AboutTableType.REVIEW, memberProfileDTO.getMemberId());
-            memberProfileDTO.setProfileImg("");
+            attachmentMapper.delete(AboutTableType.MEMBER, memberId);
+            memberVO.setProfileImg("");
         }
 
-        AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.MEMBER, memberProfileDTO.getMemberId());
+        AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.MEMBER, memberId);
 
         if (attachmentVO != null) {
-            memberProfileDTO.setProfileImg(attachmentVO.getUrl());
+            memberVO.setProfileImg(attachmentVO.getUrl());
 
             try {
                 attachmentMapper.insert(attachmentVO);
@@ -98,9 +107,12 @@ public class MemberServiceImpl implements MemberService {
                 e.printStackTrace();
                 AttachmentUtil.deleteAttachment(attachmentVO);
             }
+            return attachmentVO.getUrl();
+
         }
 
-        memberMapper.updateBasicInfo(memberProfileDTO.toVO());
+        memberMapper.updateBasicInfo(memberVO);
+        return null;
     }
 
 

@@ -14,7 +14,7 @@
         )
     </insert>
 
-    <select id="select" resultType="ItemGroupVO">
+    <select id="select" resultType="WishlistVO">
         SELECT  *
         FROM    wishlist
         WHERE   wishlist_id = #{wishlistId}
@@ -55,8 +55,6 @@
                 wl.item_group_id = ig.item_group_id
         WHERE
                 member_id = #{memberId}
-        ORDER BY
-                created_at DESC
     </select>
 
     <select id="exist" resultType="boolean">

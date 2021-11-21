@@ -14,6 +14,8 @@ public interface MemberService {
 
     void updateEtc(Integer memberId, MemberVO memberVO);
 
+    void updateMypage(Integer memberId, MemberVO memberVO);
+
     void updateBasicInfo(Integer memberId, MemberVO memberVO);
 
     void updateEmail(Integer memberId, MemberVO memberVO);
@@ -26,5 +28,5 @@ public interface MemberService {
 
     Boolean nicknameCheck(String nickname);
 
-    void updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> file);
+    String updateProfileImg(List<MultipartFile> file, Integer memberId);
 }

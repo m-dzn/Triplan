@@ -39,6 +39,12 @@ public class ApiMemberController {
         return "회원 이메일정보 수정";
     }
 
+    @PutMapping("/{memberId}")
+    public String updateMypage(@PathVariable Integer memberId, @RequestBody MemberVO memberVO){
+        memberService.updateMypage(memberId, memberVO);
+        return "회원정보 수정";
+    }
+
     @PatchMapping("/{memberId}/change-password") /*비밀번호*/
     public String updatePassword(@PathVariable Integer memberId, @RequestBody MemberVO memberVO){
         memberService.updatePassword(memberId, memberVO);

@@ -63,6 +63,16 @@
         member_id = ${memberId}
     </update>
 
+    <update id="updateMypage">
+        UPDATE  member
+        SET
+        nickname = IFNULL(  #{nickname},     nickname    ),
+        email    = IFNULL(  #{email},        email        ),
+        password = IFNULL(  #{password}, password  )
+        WHERE
+        member_id = ${memberId}
+    </update>
+
 
     <update id="delete">
         UPDATE  member
