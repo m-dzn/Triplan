@@ -37,7 +37,7 @@
                 <div class="border bg-white rounded-3 border-2 d-flex justify-content-between margin-window padding-16">
 
                     <div class="col-auto">총 금액</div>
-                    <div class="col-auto font-weight-bold" id="item-price" th:text="'50000 원'"></div>
+                    <div class="col-auto font-weight-bold" id="item-price"></div>
 
                 </div>
                 <div class="border bg-white rounded-3 border-2 margin-window padding-16">
@@ -67,7 +67,7 @@
                         </div>
                         <div class="row d-flex justify-content-between padding-top-8">
                             <span class="col-auto">최종 결제 금액</span>
-                            <span class="col-auto font-weight-bold"  id="total-price" th:text="'50000 원'"></span>
+                            <span class="col-auto font-weight-bold"  id="item-total-price"></span>
                         </div>
 
                     </div>
@@ -148,54 +148,70 @@
     <script th:inline="javascript">
 
         var itemCategory // 상품카테고리
-        var itemName; // 결제창에서 보여질 상품이름
-        var itemPriceArr = document.getElementById("item-price").innerText.split(' '); // 상품 원래 가격
-        var itemPrice = itemPriceArr[0];
+        var itemName = [[${item.name}]]; // 결제창에서 보여질 상품이름
+        var itemTotalPriceObj = document.getElementById("item-total-price");
+        var itemPriceObj = document.getElementById("item-price");
         var totalDiscountPrice = 0; // 총 할인금
-        var totalPrice = itemPrice - totalDiscountPrice; // 총 결제금액
-//        var startDate; // 시작날짜(ex 체크인)
-//        var endDate; // 끝나는날짜(ex 체크아웃)
-        startDate = new Date([[${startDate}]]); // 시작날짜(ex 체크인)
-        endDate = new Date([[${endDate}]]); // 끝나는날짜(ex 체크아웃)
+        var startDate = [[${startDate}]]; // 시작날짜(ex 체크인)
+        var endDate = [[${endDate}]]; // 끝나는날짜(ex 체크아웃)
         var name; // 예약자이름
         var phone; // 예약자 전화번호
         var memberId = [[${memberId}]]; // 회원id
         var sellerId = [[${sellerId}]]; // 판매자id
-    //    var itemScheduleIdList = [[${itemScheduleIdList}]]; // 아이템스케줄id
+        var itemId = [[${item.itemId}]];
 
         var memberCouponId = 0; // 쿠폰id
         var paidAt; // 결제일
         var submitButton = document.getElementById("button_solid"); // 결제버튼
 
-         function changeDiscountPrice() {
+
+
+        function changeDiscountPrice() {
             var couponSelect = document.getElementById("coupon-select");
             totalDiscountPrice = couponSelect.options[couponSelect.selectedIndex].value;
             var discountPriceObj = document.getElementById("discount-price");
             discountPriceObj.innerHTML = totalDiscountPrice + ' 원';
 
-            totalPrice = itemPrice - totalDiscountPrice;
-            document.getElementById("total-price").innerHTML = totalPrice + ' 원';
+            totalPrice = totalPrice - totalDiscountPrice;
+            if(totalPrice < 0){
+                totalPrice = 0;
+            }
+            itemTotalPriceObj.innerHTML = totalPrice + ' 원';
 
             memberCouponIdObj = couponSelect.options[couponSelect.selectedIndex];
             memberCouponId = parseInt(memberCouponIdObj.dataset.couponid);
 
             submitButton.value = totalPrice + '원 결제';
-         }
-
-
-
+       }
 
         $(document).ready(function () {
+            $.ajax({
+                url: '/api/items/'+itemId +'?startDate='+startDate+'&endDate='+endDate,
+                type: 'GET',
+                contentType: 'application/json;charset=utf-8',
+                success: function(itemResponseDTO) {
+                    if(!itemResponseDTO.totalPrice) {
+                        totalPrice = 0;
+                    } else {
+                        totalPrice = itemResponseDTO.totalPrice;
+                    }
+                    itemPriceObj.innerHTML = totalPrice + ' 원';
+                    itemTotalPriceObj.innerHTML = totalPrice + ' 원';
+                },
+                error:function(e) {
+                    console.log('api/item 불러오기 실패');
+                }
+
+            }); // ajax
+
+
+
 
             $('#button_solid').click(function (e) {
                 // 예약/결제정보 줍줍
                 // itemCategory = document.getElementById('item-category').innerText;
                 itemCategory = 'ROOM';
                 itemName = document.getElementById('item-name').innerText;
-            //    startDate = new Date(document.getElementById('start-date').innerText);
-            //    endDate = new Date(document.getElementById('end-date').innerText);
-                startDate = new Date([[${startDate}]]);
-                endDate = new Date([[${endDate}]]);
                 name = document.getElementById('name').value.trim(); // value값
                 phone = document.getElementById('tel').value.trim(); // value값
 
@@ -215,6 +231,11 @@
 
                  if (!regPhone.test(phone)|| !regTel.test(phone)) {
                     alert('연락처의 형식이 올바르지 않습니다.');
+                    return;
+                 }
+
+                 if(totalPrice <= 0) {
+                    alert("'0원'은 결제가 불가능합니다.");
                     return;
                  }
 
