@@ -3,6 +3,7 @@ package com.triplan.service;
 import com.triplan.domain.ItemScheduleVO;
 import com.triplan.domain.ReservationVO;
 import com.triplan.dto.ReservationDTO;
+import com.triplan.dto.response.Pagination;
 import com.triplan.exception.ResourceNotFoundException;
 import com.triplan.mapper.ItemScheduleMapper;
 import com.triplan.mapper.ReservationMapper;
@@ -159,5 +160,13 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationDTOList;
     }
 
+    /* 페이징 처리 */
+    @Override
+    public Pagination<ReservationDTO> myPagedResList(Integer memberId, Integer pageSize, Integer currentPage) {
+        List<ReservationDTO> pagedResList = reservationMapper.myPagedResList(pageSize, currentPage);
+        Integer totalReservations = reservationMapper.count(memberId);
+
+        return new Pagination<>(pageSize, currentPage, totalReservations, pagedResList);
+    }
 
 }

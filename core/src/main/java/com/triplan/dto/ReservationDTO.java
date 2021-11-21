@@ -2,6 +2,7 @@ package com.triplan.dto;
 
 import com.triplan.domain.ReservationVO;
 import com.triplan.enumclass.ItemCategory;
+import com.triplan.enumclass.PaymentState;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -56,6 +57,15 @@ public class ReservationDTO {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime updatedAt;
+
+
+    // payment 테이블 컬럼
+    private LocalDateTime paidAt;
+    private PaymentState state;
+
+    // item 테이블 컬럼
+    private String iname;
+    private String itemImg;
 
 
     public static ReservationDTO of(ReservationVO reservationVO){

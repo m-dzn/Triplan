@@ -56,6 +56,9 @@ public class TestController {
     @GetMapping({"/mypagecouponexpired"})
     public String mypagecouponexpired() { return "mypage_coupon_expired"; }
 
+    @GetMapping({"/mypagereservation"})
+    public String mypagereservation() { return "mypage_reservation"; }
+
     @GetMapping({"/login"})
     public String login() {
         return "login";

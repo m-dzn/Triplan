@@ -173,6 +173,26 @@
         ORDER BY    updated_at DESC
     </select>
 
+    <!-- 페이징 처리-->
+    <select id="myPagedResList" resultType="com.triplan.dto.ReservationDTO">
+        SELECT  r.res_id, r.item_category, r.total_price, r.start_date, r.end_date, r.name, r.phone,
+                r.total_discount_price, r.created_at, r.updated_at, r.member_id, r.seller_id, r.cancellation,
+                p.paid_at, p.state, it.name as "iname", ig.item_img
+        FROM    reservation r JOIN payment p            ON  (r.res_id = p.res_id)
+                              JOIN reservation_item ri  ON  (r.res_id = ri.res_id)
+                              JOIN item_schedule isc    ON  (isc.item_schedule_id = ri.item_schedule_id)
+                              JOIN item it              ON  (isc.item_id = it.item_id)
+                              JOIN item_group ig        ON  (it.item_group_id = ig.item_group_id)
+        ORDER BY r.start_date DESC
+            LIMIT (#{currentPage} -1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="Integer">
+        SELECT  COUNT(*)
+        FROM    reservation
+        WHERE   member_id = #{memberId}
+    </select>
+
     <update id="updateStockByItemSchedule">
         UPDATE  item_schedule
         SET
@@ -185,4 +205,5 @@
         SET sales_volume = sales_volume+1
         WHERE item_id = (SELECT item_id FROM item_schedule WHERE item_schedule_id = #{itemScheduleId} )
     </update>
+  
 </mapper>
