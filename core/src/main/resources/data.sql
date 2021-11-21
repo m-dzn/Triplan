@@ -44,15 +44,6 @@ INSERT INTO wishlist (member_id, item_group_id)
 VALUES (1, 3);
 
 
-
-INSERT INTO room (number_of_person, max_person, item_id)
-VALUES (3, 5, 1);
-INSERT INTO room (number_of_person, max_person, item_id)
-VALUES (4, 4, 2);
-INSERT INTO room (number_of_person, max_person, item_id)
-VALUES (10, 20, 3);
-
-
 INSERT INTO reservation (item_category, total_price, start_date, end_date, name, phone, member_id, seller_id)
 VALUES ('ROOM', 50000, '2021-11-1T01:01:01', '2021-12-31T23:59:59', '양경호', '010-9999-9999', 1, 1);
 
