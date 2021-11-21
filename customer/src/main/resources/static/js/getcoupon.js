@@ -10,8 +10,8 @@ function getCouponByNum() {
             return response.text();
         }
     }).then(memberCouponNum => {
-        alert("실험");
         console.log(memberCouponNum)
+
         if(memberCouponNum == -2) {
             alert("이미 가지고 있거나 사용한 쿠폰입니다.");
         }

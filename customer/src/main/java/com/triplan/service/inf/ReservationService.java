@@ -1,6 +1,7 @@
 package com.triplan.service.inf;
 
 import com.triplan.dto.ReservationDTO;
+import com.triplan.dto.response.Pagination;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface ReservationService {
     Integer reserve(Integer memberCouponId, ReservationDTO reservationDTO, Integer itemId, LocalDateTime startDate, LocalDateTime endDate);
 
     Integer cancel(Integer resId, ReservationDTO reservationDTO);
+
+    Pagination<ReservationDTO> myPagedResList(Integer memberId, Integer pageSize, Integer currentPage);
 }
