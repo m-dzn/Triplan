@@ -32,7 +32,7 @@
                 </if>
         ) item_group
         JOIN (
-                SELECT  item_group_id, price price_per_day
+                SELECT  item_group_id, MIN(price) price_per_day
                 FROM    item
                 JOIN (
                         SELECT
@@ -79,7 +79,7 @@
                 </if>
         ) item_group
         JOIN (
-                SELECT  item_group_id, price price_per_day
+                SELECT  item_group_id
                 FROM    item
                 JOIN (
                         SELECT

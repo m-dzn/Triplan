@@ -28,7 +28,7 @@ public class ReviewServiceImpl implements ReviewService {
     public void reviewInsert(ReviewVO reviewVO, List<MultipartFile> files) {
         reviewMapper.insert(reviewVO);
 
-        if (files.isEmpty()) return;
+        if (files == null || files.isEmpty()) return;
 
         AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.REVIEW, reviewVO.getReviewId());
 
@@ -53,7 +53,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public ReviewVO reviewUpdate(ReviewVO reviewVO, List<MultipartFile> files) {
-        if (!files.isEmpty()) {
+        if (files != null && !files.isEmpty()) {
             List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.REVIEW, reviewVO.getReviewId());
             AttachmentUtil.deleteAttachments(filesToDelete);
             attachmentMapper.delete(AboutTableType.REVIEW, reviewVO.getReviewId());

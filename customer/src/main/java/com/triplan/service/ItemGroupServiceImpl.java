@@ -33,7 +33,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
     }
 
     @Override
-    public ItemGroupResponseDTO getItemList(Integer itemGroupId) {
+    public ItemGroupResponseDTO getItemList(Integer itemGroupId, Integer memberId) {
 
         List<ItemVO> itemVO = itemMapper.getItemByItemGroupId(itemGroupId);
 
@@ -47,6 +47,11 @@ public class ItemGroupServiceImpl implements ItemGroupService {
             itemGroupResponseDTO.setItemRoomList(itemRoomResponseDTO);
             itemGroupResponseDTO.setTagList(tagMapper.list(itemGroupId));
 
+            // 회원 로그인 시 찜 여부 조회
+            if (memberId != null) {
+                itemGroupResponseDTO.setLiked(wishlistMapper.exist(itemGroupId, memberId));
+            }
+
             return itemGroupResponseDTO;
         }
         else if(itemVO.get(0).getItemCategory().equals(ItemCategory.FLIGHT)){
@@ -58,6 +63,11 @@ public class ItemGroupServiceImpl implements ItemGroupService {
             ItemGroupResponseDTO itemGroupResponseDTO = ItemGroupResponseDTO.of(itemGroupVO);
             itemGroupResponseDTO.setItemFlightList(itemFlightResponseDTO);
             itemGroupResponseDTO.setTagList(tagMapper.list(itemGroupId));
+
+            // 회원 로그인 시 찜 여부 조회
+            if (memberId != null) {
+                itemGroupResponseDTO.setLiked(wishlistMapper.exist(itemGroupId, memberId));
+            }
 
             return itemGroupResponseDTO;
         }

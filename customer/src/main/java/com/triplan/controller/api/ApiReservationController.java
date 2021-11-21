@@ -6,7 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -43,15 +44,18 @@ public class ApiReservationController {
 
     // 예약하기 -> 프론트에서 쿠폰 적용 안 할 시 memberCouponId == 0 으로 넘기기
     @PostMapping("/reserve/{memberCouponId}")
-    public Integer reserve(@RequestParam String itemScheduleId, @PathVariable Integer memberCouponId,
-                          @Valid @RequestBody ReservationDTO reservationDTO) {
-        List<Integer> itemScheduleIdList = new ArrayList<>();
-        String splitArr[] = itemScheduleId.split(",");
-        for(int i=0; i<splitArr.length; i++) {
-            itemScheduleIdList.add(Integer.parseInt(splitArr[i]));
-        }
+    public Integer reserve(
+            @PathVariable Integer memberCouponId,
+            @RequestParam Integer itemId,
+            @RequestParam String startDate,
+            @RequestParam String endDate,
+            @Valid @RequestBody ReservationDTO reservationDTO
+    ) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime startDateLDT = LocalDateTime.parse(startDate, formatter);
+        LocalDateTime endDateLDT = LocalDateTime.parse(endDate, formatter);
 
-        Integer resId = reservationService.reserve(itemScheduleIdList, memberCouponId, reservationDTO);
+        Integer resId = reservationService.reserve(memberCouponId, reservationDTO, itemId, startDateLDT, endDateLDT);
         // * 받아와야할 거
         // - 상품 : itemCategory, totalPrice, startDate, endDate + itemScheduleId
         // - 사용자 입력 : name, phone

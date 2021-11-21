@@ -29,12 +29,12 @@ public class ApiItemController {
 
     @GetMapping("/room/{itemId}")
     public ItemRoomResponseDTO readItemDetailRoom(@PathVariable Integer itemId){
-        return itemService.getDetailRoomByItemId(ItemCategory.ROOM,itemId);
+        return itemService.getDetailRoomByItemId(ItemCategory.ROOM, itemId);
     }
 
     @GetMapping("/flight/{itemId}")
     public ItemFlightResponseDTO readItemDetailFlight(@PathVariable Integer itemId){
-        return itemService.getDetailFlightByItemId(ItemCategory.FLIGHT,itemId);
+        return itemService.getDetailFlightByItemId(ItemCategory.FLIGHT, itemId);
     }
 
     @GetMapping("/item-groups/{itemGroupId}")

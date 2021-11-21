@@ -31,10 +31,14 @@ public class ItemGroupResponseDTO {
     private Integer lng;
     private Integer likeCount;
     private Integer reviewCount;
+    private Integer sellerId;
 
     private List<ItemRoomResponseDTO> itemRoomList;
     private List<ItemFlightResponseDTO> itemFlightList;
     private List<TagVO> tagList;
+
+    // 기타 컬럼
+    private Boolean liked;
 
 
     public static ItemGroupResponseDTO of(ItemGroupVO vo) {
@@ -54,6 +58,7 @@ public class ItemGroupResponseDTO {
                 .lng(vo.getLng())
                 .likeCount(vo.getLikeCount())
                 .reviewCount(vo.getReviewCount())
+                .sellerId(vo.getSellerId())
                 .build();
     }
 
