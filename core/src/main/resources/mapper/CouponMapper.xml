@@ -6,7 +6,6 @@
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="couponId">
         INSERT INTO coupon (
-            coupon_id,
             name,
             num,
             price,

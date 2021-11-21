@@ -1,6 +1,7 @@
 package com.triplan.controller.api;
 
 import com.triplan.dto.ReservationDTO;
+import com.triplan.dto.response.Pagination;
 import com.triplan.service.inf.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -85,9 +86,17 @@ public class ApiReservationController {
     }
 
     // 나의 예약 조회 - 취소된 여행 (여행 취소 일자 순)
-    @GetMapping("/myCancelledResList/{memberId}")
+    @GetMapping("/myCancelledResList")
     public List<ReservationDTO> myCancelledResList() {
         Integer memberId = 1;
         return reservationService.myCancelledResList(memberId);
+    }
+
+    // 나의 예약 전체 리스트 - 페이징 처리
+    @GetMapping("/myPagedResList")
+    public Pagination<ReservationDTO> myPagedResList(@RequestParam(defaultValue = "10") Integer pageSize,
+                                                     @RequestParam(defaultValue = "1") Integer currentPage) {
+        Integer memberId = 1;
+        return reservationService.myPagedResList(memberId, pageSize, currentPage);
     }
 }

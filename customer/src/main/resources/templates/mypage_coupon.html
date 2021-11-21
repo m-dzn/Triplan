@@ -8,14 +8,95 @@
         <section class="col-3">
             <th:block th:replace="fragment/myPage :: mypage_top"></th:block>
             <th:block th:replace="fragment/myPage :: mypage_nav_coupon"></th:block>
-<!--            <th:block th:replace="fragment/myPage :: mypage_bottom"></th:block>-->
+            <!--            <th:block th:replace="fragment/myPage :: mypage_bottom"></th:block>-->
         </section>
         <section class="col-9">
-            <th:block th:replace="fragment/myPage :: coupon"></th:block>
+            <!--            <th:block th:replace="fragment/myPage :: coupon"></th:block>-->
+            <div    th:fragment="coupon"
+                    class="border bg-white rounded-3 border-2 margin-title padding-16">
 
+                <th:block th:replace="fragment/title :: title_2('나의 쿠폰')"></th:block>
 
+                <!--                <th:block th:replace="fragment/myPage :: couponInsert"></th:block>-->
+                <form action="" th:fragment="couponInsert" onsubmit="return getCouponByNum();">
+
+                    <div class="row align-items-end margin-left-8">
+                        <label class="col-10">쿠폰 등록
+                            <input  type="text" class="form-control" name="num" id="num"></input>
+                        </label>
+
+                        <input  class="col-auto btn btn-primary"
+                                id="button_solid"
+                                value="쿠폰 등록"
+                                type="submit"/>
+
+                    </div><!--row-->
+                </form>
+
+                <!--카테고리 탭-->
+                <ul class="nav nav-tabs margin-bottom-32 margin-top-24">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="mypagecoupon">사용 가능</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link color-gray" href="mypagecoupondisabled">사용 완료</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link color-gray" href="mypagecouponexpired">사용 불가</a>
+                    </li>
+                </ul>
+                <!--카테고리 탭 끝-->
+
+                <div class="row text-align-center margin-top-24 justify-content-center">
+                    <table class="col-11" id="couponTable">
+                        <thead>
+                            <tr>
+                                <td>쿠폰명</td>
+                                <td>할인 금액</td>
+                                <td>사용 조건</td>
+                                <td>유효 기간</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </section>
     </div>
 
 </div>
+
+<th:block layout:fragment="script">
+    <!--쿠폰 등록 스크립트 -->
+    <script src="/js/getcoupon.js"></script>
+    <script>
+        // 사용 가능 쿠폰 리스트 로드
+        document.addEventListener("DOMContentLoaded", function() {
+            var couponTable = document.getElementById("couponTable");
+
+            fetch(`${BASE_URL}/api/membercoupons/myavailablecouponlist`, {
+                method: 'GET'
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+            }).then(memberCouponList => {
+                console.log(memberCouponList)
+
+                var memberCouponTBody = couponTable.getElementsByTagName("tbody")[0];
+                memberCouponTBody.innerHTML = memberCouponList.map(memberCoupon => {
+                    return `<tr>`
+                        + `<td style="width: 32%;white-space: nowrap">${memberCoupon.name}</td>`
+                        + `<td style="width: 11%;white-space: nowrap">${memberCoupon.price}</a></td>`
+                        + `<td>${memberCoupon.condition}</td>`
+                        + `<td style="width: 13%;white-space: nowrap">~${moment(memberCoupon.expiredAt).format(DATE_FORMAT_KOR)}</td>`
+                        + `</tr>`
+                }).join('');
+            });
+        });
+
+    </script>
+</th:block>
 </html>
