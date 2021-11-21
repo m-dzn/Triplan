@@ -91,7 +91,6 @@
         ORDER BY sales_volume DESC
     </select>
 
-
     <update id="updateByItemGroupId">
         UPDATE item
            SET item_group_id = #{itemGroupId}
@@ -146,4 +145,26 @@
         FROM item
         WHERE item_category = #{room}
     </select>
+
+    <select id="getItemsByItemGroupId" resultType="com.triplan.dto.response.RoomCardResponseDTO">
+        <![CDATA[
+            SELECT *
+            FROM item
+            JOIN (
+                SELECT
+                    item_id,
+                    MIN(start_date) start_date,
+                    AVG(price) price_per_day,
+                    AVG(discount_price) discount_per_day,
+                    SUM(price) total_price,
+                    SUM(discount_price) total_discount_price
+                FROM    item_schedule
+                WHERE   DATEDIFF(DAY, start_date, #{startDate}) <= 0
+                  AND   DATEDIFF(DAY, end_date, #{endDate}) >= 0
+                GROUP BY item_id
+            ) USING (item_id)
+            WHERE   item_group_id = #{itemGroupId}
+        ]]>
+    </select>
+
 </mapper>

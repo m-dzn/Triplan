@@ -20,4 +20,5 @@ public interface PaymentMapper {
 
     Long getYearPayment(Integer memberId);
 
+    String getNameByItem(Integer resId);
 }

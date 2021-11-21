@@ -4,8 +4,10 @@ import com.triplan.domain.MemberVO;
 import com.triplan.service.inf.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/members")
@@ -39,6 +41,12 @@ public class ApiMemberController {
         return "회원 이메일정보 수정";
     }
 
+    @PutMapping("/{memberId}")
+    public String updateMypage(@PathVariable Integer memberId, @RequestBody MemberVO memberVO){
+        memberService.updateMypage(memberId, memberVO);
+        return "회원정보 수정";
+    }
+
     @PatchMapping("/{memberId}/change-password") /*비밀번호*/
     public String updatePassword(@PathVariable Integer memberId, @RequestBody MemberVO memberVO){
         memberService.updatePassword(memberId, memberVO);
@@ -69,6 +77,13 @@ public class ApiMemberController {
     public Boolean nicknameCheck(@RequestParam("nickname") String nickname) {
         Boolean result = memberService.nicknameCheck(nickname);
         return result;
+    }
+
+    @PatchMapping("/updateProfileImg")
+    public String updateMemberProfile(@RequestPart("files") List<MultipartFile> files) {
+        Integer memberId = 1;
+        memberService.updateProfileImg(files, memberId);
+        return "정보 입력 성공";
     }
 
 }

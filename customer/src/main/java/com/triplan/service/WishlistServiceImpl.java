@@ -22,11 +22,11 @@ public class WishlistServiceImpl implements WishlistService {
 
     @Override
     @Transactional
-    public void addToWishlist(Integer memberId, Integer itemId) {
-        ItemGroupVO itemGroupVO = itemGroupMapper.selectByItemId(itemId);
+    public void addToWishlist(Integer memberId, Integer itemGroupId) {
+        ItemGroupVO itemGroupVO = itemGroupMapper.select(itemGroupId);
         itemGroupVO.increaseLikeCount();
         itemGroupMapper.update(itemGroupVO);
-        wishlistMapper.insert(memberId, itemId);
+        wishlistMapper.insert(memberId, itemGroupId);
     }
 
     @Override
@@ -39,6 +39,16 @@ public class WishlistServiceImpl implements WishlistService {
         itemGroupMapper.update(itemGroupVO);
 
         wishlistMapper.delete(wishlistId);
+    }
+
+    @Override
+    @Transactional
+    public void removeByItemGroupId(Integer itemGroupId) {
+        ItemGroupVO itemGroupVO = itemGroupMapper.select(itemGroupId);
+        itemGroupVO.decreaseLikeCount();
+        itemGroupMapper.update(itemGroupVO);
+
+        wishlistMapper.deleteByItemGroupId(itemGroupId);
     }
 
     @Override

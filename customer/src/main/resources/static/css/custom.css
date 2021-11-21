@@ -256,9 +256,14 @@ h1::before{ /* 추가요소::before */
   height: calc(var(--unit)*240);
 }
 
+#productCardContainer > a > div {
+    overflow: hidden;
+}
+
 #thumbnailCard-img{
-  height: 100%;
+  height: calc(var(--unit)*166);
   width: calc(var(--unit)*200);
+  object-fit: cover;
 }
 
 #banner{

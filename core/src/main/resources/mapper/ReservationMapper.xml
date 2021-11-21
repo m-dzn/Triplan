@@ -193,5 +193,17 @@
         WHERE   member_id = #{memberId}
     </select>
 
+    <update id="updateStockByItemSchedule">
+        UPDATE  item_schedule
+        SET
+        stock = stock-1
+        WHERE   item_schedule_id  = #{itemScheduleId}
+    </update>
 
+    <update id="updateSalesVolumeByItem">
+        UPDATE item
+        SET sales_volume = sales_volume+1
+        WHERE item_id = (SELECT item_id FROM item_schedule WHERE item_schedule_id = #{itemScheduleId} )
+    </update>
+  
 </mapper>

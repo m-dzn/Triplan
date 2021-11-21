@@ -1,0 +1,48 @@
+.review-avatar {
+    width: calc(var(--unit)*48);
+    height: calc(var(--unit)*48);
+    border-radius: calc(var(--unit)*8);
+}
+
+/* 좋아요 버튼 */
+[id|="heart"] {
+  position: absolute;
+  left: -1000vw;
+}
+
+[for|="heart"] {
+  color: #aab8c2;
+  cursor: pointer;
+  /*font-size: 6em;*/
+  align-self: center;
+  transition: color 0.2s ease-in-out;
+}
+
+[for|="heart"]:hover {
+  color: grey;
+}
+
+[for|="heart"]::selection {
+  color: var(--primary);
+  background: transparent;
+}
+
+/*[for="heart"]::moz-selection {*/
+/*  color: var(--primary);*/
+/*  background: transparent;*/
+/*}*/
+
+[id|="heart"]:checked + label {
+  color: var(--primary);
+  will-change: font-size;
+  animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
+}
+
+.carousel-item {
+    height: 100%;
+}
+
+.carousel-item img {
+    height: 100%;
+    object-fit: cover;
+}

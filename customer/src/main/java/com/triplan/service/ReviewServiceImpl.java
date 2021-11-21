@@ -2,6 +2,7 @@ package com.triplan.service;
 
 import com.triplan.domain.AttachmentVO;
 import com.triplan.domain.ReviewVO;
+import com.triplan.dto.ReviewDTO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.AboutTableType;
 import com.triplan.mapper.AttachmentMapper;
@@ -27,7 +28,7 @@ public class ReviewServiceImpl implements ReviewService {
     public void reviewInsert(ReviewVO reviewVO, List<MultipartFile> files) {
         reviewMapper.insert(reviewVO);
 
-        if (files.isEmpty()) return;
+        if (files == null || files.isEmpty()) return;
 
         AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.REVIEW, reviewVO.getReviewId());
 
@@ -52,7 +53,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public ReviewVO reviewUpdate(ReviewVO reviewVO, List<MultipartFile> files) {
-        if (!files.isEmpty()) {
+        if (files != null && !files.isEmpty()) {
             List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.REVIEW, reviewVO.getReviewId());
             AttachmentUtil.deleteAttachments(filesToDelete);
             attachmentMapper.delete(AboutTableType.REVIEW, reviewVO.getReviewId());
@@ -93,9 +94,9 @@ public class ReviewServiceImpl implements ReviewService {
 
     /* 페이징 처리 */
     @Override
-    public Pagination<ReviewVO> page(Integer itemId, Integer pageSize, Integer currentPage) {
-        List<ReviewVO> reviewPage = reviewMapper.page(pageSize,currentPage);
-        int totalReviews = reviewMapper.count(itemId);
+    public Pagination<ReviewDTO> listByItemGroupId(Integer itemGroupId, Integer pageSize, Integer currentPage) {
+        List<ReviewDTO> reviewPage = reviewMapper.listByItemGroupId(itemGroupId, pageSize,currentPage);
+        int totalReviews = reviewMapper.countByItemGroupId(itemGroupId);
 
         return new Pagination<>(pageSize,currentPage,totalReviews,reviewPage);
     }

@@ -1,6 +1,7 @@
 package com.triplan.service;
 
 import com.triplan.domain.PaymentVO;
+import com.triplan.mapper.ItemScheduleMapper;
 import com.triplan.mapper.MemberMapper;
 import com.triplan.mapper.PaymentMapper;
 import com.triplan.service.inf.PaymentService;
@@ -14,6 +15,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentMapper paymentMapper;
     private final MemberMapper memberMapper;
+    private final ItemScheduleMapper itemScheduleMapper;
 
     @Override
     @Transactional
@@ -39,5 +41,9 @@ public class PaymentServiceImpl implements PaymentService {
         paymentMapper.delete(paymentId);
     }
 
+    @Override
+    public String readNameByItem(Integer itemId) {
+        return paymentMapper.getNameByItem(itemId);
+    }
 
 }

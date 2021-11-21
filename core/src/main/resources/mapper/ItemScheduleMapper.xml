@@ -11,4 +11,14 @@
         LEFT OUTER JOIN item_group c ON(b.item_group_id=c.item_group_id) WHERE c.seller_id = #{sellerId}
     </select>
 
+    <select id="selectByDate" resultType="ItemScheduleVO">
+        <![CDATA[
+            SELECT  *
+            FROM    item_schedule
+            WHERE   item_id = #{itemId}
+              AND   start_date >= #{startDate}
+              AND   end_date <= #{endDate}
+        ]]>
+    </select>
+
 </mapper>

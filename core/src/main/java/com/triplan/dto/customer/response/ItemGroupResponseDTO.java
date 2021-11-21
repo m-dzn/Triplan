@@ -1,8 +1,7 @@
 package com.triplan.dto.customer.response;
 
-import com.triplan.domain.ItemGroupTagVO;
 import com.triplan.domain.ItemGroupVO;
-import com.triplan.domain.ItemVO;
+import com.triplan.domain.TagVO;
 import com.triplan.enumclass.ItemCategory;
 import lombok.*;
 
@@ -32,10 +31,14 @@ public class ItemGroupResponseDTO {
     private Integer lng;
     private Integer likeCount;
     private Integer reviewCount;
+    private Integer sellerId;
 
     private List<ItemRoomResponseDTO> itemRoomList;
     private List<ItemFlightResponseDTO> itemFlightList;
-    private List<Integer> tagIdList;
+    private List<TagVO> tagList;
+
+    // 기타 컬럼
+    private Boolean liked;
 
 
     public static ItemGroupResponseDTO of(ItemGroupVO vo) {
@@ -55,8 +58,8 @@ public class ItemGroupResponseDTO {
                 .lng(vo.getLng())
                 .likeCount(vo.getLikeCount())
                 .reviewCount(vo.getReviewCount())
+                .sellerId(vo.getSellerId())
                 .build();
     }
-
 
 }

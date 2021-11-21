@@ -49,4 +49,9 @@ public interface ReservationMapper {
     List<ReservationDTO> myPagedResList(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
 
     Integer count(Integer memberId);
+  
+    void updateStockByItemSchedule(Integer itemScheduleId);
+
+    void updateSalesVolumeByItem(Integer itemScheduleId);
+  
 }

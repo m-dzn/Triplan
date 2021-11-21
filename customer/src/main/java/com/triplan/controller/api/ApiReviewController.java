@@ -1,10 +1,10 @@
 package com.triplan.controller.api;
 
 import com.triplan.domain.ReviewVO;
+import com.triplan.dto.ReviewDTO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.service.inf.ReviewService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +22,7 @@ public class ApiReviewController {
     @PostMapping
     public String reviewInsert(
             @RequestPart("review") @Valid ReviewVO reviewVO,
-            @RequestPart("file") List<MultipartFile> files
+            @RequestPart(value = "file", required = false) List<MultipartFile> files
     ) {
         reviewService.reviewInsert(reviewVO, files);
         return "정보 입력 성공";
@@ -58,13 +58,13 @@ public class ApiReviewController {
     }
 
     /* 페이징 처리 */
-    @GetMapping("/items/{itemId}")
-    public Pagination<ReviewVO> reviewPage(
-            @PathVariable Integer itemId,
-            @RequestParam(defaultValue = "5") Integer pageSize,
+    @GetMapping("/item-groups/{itemGroupId}")
+    public Pagination<ReviewDTO> reviewPage(
+            @PathVariable Integer itemGroupId,
+            @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "1") Integer currentPage
     ) {
-        return reviewService.page(itemId, pageSize, currentPage);
+        return reviewService.listByItemGroupId(itemGroupId, pageSize, currentPage);
     }
 
 }

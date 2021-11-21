@@ -14,7 +14,7 @@
         )
     </insert>
 
-    <select id="select" resultType="ItemGroupVO">
+    <select id="select" resultType="WishlistVO">
         SELECT  *
         FROM    wishlist
         WHERE   wishlist_id = #{wishlistId}
@@ -26,6 +26,12 @@
         WHERE   wishlist_id = #{wishlistId}
     </delete>
 
+    <delete id="deleteByItemGroupId">
+        DELETE
+        FROM    wishlist
+        WHERE   item_group_id = #{itemGroupId}
+    </delete>
+
     <select id="list" resultType="com.triplan.dto.response.WishlistResponseDTO">
         SELECT
                 wishlist_id,
@@ -33,6 +39,8 @@
                 item_category,
                 location,
                 like_count,
+                review_count,
+                item_img,
                 wl.created_at
         FROM
                 wishlist wl JOIN item_group ig
@@ -59,7 +67,7 @@
 
     <select id="exist" resultType="boolean">
         SELECT EXISTS (
-            SELECT  COUNT(*)
+            SELECT  wishlist_id
             FROM    wishlist
             WHERE   item_group_id = #{itemGroupId}
               AND   member_id = #{memberId}

@@ -1,7 +1,6 @@
 package com.triplan.service.inf;
 
 import com.triplan.domain.MemberVO;
-import com.triplan.dto.MemberProfileDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -13,6 +12,8 @@ public interface MemberService {
     MemberVO getMember(Integer memberId);
 
     void updateEtc(Integer memberId, MemberVO memberVO);
+
+    void updateMypage(Integer memberId, MemberVO memberVO);
 
     void updateBasicInfo(Integer memberId, MemberVO memberVO);
 
@@ -26,5 +27,5 @@ public interface MemberService {
 
     Boolean nicknameCheck(String nickname);
 
-    void updateProfileImg(MemberProfileDTO memberProfileDTO, List<MultipartFile> file);
+    String updateProfileImg(List<MultipartFile> file, Integer memberId);
 }

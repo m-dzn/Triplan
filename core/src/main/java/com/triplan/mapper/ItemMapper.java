@@ -1,12 +1,12 @@
 package com.triplan.mapper;
 
-import com.triplan.domain.FlightVO;
 import com.triplan.domain.ItemVO;
-import com.triplan.domain.RoomVO;
+import com.triplan.dto.response.RoomCardResponseDTO;
 import com.triplan.enumclass.ItemCategory;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -41,4 +41,11 @@ public interface ItemMapper {
     int countFlight(@Param("sellerId") Integer sellerId, @Param("flight") ItemCategory flight);
 
     List<ItemVO> getItemVOList(ItemCategory room);
+
+    List<RoomCardResponseDTO> getItemsByItemGroupId(
+            @Param("itemGroupId") Integer itemGroupId,
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate
+    );
+
 }

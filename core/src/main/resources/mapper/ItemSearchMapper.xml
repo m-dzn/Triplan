@@ -9,87 +9,93 @@
           FROM Item_Schedule
     </select>
 
-    <select id="getFilterAsDateDistinct" parameterType="map" resultType="ItemGroupVO">
-        SELECT DISTINCT item.item_group_id
-        FROM item
-        JOIN item_group
-        ON item.item_group_id = item_group.item_group_id
-        JOIN item_group_tag
-        ON item_group.item_group_id = item_group_tag.item_group_id
-        WHERE item_id in(
-        SELECT DISTINCT item_id
-        FROM Item_Schedule
-        <if test="Data != null">
-            WHERE item_id IS NOT NULL
-            <if test="startDate != null"> AND start_date &gt;= #{startDate}</if>
-            <if test="endDate != null">   AND end_date &lt;= #{endDate}</if>
-            <if test="underPrice != null">     AND price &lt;= #{underPrice}</if>
-            <if test="overPrice != null">     AND price &gt;= #{overPrice}</if>
-            )
-        </if>
-        <if test="tags != null">
-            AND tag_id in( <foreach collection="tags" item="item" index="idx" separator=",">
-            #{item}
-        </foreach> )
-        </if>
-
+    <select id="getFilterAndSort" parameterType="map" resultType="com.triplan.dto.response.AccommodationCardResponseDTO">
+        SELECT
+                *
+        FROM (
+                SELECT
+                        DISTINCT item_group.item_group_id,
+                        name,
+                        item_category,
+                        address,
+                        like_count,
+                        review_count,
+                        item_img,
+                        location,
+                        created_at
+                FROM    item_group
+                <if test="tags != null">
+                LEFT JOIN    item_group_tag USING (item_group_id)
+                WHERE   tag_id IN (
+                    <foreach collection="tags" item="item" index="idx" separator=",">#{item}</foreach>
+                )
+                </if>
+        ) item_group
+        JOIN (
+                SELECT  item_group_id, MIN(price) price_per_day
+                FROM    item
+                JOIN (
+                        SELECT
+                                item_id,
+                                MIN(start_date) start_date,
+                                MAX(end_date) end_date,
+                                AVG(price) price,
+                                AVG(discount_price) discount_per_day
+                        FROM    item_schedule
+                        GROUP BY item_id
+                ) USING (item_id)
+                WHERE   start_date &gt;= #{startDate}
+                AND   end_date &lt;= #{endDate}
+                AND   price &gt;= #{overPrice}
+                <if test="underPrice != null"> AND price &lt;= #{underPrice} </if>
+                GROUP BY item_group_id
+        ) USING (item_group_id)
+        <choose>
+            <when test='sortType.equals("wish")'>
+                ORDER BY like_count DESC
+            </when>
+            <when test='sortType.equals("review")'>
+                ORDER BY review_count DESC
+            </when>
+            <otherwise>
+                ORDER BY item_group.created_at DESC
+            </otherwise>
+        </choose>
         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
-
     </select>
 
     <select id="getCount" parameterType="map" resultType="Integer">
-        SELECT count( DISTINCT item.item_group_id)
-        FROM item
-        JOIN item_group
-        ON item.item_group_id = item_group.item_group_id
-        JOIN item_group_tag
-        ON item_group.item_group_id = item_group_tag.item_group_id
-        WHERE item_id in(
-        SELECT DISTINCT item_id
-        FROM Item_Schedule
-        <if test="Data != null">
-            WHERE item_id IS NOT NULL
-            <if test="startDate != null"> AND start_date &gt;= #{startDate}</if>
-            <if test="endDate != null">   AND end_date &lt;= #{endDate}</if>
-            <if test="underPrice != null">     AND price &lt;= #{underPrice}</if>
-            <if test="overPrice != null">     AND price &gt;= #{overPrice}</if>
-            )
-        </if>
-        <if test="tags != null">
-            AND tag_id in( <foreach collection="tags" item="item" index="idx" separator=",">
-            #{item}
-        </foreach> )
-        </if>
-
-    </select>
-
-    <select id="getFilterAndSort" parameterType="map" resultType="ItemGroupVO">
-        SELECT DISTINCT item.item_group_id
-        FROM item
-        JOIN item_group
-        ON item.item_group_id = item_group.item_group_id
-        JOIN item_group_tag
-        ON item_group.item_group_id = item_group_tag.item_group_id
-        WHERE item_id in(
-            SELECT DISTINCT item_id
-            FROM Item_Schedule
-            <if test="Data != null">
-                WHERE item_id IS NOT NULL
-                <if test="startDate != null"> AND start_date &gt;= #{startDate}</if>
-                <if test="endDate != null">   AND end_date &lt;= #{endDate}</if>
-                <if test="underPrice != null">     AND price &lt;= #{underPrice}</if>
-                <if test="overPrice != null">     AND price &gt;= #{overPrice}</if>
-            </if>
+        SELECT
+                COUNT(item_group.item_group_id)
+        FROM (
+                SELECT
+                        DISTINCT item_group.item_group_id
+                FROM    item_group
+                <if test="tags != null">
+                LEFT JOIN    item_group_tag USING (item_group_id)
+                WHERE   tag_id IN (
+                    <foreach collection="tags" item="item" index="idx" separator=",">#{item}</foreach>
                 )
-        <if test="tags != null">
-        AND tag_id in( <foreach collection="tags" item="item" index="idx" separator=",">
-            #{item}
-            </foreach> )
-        </if>
-
-        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
-
-    </select>
-
+                </if>
+        ) item_group
+        JOIN (
+                SELECT  item_group_id
+                FROM    item
+                JOIN (
+                        SELECT
+                                item_id,
+                                MIN(start_date) start_date,
+                                MAX(end_date) end_date,
+                                AVG(price) price
+                        FROM    item_schedule
+                        GROUP BY item_id
+                ) USING (item_id)
+                WHERE   DATEDIFF(DAY, start_date, #{startDate}) &lt;= 0
+                AND   DATEDIFF(DAY, end_date, #{endDate}) &gt;= 0
+                AND   price &gt;= #{overPrice}
+                <if test="underPrice != null"> AND price &lt;= #{underPrice} </if>
+                GROUP BY item_group_id
+        ) USING (item_group_id)
+</select>
 
 </mapper>

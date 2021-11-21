@@ -16,6 +16,8 @@ public interface WishlistMapper {
 
     void delete(Integer wishListId);
 
+    void deleteByItemGroupId(Integer itemGroupId);
+
     List<WishlistResponseDTO> list(
             @Param("memberId") Integer memberId,
             @Param("pageSize") Integer pageSize,

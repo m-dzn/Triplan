@@ -1,7 +1,6 @@
 package com.triplan.mapper;
 
 import com.triplan.domain.QuestionVO;
-import com.triplan.enumclass.QuestionType;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,10 +18,10 @@ public interface QuestionMapper {
     void delete(Integer questionId);
 
     List<QuestionVO> listByItemGroupId(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage, @Param("itemGroupId") Integer itemGroupId);
-    int countByItemGroupId(QuestionType type);
+    int countByItemGroupId(Integer itemGroupId);
 
     List<QuestionVO> listBySellerId(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage, @Param("sellerId") Integer sellerId);
-    int countBySellerId(QuestionType type);
+    int countBySellerId(String type);
 
     List<QuestionVO> listByMemberId(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage, @Param("memberId") Integer memberId);
     int countByMemberId(Integer memberId);

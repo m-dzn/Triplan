@@ -92,7 +92,7 @@ CREATE TABLE `Payment` (
 	`total_payment`	INT UNSIGNED	NOT NULL,
 	`account_bank`	VARCHAR(20)	NULL,
 	`account_number`	VARCHAR(20)	NULL,
-	`payment_deadline`	TIMESTAMP	NOT NULL,
+	`payment_deadline`	TIMESTAMP	NULL,
 	`paid_at`	TIMESTAMP	NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -172,7 +172,7 @@ CREATE TABLE `Tag` (
 	`tag_id`	INT AUTO_INCREMENT	NOT NULL,
 	`color`	VARCHAR(20)	NULL,
 	`name`	VARCHAR(255)	NULL,
-	`icon`	VARCHAR(255)	NULL
+	`checked`	VARCHAR(255)	NULL
 );
 
 CREATE TABLE `Item_Group_Tag` (

@@ -26,7 +26,5 @@ public interface ItemGroupMapper {
 
     int count(Integer sellerId);
 
-    ItemGroupVO selectByItemId(Integer itemId);
-
     List<ItemGroupVO> selectAllSort(@Param("itemGroupId") List<ItemGroupVO> sortItemGroupId, @Param("sortType")String sortType);
 }

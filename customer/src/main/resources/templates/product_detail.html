@@ -9,7 +9,7 @@
         <ol class="breadcrumb margin-top-8">
             <li class="breadcrumb-item"><a href="product">예약</a></li>
             <li class="breadcrumb-item"><a href="product">액티비티</a></li>
-            <li class="breadcrumb-item active" aria-current="page">[특가 50% 진행중!] 아이티윌 강의실 입장권</li>
+            <li class="breadcrumb-item active" aria-current="page" id="itemGroupBreadCrumb">[특가 50% 진행중!] 아이티윌 강의실 입장권</li>
         </ol>
     </nav>
     <!--브레드 크럼 끝-->
@@ -17,22 +17,8 @@
     <div class="row">
         <div class="col-9">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="img/광안리.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/해운대.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/서면.jpg..." class="d-block w-100" alt="...">
-                    </div>
-                </div>
+                <div class="carousel-indicators" id="itemImgCarouselIndicator"></div>
+                <div class="carousel-inner" id="itemImgCarousel"></div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
@@ -57,10 +43,10 @@
                         </div>
 
                         <div class="row">
-                            <button class="btn btn-primary col" id="button_outline" onclick="myFunction()">
-                                <span class="color-gray">🖤</span><!--나중에 백엔드랑 연동해서 상품그룹이 위시리스트에 들어있으면 primary 컬러로 변경되게 하기-->
+                            <button class="btn btn-primary col" id="wishBtn">
+                                <span class="color-gray">♡</span><!--나중에 백엔드랑 연동해서 상품그룹이 위시리스트에 들어있으면 primary 컬러로 변경되게 하기-->
                                 찜하기
-                                <span>(123)</span>
+                                <span id="itemGroupLikeCount">(0)</span>
                             </button>
                         </div>
 
@@ -71,27 +57,12 @@
 
                         <p id="demo"></p>
 
-                        <script>
-                            function myFunction() {
-                                var testForm = document.testForm;
-                                var txt;
-                                var r = confirm("해당 상품을 찜 하시겠습니까?");
-                                if (r == true) {
-                                    testForm.submit();
-                                    txt = "(위시리스트 등록)";
-                                } else {
-
-                                }
-                                document.getElementById("demo").innerHTML = txt;
-                            }
-                        </script>
-
                     </div>
 
                 </div>
                 <div class="row "><!--별점-->
                     <div class="col-auto d-flex align-items-center">
-                        <img src="img/star_signature.svg">
+                        <img src="img/star-signature.png">
                         <span class="margin-left-8">(3.96)</span>
                     </div>
                 </div>
@@ -127,7 +98,7 @@
     <section class="margin-section">
         <!--타이틀-->
         <div class="row border-bottom">
-            <th:block th:replace="fragment/title :: title_2_noMargin('[특가 50% 진행중!] 아이티윌 강의실 입장권')"></th:block>
+            <h1 class="font-size-32  col-auto" id="itemGroupTitle"></h1>
         </div>
 
         <!--옵션 태그-->
@@ -152,13 +123,7 @@
 
         <!--간략 설명-->
         <div class="row border-bottom padding-detail-sector">
-            <pre>
-부산 지역 최고의 강사들에게 자바 위주의 개발 교육을 받아보세요!
-
-- 최신식 시설과 완벽한 컴퓨터 사양
-- 개발 입문자들에게 알맞는 레슨 준비
-- 최고의 강사진과 최고의 편의시설
-- 지금 바로 예약해주세요!</pre>
+            <pre id="itemGroupSummaryExplain">요약 설명</pre>
         </div>
 
         <!--옵션 선택-->
@@ -166,141 +131,20 @@
             <th:block th:replace="fragment/title :: title_3_noMargin('옵션 선택')"></th:block>
 
             <div class="col-auto">
-            <form action="warning">
-                                                <input type="text" name="prodetCalender" class="col-auto"/>
-
-                                                <script>
-                                                    // 단일 날짜 선택용
-                                                    $(function () {
-                                                        $('input[name="prodetCalender"]').daterangepicker({
-                                                            "locale": {
-                                                                "format": "YYYY-MM-DD",
-                                                                "separator": " ~ ",
-                                                                "applyLabel": "확인",
-                                                                "cancelLabel": "취소",
-                                                                "fromLabel": "From",
-                                                                "toLabel": "To",
-                                                                "customRangeLabel": "Custom",
-                                                                "weekLabel": "W",
-                                                                "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
-                                                                "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-                                                                "firstDay": 1
-                                                            },
-                                                            showDropdowns: true,
-                                                            singleDatePicker: true,
-                                                            showDropdowns: true,
-                                                            minYear: 2020,
-                                                            maxYear: 2099
-                                                        }, function(start, end, label) {
-                                                            var years = moment().diff(start, 'years');
-                                                        });
-                                                    });
-
-
-                                                    // 다중 날짜 선택용
-                                                    $(function () {
-                                                        $('input[name="prodetCalender"]').daterangepicker({
-                                                            "locale": {
-                                                                "format": "YYYY-MM-DD",
-                                                                "separator": " ~ ",
-                                                                "applyLabel": "확인",
-                                                                "cancelLabel": "취소",
-                                                                "fromLabel": "From",
-                                                                "toLabel": "To",
-                                                                "customRangeLabel": "Custom",
-                                                                "weekLabel": "W",
-                                                                "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
-                                                                "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-                                                                "firstDay": 1
-                                                            },
-                                                            "drops": "down"
-                                                        }, function (start, end, label) {
-                                                            console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-                                                        });
-                                                    });
-                                                </script>
-
-                <input class="btn btn-primary" id="button_outline" type="submit" value="조회">
-
-            </form>
+                <form action="warning">
+                    <input type="text" name="prodetCalender" class="col-auto"/>
+                    <input class="btn btn-primary" id="button_outline" type="submit" value="조회">
+                </form>
             </div>
 
-
-
-<!--옵션 선택 창 1개-->
-                <div class="border bg-white rounded-3 border-2  margin-bottom-8 padding-16">
-                    <div class="row d-flex justify-content-between">
-                        <span class="col-auto font-size-20 font-weight-bold">1인 강의권</span>
-                        <div class="col-auto">
-                            <span class="col-auto">39,900원</span>
-                        </div>
-
-
-                    <div class="row d-flex justify-content-between align-items-end">
-                        <pre class="col-11">
-
-- 1인 입장권
-- 예약 완료 시에 문자로 안내 문자를 드립니다
-- 장비는 함께 제공됩니다</pre>
-                        <form action="pay" class="col-1">
-                            <input type="hidden" name="총액" value="총액">
-                            <input class="btn btn-primary col-auto" id="button_solid" type="submit" value="바로 예약">
-                        </form>
-                    </div>
-
-        </div>
-        </div>
-
-        <!--옵션 선택 창 1개-->
-        <div class="border bg-white rounded-3 border-2 margin-bottom-8 padding-16">
-            <div class="row d-flex justify-content-between">
-                <span class="col-auto font-size-20 font-weight-bold">1인 강의권</span>
-                <div class="col-auto">
-                    <span class="col-auto">39,900원</span>
-                </div>
-
-
-                <div class="row d-flex justify-content-between align-items-end">
-                        <pre class="col-11">
-
-- 1인 입장권
-- 예약 완료 시에 문자로 안내 문자를 드립니다
-- 장비는 함께 제공됩니다</pre>
-                    <form action="pay" class="col-1">
-                        <input type="hidden" name="총액" value="총액">
-                        <input class="btn btn-primary col-auto" id="button_solid" type="submit" value="바로 예약">
-                    </form>
-                </div>
-
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div><!--옵션 종료-->
+            <div id="itemCardContainer"></div>
+        </div><!--옵션 종료-->
 
         <!--상세 설명-->
         <div class="row border-bottom padding-detail-sector">
             <th:block th:replace="fragment/title :: title_3_noMargin('상세 설명')"></th:block>
-            <pre>
-부산 지역 최고의 강사들에게 자바 위주의 개발 교육을 받아보세요!
-
-- 최신식 시설과 완벽한 컴퓨터 사양
-- 개발 입문자들에게 알맞는 레슨 준비
-- 최고의 강사진과 최고의 편의시설
-- 지금 바로 예약해주세요!</pre>
-            <img src="img/광안리.jpg">
+            <pre id="itemGroupDetailExplain">상세 설명</pre>
+            <img src="img/광안리.jpg" id="itemGroupDetailImg">
         </div>
 
         <!--위치-->
@@ -356,132 +200,104 @@
 
         <!--리뷰-->
         <div class="row border-bottom padding-detail-sector">
-        <th:block th:replace="fragment/title :: title_3_noMargin('리뷰')"></th:block>
+            <th:block th:replace="fragment/title :: title_3_noMargin('리뷰')"></th:block>
 
-        <!--리뷰 별점 보여주는 거(미완성이라 비활성화)-->
-<!--    <div class="row mb-4 ms-2">-->
-<!--        <div class="col-1 rounded-3 border-2 d-flex align-items-center" style="width: 56px;height: 56px;background-color: var(&#45;&#45;signature);color:white;">-->
-<!--            <span>3.96</span>-->
-<!--        </div>-->
+            <!--리뷰 별점 보여주는 거(미완성이라 비활성화)-->
+    <!--    <div class="row mb-4 ms-2">-->
+    <!--        <div class="col-1 rounded-3 border-2 d-flex align-items-center" style="width: 56px;height: 56px;background-color: var(&#45;&#45;signature);color:white;">-->
+    <!--            <span>3.96</span>-->
+    <!--        </div>-->
 
-<!--    </div>-->
-    <form>
-    <div class="row align-items-center">
-        <div class="form-floating col-10">
-            <textarea class="form-control" id="Review_Content" style="height: 100px;display: inline-block"></textarea>
-        </div>
-        <div class="row col-auto d-flex justify-content-center">
-        <div class="col-auto">
-            <!--별점-->
-            <div class="startRadio col-auto p-0" th:fragment="star_2">
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="0.5">
-                    <span class="startRadio__img"><span class="blind">별 0.5개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="1.0">
-                    <span class="startRadio__img"><span class="blind">별 1개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="1.5">
-                    <span class="startRadio__img"><span class="blind">별 1.5</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="2.0">
-                    <span class="startRadio__img"><span class="blind">별 2개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="2.5">
-                    <span class="startRadio__img"><span class="blind">별 2.5개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="3">
-                    <span class="startRadio__img"><span class="blind">별 3개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="3.5">
-                    <span class="startRadio__img"><span class="blind">별 3.5개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="4">
-                    <span class="startRadio__img"><span class="blind">별 4개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="4.5">
-                    <span class="startRadio__img"><span class="blind">별 4.5개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="5">
-                    <span class="startRadio__img"><span class="blind">별 5개</span></span>
-                </label>
-            </div>
-            <!--별점-->
-        </div>
-            <div class="row d-flex justify-content-center mt-2">
-        <input class="btn btn-primary col-auto" id="button_solid" type="submit" value="작성"/>
-            </div>
-        </div>
-    </div>
-</form>
-        <div class="row margin-top-32">
-        <table class="col-12" style="border: 1px;">
-            <tr>
-                <td rowspan="3" class="col-1">프사</td>
-                <td class="d-flex justify-content-between">
-                    <div>이름(작성일)</div>
-                    <div>
-<!--                        <button><a href="notupd">글 수정</a></button>&lt;!&ndash;구현에 JS가 필요해서 일단 보류&ndash;&gt;-->
-                        <button><a href="warning">글 삭제</a></button><!--리뷰 삭제 액션이랑 매핑해주세요-->
+    <!--    </div>-->
+            <form name="reviewForm">
+            <div class="row align-items-center">
+                <div class="form-floating col-10">
+                    <textarea name="content" class="form-control" id="Review_Content" style="height: 100px;" placeholder="리뷰를 입력해주세요"></textarea>
+                </div>
+                <div class="row col-auto d-flex justify-content-center">
+                <div class="col-auto">
+                    <!--별점-->
+                    <div class="startRadio col-auto p-0" th:fragment="star_2">
+                        <label class="startRadio__box">
+                            <input type="radio" name="starScore" value="1">
+                            <span class="startRadio__img"><span class="blind">1점</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="starScore" value="2">
+                            <span class="startRadio__img"><span class="blind">2점</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="starScore" value="3">
+                            <span class="startRadio__img"><span class="blind">3점</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="starScore" value="4">
+                            <span class="startRadio__img"><span class="blind">4점</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="starScore" value="5">
+                            <span class="startRadio__img"><span class="blind">5점</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="starScore" value="6">
+                            <span class="startRadio__img"><span class="blind">6점</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="starScore" value="7">
+                            <span class="startRadio__img"><span class="blind">7점</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="starScore" value="8">
+                            <span class="startRadio__img"><span class="blind">8점</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="starScore" value="9">
+                            <span class="startRadio__img"><span class="blind">9점</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="starScore" value="10" checked>
+                            <span class="startRadio__img"><span class="blind">10점</span></span>
+                        </label>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>별점</td>
-            </tr>
-            <tr>
-                <td>내용</td>
-            </tr>
-        </table>
-        </div>
+                    <!--별점-->
+                </div>
+                    <div class="row d-flex justify-content-center mt-2">
+                        <input class="btn btn-primary col-auto" id="button_solid" type="submit" value="작성"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+            <div class="d-flex flex-column" id="reviewContainer">
+                <div class="p-5 d-flex justify-content-center">리뷰를 작성해주세요</div>
+            </div>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end" id="reviewPaginationGroup">
+                </ul>
+            </nav>
+
         </div>
 
         <!--추천 상품-->
         <div class="row border-bottom padding-detail-sector">
             <th:block th:replace="fragment/title :: title_3_noMargin('Q&A')"></th:block>
-            <table style="border: 1px;border-style: solid;text-align: center;">
-                <tr>
-                    <td style="width: 5%;white-space: nowrap;">번호</td>
-                    <td>제목</td>
-                    <td style="width: 8%;white-space: nowrap;">작성자</td>
-                    <td style="width: 10%;white-space: nowrap;">작성일</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="proqnacon">문의사항 있습니다.</a></td>
-                    <td>이민재</td>
-                    <td>2021-10-21</td>
-                </tr>
+            <table style="border: 1px;border-style: solid;text-align: center;" id="itemGroupQnaTable">
+                <thead>
+                    <tr>
+                        <td>제목</td>
+                        <td style="width: 8%;white-space: nowrap;">작성자</td>
+                        <td style="width: 10%;white-space: nowrap;">작성일</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
 
             <div class="row d-flex justify-content-end">
-                <a class="btn btn-primary col-auto margin-top-8" id="button_solid" href="proqnawri" role="button">글 쓰기</a>
+                <a class="btn btn-primary col-auto margin-top-8" id="qnaWriteBtn" href="proqnawri" role="button">글 쓰기</a>
             </div>
 
             <nav class="margin-top-16" aria-label="Page navigation example">
-                <ul class="pagination pagination-sm justify-content-end">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+                <ul class="pagination pagination-sm justify-content-end" id="qnaPaginationGroup">
                 </ul>
             </nav>
 
@@ -493,4 +309,7 @@
 <!--        </div>-->
     </section>
 </div>
+<th:block layout:fragment="script">
+    <script src="/js/productDetail.js"></script>
+</th:block>
 </html>

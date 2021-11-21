@@ -1,6 +1,7 @@
 package com.triplan.controller.api;
 
 import com.triplan.domain.QuestionVO;
+import com.triplan.dto.customer.reponse.QuestionDTO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.service.inf.QuestionService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,9 @@ public class ApiQuestionController {
     //문의 사항 작성
     @PostMapping
     public String register(@RequestBody QuestionVO questionVO) {
+        Integer memberId = 1;
+        questionVO.setMemberId(memberId);
+
         questionService.create(questionVO);
         System.out.println(" C : Create 실행");
         return "board/list";
@@ -54,8 +58,8 @@ public class ApiQuestionController {
         return questionService.listFromCustomerToAdmin(pageSize, currentPage);
     }
 
-    @GetMapping("/itemGroups/{itemGroupId}")
-    public Pagination<QuestionVO> questionListByItemGroupId(
+    @GetMapping("/item-groups/{itemGroupId}")
+    public Pagination<QuestionDTO> questionListByItemGroupId(
             @PathVariable Integer itemGroupId,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "1") Integer currentPage

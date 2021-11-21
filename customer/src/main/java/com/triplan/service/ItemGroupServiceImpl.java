@@ -5,12 +5,10 @@ import com.triplan.domain.ItemVO;
 import com.triplan.dto.customer.response.ItemFlightResponseDTO;
 import com.triplan.dto.customer.response.ItemGroupResponseDTO;
 import com.triplan.dto.customer.response.ItemRoomResponseDTO;
+import com.triplan.dto.response.AccommodationCardResponseDTO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.enumclass.ItemCategory;
-import com.triplan.mapper.ItemGroupMapper;
-import com.triplan.mapper.ItemMapper;
-import com.triplan.mapper.ItemSearchMapper;
-import com.triplan.mapper.TagMapper;
+import com.triplan.mapper.*;
 import com.triplan.service.inf.ItemGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +25,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
     private final ItemMapper itemMapper;
     private final TagMapper tagMapper;
     private final ItemSearchMapper itemSearchMapper;
+    private final WishlistMapper wishlistMapper;
 
     @Override
     public ItemGroupVO getItemGroup(Integer itemGroupId) {
@@ -34,12 +33,11 @@ public class ItemGroupServiceImpl implements ItemGroupService {
     }
 
     @Override
-    public ItemGroupResponseDTO getItemList(Integer itemGroupId) {
+    public ItemGroupResponseDTO getItemList(Integer itemGroupId, Integer memberId) {
 
         List<ItemVO> itemVO = itemMapper.getItemByItemGroupId(itemGroupId);
 
-        if(itemVO.get(0).getItemCategory().equals(ItemCategory.ROOM)){
-            System.out.println("room");
+        if (itemVO.get(0).getItemCategory().equals(ItemCategory.ROOM)){
             List<ItemRoomResponseDTO> itemRoomResponseDTO = itemVO.stream()
                     .map(ItemRoomResponseDTO::of).collect(Collectors.toList());
 
@@ -47,12 +45,16 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 
             ItemGroupResponseDTO itemGroupResponseDTO = ItemGroupResponseDTO.of(itemGroupVO);
             itemGroupResponseDTO.setItemRoomList(itemRoomResponseDTO);
-            itemGroupResponseDTO.setTagIdList(tagMapper.getIdList(itemGroupId));
+            itemGroupResponseDTO.setTagList(tagMapper.list(itemGroupId));
+
+            // 회원 로그인 시 찜 여부 조회
+            if (memberId != null) {
+                itemGroupResponseDTO.setLiked(wishlistMapper.exist(itemGroupId, memberId));
+            }
 
             return itemGroupResponseDTO;
         }
         else if(itemVO.get(0).getItemCategory().equals(ItemCategory.FLIGHT)){
-            System.out.println("flight");
             List<ItemFlightResponseDTO> itemFlightResponseDTO = itemVO.stream()
                     .map(ItemFlightResponseDTO::of).collect(Collectors.toList());
 
@@ -60,7 +62,12 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 
             ItemGroupResponseDTO itemGroupResponseDTO = ItemGroupResponseDTO.of(itemGroupVO);
             itemGroupResponseDTO.setItemFlightList(itemFlightResponseDTO);
-            itemGroupResponseDTO.setTagIdList(tagMapper.getIdList(itemGroupId));
+            itemGroupResponseDTO.setTagList(tagMapper.list(itemGroupId));
+
+            // 회원 로그인 시 찜 여부 조회
+            if (memberId != null) {
+                itemGroupResponseDTO.setLiked(wishlistMapper.exist(itemGroupId, memberId));
+            }
 
             return itemGroupResponseDTO;
         }
@@ -68,38 +75,23 @@ public class ItemGroupServiceImpl implements ItemGroupService {
     }
 
     @Override
-    public Pagination<ItemGroupVO> getFilterAsDate(LocalDateTime startDate, LocalDateTime endDate,
+    public Pagination<AccommodationCardResponseDTO> getFilterAsDate(LocalDateTime startDate, LocalDateTime endDate,
                                              Integer underPrice, Integer overPrice, List<Integer> tags,
                                              String sortType,
-                                             Integer pageSize, Integer currentPage) {
+                                             Integer pageSize, Integer currentPage, Integer memberId) {
+        if (tags.isEmpty()) tags = null;
 
-        Integer Data = null;
-
-        if(startDate != null) Data = 1;
-        else if (endDate != null) Data = 1;
-        else if (tags != null) Data = 1;
-        else if (underPrice != null) Data = 1;
-        else if (overPrice != null) Data = 1;
-        else Data = null;
-        List<ItemGroupVO> itemGroupVOS = null;
-        Integer count = 0;
-
-        if(sortType != null){
-            List<ItemGroupVO> sortItemGroupId = itemSearchMapper.getFilterAndSort(startDate, endDate, underPrice, overPrice, tags,sortType, pageSize, currentPage, Data);
-            itemGroupVOS = itemGroupMapper.selectAllSort(sortItemGroupId,sortType);
-            count = itemSearchMapper.getCount(startDate, endDate, underPrice, overPrice, tags, Data);
-
-            return new Pagination<>(pageSize,currentPage,count,itemGroupVOS);
+        // 검색 조건 필터링 후 DB에서 ItemGroupDTO 가져오기
+        List<AccommodationCardResponseDTO> itemGroupDTOs = itemSearchMapper.getFilterAndSort(startDate, endDate, underPrice, overPrice, tags, sortType, pageSize, currentPage);
+        
+        // 회원 로그인 시 찜 여부 조회
+        if (memberId != null) {
+            itemGroupDTOs = itemGroupDTOs.stream().peek(dto -> dto.setLiked(wishlistMapper.exist(dto.getItemGroupId(), memberId))).collect(Collectors.toList());
         }
 
-        else {
-            List<ItemGroupVO> resultItemGroupId = itemSearchMapper.getFilterAsDateDistinct(startDate, endDate, underPrice, overPrice, tags, pageSize, currentPage, Data);
-            itemGroupVOS = itemGroupMapper.selectAll(resultItemGroupId);
-            count = itemSearchMapper.getCount(startDate, endDate, underPrice, overPrice, tags, Data);
+        Integer count = itemSearchMapper.getCount(startDate, endDate, underPrice, overPrice, tags);
 
-            return new Pagination<>(pageSize, currentPage, count, itemGroupVOS);
-        }
-
+        return new Pagination<>(pageSize,currentPage,count, itemGroupDTOs);
     }
 
 }
