@@ -153,20 +153,16 @@
         var itemPrice = itemPriceArr[0];
         var totalDiscountPrice = 0; // 총 할인금
         var totalPrice = itemPrice - totalDiscountPrice; // 총 결제금액
-        var startDate; // 시작날짜(ex 체크인)
-        var endDate; // 끝나는날짜(ex 체크아웃)
+//        var startDate; // 시작날짜(ex 체크인)
+//        var endDate; // 끝나는날짜(ex 체크아웃)
+        startDate = new Date([[${startDate}]]); // 시작날짜(ex 체크인)
+        endDate = new Date([[${endDate}]]); // 끝나는날짜(ex 체크아웃)
         var name; // 예약자이름
         var phone; // 예약자 전화번호
         var memberId = [[${memberId}]]; // 회원id
         var sellerId = [[${sellerId}]]; // 판매자id
-        var itemScheduleIdList = [[${itemScheduleIdList}]]; // 아이템스케줄id
-        var itemScheduleId="";
-        for(var i = 0; i < itemScheduleIdList.length; i++) {
-            itemScheduleId += itemScheduleIdList[i];
-            if(i !== itemScheduleIdList.length-1) {
-               itemScheduleId += ',';
-            }
-        }
+    //    var itemScheduleIdList = [[${itemScheduleIdList}]]; // 아이템스케줄id
+
         var memberCouponId = 0; // 쿠폰id
         var paidAt; // 결제일
         var submitButton = document.getElementById("button_solid"); // 결제버튼
@@ -196,8 +192,10 @@
                 // itemCategory = document.getElementById('item-category').innerText;
                 itemCategory = 'ROOM';
                 itemName = document.getElementById('item-name').innerText;
-                startDate = new Date(document.getElementById('start-date').innerText);
-                endDate = new Date(document.getElementById('end-date').innerText);
+            //    startDate = new Date(document.getElementById('start-date').innerText);
+            //    endDate = new Date(document.getElementById('end-date').innerText);
+                startDate = new Date([[${startDate}]]);
+                endDate = new Date([[${endDate}]]);
                 name = document.getElementById('name').value.trim(); // value값
                 phone = document.getElementById('tel').value.trim(); // value값
 
@@ -288,15 +286,7 @@
 
 
                         $.ajax({ // 예약정보 db에 저장
-                            url: '/api/res/reserve/'+memberCouponId+'?itemScheduleId='+itemScheduleId,
-                            /*
-                            for(var i = 0; i < itemScheduleIdList.length; i++) {
-                                itemScheduleId += itemScheduleIdList[i];
-                                if(i !== itemScheduleIdList.length-1) {
-                                   itemScheduleId += ',';
-                                }
-                            },
-                            */
+                            url: '/api/res/reserve/'+memberCouponId+'?itemId='+itemId+'&startDate='+startDate+'&endDate='+endDate,
                             type: 'POST',
                             data: JSON.stringify(reservation),
                             contentType: 'application/json;charset=utf-8',
