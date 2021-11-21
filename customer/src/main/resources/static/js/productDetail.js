@@ -17,12 +17,18 @@ var productDetail = {
     reviewContainer: $("#reviewContainer"),
     reviewPaginationGroup: $("#reviewPaginationGroup"),
 
+    qnaTable: $("#itemGroupQnaTable"),
+    qnaPaginationGroup: $("#qnaPaginationGroup"),
+    qnaWriteBtn: $("#qnaWriteBtn"),
+
     itemGroup: null,
     itemList: null,
 
     itemGroupId: null,
     start: null,
     end: null,
+
+    pageSize: null,
 
     init: function() {
         var _this = this;
@@ -31,18 +37,23 @@ var productDetail = {
         this.itemGroupId = url.searchParams.get("itemGroupId");
         this.start = url.searchParams.get("startDate");
         this.end = url.searchParams.get("endDate");
+        this.pageSize = 5;
 
         this.fetchItemGroupDetail.bind(this);
         this.fetchItemCards.bind(this);
         this.fetchReviewList.bind(this);
         this.addReview.bind(this);
+        this.fetchQuestionList.bind(this);
 
         this.fetchItemGroupDetail();
         this.fetchItemCards(this.start, this.end);
-        this.fetchReviewList(10, 1);
+        this.fetchReviewList(this.pageSize, 1);
+        this.fetchQuestionList(this.pageSize, 1);
 
         this.wishBtn.click(() => this.toggleWishlist(this.itemGroup));
         this.reviewForm.submit((event) => this.addReview(event));
+
+        this.qnaWriteBtn.attr("href", `proqnawri?itemGroupId=${this.itemGroupId}`);
 
          // 단일 날짜 선택용
         $(() => {
@@ -84,7 +95,7 @@ var productDetail = {
                     "weekLabel": "W",
                     "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
                     "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-                    "firstDay": 1
+                    "firstDay": 6
                 },
                 "drops": "down"
             }, (start, end, label) => {
@@ -178,9 +189,6 @@ var productDetail = {
             success: (pagination) => {
                 console.log(pagination);
 
-                var pageSize = 10;
-                var currentPage = 1;
-
                 reviewContainer.innerHTML = pagination.list.map(review => `<div class="row mt-3 p-2">
                       <div class="col-12 d-flex">
                           <div>
@@ -207,7 +215,7 @@ var productDetail = {
                     </li>
                 `);
                 if (pagination.hasPrev) {
-                    prevBtn.click(() => this.fetchReviewList(10, pagination.startPage - 1));
+                    prevBtn.click(() => this.fetchReviewList(this.pageSize, pagination.startPage - 1));
                 }
                 this.reviewPaginationGroup.append(prevBtn.get(0));
 
@@ -218,7 +226,7 @@ var productDetail = {
                                 ${i}
                             </button>
                         </li>
-                    `).click(() => this.fetchReviewList(10, i)).get(0));
+                    `).click(() => this.fetchReviewList(this.pageSize, i)).get(0));
                 }
 
                 var nextBtn = $(`
@@ -229,7 +237,7 @@ var productDetail = {
                     </li>
                 `);
                 if (pagination.hasNext) {
-                    nextBtn.click(() => this.fetchReviewList(10, pagination.endPage + 1));
+                    nextBtn.click(() => this.fetchReviewList(this.pageSize, pagination.endPage + 1));
                 }
                 this.reviewPaginationGroup.append(nextBtn.get(0));
             }
@@ -284,12 +292,72 @@ var productDetail = {
             processData: false,
             data: formData,
             success: (msg) => {
-                this.fetchReviewList(10, 1);
+                this.fetchReviewList(this.pageSize, 1);
             },
             error: (msg) => {
                 console.log('review add failed', msg);
             }
         })
+    },
+
+    fetchQuestionList: function(pageSize, currentPage) {
+        $.ajax({
+            url: `${BASE_URL}/api/questions/item-groups/${this.itemGroupId}?pageSize=${pageSize}&currentPage=${currentPage}`,
+            type: 'GET',
+            dataType: 'json',
+            success: (pagination) => {
+                console.log(pagination);
+
+                var qnaTBody = this.qnaTable.find("tbody").first();
+                qnaTBody.empty();
+
+                pagination.list.forEach(question => qnaTBody.append($(`
+                    <tr>
+                        <td><a href="proqnacon?questionId=${question.questionId}">${question.title}</a></td>
+                        <td>${question.nickname}</td>
+                        <td>${moment(question.createdAt).format(DATE_FORMAT_KOR)}</td>
+                    </tr>
+                `).get(0)));
+
+                // 페이지네이션
+                this.qnaPaginationGroup.empty();
+
+                var prevBtn = $(`
+                    <li class="page-item ${pagination.hasPrev ? '' : 'disabled'}">
+                        <button class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </button>
+                    </li>
+                `);
+                if (pagination.hasPrev) {
+                    prevBtn.click(() => this.fetchQuestionList(this.pageSize, pagination.startPage - 1));
+                }
+                this.qnaPaginationGroup.append(prevBtn.get(0));
+
+                for (let i = pagination.startPage; i <= pagination.endPage; i++) {
+                    this.qnaPaginationGroup.append($(`
+                        <li class="page-item">
+                            <button class="page-link">
+                                ${i}
+                            </button>
+                        </li>
+                    `).click(() => this.fetchQuestionList(this.pageSize, i)).get(0));
+                }
+
+                var nextBtn = $(`
+                    <li class="page-item ${pagination.hasNext ? '' : 'disabled'}">
+                        <button class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </button>
+                    </li>
+                `);
+                if (pagination.hasNext) {
+                    nextBtn.click(() => this.fetchQuestionList(this.pageSize, pagination.endPage + 1));
+                }
+
+                this.qnaPaginationGroup.append(nextBtn.get(0));
+            }
+        });
     }
 }
 

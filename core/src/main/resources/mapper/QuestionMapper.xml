@@ -26,7 +26,7 @@
     </insert>
 
     <!-- 문의글 read -->
-    <select id="select" resultType="com.triplan.domain.QuestionVO">
+    <select id="select" resultType="QuestionVO">
         SELECT  *
         FROM    question
         WHERE   question_id = ${questionId}
@@ -39,10 +39,7 @@
                 title           = IFNULL(       #{title},           title               ),
                 content         = IFNULL(       #{content},         content             ),
                 qna_category_id = IFNULL(       #{qnaCategoryId},   qna_category_id     ),
-                member_id       = IFNULL(       #{memberId},        member_id           ),
-                item_group_id   = IFNULL(       #{itemGroupId},     item_group_id       ),
-                hide            = IFNULL(       #{hide},            hide                ),
-                type            = IFNULL(       #{type},            type                )
+                hide            = IFNULL(       #{hide},            hide                )
         WHERE
                 question_id = #{questionId}
     </update>
@@ -58,7 +55,7 @@
     <select id="listFromCustomerToAdmin" resultType="QuestionVO">
         SELECT  *
         FROM    question
-        WHERE   type = 'CUSTOMER'
+        WHERE   type = 'customer'
         AND   item_group_id IS NULL
         ORDER BY created_at DESC
         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
@@ -67,7 +64,7 @@
     <select id="countFromCustomerToAdmin" resultType="Integer">
         SELECT  COUNT(*)
         FROM    question
-        WHERE   type = 'CUSTOMER'
+        WHERE   type = 'customer'
         AND   item_group_id IS NULL
     </select>
 
@@ -81,7 +78,7 @@
         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
     </select>
 
-    <select id="countByItemGroupId" resultType="Integer">
+    <select id="countByItemGroupId" resultType="int">
         SELECT  COUNT(*)
         FROM    question
         WHERE   type = 'CUSTOMER'
@@ -92,7 +89,7 @@
     <select id="listBySellerId" resultType="QuestionVO">
         SELECT  *
         FROM    question
-        WHERE   type = 'SELLER'
+        WHERE   type = 'seller'
           AND   item_group_id IN (
                 SELLER  item_group_id
                 FROM    item_group
@@ -105,7 +102,7 @@
     <select id="countBySellerId" resultType="Integer">
         SELECT  COUNT(*)
         FROM    question
-        WHERE   type = 'SELLER'
+        WHERE   type = 'seller'
           AND   item_group_id IN (
                 SELLER  item_group_id
                 FROM    item_group

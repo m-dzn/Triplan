@@ -172,7 +172,7 @@ CREATE TABLE `Tag` (
 	`tag_id`	INT AUTO_INCREMENT	NOT NULL,
 	`color`	VARCHAR(20)	NULL,
 	`name`	VARCHAR(255)	NULL,
-	`icon`	VARCHAR(255)	NULL
+	`checked`	VARCHAR(255)	NULL
 );
 
 CREATE TABLE `Item_Group_Tag` (

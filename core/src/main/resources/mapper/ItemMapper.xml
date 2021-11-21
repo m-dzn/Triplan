@@ -159,8 +159,8 @@
                     SUM(price) total_price,
                     SUM(discount_price) total_discount_price
                 FROM    item_schedule
-                WHERE   start_date >= #{startDate}
-                  AND   end_date <= #{endDate}
+                WHERE   DATEDIFF(DAY, start_date, #{startDate}) <= 0
+                  AND   DATEDIFF(DAY, end_date, #{endDate}) >= 0
                 GROUP BY item_id
             ) USING (item_id)
             WHERE   item_group_id = #{itemGroupId}

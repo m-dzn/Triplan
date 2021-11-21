@@ -4,7 +4,7 @@
       layout:decorator="layout/layout">
 
 <div layout:fragment="content">
-    <form name="qnaWriteForm">
+    <form name="qnaUpdateTable">
     <table>
         <tr>
             <td>제목</td>
@@ -12,18 +12,20 @@
         </tr>
         <tr>
             <td>내용</td>
-            <td style="width: 97%;"><textarea name="content" rows=10 style="height: 100%;width:100%;" placeholder="내용을 입력하세요"></textarea></td>
+            <td style="width: 97%;">
+                <textarea name="content" rows=10 style="height: 100%;width:100%;" placeholder="내용을 입력하세요"></textarea>
+            </td>
         </tr>
         <tr>
             <td>비밀글</td>
             <td><input type="checkbox" name="hide"></td>
         </tr>
     </table>
-        <input type="submit" value="글쓰기">
+        <input type="submit" value="수정">
         <button type="button" onclick="history.back();">취소</button>
     </form>
 </div>
 <th:block layout:fragment="script">
-    <script src="/js/qnaWritePage.js"></script>
+    <script src="/js/qnaUpdatePage.js"></script>
 </th:block>
 </html>

@@ -1,5 +1,6 @@
 package com.triplan.dto.customer.reponse;
 
+import com.triplan.domain.MemberVO;
 import com.triplan.domain.QuestionVO;
 import com.triplan.enumclass.QuestionType;
 import lombok.*;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class QuestionDTO {
 
+    // QuestionVO의 필드
     private Integer questionId;
     private String title;
     private String content;
@@ -23,6 +25,9 @@ public class QuestionDTO {
     private Integer qnaCategoryId;
     private Integer itemGroupId;
     private QuestionType type;
+
+    // 기타 필드
+    private String nickname;
 
     public static QuestionDTO of(QuestionVO vo) {
 
@@ -38,4 +43,11 @@ public class QuestionDTO {
                 .type(vo.getType())
                 .build();
     }
+
+    public static QuestionDTO of(QuestionVO questionVO, MemberVO memberVO) {
+        QuestionDTO questionDTO = QuestionDTO.of(questionVO);
+        questionDTO.setNickname(memberVO.getNickname());
+        return questionDTO;
+    }
+
 }
