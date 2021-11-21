@@ -1,6 +1,7 @@
 package com.triplan.controller;
 
 import com.triplan.domain.ItemVO;
+import com.triplan.dto.seller.response.ItemResponseDTO;
 import com.triplan.service.inf.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,8 @@ public class ItemController {
 
     @GetMapping("/test")
     public String itemRead(@PathVariable Integer itemId, Model model){
-        ItemVO itemVO = itemService.itemRead(itemId);
-        model.addAttribute("item", itemVO);
+        ItemResponseDTO itemDTO = itemService.itemRead(itemId);
+        model.addAttribute("item", itemDTO);
 
         return "item"; // View Resolver의 동작이 숨겨져있음 -> "/templates/" (prefix) + "item" + ".html" (suffix) => "/templates/item.html"
     }
