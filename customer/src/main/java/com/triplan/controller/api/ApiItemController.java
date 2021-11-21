@@ -29,7 +29,7 @@ public class ApiItemController {
             @RequestParam String startDate,
             @RequestParam String endDate
     ){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime startDateLDT = LocalDateTime.parse(startDate, formatter);
         LocalDateTime endDateLDT = LocalDateTime.parse(endDate, formatter);
 

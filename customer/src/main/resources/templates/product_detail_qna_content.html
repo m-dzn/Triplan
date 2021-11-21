@@ -7,20 +7,23 @@
     <table>
         <tr>
             <td>글번호</td>
-            <td>글 번호 불러오는 메소드 넣어주세요</td>
+            <td id="qno"></td>
             <td>작성일</td>
-            <td>작성일 불러오는 메소드 넣어주세요</td>
+            <td id="createdAt"></td>
         </tr>
         <tr>
             <td>제목</td>
-            <td colspan="3">제목 불러오는 메소드 넣어주세요</td>
+            <td id="questionTitle" colspan="3"></td>
         </tr>
         <tr>
             <td>내용</td>
-            <td colspan="3">내용 불러오는 메소드 넣어주세요</td>
+            <td id="questionContent" colspan="3"></td>
         </tr>
     </table>
-    <button><a href="notupd">글 수정</a></button>
-    <button><a href="warning">글 삭제</a></button>
+    <button><a id="updateQuestionBtn">글 수정</a></button>
+    <button id="deleteQuestionBtn">글 삭제</button>
 </div>
+<th:block layout:fragment="script">
+    <script src="/js/qnaDetailPage.js"></script>
+</th:block>
 </html>

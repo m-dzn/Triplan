@@ -41,7 +41,7 @@ public class QuestionServiceImpl implements QuestionService {
     public Pagination<QuestionVO> listByItemGroupId(Integer pageSize, Integer currentPage, Integer itemGroupId) {
         List<QuestionVO> questionListByItemGroupIdListPage = questionMapper.listByItemGroupId(pageSize, currentPage, itemGroupId);
 
-        int totalReviews = questionMapper.countByItemGroupId(QuestionType.CUSTOMER);
+        int totalReviews = questionMapper.countByItemGroupId(itemGroupId);
 
         return new Pagination<>(pageSize, currentPage, totalReviews, questionListByItemGroupIdListPage);
     }
@@ -50,7 +50,7 @@ public class QuestionServiceImpl implements QuestionService {
     public Pagination<QuestionVO> listBySellerId(Integer pageSize, Integer currentPage, Integer sellerId) {
         List<QuestionVO> questionListBySellerIdListPage = questionMapper.listBySellerId(pageSize, currentPage, sellerId);
 
-        int totalReviews = questionMapper.countBySellerId(QuestionType.SELLER);
+        int totalReviews = questionMapper.countBySellerId(QuestionType.SELLER.name());
 
         return new Pagination<>(pageSize, currentPage, totalReviews, questionListBySellerIdListPage);
     }

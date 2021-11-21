@@ -281,40 +281,23 @@
         <!--추천 상품-->
         <div class="row border-bottom padding-detail-sector">
             <th:block th:replace="fragment/title :: title_3_noMargin('Q&A')"></th:block>
-            <table style="border: 1px;border-style: solid;text-align: center;">
-                <tr>
-                    <td style="width: 5%;white-space: nowrap;">번호</td>
-                    <td>제목</td>
-                    <td style="width: 8%;white-space: nowrap;">작성자</td>
-                    <td style="width: 10%;white-space: nowrap;">작성일</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="proqnacon">문의사항 있습니다.</a></td>
-                    <td>이민재</td>
-                    <td>2021-10-21</td>
-                </tr>
+            <table style="border: 1px;border-style: solid;text-align: center;" id="itemGroupQnaTable">
+                <thead>
+                    <tr>
+                        <td>제목</td>
+                        <td style="width: 8%;white-space: nowrap;">작성자</td>
+                        <td style="width: 10%;white-space: nowrap;">작성일</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
 
             <div class="row d-flex justify-content-end">
-                <a class="btn btn-primary col-auto margin-top-8" id="button_solid" href="proqnawri" role="button">글 쓰기</a>
+                <a class="btn btn-primary col-auto margin-top-8" id="qnaWriteBtn" href="proqnawri" role="button">글 쓰기</a>
             </div>
 
             <nav class="margin-top-16" aria-label="Page navigation example">
-                <ul class="pagination pagination-sm justify-content-end">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+                <ul class="pagination pagination-sm justify-content-end" id="qnaPaginationGroup">
                 </ul>
             </nav>
 

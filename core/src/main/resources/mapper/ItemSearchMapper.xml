@@ -90,8 +90,8 @@
                         FROM    item_schedule
                         GROUP BY item_id
                 ) USING (item_id)
-                WHERE   start_date &gt;= #{startDate}
-                AND   end_date &lt;= #{endDate}
+                WHERE   DATEDIFF(DAY, start_date, #{startDate}) &lt;= 0
+                AND   DATEDIFF(DAY, end_date, #{endDate}) &gt;= 0
                 AND   price &gt;= #{overPrice}
                 <if test="underPrice != null"> AND price &lt;= #{underPrice} </if>
                 GROUP BY item_group_id
