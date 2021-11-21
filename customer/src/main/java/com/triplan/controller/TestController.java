@@ -17,8 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -67,16 +67,25 @@ public class TestController {
     }
 
     @GetMapping({"/pay"}) // 예약/결제창
-    public String pay(Model model) {
-    // URL로 받아올거 : memberId, sellerId, itemScheduleId, itemId, itemGroupId, choid_set[begin_at, end_at]
-        // 테스트 데이터
-        Integer memberId = 1; Integer sellerId = 1; Integer itemId = 1; Integer itemGroupId = 1;
-        String startDate = "2021-12-1"; String endDate = "2021-12-5";
+    public String pay(Model model,
+                      @RequestParam Integer itemGroupId,
+                      @RequestParam Integer itemId,
+                      @RequestParam String startDate,
+                      @RequestParam String endDate
+                      ) {
+    // URL로 받아올거 : memberId, sellerId, itemScheduleId, itemId, itemGroupId, startDate, endDate
+        Integer memberId = 1;
+        Integer sellerId = itemGroupService.getItemGroup(itemGroupId).getSellerId();
 
-    // 프론트로 넘겨줄거 :  쿠폰목록, 아이템그룹정보, 아이템정보, 상품 시작, 종료기간 memberId, sellerId, itemScheduleId, itemId, itemGroupId
-        // 테스트 데이터
 
-        // 내 쿠폰 목록 - 쿠폰id, 쿠폰명, 할인금액
+//        // 테스트 데이터
+//        Integer memberId = 1; Integer sellerId = 1; Integer itemId = 1; Integer itemGroupId = 1;
+//        String startDate = "2021-12-1"; String endDate = "2021-12-5";
+//
+//    // 프론트로 넘겨줄거 :  쿠폰목록, 아이템그룹정보, 아이템정보, 상품 시작, 종료기간 memberId, sellerId, itemScheduleId, itemId, itemGroupId
+//        // 테스트 데이터
+//
+//        // 내 쿠폰 목록 - 쿠폰id, 쿠폰명, 할인금액
         List<MemberCouponDTO> couponList = memberCouponService.myAvailableCouponList(memberId);
         model.addAttribute("couponList", couponList);
         // 아이템 그륩 정보 - 상품그룹명
@@ -92,14 +101,6 @@ public class TestController {
         model.addAttribute("memberId", memberId);
         // sellerId
         model.addAttribute("sellerId", sellerId);
-        // itemSchedule Id
-        List<Integer> itemScheduleIdList = new ArrayList<>();
-        itemScheduleIdList.add(1);
-        itemScheduleIdList.add(2);
-        itemScheduleIdList.add(3);
-        itemScheduleIdList.add(4);
-        itemScheduleIdList.add(5);
-        model.addAttribute("itemScheduleIdList" , itemScheduleIdList);
 
         return "pay";
     }
