@@ -17,22 +17,8 @@
     <div class="row">
         <div class="col-9">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="img/광안리.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/해운대.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/서면.jpg..." class="d-block w-100" alt="...">
-                    </div>
-                </div>
+                <div class="carousel-indicators" id="itemImgCarouselIndicator"></div>
+                <div class="carousel-inner" id="itemImgCarousel"></div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
@@ -57,8 +43,8 @@
                         </div>
 
                         <div class="row">
-                            <button class="btn btn-primary col" id="button_outline" onclick="myFunction()">
-                                <span class="color-gray">🖤</span><!--나중에 백엔드랑 연동해서 상품그룹이 위시리스트에 들어있으면 primary 컬러로 변경되게 하기-->
+                            <button class="btn btn-primary col" id="wishBtn">
+                                <span class="color-gray">♡</span><!--나중에 백엔드랑 연동해서 상품그룹이 위시리스트에 들어있으면 primary 컬러로 변경되게 하기-->
                                 찜하기
                                 <span id="itemGroupLikeCount">(0)</span>
                             </button>
@@ -70,21 +56,6 @@
                         </form>
 
                         <p id="demo"></p>
-
-                        <script>
-                            function myFunction() {
-                                var testForm = document.testForm;
-                                var txt;
-                                var r = confirm("해당 상품을 찜 하시겠습니까?");
-                                if (r == true) {
-                                    testForm.submit();
-                                    txt = "(위시리스트 등록)";
-                                } else {
-
-                                }
-                                document.getElementById("demo").innerHTML = txt;
-                            }
-                        </script>
 
                     </div>
 
@@ -160,135 +131,20 @@
             <th:block th:replace="fragment/title :: title_3_noMargin('옵션 선택')"></th:block>
 
             <div class="col-auto">
-            <form action="warning">
-                                                <input type="text" name="prodetCalender" class="col-auto"/>
-
-                                                <script>
-                                                    // 단일 날짜 선택용
-                                                    $(function () {
-                                                        $('input[name="prodetCalender"]').daterangepicker({
-                                                            "locale": {
-                                                                "format": "YYYY-MM-DD",
-                                                                "separator": " ~ ",
-                                                                "applyLabel": "확인",
-                                                                "cancelLabel": "취소",
-                                                                "fromLabel": "From",
-                                                                "toLabel": "To",
-                                                                "customRangeLabel": "Custom",
-                                                                "weekLabel": "W",
-                                                                "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
-                                                                "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-                                                                "firstDay": 1
-                                                            },
-                                                            showDropdowns: true,
-                                                            singleDatePicker: true,
-                                                            showDropdowns: true,
-                                                            minYear: 2020,
-                                                            maxYear: 2099
-                                                        }, function(start, end, label) {
-                                                            var years = moment().diff(start, 'years');
-                                                        });
-                                                    });
-
-
-                                                    // 다중 날짜 선택용
-                                                    $(function () {
-                                                        $('input[name="prodetCalender"]').daterangepicker({
-                                                            "locale": {
-                                                                "format": "YYYY-MM-DD",
-                                                                "separator": " ~ ",
-                                                                "applyLabel": "확인",
-                                                                "cancelLabel": "취소",
-                                                                "fromLabel": "From",
-                                                                "toLabel": "To",
-                                                                "customRangeLabel": "Custom",
-                                                                "weekLabel": "W",
-                                                                "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
-                                                                "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-                                                                "firstDay": 1
-                                                            },
-                                                            "drops": "down"
-                                                        }, function (start, end, label) {
-                                                            console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-                                                        });
-                                                    });
-                                                </script>
-
-                <input class="btn btn-primary" id="button_outline" type="submit" value="조회">
-
-            </form>
+                <form action="warning">
+                    <input type="text" name="prodetCalender" class="col-auto"/>
+                    <input class="btn btn-primary" id="button_outline" type="submit" value="조회">
+                </form>
             </div>
 
-
-
-<!--옵션 선택 창 1개-->
-                <div class="border bg-white rounded-3 border-2  margin-bottom-8 padding-16">
-                    <div class="row d-flex justify-content-between">
-                        <span class="col-auto font-size-20 font-weight-bold">1인 강의권</span>
-                        <div class="col-auto">
-                            <span class="col-auto">39,900원</span>
-                        </div>
-
-
-                    <div class="row d-flex justify-content-between align-items-end">
-                        <pre class="col-11">
-
-- 1인 입장권
-- 예약 완료 시에 문자로 안내 문자를 드립니다
-- 장비는 함께 제공됩니다</pre>
-                        <form class="col-1">
-                            <input type="hidden" name="총액" value="총액">
-                            <a href="pay?itemGroupId=1&itemId=1&startDate=2021-11-24&endDate=2021-11-30" class="btn btn-primary col-auto" id="button_solid">바로 예약</a>
-                        </form>
-                    </div>
-
-        </div>
-        </div>
-
-        <!--옵션 선택 창 1개-->
-        <div class="border bg-white rounded-3 border-2 margin-bottom-8 padding-16">
-            <div class="row d-flex justify-content-between">
-                <span class="col-auto font-size-20 font-weight-bold">1인 강의권</span>
-                <div class="col-auto">
-                    <span class="col-auto">39,900원</span>
-                </div>
-
-
-                <div class="row d-flex justify-content-between align-items-end">
-                        <pre class="col-11">
-
-- 1인 입장권
-- 예약 완료 시에 문자로 안내 문자를 드립니다
-- 장비는 함께 제공됩니다</pre>
-                    <form action="pay" class="col-1">
-                        <input type="hidden" name="총액" value="총액">
-                        <a href="pay?itemGroupId=1&itemId=2&startDate=2021-12-01&endDate=2021-12-07" class="btn btn-primary col-auto" id="button_solid">바로 예약</a>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div><!--옵션 종료-->
+            <div id="itemCardContainer"></div>
+        </div><!--옵션 종료-->
 
         <!--상세 설명-->
         <div class="row border-bottom padding-detail-sector">
             <th:block th:replace="fragment/title :: title_3_noMargin('상세 설명')"></th:block>
             <pre id="itemGroupDetailExplain">상세 설명</pre>
-            <img src="img/광안리.jpg">
+            <img src="img/광안리.jpg" id="itemGroupDetailImg">
         </div>
 
         <!--위치-->
@@ -353,54 +209,54 @@
     <!--        </div>-->
 
     <!--    </div>-->
-            <form>
+            <form name="reviewForm">
             <div class="row align-items-center">
                 <div class="form-floating col-10">
-                    <textarea class="form-control" id="Review_Content" style="height: 100px;" placeholder="리뷰를 입력해주세요"></textarea>
+                    <textarea name="content" class="form-control" id="Review_Content" style="height: 100px;" placeholder="리뷰를 입력해주세요"></textarea>
                 </div>
                 <div class="row col-auto d-flex justify-content-center">
                 <div class="col-auto">
                     <!--별점-->
                     <div class="startRadio col-auto p-0" th:fragment="star_2">
                         <label class="startRadio__box">
-                            <input type="radio" name="star_score" id="0.5">
-                            <span class="startRadio__img"><span class="blind">별 0.5개</span></span>
+                            <input type="radio" name="starScore" value="1">
+                            <span class="startRadio__img"><span class="blind">1점</span></span>
                         </label>
                         <label class="startRadio__box">
-                            <input type="radio" name="star_score" id="1.0">
-                            <span class="startRadio__img"><span class="blind">별 1개</span></span>
+                            <input type="radio" name="starScore" value="2">
+                            <span class="startRadio__img"><span class="blind">2점</span></span>
                         </label>
                         <label class="startRadio__box">
-                            <input type="radio" name="star_score" id="1.5">
-                            <span class="startRadio__img"><span class="blind">별 1.5</span></span>
+                            <input type="radio" name="starScore" value="3">
+                            <span class="startRadio__img"><span class="blind">3점</span></span>
                         </label>
                         <label class="startRadio__box">
-                            <input type="radio" name="star_score" id="2.0">
-                            <span class="startRadio__img"><span class="blind">별 2개</span></span>
+                            <input type="radio" name="starScore" value="4">
+                            <span class="startRadio__img"><span class="blind">4점</span></span>
                         </label>
                         <label class="startRadio__box">
-                            <input type="radio" name="star_score" id="2.5">
-                            <span class="startRadio__img"><span class="blind">별 2.5개</span></span>
+                            <input type="radio" name="starScore" value="5">
+                            <span class="startRadio__img"><span class="blind">5점</span></span>
                         </label>
                         <label class="startRadio__box">
-                            <input type="radio" name="star_score" id="3">
-                            <span class="startRadio__img"><span class="blind">별 3개</span></span>
+                            <input type="radio" name="starScore" value="6">
+                            <span class="startRadio__img"><span class="blind">6점</span></span>
                         </label>
                         <label class="startRadio__box">
-                            <input type="radio" name="star_score" id="3.5">
-                            <span class="startRadio__img"><span class="blind">별 3.5개</span></span>
+                            <input type="radio" name="starScore" value="7">
+                            <span class="startRadio__img"><span class="blind">7점</span></span>
                         </label>
                         <label class="startRadio__box">
-                            <input type="radio" name="star_score" id="4">
-                            <span class="startRadio__img"><span class="blind">별 4개</span></span>
+                            <input type="radio" name="starScore" value="8">
+                            <span class="startRadio__img"><span class="blind">8점</span></span>
                         </label>
                         <label class="startRadio__box">
-                            <input type="radio" name="star_score" id="4.5">
-                            <span class="startRadio__img"><span class="blind">별 4.5개</span></span>
+                            <input type="radio" name="starScore" value="9">
+                            <span class="startRadio__img"><span class="blind">9점</span></span>
                         </label>
                         <label class="startRadio__box">
-                            <input type="radio" name="star_score" id="5">
-                            <span class="startRadio__img"><span class="blind">별 5개</span></span>
+                            <input type="radio" name="starScore" value="10" checked>
+                            <span class="startRadio__img"><span class="blind">10점</span></span>
                         </label>
                     </div>
                     <!--별점-->

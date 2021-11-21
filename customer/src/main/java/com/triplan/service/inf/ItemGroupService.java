@@ -13,7 +13,7 @@ public interface ItemGroupService {
 
     ItemGroupVO getItemGroup(Integer itemGroupId);
 
-    ItemGroupResponseDTO getItemList(Integer itemGroupId);
+    ItemGroupResponseDTO getItemList(Integer itemGroupId, Integer memberId);
 
     Pagination<AccommodationCardResponseDTO> getFilterAsDate(LocalDateTime startDate, LocalDateTime endDate,
                                                              Integer underPrice, Integer overPrice, List<Integer> tags,

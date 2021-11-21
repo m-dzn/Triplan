@@ -66,17 +66,17 @@
                 FROM    item
                 WHERE   item_group_id = #{itemGroupId}
         )
-        ORDER BY item_id DESC
-        LIMIT (#{currentPage} -1) * #{pageSize}, #{pageSize}
+        ORDER BY r.created_at DESC
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
     </select>
 
     <select id="countByItemGroupId" resultType="int">
         SELECT  COUNT(*)
         FROM    review
         WHERE   item_id IN (
-        SELECT  item_id
-        FROM    item
-        WHERE   item_group_id = #{itemGroupId}
+                SELECT  item_id
+                FROM    item
+                WHERE   item_group_id = #{itemGroupId}
         )
     </select>
 

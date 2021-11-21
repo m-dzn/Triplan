@@ -41,7 +41,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
         itemGroupMapper.insert(itemGroupVO);
         tagMapper.RegisterAddTagIdList(itemGroupVO.getItemGroupId(),itemGroupRequestDTO.getTagIdList());
 
-        if (files.isEmpty()) return;
+        if (files == null || files.isEmpty()) return;
 
         AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.ITEM, itemGroupVO.getItemGroupId());
 

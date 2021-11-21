@@ -27,7 +27,8 @@ public class ApiItemGroupController {
 
     @GetMapping("/{itemGroupId}/items")
     public ItemGroupResponseDTO getItemGroupByItemGroupId(@PathVariable Integer itemGroupId) {
-        return itemGroupService.getItemList(itemGroupId);
+        Integer memberId = 1;
+        return itemGroupService.getItemList(itemGroupId, memberId);
     }
 
     @GetMapping("/filter")

@@ -26,7 +26,7 @@ public class SellerServiceImpl implements SellerService {
     public void register(SellerVO sellerVO, List<MultipartFile> files) {
         sellerMapper.insert(sellerVO);
 
-        if (files.isEmpty()) return;
+        if (files == null || files.isEmpty()) return;
 
         AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.SELLER, sellerVO.getSellerId());
 
@@ -53,7 +53,7 @@ public class SellerServiceImpl implements SellerService {
     public void update(Integer sellerId, SellerVO sellerVO, List<MultipartFile> files) {
         sellerVO.setSellerId(sellerId);
 
-        if (!files.isEmpty()) {
+        if (files != null && !files.isEmpty()) {
             // 기존 파일 삭제
             List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.SELLER, sellerVO.getSellerId());
             AttachmentUtil.deleteAttachments(filesToDelete);

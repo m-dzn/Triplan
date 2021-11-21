@@ -94,7 +94,7 @@ public class ItemServiceImpl implements ItemService {
         RoomVO roomVO = itemRoomRequestDTO.toRoomVO();
 
 
-        if (files.isEmpty()) return;
+        if (files == null || files.isEmpty()) return;
 
         AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.ROOM, itemVO.getItemId());
 
@@ -126,7 +126,7 @@ public class ItemServiceImpl implements ItemService {
             ItemVO itemVO = itemFlightRequestDTO.toItemVO();
             FlightVO flightVO = itemFlightRequestDTO.toFlightVO();
 
-            if (files.isEmpty()) return;
+            if (files == null || files.isEmpty()) return;
 
             AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.ITEM, itemVO.getItemId());
 
@@ -156,7 +156,7 @@ public class ItemServiceImpl implements ItemService {
         ItemVO itemVO = itemRoomRequestDTO.toItemVO();
         RoomVO roomVO = itemRoomRequestDTO.toRoomVO();
 
-        if (!files.isEmpty()) {
+        if (files != null && !files.isEmpty()) {
             // 기존 파일 삭제
             List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.ROOM, itemVO.getItemId());
             AttachmentUtil.deleteAttachments(filesToDelete);
@@ -197,7 +197,7 @@ public class ItemServiceImpl implements ItemService {
         ItemVO itemVO = itemFlightRequestDTO.toItemVO();
         FlightVO flightVO = itemFlightRequestDTO.toFlightVO();
 
-        if (!files.isEmpty()) {
+        if (files != null && !files.isEmpty()) {
             // 기존 파일 삭제
             List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.ITEM, itemVO.getItemId());
             AttachmentUtil.deleteAttachments(filesToDelete);

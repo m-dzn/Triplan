@@ -22,7 +22,7 @@ public class ApiReviewController {
     @PostMapping
     public String reviewInsert(
             @RequestPart("review") @Valid ReviewVO reviewVO,
-            @RequestPart("file") List<MultipartFile> files
+            @RequestPart(value = "file", required = false) List<MultipartFile> files
     ) {
         reviewService.reviewInsert(reviewVO, files);
         return "정보 입력 성공";
@@ -61,7 +61,7 @@ public class ApiReviewController {
     @GetMapping("/item-groups/{itemGroupId}")
     public Pagination<ReviewDTO> reviewPage(
             @PathVariable Integer itemGroupId,
-            @RequestParam(defaultValue = "5") Integer pageSize,
+            @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "1") Integer currentPage
     ) {
         return reviewService.listByItemGroupId(itemGroupId, pageSize, currentPage);

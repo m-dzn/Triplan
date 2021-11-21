@@ -2,6 +2,7 @@ package com.triplan.service.inf;
 
 import com.triplan.dto.ReservationDTO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -23,7 +24,7 @@ public interface ReservationService {
 
     List<ReservationDTO> myCancelledResList(Integer memberId);
 
-    Integer reserve(List<Integer> itemScheduleIdList, Integer memberCouponId, ReservationDTO reservationDTO);
+    Integer reserve(Integer memberCouponId, ReservationDTO reservationDTO, Integer itemId, LocalDateTime startDate, LocalDateTime endDate);
 
     Integer cancel(Integer resId, ReservationDTO reservationDTO);
 }

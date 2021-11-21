@@ -3,12 +3,15 @@ package com.triplan.service;
 import com.triplan.domain.ItemScheduleVO;
 import com.triplan.domain.ReservationVO;
 import com.triplan.dto.ReservationDTO;
+import com.triplan.exception.ResourceNotFoundException;
+import com.triplan.mapper.ItemScheduleMapper;
 import com.triplan.mapper.ReservationMapper;
 import com.triplan.service.inf.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +20,7 @@ import java.util.stream.Collectors;
 public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationMapper reservationMapper;
+    private final ItemScheduleMapper itemScheduleMapper;
 
     @Transactional
     public void insert(ReservationDTO reservationDTO) {
@@ -45,13 +49,15 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Integer reserve(List<Integer> itemScheduleIdList, Integer memberCouponId, ReservationDTO reservationDTO) {
+    @Transactional
+    public Integer reserve(
+            Integer memberCouponId,
+            ReservationDTO reservationDTO,
+            Integer itemId, LocalDateTime startDate, LocalDateTime endDate
+    ) {
         Integer result = -1;
         ReservationVO reservationVO = reservationDTO.toVO();
         Integer resId = null;
-        ItemScheduleVO itemScheduleVO = new ItemScheduleVO();
-        Integer itemId;
-
 
         // 쿠폰 사용 처리
         if (memberCouponId != null) {
@@ -79,22 +85,31 @@ public class ReservationServiceImpl implements ReservationService {
                     }
                 }
             }
+
+            // 지정된 기간에 해당하는 ItemScheduleVO를 가져온 뒤 재고수량이 0이면 예외 발생
+            List<ItemScheduleVO> itemScheduleVOList = itemScheduleMapper.selectByDate(itemId, startDate, endDate)
+                    .stream().peek(itemScheduleVO -> {
+                       if (itemScheduleVO.getStock() == 0) {
+                           throw new ResourceNotFoundException(itemId + "번 상품의 재고가 부족합니다.");
+                       }
+                    }).collect(Collectors.toList());
             
             // 저장완료 후 아이템 스케줄 추가 + 상품 수량 설정
-            for (Integer itemScheduleId : itemScheduleIdList) {
+            for (ItemScheduleVO itemScheduleVO : itemScheduleVOList) {
+                Integer itemScheduleId = itemScheduleVO.getItemScheduleId();
+
                 reservationMapper.insertResItem(resId, itemScheduleId);
                 reservationMapper.updateStockByItemSchedule(itemScheduleId);
                 reservationMapper.updateSalesVolumeByItem(itemScheduleId);
             }
         }
 
-
 //        return result;
         return resId;
     }
 
-
     @Override
+    @Transactional
     public Integer cancel(Integer resId, ReservationDTO reservationDTO) {
         Integer result = -1;
         reservationDTO.setResId(resId);

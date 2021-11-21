@@ -82,7 +82,7 @@ public class MemberServiceImpl implements MemberService {
         MemberVO memberVO = new MemberVO();
         memberVO.setMemberId(memberId);
 
-        if (!files.isEmpty()) {
+        if (files != null && !files.isEmpty()) {
             List<AttachmentVO> filesToDelete = attachmentMapper.select(AboutTableType.MEMBER, memberId);
             AttachmentUtil.deleteAttachments(filesToDelete);
             attachmentMapper.delete(AboutTableType.MEMBER, memberId);
