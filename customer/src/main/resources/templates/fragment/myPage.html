@@ -4,9 +4,9 @@
         <div class="position-relative">
             <img src="img/광안리.jpg" class="rounded-circle pro-pho" alt="..." id="changeImg">
             <div class="position-absolute" style="
-        top: 95%;
-        left: 95%;
-        transform: translate( -50%, -50% );
+        top: 85%;
+        left: 85%;
+        /*transform: translate( -50%, -50% );*/
 ">
                 <label style="border: 0px;    background: none;" for="profileImg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-camera-fill top-100" viewBox="0 0 16 16">
@@ -18,7 +18,27 @@
             </div>
         </div>
     </div>
-    <div class="align-items-start" id="myp-sns">연동SNS :</div>
+    <!--    <div class="align-items-start" id="myp-sns">연동SNS :</div>-->
+
+    <script>
+        document.getElementById("profileImg").addEventListener("change", (event) => {
+            console.log(event.target.files[0]);
+            var formData = new FormData();
+            formData.append("files", event.target.files[0]);
+            console.log(formData)
+            fetch(`http://localhost:8082/member/updateProfileImg`, {
+                method: "PATCH",
+                body: formData
+            })
+                .then(response => response.text())
+                .catch(error => console.error('Error:', error))
+                .then(response => {
+                    console.log('Success:', JSON.stringify(response));
+                    changeImg.setAttribute('src', "resources" + response);
+                });
+
+        });
+    </script>
 
 </div>
 
@@ -46,7 +66,7 @@
                         <input type="text" class="form-control" id="nickname">
                         <span id="nicknameMsg"></span>
                     </div>
-                    <a class="btn btn-primary col-auto" href="#" id="check_nickname" role="button">중복확인</a>
+                    <a class="btn btn-primary col-auto h-100 button-outline" href="#" id="check_nickname" role="button">중복확인</a>
                 </div>
                 <div class="row" id="myp-mod">
                     <label for="email" class="col-2 col-form-label font-weight-bold text-align-end">이메일</label>
@@ -55,7 +75,7 @@
                         <span id="emailMsg"></span>
 
                     </div>
-                    <a class="btn btn-primary col-auto" href="#" id="check_email" role="button">중복확인</a>
+                    <a class="btn btn-primary col-auto h-100 button-outline" href="#" id="check_email" role="button">중복확인</a>
                 </div>
                 <div class="row" id="myp-mod">
                     <label for="password" class="col-2 col-form-label font-weight-bold text-align-end">비밀번호</label>
@@ -220,7 +240,7 @@
                     <!--                    <th:block th:replace="fragment/button :: solid('회원탈퇴')" />-->
                     <!---->
 
-                    <input class="btn btn-primary button-solid" type="button" id="memberUpdateBtn" value="저장">
+                    <input class="btn btn-primary button-solid col-auto" type="button" id="memberUpdateBtn" value="저장">
                 </div>
             </form>
         </div><!--col-->
@@ -228,15 +248,14 @@
 
 </div><!--프로필 관리 창-->
 
-<form action="warning" th:fragment="couponInsert">
+<form action="" th:fragment="couponInsert" onsubmit="return getCouponByNum();">
     <div class="row align-items-end margin-left-8">
 
         <label class="col-10">쿠폰 등록
             <input  type="text" class="form-control" name="num"></input>
         </label>
 
-        <input  class="col-auto btn btn-primary"
-                id="button_solid"
+        <input  class="col-auto btn btn-primary button-solid"
                 value="쿠폰 등록"
                 type="submit"/>
 
@@ -245,8 +264,8 @@
 
 <div    th:fragment="coupon"
         class="border bg-white rounded-3 border-2 margin-title padding-16">
-
-    <th:block th:replace="fragment/title :: title_2('나의 쿠폰')"></th:block>
+    <h1 class="font-size-32 margin-window-title mypNavText-32 col"
+        id="title_2">나의 쿠폰</h1>
     <th:block th:replace="fragment/myPage :: couponInsert"></th:block>
 
     <!--카테고리 탭-->
@@ -263,20 +282,33 @@
     </ul>
     <!--카테고리 탭 끝-->
 
+
+    <!--카드 없을 때-->
+
+
+    <div id="couponNull">
+    </div>
+
+    <!--카드 없을 때 끝-->
+
     <div class="row text-align-center margin-top-24 justify-content-center">
         <table class="col-11" id="couponTable">
+            <thead>
             <tr>
                 <td>쿠폰명</td>
                 <td>할인 금액</td>
                 <td>사용 조건</td>
                 <td>유효 기간</td>
             </tr>
+            </thead>
+            <tbody>
             <tr>
                 <td style="width: 32%;white-space: nowrap">아이티윌 수료 기념 5% 할인 쿠폰</td>
                 <td style="width: 11%;white-space: nowrap">5%</td>
                 <td style="white-space: nowrap"><pre>- 전 품목에 사용 가능</pre></td>
-                <td style="width: 13%;white-space: nowrap">~21.11.23</td>
+                <td style="width: 16%;white-space: nowrap">~21.11.23</td>
             </tr>
+            </tbody>
         </table>
     </div>
 
@@ -285,7 +317,8 @@
 <div    th:fragment="coupon_disabled"
         class="border bg-white rounded-3 border-2 margin-title padding-16">
 
-    <th:block th:replace="fragment/title :: title_2('나의 쿠폰')"></th:block>
+    <h1 class="font-size-32 margin-window-title mypNavText-32 col"
+        id="title_2">나의 쿠폰</h1>
     <th:block th:replace="fragment/myPage :: couponInsert"></th:block>
 
     <!--카테고리 탭-->
@@ -304,18 +337,16 @@
 
     <div class="row text-align-center margin-top-24 justify-content-center">
         <table class="col-11" id="couponTable">
+            <thead>
             <tr>
-                <td>쿠폰명</td>
-                <td>할인 금액</td>
+                <td style="width: 32%;white-space: nowrap">쿠폰명</td>
+                <td style="width: 11%;white-space: nowrap">할인 금액</td>
                 <td>사용 품목</td>
-                <td>사용 일자</td>
+                <td style="width: 16%;white-space: nowrap">사용 일자</td>
             </tr>
-            <tr>
-                <td style="width: 32%;white-space: nowrap">아이티윌 수료 기념 5% 할인 쿠폰</td>
-                <td style="width: 11%;white-space: nowrap">5%</td>
-                <td><a href="prodet">[특가 50% 진행중!] 아이티윌 강의실 입장권</a></td>
-                <td style="width: 13%;white-space: nowrap">21.11.23</td>
-            </tr>
+            </thead>
+            <tbody>
+            </tbody>
         </table>
     </div>
 
@@ -324,7 +355,8 @@
 <div    th:fragment="coupon_expired"
         class="border bg-white rounded-3 border-2 margin-title padding-16">
 
-    <th:block th:replace="fragment/title :: title_2('나의 쿠폰')"></th:block>
+    <h1 class="font-size-32 margin-window-title mypNavText-32 col"
+        id="title_2">나의 쿠폰</h1>
     <th:block th:replace="fragment/myPage :: couponInsert"></th:block>
 
     <!--카테고리 탭-->
@@ -343,16 +375,15 @@
 
     <div class="row text-align-center margin-top-24 justify-content-center">
         <table class="col-11" id="couponTable">
+            <thead>
             <tr>
                 <td>쿠폰명</td>
-                <td>할인 금액</td>
-                <td>유효 기간</td>
+                <td style="width: 11%;white-space: nowrap">할인 금액</td>
+                <td style="width: 16%;white-space: nowrap">유효 기간</td>
             </tr>
-            <tr>
-                <td>아이티윌 수료 기념 5% 할인 쿠폰</td>
-                <td style="width: 11%;white-space: nowrap">5%</td>
-                <td style="width: 13%;white-space: nowrap">~21.11.23</td>
-            </tr>
+            </thead>
+            <tbody>
+            </tbody>
         </table>
     </div>
 
@@ -361,12 +392,13 @@
 <div    th:fragment="mypage_nav_member"
         class="border bg-white rounded-3 border-2 margin-title padding-16">
     <div class="row margin-bottom-16 mx-0">
-        <h1 href="#" class="font-weight-bold position-relative font-size-16 mb-0">
+        <span href="#" class="mypNavText font-weight-bold position-relative font-size-16 mb-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg>
-            정보 조회/수정</h1>
+            정보 조회/수정
+        </span>
     </div>
     <div class="row margin-bottom-16 mx-0">
         <a href="mypagecoupon" >
@@ -377,7 +409,7 @@
             나의 쿠폰</a>
     </div>
     <div class="row margin-bottom-8 mx-0">
-        <a href="mypagereservation" >
+        <a href="myReservation" >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-card-list" viewBox="0 0 16 16">
                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                 <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
@@ -398,16 +430,16 @@
             정보 조회/수정</a>
     </div>
     <div class="row margin-bottom-16 mx-0">
-        <h1 href="#" class="font-weight-bold position-relative font-size-16 mb-0">
+        <span href="#" class="mypNavText font-weight-bold position-relative font-size-16 mb-0">
 
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-cash" viewBox="0 0 16 16">
                 <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
                 <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
             </svg>
-            나의 쿠폰</h1>
+            나의 쿠폰</span>
     </div>
     <div class="row margin-bottom-8 mx-0">
-        <a href="mypagereservation" >
+        <a href="myReservation" >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-card-list" viewBox="0 0 16 16">
                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                 <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
@@ -463,15 +495,15 @@
                             <span class="col-auto">예약완료여부</span>
                         </div>
                         <div><!--중간묶음-->
-                        <div class="row d-flex justify-content-between">
-                            <span class="col-auto">상품분류 : 숙소</span><span class="col-auto">10,000원</span>
-                        </div>
-                        <div class="row">
-                            <span>상품이름 : 성원이 집</span>
-                        </div>
-                        <div class="row">
-                            <span>예약날짜 : 2011-11-11</span>
-                        </div>
+                            <div class="row d-flex justify-content-between">
+                                <span class="col-auto">상품분류 : 숙소</span><span class="col-auto">10,000원</span>
+                            </div>
+                            <div class="row">
+                                <span>상품이름 : 성원이 집</span>
+                            </div>
+                            <div class="row">
+                                <span>예약날짜 : 2011-11-11</span>
+                            </div>
                         </div>
 
                     </div>
@@ -509,4 +541,34 @@
     </nav>
     <!--페이지 끝-->
 
+</div>
+
+<div    th:fragment="mypage_nav_reservation"
+        class="border bg-white rounded-3 border-2 margin-title padding-16">
+    <div class="row margin-bottom-16 mx-0">
+        <a href="mypagemember">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+            정보 조회/수정
+        </a>
+    </div>
+    <div class="row margin-bottom-16 mx-0">
+        <a href="mypagecoupon" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-cash" viewBox="0 0 16 16">
+                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+            </svg>
+            나의 쿠폰</a>
+    </div>
+    <div class="row margin-bottom-8 mx-0">
+        <span class="mypNavText font-weight-bold position-relative font-size-16 mb-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-card-list" viewBox="0 0 16 16">
+                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+            </svg>
+            나의 예약
+        </span>
+    </div>
 </div>
