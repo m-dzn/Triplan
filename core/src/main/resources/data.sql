@@ -48,7 +48,7 @@ INSERT INTO reservation (item_category, total_price, start_date, end_date, name,
 VALUES ('ROOM', 50000, '2021-11-1T01:01:01', '2021-12-31T23:59:59', '양경호', '010-9999-9999', 1, 1);
 
 INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
-VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);
+VALUES (50000, 1, '2021-11-25T00:00:00', '2021-11-25T23:59:59', 1);
 
 INSERT INTO reservation_item (res_id, item_schedule_id)
 VALUES (1, 1);
@@ -92,8 +92,8 @@ VALUES ('부산 해운대 하얏트 호텔1', '부산 해운대 하얏트 호텔
 INSERT INTO item (name, `explain`, item_category, item_group_id)
 VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 1);
 INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
-VALUES (40333, 1, '2021-11-1T01:01:01', '2021-11-1T23:59:59', 1);
-VALUES (50000, 1, '2021-11-2T01:01:01', '2021-11-2T23:59:59', 1);
+VALUES (40333, 1, '2021-11-26T00:00:00', '2021-11-26T23:59:59', 1);
+VALUES (50000, 1, '2021-11-27T00:00:00', '2021-11-27T23:59:59', 1);
 INSERT INTO item_group_tag (item_group_id, tag_id)
 VALUES (1, 1);
 

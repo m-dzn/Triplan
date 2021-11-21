@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -51,9 +52,9 @@ public class ApiReservationController {
             @RequestParam String endDate,
             @Valid @RequestBody ReservationDTO reservationDTO
     ) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime startDateLDT = LocalDateTime.parse(startDate, formatter);
-        LocalDateTime endDateLDT = LocalDateTime.parse(endDate, formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime startDateLDT = LocalDate.parse(startDate, formatter).atStartOfDay();
+        LocalDateTime endDateLDT = LocalDate.parse(endDate, formatter).atTime(23,59,59);
 
         Integer resId = reservationService.reserve(memberCouponId, reservationDTO, itemId, startDateLDT, endDateLDT);
         // * 받아와야할 거
