@@ -24,4 +24,11 @@
          WHERE item_group_id = #{itemGroupId}
     </delete>
 
+    <select id="list" resultType="TagVO">
+        SELECT  *
+        FROM    tag
+        JOIN    item_group_tag USING (tag_id)
+        WHERE   item_group_id = #{itemGroupId}
+    </select>
+
 </mapper>

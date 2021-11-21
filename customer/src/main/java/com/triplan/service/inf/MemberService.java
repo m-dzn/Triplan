@@ -1,7 +1,6 @@
 package com.triplan.service.inf;
 
 import com.triplan.domain.MemberVO;
-import com.triplan.dto.MemberProfileDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

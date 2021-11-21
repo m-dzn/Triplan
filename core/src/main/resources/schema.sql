@@ -1,7 +1,7 @@
 CREATE TABLE `Member` (
 	`member_id`	INT AUTO_INCREMENT	NOT NULL,
 	`email`	VARCHAR(50)	NOT NULL,
-	`password`	VARCHAR(255)	NOT NULL,
+	`password`	VARCHAR(255)	NULL,
 	`nickname`	VARCHAR(20)	NOT NULL,
 	`email_confirm`	TINYINT	NOT NULL	DEFAULT 0	COMMENT 'Boolean',
 	`state`	VARCHAR(20)	NOT NULL	DEFAULT 'REGISTER',
@@ -92,7 +92,7 @@ CREATE TABLE `Payment` (
 	`total_payment`	INT UNSIGNED	NOT NULL,
 	`account_bank`	VARCHAR(20)	NULL,
 	`account_number`	VARCHAR(20)	NULL,
-	`payment_deadline`	TIMESTAMP	NOT NULL,
+	`payment_deadline`	TIMESTAMP	NULL,
 	`paid_at`	TIMESTAMP	NULL,
 	`created_at`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
 	`updated_at`	TIMESTAMP	NULL	DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

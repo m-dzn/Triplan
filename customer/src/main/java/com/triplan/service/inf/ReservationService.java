@@ -23,7 +23,7 @@ public interface ReservationService {
 
     List<ReservationDTO> myCancelledResList(Integer memberId);
 
-    Integer reserve(Integer itemScheduleId, Integer memberCouponId, ReservationDTO reservationDTO);
+    Integer reserve(List<Integer> itemScheduleIdList, Integer memberCouponId, ReservationDTO reservationDTO);
 
     Integer cancel(Integer resId, ReservationDTO reservationDTO);
 }

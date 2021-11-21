@@ -12,15 +12,22 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class WishlistResponseDTO {
+public class AccommodationCardResponseDTO {
 
-    private Integer wishlistId;
+    // ItemGroup 관련 필드
+    private Integer itemGroupId;
     private String name;
     private ItemCategory itemCategory;
-    private String location;
+    private String address;
     private Integer likeCount;
     private Integer reviewCount;
     private String itemImg;
-    private LocalDateTime createdAt; // 찜 등록일
+    private Integer location;
+    private LocalDateTime createdAt;
+
+    // 기타 컬럼
+    private Integer pricePerDay;
+    private Integer discountPerDay;
+    private Boolean liked;
 
 }

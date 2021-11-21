@@ -87,14 +87,132 @@ INSERT INTO Tag (color,name,icon)
 VALUES('#ffdbff','11번','11번');
 INSERT INTO Tag (color,name,icon)
 VALUES('#ffdbed','12번','12번');
-/* Tag_Group */
-INSERT INTO Item_Group_Tag (item_group_id,tag_id)
-VALUES(1,1);
-INSERT INTO Item_Group_Tag (item_group_id,tag_id)
-VALUES(1,2);
-INSERT INTO Item_Group_Tag (item_group_id,tag_id)
-VALUES(1,3);
 
+/* 회원 정보 */
+INSERT INTO member (email, password, nickname)
+VALUES ('user@gmail.com', '1111', '사용자1');
+
+INSERT INTO seller (business_license_number, business_name, tel, owner_name, email, business_account, zip_code, address, member_id)
+VALUES ('1', 'Com. Trip', '010-1111-1111', '손명진', 'smj@gmail.com', '00-000-0000', '000-00', '부산광역시 부산진구', 1);
+
+/* 숙박 정보 */
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔1', '부산 해운대 하얏트 호텔1 요약 설명', '부산 해운대 하얏트 호텔1 상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test.jpg', 1, 51);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 1);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (40333, 1, '2021-11-1T01:01:01', '2021-11-1T23:59:59', 1);
+VALUES (50000, 1, '2021-11-2T01:01:01', '2021-11-2T23:59:59', 1);
+INSERT INTO item_group_tag (item_group_id, tag_id)
+VALUES (1, 1);
+
+
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔2', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test2.jpg', 10, 60);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 2);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-2T01:01:01', '2021-12-31T23:59:59', 2);
+INSERT INTO item_group_tag (item_group_id, tag_id)
+VALUES (2, 1);
+
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔3', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test3.jpg', 20, 88);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 3);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-3T01:01:01', '2021-12-31T23:59:59', 3);
+INSERT INTO item_group_tag (item_group_id, tag_id)
+VALUES (3, 1);
+
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔4', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test4.jpg', 30, 68);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 4);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-4T01:01:01', '2021-12-31T23:59:59', 4);
+
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔5', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test5.jpg', 40, 24);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 5);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-5T01:01:01', '2021-12-31T23:59:59', 5);
+
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔6', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test6.jpg', 50, 36);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 6);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-6T01:01:01', '2021-12-31T23:59:59', 6);
+
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔7', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test7.jpg', 60, 77);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 7);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-7T01:01:01', '2021-12-31T23:59:59', 7);
+
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔8', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test8.jpg', 70, 28);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 8);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-8T01:01:01', '2021-12-31T23:59:59', 8);
+
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔9', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test9.jpg', 80, 99);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 9);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-9T01:01:01', '2021-12-31T23:59:59', 9);
+
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔10', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test10.jpg', 90, 47);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 10);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-10T01:01:01', '2021-12-31T23:59:59', 10);
+
+INSERT INTO item_group (name, summary_explain, detail_explain, item_category, address, seller_id, item_img, like_count, review_count)
+VALUES ('부산 해운대 하얏트 호텔11', '5성급 호텔', '상세 설명', 'ROOM', '부산광역시 해운대구', 1, '/item/test11.jpg', 100, 51);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 11);
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-11T01:01:01', '2021-12-31T23:59:59', 11);
+
+INSERT INTO wishlist (member_id, item_group_id)
+VALUES (1, 1);
+INSERT INTO wishlist (member_id, item_group_id)
+VALUES (1, 1);
+INSERT INTO wishlist (member_id, item_group_id)
+VALUES (1, 1);
+
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('스위트룸 오션뷰 2인실', '국내 최고의 오션뷰', 'ROOM', 1);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('4인용 오션뷰 객실', '가격은 2배', 'ROOM', 1);
+INSERT INTO item (name, `explain`, item_category, item_group_id)
+VALUES ('대회의실', '가격은 4배', 'ROOM', 1);
+
+
+
+INSERT INTO room (number_of_person, max_person, item_id)
+VALUES (3, 5, 1);
+INSERT INTO room (number_of_person, max_person, item_id)
+VALUES (4, 4, 2);
+INSERT INTO room (number_of_person, max_person, item_id)
+VALUES (10, 20, 3);
+
+
+INSERT INTO reservation (item_category, total_price, start_date, end_date, name, phone, member_id, seller_id)
+VALUES ('ROOM', 50000, '2021-11-1T01:01:01', '2021-12-31T23:59:59', '양경호', '010-9999-9999', 1, 1);
+
+INSERT INTO item_schedule (price, stock, start_date, end_date, item_id)
+VALUES (50000, 1, '2021-11-1T01:01:01', '2021-12-31T23:59:59', 1);
+
+INSERT INTO reservation_item (res_id, item_schedule_id)
+VALUES (1, 1);
 
 
 INSERT INTO coupon(name, num, price, condition, expired_at)
@@ -167,3 +285,25 @@ INSERT INTO question (title, content, hide, member_id, type)
 VALUES ('테스트 문의4', '테스트 문의 내용', 0, 1, 'CUSTOMER');
 
 
+/* Review */
+INSERT INTO review (review_id, content, review_score, member_id, item_id )
+VALUES ( '1',
+	'호기심에 시작한 여행이였는데ㅠ날씨도 좋고 힐링되고 정말 좋았어요
+	시간 때문에 여행하려다 포기하고 이사온뒤로 어디 놀러가질못했는데 정말 좋았어요
+	또 갈거예요!!><',
+	'10', '1', '1' );
+
+INSERT INTO review (review_id, content, review_score, member_id, item_id )
+VALUES ( '2',
+	'공기좋고 경치좋고 깨끗한 룸에서 잘먹고 잘놀다 갑니다. 종종 이용하고 싶어요!',
+	'9', '1', '1' );
+
+INSERT INTO review (review_id, content, review_score, member_id, item_id )
+VALUES ( '3',
+	'합리적인 가격에 객실도 괜찮았어요 조식은 별로였지만... 이용 잘했어요!',
+	'9', '1', '1' );
+
+INSERT INTO review (review_id, content, review_score, member_id, item_id )
+VALUES ( '4',
+	'서비스가 별로입니다. 가격만 싸고, 다음에는 안 올 것 같아요',
+	'3', '1', '1' );

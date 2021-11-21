@@ -39,8 +39,6 @@ public class ApiItemGroupController {
         return itemGroupService.getItemList(itemGroupId);
     }
 
-
-
     @PutMapping("/{itemGroupId}")
     public String ItemGroupUpdateTags(@Valid @PathVariable Integer itemGroupId,
                                       @Valid @RequestBody ItemGroupRequestDTO itemGroupRequestDTO,

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <form name="profile">
+        <input type="file" name="file">
+    </form>
+    <button id="submit">제출</button>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById("submit").addEventListener("click", () => {
+            const formData = new FormData();
+            formData.append("files", document.profile.file.files[0]);
+
+            fetch(`http://localhost:8082/api/members/updateProfileImg`, {
+                method: "PATCH",
+                body: formData
+            });
+        });
+      });
+    </script>
+</body>
+</html>

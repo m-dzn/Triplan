@@ -21,8 +21,9 @@
                 <td class="test">비밀 글 여부</td>
                 <td>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="hide" value="1" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" name="hide" value="1" id="hide">
+                        <input type="hidden" name="hide" value='0' id="hide_hidden"/>
+                        <label class="form-check-label" for="hide">
                             비밀 글
                         </label>
                     </div>
@@ -40,7 +41,7 @@
                 <td></td>
                 <td colspan="3">
                     <!-- <input type="submit" value="수정"> 밑에도 서브밋 값을 줘야하는지? -->
-                    <input class="btn col-auto margin-right-16 color-white a-button-solid" id="button_solid" type="submit" value="글쓰기">
+                    <input class="btn col-auto margin-right-16 color-white a-button-solid" id="qnaWriteBtn" type="submit" value="글쓰기">
                     <button type="button" class="btn col-auto " id="button_solid"><a href="qna" class="color-white a-button-solid">취소</a></button>
                 </td>
             </tr>
@@ -52,25 +53,40 @@
 <th:block layout:fragment="script">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var qnaForm = document.getElementById("qnaForm");
 
-            // JS로 URL의 쿼리 파라미터 가져오기
-            var url = new URL(location.href);
-            var questionId = url.searchParams.get("questionId");
+            if(document.getElementById("input_check").checked) {
+                document.getElementById("input_check_hidden").disabled = true;
+            }
 
-            fetch(`${BASE_URL}/api/questions`, {
-                method: 'POST'
-            }).then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-            }).then(notice => {
-                // 태그 엘리먼트에 데이터를 붙여주면 됨
-                noticeId.innerText = notice.noticeId;
-                noticeTitle.innerText = notice.title;
-                noticeContent.innerText = notice.content;
-                noticeCreatedAt.innerText = moment(notice.createdAt).format(DATE_FORMAT_KOR);
+            var qnaWriteBtn = document.getElementById("qnaWriteBtn");
+
+            qnaWriteBtn.addEventListener("click",function (){
+
+                var qnaForm = document.getElementById("qnaForm");
+
+                // JS로 URL의 쿼리 파라미터 가져오기
+                var url = new URL(location.href);
+                var questionId = url.searchParams.get("questionId");
+
+                fetch(`${BASE_URL}/api/questions`, {
+                    method: 'POST',
+                    body: new FormData(document.qnaForm),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => {
+                    console.log(response);
+                });
+
             });
+
+
+
+
+
+
+
+
         });
     </script>
 </th:block>

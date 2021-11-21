@@ -9,7 +9,7 @@
         <ol class="breadcrumb margin-top-8">
             <li class="breadcrumb-item"><a href="product">예약</a></li>
             <li class="breadcrumb-item"><a href="product">액티비티</a></li>
-            <li class="breadcrumb-item active" aria-current="page">[특가 50% 진행중!] 아이티윌 강의실 입장권</li>
+            <li class="breadcrumb-item active" aria-current="page" id="itemGroupBreadCrumb">[특가 50% 진행중!] 아이티윌 강의실 입장권</li>
         </ol>
     </nav>
     <!--브레드 크럼 끝-->
@@ -60,7 +60,7 @@
                             <button class="btn btn-primary col" id="button_outline" onclick="myFunction()">
                                 <span class="color-gray">🖤</span><!--나중에 백엔드랑 연동해서 상품그룹이 위시리스트에 들어있으면 primary 컬러로 변경되게 하기-->
                                 찜하기
-                                <span>(123)</span>
+                                <span id="itemGroupLikeCount">(0)</span>
                             </button>
                         </div>
 
@@ -91,7 +91,7 @@
                 </div>
                 <div class="row "><!--별점-->
                     <div class="col-auto d-flex align-items-center">
-                        <img src="img/star_signature.svg">
+                        <img src="img/star-signature.png">
                         <span class="margin-left-8">(3.96)</span>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
     <section class="margin-section">
         <!--타이틀-->
         <div class="row border-bottom">
-            <th:block th:replace="fragment/title :: title_2_noMargin('[특가 50% 진행중!] 아이티윌 강의실 입장권')"></th:block>
+            <h1 class="font-size-32  col-auto" id="itemGroupTitle"></h1>
         </div>
 
         <!--옵션 태그-->
@@ -152,13 +152,7 @@
 
         <!--간략 설명-->
         <div class="row border-bottom padding-detail-sector">
-            <pre>
-부산 지역 최고의 강사들에게 자바 위주의 개발 교육을 받아보세요!
-
-- 최신식 시설과 완벽한 컴퓨터 사양
-- 개발 입문자들에게 알맞는 레슨 준비
-- 최고의 강사진과 최고의 편의시설
-- 지금 바로 예약해주세요!</pre>
+            <pre id="itemGroupSummaryExplain">요약 설명</pre>
         </div>
 
         <!--옵션 선택-->
@@ -242,9 +236,9 @@
 - 1인 입장권
 - 예약 완료 시에 문자로 안내 문자를 드립니다
 - 장비는 함께 제공됩니다</pre>
-                        <form action="pay" class="col-1">
+                        <form class="col-1">
                             <input type="hidden" name="총액" value="총액">
-                            <input class="btn btn-primary col-auto" id="button_solid" type="submit" value="바로 예약">
+                            <a href="pay?itemGroupId=1&itemId=1&startDate=2021-11-24&endDate=2021-11-30" class="btn btn-primary col-auto" id="button_solid">바로 예약</a>
                         </form>
                     </div>
 
@@ -268,7 +262,7 @@
 - 장비는 함께 제공됩니다</pre>
                     <form action="pay" class="col-1">
                         <input type="hidden" name="총액" value="총액">
-                        <input class="btn btn-primary col-auto" id="button_solid" type="submit" value="바로 예약">
+                        <a href="pay?itemGroupId=1&itemId=2&startDate=2021-12-01&endDate=2021-12-07" class="btn btn-primary col-auto" id="button_solid">바로 예약</a>
                     </form>
                 </div>
 
@@ -293,13 +287,7 @@
         <!--상세 설명-->
         <div class="row border-bottom padding-detail-sector">
             <th:block th:replace="fragment/title :: title_3_noMargin('상세 설명')"></th:block>
-            <pre>
-부산 지역 최고의 강사들에게 자바 위주의 개발 교육을 받아보세요!
-
-- 최신식 시설과 완벽한 컴퓨터 사양
-- 개발 입문자들에게 알맞는 레슨 준비
-- 최고의 강사진과 최고의 편의시설
-- 지금 바로 예약해주세요!</pre>
+            <pre id="itemGroupDetailExplain">상세 설명</pre>
             <img src="img/광안리.jpg">
         </div>
 
@@ -356,93 +344,82 @@
 
         <!--리뷰-->
         <div class="row border-bottom padding-detail-sector">
-        <th:block th:replace="fragment/title :: title_3_noMargin('리뷰')"></th:block>
+            <th:block th:replace="fragment/title :: title_3_noMargin('리뷰')"></th:block>
 
-        <!--리뷰 별점 보여주는 거(미완성이라 비활성화)-->
-<!--    <div class="row mb-4 ms-2">-->
-<!--        <div class="col-1 rounded-3 border-2 d-flex align-items-center" style="width: 56px;height: 56px;background-color: var(&#45;&#45;signature);color:white;">-->
-<!--            <span>3.96</span>-->
-<!--        </div>-->
+            <!--리뷰 별점 보여주는 거(미완성이라 비활성화)-->
+    <!--    <div class="row mb-4 ms-2">-->
+    <!--        <div class="col-1 rounded-3 border-2 d-flex align-items-center" style="width: 56px;height: 56px;background-color: var(&#45;&#45;signature);color:white;">-->
+    <!--            <span>3.96</span>-->
+    <!--        </div>-->
 
-<!--    </div>-->
-    <form>
-    <div class="row align-items-center">
-        <div class="form-floating col-10">
-            <textarea class="form-control" id="Review_Content" style="height: 100px;display: inline-block"></textarea>
-        </div>
-        <div class="row col-auto d-flex justify-content-center">
-        <div class="col-auto">
-            <!--별점-->
-            <div class="startRadio col-auto p-0" th:fragment="star_2">
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="0.5">
-                    <span class="startRadio__img"><span class="blind">별 0.5개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="1.0">
-                    <span class="startRadio__img"><span class="blind">별 1개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="1.5">
-                    <span class="startRadio__img"><span class="blind">별 1.5</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="2.0">
-                    <span class="startRadio__img"><span class="blind">별 2개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="2.5">
-                    <span class="startRadio__img"><span class="blind">별 2.5개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="3">
-                    <span class="startRadio__img"><span class="blind">별 3개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="3.5">
-                    <span class="startRadio__img"><span class="blind">별 3.5개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="4">
-                    <span class="startRadio__img"><span class="blind">별 4개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="4.5">
-                    <span class="startRadio__img"><span class="blind">별 4.5개</span></span>
-                </label>
-                <label class="startRadio__box">
-                    <input type="radio" name="star_score" id="5">
-                    <span class="startRadio__img"><span class="blind">별 5개</span></span>
-                </label>
-            </div>
-            <!--별점-->
-        </div>
-            <div class="row d-flex justify-content-center mt-2">
-        <input class="btn btn-primary col-auto" id="button_solid" type="submit" value="작성"/>
-            </div>
-        </div>
-    </div>
-</form>
-        <div class="row margin-top-32">
-        <table class="col-12" style="border: 1px;">
-            <tr>
-                <td rowspan="3" class="col-1">프사</td>
-                <td class="d-flex justify-content-between">
-                    <div>이름(작성일)</div>
-                    <div>
-<!--                        <button><a href="notupd">글 수정</a></button>&lt;!&ndash;구현에 JS가 필요해서 일단 보류&ndash;&gt;-->
-                        <button><a href="warning">글 삭제</a></button><!--리뷰 삭제 액션이랑 매핑해주세요-->
+    <!--    </div>-->
+            <form>
+            <div class="row align-items-center">
+                <div class="form-floating col-10">
+                    <textarea class="form-control" id="Review_Content" style="height: 100px;" placeholder="리뷰를 입력해주세요"></textarea>
+                </div>
+                <div class="row col-auto d-flex justify-content-center">
+                <div class="col-auto">
+                    <!--별점-->
+                    <div class="startRadio col-auto p-0" th:fragment="star_2">
+                        <label class="startRadio__box">
+                            <input type="radio" name="star_score" id="0.5">
+                            <span class="startRadio__img"><span class="blind">별 0.5개</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="star_score" id="1.0">
+                            <span class="startRadio__img"><span class="blind">별 1개</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="star_score" id="1.5">
+                            <span class="startRadio__img"><span class="blind">별 1.5</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="star_score" id="2.0">
+                            <span class="startRadio__img"><span class="blind">별 2개</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="star_score" id="2.5">
+                            <span class="startRadio__img"><span class="blind">별 2.5개</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="star_score" id="3">
+                            <span class="startRadio__img"><span class="blind">별 3개</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="star_score" id="3.5">
+                            <span class="startRadio__img"><span class="blind">별 3.5개</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="star_score" id="4">
+                            <span class="startRadio__img"><span class="blind">별 4개</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="star_score" id="4.5">
+                            <span class="startRadio__img"><span class="blind">별 4.5개</span></span>
+                        </label>
+                        <label class="startRadio__box">
+                            <input type="radio" name="star_score" id="5">
+                            <span class="startRadio__img"><span class="blind">별 5개</span></span>
+                        </label>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>별점</td>
-            </tr>
-            <tr>
-                <td>내용</td>
-            </tr>
-        </table>
-        </div>
+                    <!--별점-->
+                </div>
+                    <div class="row d-flex justify-content-center mt-2">
+                        <input class="btn btn-primary col-auto" id="button_solid" type="submit" value="작성"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+            <div class="d-flex flex-column" id="reviewContainer">
+                <div class="p-5 d-flex justify-content-center">리뷰를 작성해주세요</div>
+            </div>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end" id="reviewPaginationGroup">
+                </ul>
+            </nav>
+
         </div>
 
         <!--추천 상품-->
@@ -493,4 +470,7 @@
 <!--        </div>-->
     </section>
 </div>
+<th:block layout:fragment="script">
+    <script src="/js/productDetail.js"></script>
+</th:block>
 </html>

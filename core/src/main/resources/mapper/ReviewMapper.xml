@@ -48,17 +48,36 @@
     </select>
 
     <!-- 페이징 처리-->
-    <select id="page" resultType="ReviewVO">
-        SELECT  *
-        FROM    review
+    <select id="listByItemGroupId" resultType="com.triplan.dto.response.ReviewResponseDTO">
+        SELECT
+                r.review_id,
+                r.content,
+                r.review_score,
+                r.review_img,
+                r.item_id,
+                r.created_at,
+                r.updated_at,
+                m.nickname,
+                m.profile_img
+        FROM    review r JOIN member m
+        ON      r.member_id = m.member_id
+        WHERE   item_id IN (
+                SELECT  item_id
+                FROM    item
+                WHERE   item_group_id = #{itemGroupId}
+        )
         ORDER BY item_id DESC
         LIMIT (#{currentPage} -1) * #{pageSize}, #{pageSize}
     </select>
 
-    <select id="count" resultType="int">
+    <select id="countByItemGroupId" resultType="int">
         SELECT  COUNT(*)
         FROM    review
-        WHERE   item_id = #{itemId}
+        WHERE   item_id IN (
+        SELECT  item_id
+        FROM    item
+        WHERE   item_group_id = #{itemGroupId}
+        )
     </select>
 
 </mapper>
