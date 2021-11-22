@@ -60,7 +60,7 @@
                     c.name, c.price, c.condition, c.expired_at
         FROM        member_coupon m JOIN coupon c
         ON          (m.coupon_id = c.coupon_id)
-        WHERE       FORMATDATETIME(expired_at, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
+        WHERE       DATEDIFF(expired_at, NOW()) &gt;= 0
           AND       m.usage1 != 1
         ORDER BY    expired_at
     </select>
@@ -79,7 +79,7 @@
                     c.name, c.price, c.condition, c.expired_at
         FROM        member_coupon m JOIN coupon c
         ON          (m.coupon_id = c.coupon_id)
-        WHERE       FORMATDATETIME(now(), 'yyyyMMdd') > FORMATDATETIME(expired_at, 'yyyyMMdd')
+        WHERE       DATEDIFF(expired_at, NOW()) &lt;= 0
           AND       m.usage1 != 1
         ORDER BY    expired_at DESC
     </select>

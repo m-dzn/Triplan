@@ -3,6 +3,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 
 /* css */
+*::-webkit-scrollbar {
+    display: none;
+}
+
 #button_solid {
   /* 배경색이 있는 버튼 */
   background-color: var(--primary);
