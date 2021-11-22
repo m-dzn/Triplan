@@ -1,5 +1,0 @@
-dependencies {
-}
-
-war.enabled(true)
-bootWar.enabled(false)
