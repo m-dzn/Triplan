@@ -51,7 +51,7 @@ public class ApiItemGroupController {
         LocalDateTime startDateLDT = LocalDateTime.parse(startDate, formatter);
         LocalDateTime endDateLDT = LocalDateTime.parse(endDate, formatter);
 
-        Integer memberId = currentMember.getMemberId();
+        Integer memberId = currentMember != null ? currentMember.getMemberId() : null;
         return itemGroupService.getFilterAsDate(
                 startDateLDT, endDateLDT, underPrice, overPrice, tags, sortType, pageSize, currentPage, memberId);
     }

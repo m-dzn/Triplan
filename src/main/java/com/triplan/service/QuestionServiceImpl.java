@@ -1,11 +1,11 @@
 package com.triplan.service;
 
 import com.triplan.domain.cs.QuestionVO;
-import com.triplan.dto.response.customer.QuestionDTO;
 import com.triplan.dto.response.Pagination;
+import com.triplan.dto.response.customer.QuestionDTO;
 import com.triplan.exception.AccessNotAllowedException;
-import com.triplan.mapper.member.MemberMapper;
 import com.triplan.mapper.cs.QuestionMapper;
+import com.triplan.mapper.member.MemberMapper;
 import com.triplan.service.inf.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,14 +46,16 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Pagination<QuestionVO> listFromCustomerToAdmin(Integer pageSize, Integer currentPage) {
-        List<QuestionVO> list = questionMapper.listFromCustomerToAdmin(pageSize, currentPage);
+        Integer startRow = (currentPage - 1) * pageSize;
+        List<QuestionVO> list = questionMapper.listFromCustomerToAdmin(startRow, pageSize);
         Integer count = questionMapper.countFromCustomerToAdmin();
         return new Pagination<>(pageSize, currentPage, count, list);
     }
 
     @Override
     public Pagination<QuestionDTO> listByItemGroupId(Integer pageSize, Integer currentPage, Integer itemGroupId) {
-        List<QuestionDTO> questionListByItemGroupIdListPage = questionMapper.listByItemGroupId(pageSize, currentPage, itemGroupId)
+        Integer startRow = (currentPage - 1) * pageSize;
+        List<QuestionDTO> questionListByItemGroupIdListPage = questionMapper.listByItemGroupId(startRow, pageSize, itemGroupId)
                 .stream().map(questionVO ->
                         QuestionDTO.of(questionVO, memberMapper.select(questionVO.getMemberId()))
                 ).collect(Collectors.toList());
@@ -65,7 +67,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Pagination<QuestionVO> listByMemberId(Integer pageSize, Integer currentPage, Integer memberId) {
-        List<QuestionVO> questionListByMemberIdListPage = questionMapper.listByMemberId(pageSize, currentPage, memberId);
+        Integer startRow = (currentPage - 1) * pageSize;
+        List<QuestionVO> questionListByMemberIdListPage = questionMapper.listByMemberId(startRow, pageSize, memberId);
 
         int totalReviews = questionMapper.countByMemberId(memberId);
 

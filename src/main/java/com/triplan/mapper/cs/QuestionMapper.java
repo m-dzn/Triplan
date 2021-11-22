@@ -17,16 +17,31 @@ public interface QuestionMapper {
 
     void delete(Integer questionId);
 
-    List<QuestionVO> listByItemGroupId(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage, @Param("itemGroupId") Integer itemGroupId);
+    List<QuestionVO> listByItemGroupId(
+            @Param("startRow") Integer startRow,
+            @Param("pageSize") Integer pageSize,
+            @Param("itemGroupId") Integer itemGroupId
+    );
     int countByItemGroupId(Integer itemGroupId);
 
-    List<QuestionVO> listBySellerId(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage, @Param("sellerId") Integer sellerId);
+    List<QuestionVO> listBySellerId(
+            @Param("startRow") Integer startRow,
+            @Param("pageSize") Integer pageSize,
+            @Param("sellerId") Integer sellerId
+    );
     int countBySellerId(String type);
 
-    List<QuestionVO> listByMemberId(@Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage, @Param("memberId") Integer memberId);
+    List<QuestionVO> listByMemberId(
+            @Param("startRow") Integer startRow,
+            @Param("pageSize") Integer pageSize,
+            @Param("memberId") Integer memberId
+    );
     int countByMemberId(Integer memberId);
 
-    List<QuestionVO> listFromCustomerToAdmin(Integer pageSize, Integer currentPage);
+    List<QuestionVO> listFromCustomerToAdmin(
+            @Param("startRow") Integer startRow,
+            @Param("pageSize") Integer pageSize
+    );
 
     Integer countFromCustomerToAdmin();
 

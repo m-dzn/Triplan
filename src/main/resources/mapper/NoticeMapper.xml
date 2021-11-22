@@ -40,7 +40,7 @@
         FROM    notice
         WHERE   noticeTarget = #{noticeTarget}
         ORDER BY created_at DESC
-        LIMIT   (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+        LIMIT   #{startRow}, #{pageSize}
     </select>
 
     <select id="count" resultType="Integer">

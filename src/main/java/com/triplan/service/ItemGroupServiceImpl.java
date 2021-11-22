@@ -86,7 +86,8 @@ public class ItemGroupServiceImpl implements ItemGroupService {
         if (tags.isEmpty()) tags = null;
 
         // 검색 조건 필터링 후 DB에서 ItemGroupDTO 가져오기
-        List<AccommodationCardResponseDTO> itemGroupDTOs = itemSearchMapper.getFilterAndSort(startDate, endDate, underPrice, overPrice, tags, sortType, pageSize, currentPage);
+        Integer startRow = (currentPage - 1) * pageSize;
+        List<AccommodationCardResponseDTO> itemGroupDTOs = itemSearchMapper.getFilterAndSort(startDate, endDate, underPrice, overPrice, tags, sortType, startRow, pageSize);
         
         // 회원 로그인 시 찜 여부 조회
         if (memberId != null) {

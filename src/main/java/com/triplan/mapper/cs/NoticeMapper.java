@@ -20,8 +20,8 @@ public interface NoticeMapper {
 
     List<NoticeVO> noticeList(
             @Param("target") NoticeTarget noticeTarget,
-            @Param("pageSize") Integer pageSize,
-            @Param("currentPage") Integer currentPage
+            @Param("startRow") Integer startRow,
+            @Param("pageSize") Integer pageSize
     );
 
     Integer count(NoticeTarget noticeTarget);

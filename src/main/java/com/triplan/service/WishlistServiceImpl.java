@@ -60,7 +60,8 @@ public class WishlistServiceImpl implements WishlistService {
 
     @Override
     public Pagination<WishlistResponseDTO> getMemberWishList(Integer memberId, Integer pageSize, Integer currentPage) {
-        List<WishlistResponseDTO> wishlistList = wishlistMapper.list(memberId, pageSize, currentPage);
+        Integer startRow = (currentPage - 1) * pageSize;
+        List<WishlistResponseDTO> wishlistList = wishlistMapper.list(memberId, startRow, pageSize);
         Integer count = wishlistMapper.countByMemberId(memberId);
 
         return new Pagination<>(pageSize, currentPage, count, wishlistList);

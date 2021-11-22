@@ -20,8 +20,10 @@ public class MemberPrincipal implements UserDetails, OAuth2User {
 
     private Integer memberId;
     private String email;
+    @Setter
     private String nickname;
     private String password;
+    @Setter
     private String profileImg;
 
     private Set<? extends GrantedAuthority> authorities;

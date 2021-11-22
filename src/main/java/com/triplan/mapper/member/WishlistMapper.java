@@ -22,8 +22,8 @@ public interface WishlistMapper {
 
     List<WishlistResponseDTO> list(
             @Param("memberId") Integer memberId,
-            @Param("pageSize") Integer pageSize,
-            @Param("currentPage") Integer currentPage
+            @Param("startRow") Integer startRow,
+            @Param("pageSize") Integer pageSize
     );
 
     Boolean exist(@Param("itemGroupId") Integer itemGroupId, @Param("memberId") Integer memberId);

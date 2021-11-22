@@ -3,10 +3,10 @@
     <div class="d-flex justify-content-center position-relative">
         <div class="position-relative">
             <th:block th:if="${member.profileImg != null}">
-                <img th:src="${member.profileImg}" class="rounded-circle pro-pho" alt="profile image">
+                <img th:src="${member.profileImg}" class="rounded-circle pro-pho" alt="profile image" id="changeImg">
             </th:block>
             <th:block th:unless="${member.profileImg != null}">
-                <img src="/img/default-profile-img.png" class="rounded-circle pro-pho" alt="profile image">
+                <img src="/img/default-profile-img.png" class="rounded-circle pro-pho" alt="profile image" id="changeImg">
             </th:block>
             <div class="position-absolute" style="
         top: 95%;

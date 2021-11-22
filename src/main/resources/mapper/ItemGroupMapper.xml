@@ -88,7 +88,7 @@
         FROM item_group
         WHERE seller_id = #{sellerId}
         ORDER BY created_at DESC
-        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+        LIMIT #{startRow}, #{pageSize}
     </select>
 
     <select id="count" resultType="Integer">

@@ -27,10 +27,10 @@
         <div class="btn-group">
             <button type="button" class="border-0 background-color-none" id="profile_image" data-bs-toggle="dropdown" aria-expanded="false">
                 <th:block th:if="${member.profileImg != null}">
-                    <img th:src="${member.profileImg}" alt="profile image"  class="nav-profile-img">
+                    <img th:src="${member.profileImg}" alt="profile image"  class="nav-profile-img" id="navProfileImg">
                 </th:block>
                 <th:block th:unless="${member.profileImg != null}">
-                    <img src="/img/default-profile-img.png" alt="profile image" class="nav-profile-img">
+                    <img src="/img/default-profile-img.png" alt="profile image" class="nav-profile-img" id="navProfileImg">
                 </th:block>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">

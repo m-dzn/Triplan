@@ -194,7 +194,7 @@
             JOIN item_group ig        ON  (it.item_group_id = ig.item_group_id)
         WHERE   member_id = #{memberId}
         ORDER BY r.start_date DESC
-        LIMIT (#{currentPage} -1) * #{pageSize}, #{pageSize}
+        LIMIT #{startRow}, #{pageSize}
     </select>
 
     <select id="count" resultType="Integer">

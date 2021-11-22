@@ -45,8 +45,8 @@ public interface ReservationMapper {
     void giveBackCoupon(@Param("resId") Integer resId, @Param("memberId") Integer memberId);
 
     List<ReservationDTO> myPagedResList(
+            @Param("startRow") Integer startRow,
             @Param("pageSize") Integer pageSize,
-            @Param("currentPage") Integer currentPage,
             @Param("memberId") Integer memberId
     );
 

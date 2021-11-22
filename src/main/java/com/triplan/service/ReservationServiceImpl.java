@@ -172,7 +172,8 @@ public class ReservationServiceImpl implements ReservationService {
     /* 페이징 처리 */
     @Override
     public Pagination<ReservationDTO> myPagedResList(Integer memberId, Integer pageSize, Integer currentPage) {
-        List<ReservationDTO> pagedResList = reservationMapper.myPagedResList(pageSize, currentPage, memberId);
+        Integer startRow = (currentPage - 1) * pageSize;
+        List<ReservationDTO> pagedResList = reservationMapper.myPagedResList(startRow, pageSize, memberId);
         Integer totalReservations = reservationMapper.count(memberId);
 
         return new Pagination<>(pageSize, currentPage, totalReservations, pagedResList);

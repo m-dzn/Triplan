@@ -10,6 +10,10 @@ import com.triplan.mapper.member.RoleMapper;
 import com.triplan.service.inf.MemberService;
 import com.triplan.util.AttachmentUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +29,7 @@ public class MemberServiceImpl implements MemberService {
     private final RoleMapper roleMapper;
     private final AttachmentMapper attachmentMapper;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     @Transactional
@@ -49,6 +54,14 @@ public class MemberServiceImpl implements MemberService {
     public void updateMypage(Integer memberId, MemberVO memberVO) {
         memberVO.setMemberId(memberId);
         memberMapper.updateMypage(memberVO);
+
+        MemberVO updatedMemberVO = memberMapper.select(memberId);
+
+        Authentication oldAuth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(
+                oldAuth, oldAuth.getCredentials(), oldAuth.getAuthorities()
+        );
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
     }
 
     @Override
@@ -90,6 +103,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public String updateProfileImg(List<MultipartFile> files, Integer memberId) {
+        String response = null;
+
         MemberVO memberVO = new MemberVO();
         memberVO.setMemberId(memberId);
 
@@ -98,25 +113,33 @@ public class MemberServiceImpl implements MemberService {
             AttachmentUtil.deleteAttachments(filesToDelete);
             attachmentMapper.delete(AboutTableType.MEMBER, memberId);
             memberVO.setProfileImg("");
-        }
 
-        AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.MEMBER, memberId);
+            AttachmentVO attachmentVO = AttachmentUtil.getAttachment(files.get(0), AboutTableType.MEMBER, memberId);
 
-        if (attachmentVO != null) {
-            memberVO.setProfileImg(attachmentVO.getUrl());
+            if (attachmentVO != null) {
+                memberVO.setProfileImg(attachmentVO.getUrl());
 
-            try {
-                attachmentMapper.insert(attachmentVO);
-            } catch (Exception e) {
-                e.printStackTrace();
-                AttachmentUtil.deleteAttachment(attachmentVO);
+                try {
+                    attachmentMapper.insert(attachmentVO);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    AttachmentUtil.deleteAttachment(attachmentVO);
+                }
+                memberMapper.updateBasicInfo(memberVO);
+                response = attachmentVO.getUrl();
             }
-            return attachmentVO.getUrl();
-
         }
 
         memberMapper.updateBasicInfo(memberVO);
-        return null;
+
+        // 회원 정보 업데이트 후 Spring Security의 MemberPrincipal 객체를 함께 업데이트
+        Authentication oldAuth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(
+                oldAuth, oldAuth.getCredentials(), oldAuth.getAuthorities()
+        );
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
+
+        return response;
     }
 
 }

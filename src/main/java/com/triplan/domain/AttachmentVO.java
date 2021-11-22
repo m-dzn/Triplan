@@ -53,6 +53,10 @@ public class AttachmentVO {
         this.fileSize = fileSize;
     }
 
+    public String getUUIDAndExt() {
+        return serverFileName + "." + fileExtension;
+    }
+
     public String getUrl() {
         return RESOURCES_COMMON_URL + uploadPath+"/"+serverFileName+"."+fileExtension;
     }

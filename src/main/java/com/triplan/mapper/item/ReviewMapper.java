@@ -20,7 +20,11 @@ public interface ReviewMapper {
 
     List<ReviewVO> list();
 
-    List<ReviewDTO> listByItemGroupId(@Param("itemGroupId") Integer itemGroupId, @Param("pageSize") Integer pageSize, @Param("currentPage") Integer currentPage);
+    List<ReviewDTO> listByItemGroupId(
+            @Param("itemGroupId") Integer itemGroupId,
+            @Param("startRow") Integer startRow,
+            @Param("pageSize") Integer pageSize
+    );
 
     int countByItemGroupId(Integer itemGroupId);
 
