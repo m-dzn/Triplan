@@ -55,7 +55,7 @@ public class ApiMemberController {
 
     @GetMapping
     public MemberVO getMember(@CurrentMember MemberPrincipal currentMember) {
-        Integer memberId = currentMember.getMemberId();
+        Integer memberId = currentMember != null ? currentMember.getMemberId() : null;
         return memberService.getMember(memberId);
     }
 

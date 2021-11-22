@@ -32,7 +32,7 @@ public class ApiItemGroupController {
             @PathVariable Integer itemGroupId,
             @CurrentMember MemberPrincipal currentMember
     ) {
-        Integer memberId = currentMember.getMemberId();
+        Integer memberId = currentMember != null ? currentMember.getMemberId() : null;
         return itemGroupService.getItemList(itemGroupId, memberId);
     }
 

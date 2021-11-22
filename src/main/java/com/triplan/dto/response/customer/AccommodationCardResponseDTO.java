@@ -22,7 +22,7 @@ public class AccommodationCardResponseDTO {
     private Integer likeCount;
     private Integer reviewCount;
     private String itemImg;
-    private Integer location;
+    private String location;
     private LocalDateTime createdAt;
 
     // 기타 컬럼

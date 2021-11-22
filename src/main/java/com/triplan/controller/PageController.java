@@ -103,6 +103,7 @@ public class PageController {
 
     // Item
     @GetMapping("/pay") // 예약/결제창
+    @PreAuthorize("hasRole('ROLE_MEMBER')")
     public String pay(Model model,
                       @RequestParam Integer itemGroupId,
                       @RequestParam Integer itemId,

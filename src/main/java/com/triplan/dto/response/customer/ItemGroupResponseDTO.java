@@ -26,7 +26,7 @@ public class ItemGroupResponseDTO {
     private String addressDetail;
     private String itemImg;
     private String detailImg;
-    private Integer location;
+    private String location;
     private Integer lat;
     private Integer lng;
     private Integer likeCount;

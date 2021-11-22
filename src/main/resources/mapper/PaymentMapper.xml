@@ -56,7 +56,7 @@
             FROM    payment p JOIN reservation r
             ON      p.res_id = r.res_id
             WHERE   r.member_id = #{memberId}
-              AND   ABS(DATEDIFF(MONTH, paid_at, current_timestamp)) <= 12;
+              AND   ABS(TIMESTAMPDIFF(MONTH, paid_at, current_timestamp)) <= 12;
         ]]>
 
     </select>
