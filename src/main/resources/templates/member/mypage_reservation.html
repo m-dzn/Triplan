@@ -132,7 +132,7 @@
                         + `<div class="row d-flex justify-content-between">`
                         + `<div class="row col-10">`
                         + `<span class="col-4"><b>예약번호</b> : ${res.resId}</span>`
-                        + `<span class="col"><b>결제일</b> : ${moment(res.paidAt).format(DATE_FORMAT_KOR)}</span>`
+                        + `<span class="col"><b>결제일</b> : ${res.paidAt ? moment(res.paidAt).format(DATE_FORMAT_KOR) : '-'}</span>`
                         + `</div>`
                         + `<div class="col-auto">`
                         + `<span>결제여부</span> : ${state} &nbsp`
