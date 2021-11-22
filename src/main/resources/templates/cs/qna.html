@@ -11,13 +11,13 @@
 
         <table class="table table-bordered" id="qnaTable">
             <thead>
-                <tr class="text-align-center">
-                    <td class="font-size-16">글번호</td>
-                    <td class="font-size-16">제목</td>
-                    <td class="font-size-16">작성일</td>
-                    <td class="font-size-16">문의사항 종류</td>
-                    <td class="font-size-16">작성자</td>
-                </tr>
+            <tr class="text-align-center">
+                <td class="font-size-16">글번호</td>
+                <td class="font-size-16">제목</td>
+                <td class="font-size-16">작성일</td>
+                <td class="font-size-16">문의사항 종류</td>
+                <td class="font-size-16">작성자</td>
+            </tr>
             </thead>
             <tbody>
             </tbody>
@@ -30,7 +30,9 @@
         </nav>
         <!--페이지 끝-->
 
-        <button type="button" class="btn col-auto btn-primary background-color-primary" id="button_solid"><a href="qnawri" class="color-white a-button-solid">글 쓰기</a></button>
+        <div class="row justify-content-end margin-bottom-16">
+            <button type="button" class="btn col-auto btn-primary background-color-primary" id="button_solid"><a href="qnawri" class="color-white a-button-solid">글 쓰기</a></button>
+        </div>
 
     </div>
 
@@ -57,6 +59,7 @@
                         return response.json();
                     }
                 }).then(qnaPagination => {
+                    console.log(qnaPagination)
                     // 실제 프론트 로직이 들어갈 영역
                     // 태그 엘리먼트에 데이터를 붙여주면 됨
                     var qnaTBody = qnaTable.getElementsByTagName("tbody")[0];

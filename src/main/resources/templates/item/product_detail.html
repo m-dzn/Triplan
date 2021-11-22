@@ -32,8 +32,8 @@
         <div class="col-3">
             <div class="border bg-white rounded-3 border-2 margin-window-title margin-window">
                 <div class="row d-flex align-items-end">
-                    <span class="col-auto p-0 font-size-24 font-weight-bold margin-right-8">39,800원</span>
-                    <span class="col-auto p-0 color-gray">부터</span></div>
+<!--                    <span class="col-auto p-0 font-size-24 font-weight-bold margin-right-8">39,800원</span>-->
+<!--                    <span class="col-auto p-0 color-gray">부터</span></div>-->
 <!--                <div class="row">(최대 13% 할인)</div>-->
                 <div class="row">
                     <div class="row d-flex justify-content-center my-2">
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="row">
-                            <button class="btn btn-primary col" id="wishBtn">
+                            <button class="btn button-outline col" id="wishBtn">
                                 <span class="color-gray">♡</span><!--나중에 백엔드랑 연동해서 상품그룹이 위시리스트에 들어있으면 primary 컬러로 변경되게 하기-->
                                 찜하기
                                 <span id="itemGroupLikeCount">(0)</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="row "><!--별점-->
                     <div class="col-auto d-flex align-items-center">
-                        <img src="img/star-signature.png">
+                        <img src="img/star-signature.png" width="16px" height="16px">
                         <span class="margin-left-8">(3.96)</span>
                     </div>
                 </div>
@@ -70,6 +70,10 @@
 
 
 
+
+
+
+            </div>
             <div class="accordion margin-bottom-8" id="업체정보1">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="업체정보2">
@@ -84,21 +88,22 @@
                         </div>
                     </div>
                 </div>
-
-
-            </div>
 <!--            <div class="border bg-white rounded-3 border-2 margin-window-title">-->
 <!--                <div class="row">업체 정보</div>-->
 <!--            </div>-->
         </div>
     </div>
 
+    </div>
+
+
 
 
     <section class="margin-section">
         <!--타이틀-->
         <div class="row border-bottom">
-            <h1 class="font-size-32  col-auto" id="itemGroupTitle"></h1>
+            <span class="font-size-32 margin-bottom-16 col-auto"
+                  id="itemGroupTitle"></span>
         </div>
 
         <!--옵션 태그-->
@@ -128,12 +133,13 @@
 
         <!--옵션 선택-->
         <div class="row border-bottom padding-detail-sector d-flex justify-content-between">
-            <th:block th:replace="fragment/title :: title_3_noMargin('옵션 선택')"></th:block>
+            <h1 class="font-size-24 mypNavText-24 margin-prodet position-relative col-auto"
+                id="title_3_noMargin">옵션 선택</h1>
 
             <div class="col-auto">
                 <form action="warning">
                     <input type="text" name="prodetCalender" class="col-auto"/>
-                    <input class="btn btn-primary" id="button_outline" type="submit" value="조회">
+<!--                    <input class="btn btn-primary button-outline" id="button_outline" type="submit" value="조회">-->
                 </form>
             </div>
 
@@ -141,48 +147,53 @@
         </div><!--옵션 종료-->
 
         <!--상세 설명-->
-        <div class="row border-bottom padding-detail-sector">
-            <th:block th:replace="fragment/title :: title_3_noMargin('상세 설명')"></th:block>
+        <div class="row border-bottom padding-detail-sector d-flex justify-content-between">
+                <h1 class="font-size-24 mypNavText-24 margin-prodet position-relative col-auto"
+                    id="title_3_noMargin">상세 설명</h1>
             <pre id="itemGroupDetailExplain">상세 설명</pre>
             <img src="img/광안리.jpg" id="itemGroupDetailImg">
         </div>
 
         <!--위치-->
-        <div class="row border-bottom padding-detail-sector">
-            <th:block th:replace="fragment/title :: title_3_noMargin('위치')"></th:block>
+            <div class="row border-bottom padding-detail-sector d-flex justify-content-between">
+                <h1 class="font-size-24 mypNavText-24 margin-prodet position-relative col-auto"
+                    id="title_3_noMargin">위치</h1>
 
-            <!--위치 아코디언-->
-            <div class="accordion margin-bottom-8" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
-                                id="button-accordion-location">
-                            <div class="row m-0">주소 : 부산광역시 부산진구 동천로 109 삼한골든게이트</div>
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <img src="img/map.JPG" style="width: 100%;height: 100%;">
+                <!--위치 아코디언-->
+                <div class="accordion margin-bottom-8" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                    id="button-accordion-location">
+                                <div class="row m-0">주소 : 부산광역시 부산진구 동천로 109 삼한골든게이트</div>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <img src="img/map.JPG" style="width: 100%;height: 100%;">
+                            </div>
                         </div>
                     </div>
-                </div>
 
+
+                </div>
 
             </div>
 
-        </div>
 
         <!--유의 사항-->
-        <div class="row border-bottom padding-detail-sector">
-            <th:block th:replace="fragment/title :: title_3_noMargin('유의 사항')"></th:block>
+            <div class="row border-bottom padding-detail-sector d-flex justify-content-between">
+                <h1 class="font-size-24 mypNavText-24 margin-prodet position-relative col-auto"
+                    id="title_3_noMargin">유의 사항</h1>
             <pre>
  - 예약시간 기준 최소 10분 전 방문 부탁드립니다.
  - 기상악화로 인한 강습 취소 시 전액 환불해드립니다.</pre>
         </div>
 
         <!--이용 방법-->
-        <div class="row border-bottom padding-detail-sector">
-            <th:block th:replace="fragment/title :: title_3_noMargin('이용 방법')"></th:block>
+            <div class="row border-bottom padding-detail-sector d-flex justify-content-between">
+                <h1 class="font-size-24 mypNavText-24 margin-prodet position-relative col-auto"
+                    id="title_3_noMargin">이용 방법</h1>
             <pre>
 - 예약이 확정되면 문자로 안내를 드립니다.
 - 예약 시간 기준 최소 10분 전 방문 부탁드립니다.</pre>
@@ -190,8 +201,9 @@
         </div>
 
         <!--취소 규정-->
-        <div class="row border-bottom padding-detail-sector">
-            <th:block th:replace="fragment/title :: title_3_noMargin('취소 규정')"></th:block>
+            <div class="row border-bottom padding-detail-sector d-flex justify-content-between">
+                <h1 class="font-size-24 mypNavText-24 margin-prodet position-relative col-auto"
+                    id="title_3_noMargin">취소 규정</h1>
             <pre>
  - 선택한 날짜로부터 7일 이전까지 취소 수수료 0% 발생
  - 선택한 날짜로부터 0일 ~ 6일 이전 취소 수수료 20% 발생</pre>
@@ -199,8 +211,9 @@
         </div>
 
         <!--리뷰-->
-        <div class="row border-bottom padding-detail-sector">
-            <th:block th:replace="fragment/title :: title_3_noMargin('리뷰')"></th:block>
+            <div class="row border-bottom padding-detail-sector d-flex justify-content-between">
+                <h1 class="font-size-24 mypNavText-24 margin-prodet position-relative col-auto"
+                    id="title_3_noMargin">리뷰</h1>
 
             <!--리뷰 별점 보여주는 거(미완성이라 비활성화)-->
     <!--    <div class="row mb-4 ms-2">-->
@@ -278,9 +291,10 @@
 
         </div>
 
-        <!--추천 상품-->
-        <div class="row border-bottom padding-detail-sector">
-            <th:block th:replace="fragment/title :: title_3_noMargin('Q&A')"></th:block>
+        <!--Q&A-->
+            <div class="row border-bottom padding-detail-sector d-flex justify-content-between">
+                <h1 class="font-size-24 mypNavText-24 margin-prodet position-relative col-auto"
+                    id="title_3_noMargin">Q&A</h1>
             <table style="border: 1px;border-style: solid;text-align: center;" id="itemGroupQnaTable">
                 <thead>
                     <tr>
@@ -293,7 +307,7 @@
             </table>
 
             <div class="row d-flex justify-content-end">
-                <a class="btn btn-primary col-auto margin-top-8" id="qnaWriteBtn" href="proqnawri" role="button">글 쓰기</a>
+                <a class="btn button-solid col-auto margin-top-8" id="qnaWriteBtn" href="proqnawri" role="button">글 쓰기</a>
             </div>
 
             <nav class="margin-top-16" aria-label="Page navigation example">
@@ -301,14 +315,13 @@
                 </ul>
             </nav>
 
-        </div>
+         </div>
 
 <!--        &lt;!&ndash;추천 상품&ndash;&gt;-->
 <!--        <div class="row border-bottom padding-detail-sector">-->
 <!--            <th:block th:replace="fragment/title :: title_3_noMargin('추천 상품')"></th:block>-->
 <!--        </div>-->
     </section>
-</div>
 <th:block layout:fragment="script">
     <script src="/js/productDetail.js"></script>
 </th:block>

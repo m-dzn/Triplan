@@ -83,7 +83,7 @@ public class ItemGroupServiceImpl implements ItemGroupService {
                                              Integer underPrice, Integer overPrice, List<Integer> tags,
                                              String sortType,
                                              Integer pageSize, Integer currentPage, Integer memberId) {
-        if (tags.isEmpty()) tags = null;
+        if (tags != null && tags.isEmpty()) tags = null;
 
         // 검색 조건 필터링 후 DB에서 ItemGroupDTO 가져오기
         Integer startRow = (currentPage - 1) * pageSize;

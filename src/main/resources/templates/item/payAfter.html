@@ -33,11 +33,11 @@
                         <div class="col">할인 전 가격</div>
                         <div class="col-auto" th:text="${reservation.totalDiscountPrice}+${reservation.totalPrice}"></div>
                     </div>
-                    <div class="row d-flex justify-content-between">
+                    <div class="row d-flex justify-content-between padding-bottom-8">
                         <div class="col">할인가격</div>
                         <div class="col-auto" th:text="'-' + ${reservation.totalDiscountPrice}"></div>
                     </div>
-                    <div class="row border-top d-flex justify-content-between">
+                    <div class="row border-top d-flex justify-content-between padding-top-8">
                         <div class="col">지불금액</div>
                         <div class="col-auto" th:text="${reservation.totalPrice}"></div>
                     </div>
@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-            <div class="col-8 border bg-white rounded-3 border-2 padding-16 margin-window d-none" id="is-unpaid">
+            <div class="col-4 offset-2 me-auto border bg-white rounded-3 border-2 padding-16 margin-window" id="is-unpaid">
                 <th:block th:replace="fragment/title :: title_3('무통장 정보')"></th:block>
                 <div class="row  margin-left-32">
                     <div class="row d-flex justify-content-between">

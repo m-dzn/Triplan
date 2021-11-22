@@ -10,6 +10,7 @@ import com.triplan.service.inf.ItemGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -38,8 +39,8 @@ public class ApiItemGroupController {
 
     @GetMapping("/filter")
     public Pagination<AccommodationCardResponseDTO> getSearchFilterDate(
-            @RequestParam(defaultValue = "2000-01-01 00:00:00") String startDate,
-            @RequestParam(defaultValue = "9999-12-30 23:59:59" ) String endDate,
+            @RequestParam(defaultValue = "2000-01-01") String startDate,
+            @RequestParam(defaultValue = "9999-12-30" ) String endDate,
             @RequestParam(required = false) Integer underPrice,
             @RequestParam(defaultValue = "0") Integer overPrice,
             @RequestParam(required = false) List<Integer> tags,
@@ -47,9 +48,9 @@ public class ApiItemGroupController {
             @RequestParam(defaultValue = "5") Integer pageSize,
             @RequestParam(defaultValue = "1") Integer currentPage,
             @CurrentMember MemberPrincipal currentMember) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime startDateLDT = LocalDateTime.parse(startDate, formatter);
-        LocalDateTime endDateLDT = LocalDateTime.parse(endDate, formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime startDateLDT = LocalDate.parse(startDate, formatter).atStartOfDay();
+        LocalDateTime endDateLDT = LocalDate.parse(endDate, formatter).atTime(23,59,59);
 
         Integer memberId = currentMember != null ? currentMember.getMemberId() : null;
         return itemGroupService.getFilterAsDate(

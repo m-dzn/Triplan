@@ -9,11 +9,11 @@
                 <img src="/img/default-profile-img.png" class="rounded-circle pro-pho" alt="profile image" id="changeImg">
             </th:block>
             <div class="position-absolute" style="
-        top: 95%;
-        left: 95%;
-        transform: translate( -50%, -50% );
+        top: 85%;
+        left: 85%;
+        /*transform: translate( -50%, -50% );*/
 ">
-                <label style="border: 0px;    background: none;" for="profileImg">
+                <label style="border: 0px; cursor:pointer;   background: none;" for="profileImg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-camera-fill top-100" viewBox="0 0 16 16">
                         <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                         <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="align-items-start" id="myp-sns">연동SNS :</div>
+<!--    <div class="align-items-start" id="myp-sns">연동SNS :</div>-->
 
 </div>
 
@@ -33,9 +33,10 @@
 </div>
 
 <div    th:fragment="modify"
-        class="border bg-white rounded-3 border-2 margin-title">
+        class="border bg-white rounded-3 border-2 margin-title padding-16">
 
-    <th:block th:replace="fragment/title :: title_2('프로필 관리')"></th:block>
+    <h1 class="font-size-32 margin-window-title mypNavText-32 col"
+        id="title_2">프로필 관리</h1>
     <div class="row">
         <div class="col">
             <form>
@@ -51,7 +52,7 @@
                         <input type="text" class="form-control" id="nickname">
                         <span id="nicknameMsg"></span>
                     </div>
-                    <a class="btn btn-primary col-auto" href="#" id="check_nickname" role="button">중복확인</a>
+                    <a class="btn button-outline col-auto h-100" href="#" id="check_nickname" role="button">중복확인</a>
                 </div>
                 <div class="row" id="myp-mod">
                     <label for="email" class="col-2 col-form-label font-weight-bold text-align-end">이메일</label>
@@ -60,7 +61,7 @@
                         <span id="emailMsg"></span>
 
                     </div>
-                    <a class="btn btn-primary col-auto" href="#" id="check_email" role="button">중복확인</a>
+                    <a class="btn button-outline col-auto h-100" href="#" id="check_email" role="button">중복확인</a>
                 </div>
                 <div class="row" id="myp-mod">
                     <label for="password" class="col-2 col-form-label font-weight-bold text-align-end">비밀번호</label>
@@ -137,7 +138,7 @@
                 <!--                        </div>-->
                 <!--                    </div>-->
                 <!--                </div>&lt;!&ndash;sns연동 묶음 div&ndash;&gt;-->
-                <div class="row col-12 padding-x-8 padding-bottom-16 padding-top-24 d-flex justify-content-between">
+                <div class="row col-12 padding-x-8 padding-top-24 d-flex justify-content-between">
 
                     <!-- Button trigger modal -->
                     <a class="col-auto font-size-16 margin-left-16 color-gray font-weight-normal" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -188,8 +189,8 @@
 
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                    <button type="button" class="btn btn-primary">탈퇴</button>
+                                    <button type="button" class="btn btn-secondary button-outline" data-bs-dismiss="modal">취소</button>
+                                    <button type="button" class="btn btn-primary button-solid">탈퇴</button>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +226,7 @@
                     <!--                    <th:block th:replace="fragment/button :: solid('회원탈퇴')" />-->
                     <!---->
 
-                    <input class="btn btn-primary button-solid" type="button" id="memberUpdateBtn" value="저장">
+                    <input class="btn btn-primary button-solid col-auto" type="button" id="memberUpdateBtn" value="저장">
                 </div>
             </form>
         </div><!--col-->
@@ -355,13 +356,13 @@
 <div    th:fragment="mypage_nav_member"
         class="border bg-white rounded-3 border-2 margin-title padding-16">
     <div class="row margin-bottom-16 mx-0">
-        <h1 class="font-weight-bold position-relative font-size-16 mb-0">
+        <span href="#" class="mypNavText font-weight-bold position-relative font-size-16 mb-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg>
             정보 조회/수정
-        </h1>
+        </span>
     </div>
     <div class="row margin-bottom-16 mx-0">
         <a href="mypagecoupon" >
@@ -389,17 +390,16 @@
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg>
-            정보 조회/수정
-        </a>
+            정보 조회/수정</a>
     </div>
     <div class="row margin-bottom-16 mx-0">
-        <h1 class="font-weight-bold position-relative font-size-16 mb-0">
+        <span href="#" class="mypNavText font-weight-bold position-relative font-size-16 mb-0">
+
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-cash" viewBox="0 0 16 16">
                 <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
                 <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
             </svg>
-            나의 쿠폰
-        </h1>
+            나의 쿠폰</span>
     </div>
     <div class="row margin-bottom-8 mx-0">
         <a href="myReservation" >
@@ -407,15 +407,14 @@
                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                 <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
             </svg>
-            나의 예약
-        </a>
+            나의 예약</a>
     </div>
 </div>
 
-<div th:fragment="mypage_nav_reservation"
-     class="border bg-white rounded-3 border-2 margin-title padding-16">
+<div    th:fragment="mypage_nav_reservation"
+        class="border bg-white rounded-3 border-2 margin-title padding-16">
     <div class="row margin-bottom-16 mx-0">
-        <a href="mypagemember" >
+        <a href="mypagemember">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -429,17 +428,16 @@
                 <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
                 <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
             </svg>
-            나의 쿠폰
-        </a>
+            나의 쿠폰</a>
     </div>
     <div class="row margin-bottom-8 mx-0">
-        <h1 class="font-weight-bold position-relative font-size-16 mb-0">
+        <span class="mypNavText font-weight-bold position-relative font-size-16 mb-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-right-8 bi bi-card-list" viewBox="0 0 16 16">
                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                 <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
             </svg>
             나의 예약
-        </h1>
+        </span>
     </div>
 </div>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -14,22 +14,22 @@
                         <div class="col-auto">
                             <img src="img/광안리.jpg" id="product_img">
                         </div>
-                        <div class="col-auto" style="
+                        <div class="col" style="
     padding-left: 16px;
 ">
-                            <div class="row 4 font-size-20 font-weight-bold" id="itemGroupName" th:text="${itemGroup.name}">
+                            <div class="row font-size-20 font-weight-bold" id="itemGroupName" th:text="${itemGroup.name}">
                             </div>
                             <div class="row font-size-16">
-                                <span class="offset-1" id="item-name" th:text="${item.name}"></span>
+                                <pre class="offset-1 p-0 col-auto">옵션 : </pre><span class="col-auto p-0" id="item-name" th:text="${item.name}"></span>
                             </div>
 <!--                            <div class="row font-size-16">-->
 <!--                                <span class="offset-1">수량(인원) : (수량 전달 받는 메소드는 이 곳에)</span>-->
 <!--                            </div>-->
                             <div class="row font-size-16">
-                                <span class="offset-1" id="start-date" th:text="${startDate}"></span>
-                            </div>
-                            <div class="row font-size-16">
-                                <span class="offset-1" id="end-date" th:text="${endDate}"></span>
+                                <pre class="offset-1 p-0 col-auto">예약 날짜 : </pre>
+                                <span class="col-auto p-0" id="start-date" th:text="${startDate}">2021-12-1</span>
+                                <pre class="p-0 col-auto"> ~ </pre>
+                                <span class="col-auto p-0" id="end-date" th:text="${endDate}">2021-12-2</span>
                             </div>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
         var memberCouponId = 0; // 쿠폰id
         var paidAt; // 결제일
         var submitButton = document.getElementById("button_solid"); // 결제버튼
-
+        var staticTotalPrice;
 
 
         function changeDiscountPrice() {
@@ -172,17 +172,22 @@
             var discountPriceObj = document.getElementById("discount-price");
             discountPriceObj.innerHTML = totalDiscountPrice + ' 원';
 
+            memberCouponIdObj = couponSelect.options[couponSelect.selectedIndex];
+            memberCouponId = parseInt(memberCouponIdObj.dataset.couponid);
+
+            if(!memberCouponId) {
+                totalPrice = staticTotalPrice;
+            }
+
             totalPrice = totalPrice - totalDiscountPrice;
             if(totalPrice < 0){
                 totalPrice = 0;
             }
             itemTotalPriceObj.innerHTML = totalPrice + ' 원';
 
-            memberCouponIdObj = couponSelect.options[couponSelect.selectedIndex];
-            memberCouponId = parseInt(memberCouponIdObj.dataset.couponid);
 
             submitButton.value = totalPrice + '원 결제';
-       }
+        }
 
         $(document).ready(function () {
             $.ajax({
@@ -195,10 +200,16 @@
                     } else {
                         totalPrice = itemResponseDTO.totalPrice;
                     }
+                    staticTotalPrice = totalPrice;
                     itemPriceObj.innerHTML = totalPrice + ' 원';
                     itemTotalPriceObj.innerHTML = totalPrice + ' 원';
+                },
+                error:function(e) {
+                    console.log('api/item 불러오기 실패');
                 }
+
             }); // ajax
+
 
 
 
@@ -222,18 +233,18 @@
                 }
 
                 // 연락처 유효성검사
-                 var regPhone = /^\d{3}-\d{3,4}-\d{4}$/;
-                 var regTel = /^\d{2,3}-\d{3,4}-\d{4}$/;
+                var regPhone = /^\d{3}-\d{3,4}-\d{4}$/;
+                var regTel = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
-                 if (!regPhone.test(phone)|| !regTel.test(phone)) {
+                if (!regPhone.test(phone)|| !regTel.test(phone)) {
                     alert('연락처의 형식이 올바르지 않습니다.');
                     return;
-                 }
+                }
 
-                 if(totalPrice <= 0) {
+                if(totalPrice <= 0) {
                     alert("'0원'은 결제가 불가능합니다.");
                     return;
-                 }
+                }
 
                 var paymentType = document.getElementsByName('payment-type'); // 결제방법들
                 var resId; // 예약번호
@@ -257,6 +268,7 @@
                     return;
                 }
 
+
                 var paymentType; // db에 들어갈 결제타입 설정
                 if(payMethod === 'card') {
                     paymentType = 'CREDIT_CARD';
@@ -270,7 +282,9 @@
                     paymentType = 'NAVER_PAY';
                 }
 
-            // 결제API
+
+
+                // 결제API
                 IMP.init('imp95175119'); //가맹점 식별코드
                 IMP.request_pay({
                     pg: 'html5_inicis',
@@ -282,6 +296,7 @@
                     buyer_tel: phone
 
                 }, function (rsp) {
+                    console.log(rsp);
                     if (rsp.success) { // 결제성공시
 
                         // 예약정보 객체 생성
@@ -296,6 +311,7 @@
                             sellerId : sellerId,
                             totalDiscountPrice : totalDiscountPrice
                         }
+
 
                         $.ajax({ // 예약정보 db에 저장
                             url: '/api/res/reserve/'+memberCouponId+'?itemId='+itemId+'&startDate='+startDate+'&endDate='+endDate,
@@ -324,20 +340,33 @@
                                         paidAt: paidAt
                                     }
 
+
                                     $.ajax({// 결제정보 db에 저장
-                                        url: '/api/payments/'+memberId,
+                                        url: '/api/payments',
                                         type: 'POST',
                                         data: JSON.stringify(payment),
                                         contentType: 'application/json;charset=utf-8',
                                         success: function(paymentId) {
+                                            console.log('결제정보 저장 완료');
+
                                             // 성공하면 결제 번호를 반환받옴
                                             // 반환받은 결제번호로 결제확인 페이지로 이동
                                             location.href ='/pay/payInfo/'+parseInt(paymentId)+'/'+memberId;
+                                        },
+                                        error:function(e) {
+                                            console.log('결제정보 저장 실패');
                                         }
+
                                     }); // ajax
 
+                                }else{
+                                    console.log("에약 실패");
                                 }
-                            } // success
+                            }, // success
+                            error:function(e){
+                                console.log(e);
+                                console.log("Insert ajax 통신 실패!!!");
+                            } // error
                         }) // ajax
 
 
