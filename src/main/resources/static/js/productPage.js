@@ -111,8 +111,6 @@ var product = {
             url: `${BASE_URL}/api/item-groups/filter?pageSize=${this.pageSize}&currentPage=${this.currentPage}&sortType=${this.sortType}${queryParams}`,
             dataType: 'json',
             success: (pagination) => {
-                console.log(pagination);
-
                 const productCardList = [];
 
                 pagination.list.forEach((itemGroup, idx) => {

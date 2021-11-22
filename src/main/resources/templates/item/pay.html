@@ -203,11 +203,7 @@
                     staticTotalPrice = totalPrice;
                     itemPriceObj.innerHTML = totalPrice + ' 원';
                     itemTotalPriceObj.innerHTML = totalPrice + ' 원';
-                },
-                error:function(e) {
-                    console.log('api/item 불러오기 실패');
                 }
-
             }); // ajax
 
 
@@ -296,7 +292,6 @@
                     buyer_tel: phone
 
                 }, function (rsp) {
-                    console.log(rsp);
                     if (rsp.success) { // 결제성공시
 
                         // 예약정보 객체 생성
@@ -347,26 +342,14 @@
                                         data: JSON.stringify(payment),
                                         contentType: 'application/json;charset=utf-8',
                                         success: function(paymentId) {
-                                            console.log('결제정보 저장 완료');
-
                                             // 성공하면 결제 번호를 반환받옴
                                             // 반환받은 결제번호로 결제확인 페이지로 이동
                                             location.href ='/pay/payInfo/'+parseInt(paymentId)+'/'+memberId;
-                                        },
-                                        error:function(e) {
-                                            console.log('결제정보 저장 실패');
                                         }
-
                                     }); // ajax
 
-                                }else{
-                                    console.log("에약 실패");
                                 }
-                            }, // success
-                            error:function(e){
-                                console.log(e);
-                                console.log("Insert ajax 통신 실패!!!");
-                            } // error
+                            } // success
                         }) // ajax
 
 

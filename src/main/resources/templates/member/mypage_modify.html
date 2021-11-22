@@ -234,8 +234,6 @@
             })
             .then(response => response.text())
             .then(response => {
-            console.log(response);
-            console.log(changeImg);
                 changeImg.setAttribute('src', response);
                 navProfileImg.setAttribute('src', response);
             });

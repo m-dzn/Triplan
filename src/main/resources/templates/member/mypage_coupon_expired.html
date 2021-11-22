@@ -81,8 +81,6 @@
                     return response.json();
                 }
             }).then(memberCouponList => {
-                console.log(memberCouponList)
-
                 var memberCouponTBody = couponTable.getElementsByTagName("tbody")[0];
                 memberCouponTBody.innerHTML = memberCouponList.map(memberCoupon => {
                     return `<tr>`
