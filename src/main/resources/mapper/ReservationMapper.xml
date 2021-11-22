@@ -192,7 +192,8 @@
             JOIN item_schedule isc    ON  (isc.item_schedule_id = ri.item_schedule_id)
             JOIN item it              ON  (isc.item_id = it.item_id)
             JOIN item_group ig        ON  (it.item_group_id = ig.item_group_id)
-        WHERE   member_id = #{memberId}
+        WHERE   r.member_id = #{memberId}
+        GROUP BY r.res_id
         ORDER BY r.start_date DESC
         LIMIT #{startRow}, #{pageSize}
     </select>
