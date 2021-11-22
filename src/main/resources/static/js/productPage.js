@@ -20,6 +20,13 @@ var product = {
         this.currentPage = url.searchParams.get("currentPage") || 1;
         this.sortType = url.searchParams.get("sortType") || "";
         this.tags = url.searchParams.get("tags") || "";
+        this.start = url.searchParams.get("startDate") || moment().format(DATE_FORMAT_KOR);
+        this.end = url.searchParams.get("endDate") || moment().add(7, 'd').format(DATE_FORMAT_KOR);
+
+        if (moment(this.start).isAfter(this.end)) {
+            this.end = moment(this.start).add(1, 'd').format(DATE_FORMAT_KOR);
+        }
+
 
         this.fetchProductList.bind(this);
         this.onClickSortBtn.bind(this);
@@ -64,7 +71,9 @@ var product = {
         // 다중 날짜 선택용
         $(() => {
             $('input[name="prodetCalender"]').daterangepicker({
-                "locale": {
+                startDate: this.start,
+                endDate: this.end,
+                locale: {
                     "format": "YYYY-MM-DD",
                     "separator": " ~ ",
                     "applyLabel": "확인",

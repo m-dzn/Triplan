@@ -84,8 +84,8 @@ var productDetail = {
         // 다중 날짜 선택용
         $(() => {
             $('input[name="prodetCalender"]').daterangepicker({
-                startDate: this.start,
-                endDate: this.end,
+                startDate: this.start || moment(),
+                endDate: this.end || moment().add(1, 'd'),
                 locale: {
                     "format": "YYYY-MM-DD",
                     "separator": " ~ ",
