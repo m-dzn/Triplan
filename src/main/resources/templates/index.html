@@ -5,45 +5,56 @@
 
 <div layout:fragment="content">
     <section class="margin-section">
-        <th:block th:replace="fragment/title :: title_2('인기 카테고리')"></th:block>
+        <th:block th:replace="fragment/title :: title_2('새로운 상품 카테고리')"></th:block>
 
-            <div class="testSlick"  >
+        <div class="testSlick" >
 
-                <th:block th:replace="fragment/card :: card('인기 카테고리1')"></th:block>
-                <th:block th:replace="fragment/card :: card('인기 카테고리2')"></th:block>
-                <th:block th:replace="fragment/card :: card('인기 카테고리3')"></th:block>
-                <th:block th:replace="fragment/card :: card('인기 카테고리4')"></th:block>
-                <th:block th:replace="fragment/card :: card('인기 카테고리5')"></th:block>
-
-                <th:block th:replace="fragment/card :: card('인기 카테고리6')"></th:block>
-                <th:block th:replace="fragment/card :: card('인기 카테고리7')"></th:block>
-                <th:block th:replace="fragment/card :: card('인기 카테고리8')"></th:block>
-                <th:block th:replace="fragment/card :: card('인기 카테고리9')"></th:block>
-                <th:block th:replace="fragment/card :: card('인기 카테고리10')"></th:block>
-                <th:block th:replace="fragment/card :: card('인기 카테고리11')"></th:block>
-                <th:block th:replace="fragment/card :: card('인기 카테고리12')"></th:block>
-
+            <div class="card" id="card1" th:fragment="card(text)">
+                <a href="product">
+                    <img src="img/서면.jpg" class="card-img-top" id="card-img" style="height: 240px;" alt="...">
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                        <div class="row">
+                            <h5 class="card-title" style="text-align: center;" th:text='새로운'></h5>
+                        </div>
+                    </div>
+                </a>
             </div>
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리2')"></th:block>
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리3')"></th:block>
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리4')"></th:block>
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리5')"></th:block>
+
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리6')"></th:block>
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리7')"></th:block>
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리8')"></th:block>
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리9')"></th:block>
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리10')"></th:block>
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리11')"></th:block>
+            <th:block th:replace="fragment/card :: card('새로운 상품 카테고리12')"></th:block>
+
+        </div>
 
         <script>
         $('.testSlick').slick({
         infinite: true,
         slidesToShow: 6,
-        slidesToScroll: 6
+        slidesToScroll: 6,
+            prevArrow: '<a class="slick-prev" href="#"><img class="slickButton" th:src="@{/img/wblleft.png}" src="img/wblleft.png"></a>',
+            nextArrow: '<a class="slick-next" href="#"><img class="slickButton" th:src="@{/img/wblright.png}" src="img/wblright.png"></a>'
         });
         </script>
 
-<!--        <input id="heart" type="checkbox" th:fragment="heart">-->
-<!--        <label for="heart">🖤</label>-->
+        <!--        <input id="heart" type="checkbox" th:fragment="heart">-->
+        <!--        <label for="heart">🖤</label>-->
         <!--❤🧡💛💚💙💜🖤-->
-<!--        <th:block th:replace="fragment/starPoint :: star_2"></th:block>-->
-<!--        <div class="d-flex">-->
-<!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
-<!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
-<!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
-<!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
-<!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
-<!--        </div>-->
+        <!--        <th:block th:replace="fragment/starPoint :: star_2"></th:block>-->
+        <!--        <div class="d-flex">-->
+        <!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
+        <!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
+        <!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
+        <!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
+        <!--            <th:block th:replace="fragment/card :: card('인기 카테고리')"></th:block>-->
+        <!--        </div>-->
     </section>
     <section class="margin-section">
         <th:block th:replace="fragment/banner :: banner"></th:block>
@@ -69,9 +80,51 @@
             $('.testSlick_2').slick({
                 infinite: true,
                 slidesToShow: 5,
-                slidesToScroll: 5
+                slidesToScroll: 5,
+                prevArrow: '<a class="slick-prev" href="#"><img class="slickButton" th:src="@{/img/wblleft.png}" src="img/wblleft.png"></a>',
+                nextArrow: '<a class="slick-next" href="#"><img class="slickButton" th:src="@{img/wblright.png}" src="img/wblright.png"></a>'
             });
         </script>
     </section>
 </div>
 </html>
+
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
+<script type="javascript">
+    var card-img = [${item_img}]; //새로운 상품 사진
+    var detail-card-img = [${detail_img}]; //인기 상품 사진
+
+    var card1;
+    var card2;
+    var heart1;
+    var heart2;
+
+    var itemGroupId = [${itemGroup.itemGroupId}];
+
+    var createdAt = ${itemGroup.createdAt};
+
+     console.log("itemGroupId");
+
+     $(document).ready(function () {
+            $.ajax({
+                url: '/api/item-groups/' + itemGroupId,
+                type: 'GET',
+                contentType: 'application/json;charset=utf-8',
+                success: function(data) {
+                    for(var i = 0; i < 12; i++){
+                    $('#card-img').attr('src', '/img/해운대.jpg');
+                    }
+                },
+
+                error:function(e) {
+                    console.log('api/item-group 불러오기 실패');
+                }
+
+            }); // ajax
+
+
+      });// read
+
+</script>
