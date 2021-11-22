@@ -14,7 +14,7 @@ public interface QuestionService {
     
     void delete(Integer questionId, Integer memberId);
 
-    Pagination<QuestionVO> listFromCustomerToAdmin(Integer pageSize, Integer currentPage);
+    Pagination<QuestionDTO> listFromCustomerToAdmin(Integer pageSize, Integer currentPage);
 
     Pagination<QuestionDTO> listByItemGroupId(Integer pageSize, Integer currentPage, Integer itemGroupId);
 

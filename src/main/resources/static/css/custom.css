@@ -13,6 +13,12 @@
   border-color: var(--primary);
 }
 
+.button_solid {
+  /* 배경색이 있는 버튼 */
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
 textarea {
   resize: none;
 }
