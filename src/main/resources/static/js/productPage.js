@@ -107,7 +107,7 @@ var product = {
                 const productCardList = [];
 
                 pagination.list.forEach((itemGroup, idx) => {
-                    var itemGroupCardHTML = `<a class=" margin-window margin-top-16" href="prodet?itemGroupId=${itemGroup.itemGroupId}" th:fragment="thumbnail_Card_a">
+                    var itemGroupCardHTML = `<a class=" margin-window margin-top-16" href="prodet?itemGroupId=${itemGroup.itemGroupId}${this.start ? `&startDate=${this.start}` : ``}${this.end ? `&endDate=${this.end}` : ``}" th:fragment="thumbnail_Card_a">
                         <div class="row border bg-white rounded-3 border-2">
 
                             <div class="col-auto p-0">
