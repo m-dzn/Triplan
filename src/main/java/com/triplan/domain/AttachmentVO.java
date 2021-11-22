@@ -57,8 +57,12 @@ public class AttachmentVO {
         return serverFileName + "." + fileExtension;
     }
 
+    public String getPathAndFileName() {
+        return uploadPath+"/"+ getUUIDAndExt();
+    }
+
     public String getUrl() {
-        return RESOURCES_COMMON_URL + uploadPath+"/"+serverFileName+"."+fileExtension;
+        return RESOURCES_COMMON_URL + getPathAndFileName();
     }
 
 }
