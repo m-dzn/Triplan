@@ -23,7 +23,7 @@ var loginPage = {
             contentType: 'application/json',
             data: JSON.stringify(loginForm),
             success: (msg) => {
-                history.back();
+                location.href = "/";
             }
         })
     }
