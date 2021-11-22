@@ -3,7 +3,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 
 /* css */
+*::-webkit-scrollbar {
+    display: none;
+}
+
 #button_solid {
+  /* 배경색이 있는 버튼 */
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.button_solid {
   /* 배경색이 있는 버튼 */
   background-color: var(--primary);
   border-color: var(--primary);
@@ -11,6 +21,51 @@
 
 textarea {
   resize: none;
+}
+
+#couponTable td{
+  border: 1px;
+  border-style: solid;
+  border-color: lightgray
+}
+
+#couponTable > thead > tr {
+  font-weight: bold;
+  background-color : #FAFAFA;
+}
+
+#couponTable td:first-child {
+  border-left: none;
+}
+
+#couponTable td:last-child {
+  border-right: none;
+}
+td:first-child{
+  border-left: none;
+}
+
+tdtd:last-child{
+  border-left: none;
+}
+
+#itemGroupQnaTable td{
+  border: 1px;
+  border-style: solid;
+  border-color: lightgray
+}
+
+#itemGroupQnaTable > thead > tr {
+  font-weight: bold;
+  background-color : #FAFAFA;
+}
+
+#itemGroupQnaTable > * > td:first-child {
+  border-left: none;
+}
+
+#itemGroupQnaTable > * > td:last-child {
+  border-right: none;
 }
 
 #button_solid:hover {
@@ -102,7 +157,7 @@ h1::before{ /* 추가요소::before */
   border-right: none;
 }
 
-#qnaTable tr:nth-of-type(1) {
+#qnaTable > tr:nth-of-type(1) {
   background-color : #FAFAFA;
 }
 
@@ -446,7 +501,7 @@ h1::before{ /* 추가요소::before */
 }
 
 #topBtn {
-  top: 81%;
+  top: 47%;
   left: 97%;
   width: 40px;
   height: 40px;
@@ -454,7 +509,7 @@ h1::before{ /* 추가요소::before */
   z-index: 2;
 }
 #bottomBtn {
-  top: 86%;
+  top: 53%;
   left: 97%;
   width: 40px;
   height: 40px;

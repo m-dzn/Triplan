@@ -1,6 +1,7 @@
 package com.triplan.service;
 
 import com.triplan.domain.cs.QuestionVO;
+import com.triplan.domain.member.MemberVO;
 import com.triplan.dto.response.Pagination;
 import com.triplan.dto.response.customer.QuestionDTO;
 import com.triplan.exception.AccessNotAllowedException;
@@ -45,9 +46,15 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Pagination<QuestionVO> listFromCustomerToAdmin(Integer pageSize, Integer currentPage) {
+    public Pagination<QuestionDTO> listFromCustomerToAdmin(Integer pageSize, Integer currentPage) {
         Integer startRow = (currentPage - 1) * pageSize;
-        List<QuestionVO> list = questionMapper.listFromCustomerToAdmin(startRow, pageSize);
+
+        List<QuestionDTO> list = questionMapper.listFromCustomerToAdmin(startRow, pageSize)
+                .stream().map(questionVO -> {
+                    MemberVO memberVO = memberMapper.select(questionVO.getMemberId());
+                    return QuestionDTO.of(questionVO, memberVO);
+                }).collect(Collectors.toList());
+
         Integer count = questionMapper.countFromCustomerToAdmin();
         return new Pagination<>(pageSize, currentPage, count, list);
     }

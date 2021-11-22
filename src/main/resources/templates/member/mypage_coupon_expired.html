@@ -11,7 +11,7 @@
 <!--            <th:block th:replace="fragment/myPage :: mypage_bottom"></th:block>-->
         </section>
         <section class="col-9">
-            <th:block th:replace="fragment/myPage :: coupon_expired"></th:block>
+            <!--            <th:block th:replace="fragment/myPage :: coupon_expired"></th:block>-->
             <div    th:fragment="coupon_expired"
                     class="border bg-white rounded-3 border-2 margin-title padding-16">
 
@@ -51,15 +51,17 @@
                         <thead>
                         <tr>
                             <td>쿠폰명</td>
-                            <td>할인 금액</td>
-                            <td>유효 기간</td>
+                            <td style="width: 11%;white-space: nowrap">할인 금액</td>
+                            <td style="width: 16%;white-space: nowrap">유효 기간</td>
                         </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
                 </div>
+
             </div><!--프로필 관리 창-->
+
         </section>
     </div>
 
@@ -79,8 +81,6 @@
                     return response.json();
                 }
             }).then(memberCouponList => {
-                console.log(memberCouponList)
-
                 var memberCouponTBody = couponTable.getElementsByTagName("tbody")[0];
                 memberCouponTBody.innerHTML = memberCouponList.map(memberCoupon => {
                     return `<tr>`

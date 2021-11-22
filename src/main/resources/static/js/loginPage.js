@@ -15,8 +15,6 @@ var loginPage = {
             password: this.loginForm.find("[name=password]").val()
         }
 
-        console.log(loginForm);
-
         $.ajax({
             url: `${BASE_URL}/api/members/login`,
             type: 'POST',

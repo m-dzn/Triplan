@@ -1,11 +1,18 @@
 var product = {
-    productCardList: [],
     productCardContainer: $("#productCardContainer"),
     productPaginationGroup: $("#productPaginationGroup"),
+    overPriceInput: $("#overPrice"),
+    underPriceInput: $("#underPrice"),
     pageSize: '',
     currentPage: '',
     sortType: '',
     tags: '',
+
+    start: null,
+    end: null,
+    sortType: null,
+    overPrice: null,
+    underPrice: null,
 
     init: function() {
         var url = new URL(location.href);
@@ -13,22 +20,102 @@ var product = {
         this.currentPage = url.searchParams.get("currentPage") || 1;
         this.sortType = url.searchParams.get("sortType") || "";
         this.tags = url.searchParams.get("tags") || "";
+        this.start = url.searchParams.get("startDate") || moment().format(DATE_FORMAT_KOR);
+        this.end = url.searchParams.get("endDate") || moment().add(7, 'd').format(DATE_FORMAT_KOR);
 
-        var startDate = url.searchParams.get("startDate");
+        if (moment(this.start).isAfter(this.end)) {
+            this.end = moment(this.start).add(1, 'd').format(DATE_FORMAT_KOR);
+        }
 
+
+        this.fetchProductList.bind(this);
+        this.onClickSortBtn.bind(this);
+
+        this.fetchProductList();
+        this.overPriceInput.blur((event) => {
+            this.overPrice = event.target.value;
+            this.fetchProductList();
+        });
+        this.underPriceInput.blur((event) => {
+            this.underPrice = event.target.value;
+            this.fetchProductList();
+        });
+        $("button[name=sort]").click((event) => this.onClickSortBtn(event));
+
+         // 단일 날짜 선택용
+        $(() => {
+            $('input[name="prodetCalender"]').daterangepicker({
+                "locale": {
+                    "format": "YYYY-MM-DD",
+                    "separator": " ~ ",
+                    "applyLabel": "확인",
+                    "cancelLabel": "취소",
+                    "fromLabel": "From",
+                    "toLabel": "To",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "W",
+                    "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
+                    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                    "firstDay": 1
+                },
+                showDropdowns: true,
+                singleDatePicker: true,
+                showDropdowns: true,
+                minYear: 2020,
+                maxYear: 2099
+            }, (start, end, label) => {
+                var years = moment().diff(start, 'years');
+            });
+        });
+
+        // 다중 날짜 선택용
+        $(() => {
+            $('input[name="prodetCalender"]').daterangepicker({
+                startDate: this.start,
+                endDate: this.end,
+                locale: {
+                    "format": "YYYY-MM-DD",
+                    "separator": " ~ ",
+                    "applyLabel": "확인",
+                    "cancelLabel": "취소",
+                    "fromLabel": "From",
+                    "toLabel": "To",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "W",
+                    "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
+                    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                    "firstDay": 6
+                },
+                "drops": "down"
+            }, (start, end, label) => {
+                this.start = start.format('YYYY-MM-DD');
+                this.end = end.format('YYYY-MM-DD');
+
+                this.fetchProductList();
+            });
+        });
+    },
+
+    onClickSortBtn: function(event) {
+        this.sortType = event.target.value;
         this.fetchProductList();
     },
 
     fetchProductList: function() {
+        var queryParams = `${this.start ? `&startDate=${this.start}` : ``}${this.end ? `&endDate=${this.end}` : ``}` +
+                           `${this.overPrice ? `&overPrice=${this.overPrice}` : ``}${this.underPrice ? `&underPrice=${this.underPrice}` : ``}` +
+                           `${this.tags ? `&tags=${this.tags}` : ``}`;
+
         $.ajax({
             type: "GET",
-            url: `${BASE_URL}/api/item-groups/filter?pageSize=${this.pageSize}&currentPage=${this.currentPage}&sortType=${this.sortType}&tags=${this.tags}`,
+            url: `${BASE_URL}/api/item-groups/filter?pageSize=${this.pageSize}&currentPage=${this.currentPage}&sortType=${this.sortType}${queryParams}`,
             dataType: 'json',
             success: (pagination) => {
-                console.log(pagination);
+                const productCardList = [];
+
                 pagination.list.forEach((itemGroup, idx) => {
-                    var itemGroupCardHTML = `<a href="prodet?itemGroupId=${itemGroup.itemGroupId}" th:fragment="thumbnail_Card_a">
-                        <div class="row border bg-white rounded-3 border-2 margin-window margin-top-16">
+                    var itemGroupCardHTML = `<a class=" margin-window margin-top-16" href="prodet?itemGroupId=${itemGroup.itemGroupId}${this.start ? `&startDate=${this.start}` : ``}${this.end ? `&endDate=${this.end}` : ``}" th:fragment="thumbnail_Card_a">
+                        <div class="row border bg-white rounded-3 border-2">
 
                             <div class="col-auto p-0">
                                 <img src="${itemGroup.itemImg}" class="" id="thumbnailCard-img" alt="...">
@@ -72,11 +159,11 @@ var product = {
                     var productCard = $(itemGroupCardHTML);
                     productCard.find(".wish").click(() => this.clickWishlist(itemGroup));
 
-                    this.productCardList.push(productCard.get(0));
+                    productCardList.push(productCard.get(0));
                 });
 
                 this.productCardContainer.empty();
-                this.productCardList.forEach(card => this.productCardContainer.append(card));
+                productCardList.forEach(card => this.productCardContainer.append(card));
 
                 // 페이지네이션
                 var pageBtnList = [];
@@ -107,6 +194,7 @@ var product = {
                     `</li>`
                 ).get(0));
 
+                this.productPaginationGroup.empty();
                 pageBtnList.forEach(pageBtn => this.productPaginationGroup.append(pageBtn));
             }
         });
@@ -131,6 +219,11 @@ var product = {
                 success: (msg) => {
                     this.productCardContainer.find(`#wish-label-${itemGroup.itemGroupId}`).text('♡');
                     itemGroup.liked = !itemGroup.liked;
+                },
+                error: () => {
+                    if (confirm("로그인하시겠습니까?")) {
+                        location.href = "/login";
+                    }
                 }
             });
         }

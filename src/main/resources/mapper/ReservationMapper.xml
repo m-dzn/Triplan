@@ -76,7 +76,7 @@
     <select id="checkCoupon" resultType="Integer">
         SELECT  count(*)
         FROM    coupon
-        WHERE   FORMATDATETIME(expired_at, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
+        WHERE   DATEDIFF(DAY, expired_at, CURRENT_TIMESTAMP) >= 0
           AND   coupon_id = (
                               SELECT    coupon_id
                               FROM      member_coupon
@@ -110,7 +110,7 @@
     <select id="checkExpiredCoupon" resultType="Integer">
         SELECT  count(*)
         FROM    coupon
-        WHERE   FORMATDATETIME(expired_at, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
+        WHERE   DATEDIFF(expired_at, NOW()) >= 0
           AND   coupon_id = (
                               SELECT  coupon_id
                               FROM    member_coupon
@@ -145,7 +145,7 @@
         SELECT      *
         FROM        reservation
         WHERE       member_id = #{member_id}
-          AND       FORMATDATETIME(start_date, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
+          AND       DATEDIFF(start_date, NOW()) >= 0
           AND       cancellation != 1
         ORDER BY    start_date desc
     </select>
@@ -154,7 +154,7 @@
         SELECT      *
         FROM        reservation
         WHERE       member_id = #{member_id}
-          AND       FORMATDATETIME(now(), 'yyyyMMdd') > FORMATDATETIME(start_date, 'yyyyMMdd')
+          AND       DATEDIFF(start_date, NOW()) &lt;= 0
           AND       cancellation != 1
         ORDER BY    start_date DESC
     </select>

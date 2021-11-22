@@ -7,13 +7,13 @@ import com.triplan.enumclass.member.RoleName;
 import com.triplan.mapper.AttachmentMapper;
 import com.triplan.mapper.member.MemberMapper;
 import com.triplan.mapper.member.RoleMapper;
+import com.triplan.security.MemberDetailsService;
 import com.triplan.service.inf.MemberService;
 import com.triplan.util.AttachmentUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
     private final RoleMapper roleMapper;
     private final AttachmentMapper attachmentMapper;
     private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
+    private final MemberDetailsService memberDetailsService;
 
     @Override
     @Transactional
@@ -55,13 +55,11 @@ public class MemberServiceImpl implements MemberService {
         memberVO.setMemberId(memberId);
         memberMapper.updateMypage(memberVO);
 
-        MemberVO updatedMemberVO = memberMapper.select(memberId);
-
-        Authentication oldAuth = SecurityContextHolder.getContext().getAuthentication();
-        Authentication newAuth = new UsernamePasswordAuthenticationToken(
-                oldAuth, oldAuth.getCredentials(), oldAuth.getAuthorities()
+        // 회원 정보 업데이트 후 Spring Security의 MemberPrincipal 객체를 함께 업데이트
+        UserDetails userDetails = memberDetailsService.loadUserById(memberId);
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities())
         );
-        SecurityContextHolder.getContext().setAuthentication(newAuth);
     }
 
     @Override
@@ -133,11 +131,10 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.updateBasicInfo(memberVO);
 
         // 회원 정보 업데이트 후 Spring Security의 MemberPrincipal 객체를 함께 업데이트
-        Authentication oldAuth = SecurityContextHolder.getContext().getAuthentication();
-        Authentication newAuth = new UsernamePasswordAuthenticationToken(
-                oldAuth, oldAuth.getCredentials(), oldAuth.getAuthorities()
+        UserDetails userDetails = memberDetailsService.loadUserById(memberId);
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities())
         );
-        SecurityContextHolder.getContext().setAuthentication(newAuth);
 
         return response;
     }

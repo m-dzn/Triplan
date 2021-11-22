@@ -1,3 +1,8 @@
+#itemGroupSummaryExplain,
+#itemGroupDetailExplain {
+    white-space: pre-line;
+}
+
 .review-avatar {
     width: calc(var(--unit)*48);
     height: calc(var(--unit)*48);

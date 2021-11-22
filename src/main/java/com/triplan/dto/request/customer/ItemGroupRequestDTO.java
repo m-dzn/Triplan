@@ -34,8 +34,8 @@ public class ItemGroupRequestDTO {
     private String addressDetail;
     private String itemImg;
     private String detailImg;
-    @PositiveOrZero
-    private Integer location;
+
+    private String location;
     @PositiveOrZero
     private Integer lat;
     @PositiveOrZero

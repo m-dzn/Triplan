@@ -84,7 +84,9 @@ var productDetail = {
         // 다중 날짜 선택용
         $(() => {
             $('input[name="prodetCalender"]').daterangepicker({
-                "locale": {
+                startDate: this.start || moment(),
+                endDate: this.end || moment().add(1, 'd'),
+                locale: {
                     "format": "YYYY-MM-DD",
                     "separator": " ~ ",
                     "applyLabel": "확인",
@@ -163,9 +165,9 @@ var productDetail = {
                             <div class="col-auto">
                                 <span class="col-auto">1박 당 / ${item.pricePerDay.toLocaleString("ko-KR")}원</span>
                             </div>
-                            <div class="row d-flex justify-content-between align-items-end">
-                                <pre class="col-11">${item.explain}</pre>
-                                <form class="col-1">
+                            <div class="row d-flex margin-top-32 justify-content-between align-items-end">
+                                <pre class="col-auto">${item.explain}</pre>
+                                <form class="col-auto">
                                     <input type="hidden" name="총액" value="총액">
                                     <a href="pay?itemGroupId=${this.itemGroupId}&itemId=${item.itemId}&startDate=${this.start}&endDate=${this.end}&sellerId=${this.itemGroup.sellerId}" class="btn btn-primary col-auto" id="button_solid">바로 예약</a>
                                 </form>

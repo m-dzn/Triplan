@@ -5,8 +5,9 @@
 
 <div layout:fragment="content">
 <!--컨네이터 대체 div 끝 -->
-<img src="img/background.png" class="position-relative" style="opacity: 60%;width: 100%;height: 100%;"/>
-<div class="border position-absolute start-50 translate-middle bg-white rounded-3 border-2" style="top:35%;">
+
+    <img th:src="@{/img/background.png}" class="position-relative background-100" style="opacity: 60%;"/>
+<div class="padding-16 border position-absolute start-50 translate-middle bg-white rounded-3 border-2" style="top:500px;">
     <h3 class="fw-bold px-4 py-3">회원가입</h3>
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
@@ -51,7 +52,7 @@
         </span>
         </div>
         <div class="row d-flex justify-content-center my-2">
-            <input class="btn btn-primary col-auto my-2" id="joinBtn" type="submit" value="회원가입">
+            <input class="btn button-solid col-auto my-2" id="joinBtn" type="submit" value="회원가입">
         </div>
     </form>
 
