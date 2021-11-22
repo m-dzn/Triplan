@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.item.ItemMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="itemId">
+        INSERT INTO item (
+            name,
+            explain,
+            item_category,
+            base_stock,
+            sales_volume,
+            detail_img,
+            item_group_id
+        ) VALUES (
+            #{name},
+            #{explain},
+            #{itemCategory},
+            #{baseStock},
+            #{salesVolume},
+            #{detailImg},
+            #{itemGroupId}
+        )
+    </insert>
+
+    <select id="select" resultType="ItemVO">
+        SELECT  *
+        FROM    item
+        WHERE   item_id = #{itemId}
+    </select>
+
+    <update id="update" useGeneratedKeys="true" keyProperty="itemId">
+        UPDATE  item
+        SET
+                name            = IFNULL(     #{name},            name            ),
+                explain         = IFNULL(     #{explain},         explain         ),
+                item_category   = IFNULL(     #{itemCategory},    item_category   ),
+                base_stock      = IFNULL(     #{baseStock},       base_stock      ),
+                sales_volume    = IFNULL(     #{salesVolume},     sales_volume    ),
+                detail_img      = IFNULL(     #{detailImg},       detail_img      ),
+                item_group_id   = IFNULL(     #{itemGroupId},     item_group_id   ),
+                updated_at       = CURRENT_TIMESTAMP <!-- BaseVO를 상속 받은 테이블에 들어가는 공통 구문 -->
+        WHERE
+                item_id         = #{itemId}
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM    item
+        WHERE   item_id = #{itemId}
+    </delete>
+
+    <select id="getItemByItemId" parameterType="map" resultType="ItemVO">
+        SELECT *
+          FROM item
+         WHERE item_id = #{itemId} AND item_category = #{room}
+    </select>
+
+    <select id="getItemByItemGroupId" resultType="ItemVO">
+        SELECT *
+        FROM item
+        WHERE item_group_id = #{itemGroupId}
+    </select>
+
+    <select id="getItemId" resultType="Integer">
+        SELECT MAX(item_id) as item_id
+          FROM item
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT  COUNT(*)
+        FROM    item
+        WHERE   item_group_id IN (  SELECT  item_group_id
+                                    FROM    item_group
+                                    WHERE   seller_id = #{sellerId} )
+    </select>
+
+    <select id="getItemList" resultType="ItemVO">
+        SELECT *
+        FROM   item
+        WHERE  item_id = #{itemId}
+    </select>
+
+    <select id="getItemBySellerId" resultType="ItemVO">
+        SELECT name, sales_volume
+        FROM   item
+        WHERE  item_group_id IN (   SELECT seller_id
+                                    FROM   item_group
+                                    WHERE  seller_id = #{sellerId} )
+        ORDER BY sales_volume DESC
+    </select>
+
+    <update id="updateByItemGroupId">
+        UPDATE item
+           SET item_group_id = #{itemGroupId}
+         WHERE item_group_id = #{itemGroupId}
+    </update>
+
+    <select id="getItemRoomBySellerId" resultType="ItemVO">
+        SELECT *
+          FROM item
+         WHERE item_category = #{room}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+        ORDER BY created_at DESC
+         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+
+    </select>
+
+    <select id="getItemFlightBySellerId" resultType="ItemVO">
+        SELECT *
+          FROM item
+         WHERE item_category = #{flight}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+        ORDER BY created_at DESC
+         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="countRoom" resultType="Integer">
+        SELECT count(*)
+          FROM item
+         WHERE item_category = #{room}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+
+    </select>
+
+    <select id="countFlight" resultType="Integer">
+        SELECT count(*)
+        FROM item
+        WHERE item_category = #{flight}
+        AND  item_group_id IN ( SELECT item_group_id
+                                FROM   item_group
+                                WHERE  seller_id = #{sellerId} )
+
+    </select>
+
+    <select id="getItemVOList" resultType="ItemVO">
+        SELECT *
+        FROM item
+        WHERE item_category = #{room}
+    </select>
+
+    <select id="getItemsByItemGroupId" resultType="com.triplan.dto.response.customer.RoomCardResponseDTO">
+        <![CDATA[
+            SELECT *
+            FROM item
+            JOIN (
+                SELECT
+                    item_id,
+                    MIN(start_date) start_date,
+                    AVG(price) price_per_day,
+                    AVG(discount_price) discount_per_day,
+                    SUM(price) total_price,
+                    SUM(discount_price) total_discount_price
+                FROM    item_schedule
+                WHERE   DATEDIFF(DAY, start_date, #{startDate}) <= 0
+                  AND   DATEDIFF(DAY, end_date, #{endDate}) >= 0
+                GROUP BY item_id
+            ) USING (item_id)
+            WHERE   item_group_id = #{itemGroupId}
+        ]]>
+    </select>
+
+</mapper>

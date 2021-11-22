@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.item.PaymentMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="paymentId">
+        INSERT INTO payment (
+            type,
+            total_payment,
+            account_bank,
+            account_number,
+            payment_deadline,
+            state,
+            res_id,
+            paid_at
+        ) VALUES (
+            #{type},
+            #{totalPayment},
+            #{accountBank},
+            #{accountNumber},
+            #{paymentDeadline},
+            #{state},
+            #{resId},
+            #{paidAt}
+        )
+    </insert>
+
+    <select id="select" resultType="PaymentVO">
+        SELECT  *
+        FROM    payment
+        WHERE   payment_id = ${paymentId}
+    </select>
+
+    <update id="update">
+        UPDATE  payment
+        SET
+                type                = IFNULL(   #{type},                type                ),
+                total_payment       = IFNULL(   #{totalPayment},        total_payment       ),
+                payment_deadline    = IFNULL(   #{paymentDeadline},     payment_deadline    ),
+                state               = IFNULL(   #{state},               state               ),
+                updated_at          = CURRENT_TIMESTAMP <!-- BaseVO를 상속 받은 테이블에 들어가는 공통 구문 -->
+        WHERE
+                payment_id          = ${paymentId}
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM    payment
+        WHERE   payment_id = ${paymentId}
+    </delete>
+
+    <select id="getYearPayment" resultType="Long">
+        <![CDATA[
+            SELECT  IFNULL(SUM(total_payment), 0)
+            FROM    payment p JOIN reservation r
+            ON      p.res_id = r.res_id
+            WHERE   r.member_id = #{memberId}
+              AND   ABS(DATEDIFF(MONTH, paid_at, current_timestamp)) <= 12;
+        ]]>
+
+    </select>
+
+    <select id="getPaymentBySellerId" resultType="PaymentVO">
+        SELECT sum(total_payment) total_payment, FORMATDATETIME(paid_at, 'yyyy-MM-dd') paid_at
+        FROM   payment
+        WHERE  paid_at > (NOW() - INTERVAL 7 DAY)
+        AND    res_id IN (SELECT res_id
+                          FROM reservation
+                          WHERE seller_id = #{seller_id})
+        GROUP BY FORMATDATETIME(paid_at, 'yyyy-MM-dd');
+    </select>
+
+    <select id="getNameByItem" resultType="String">
+        SELECT name
+        FROM item
+        WHERE item_id  = #{itemId}
+    </select>
+
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.member.MemberMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="memberId">
+        INSERT INTO member (
+            email,
+            password,
+            nickname,
+            profile_img
+            <if test="provider != null">, provider</if>
+        ) VALUES (
+            #{email},
+            #{password},
+            #{nickname},
+            #{profileImg}
+            <if test="provider != null">, #{provider}</if>
+        )
+    </insert>
+
+    <select id="select" resultType="MemberVO">
+        SELECT  *
+        FROM    member
+        WHERE   member_id = ${memberId}
+    </select>
+
+    <update id="update">
+        UPDATE  member
+        SET
+        nickname    = IFNULL(   #{nickname},    nickname    ),
+        grade       = IFNULL(   #{grade},       grade       ),
+        profile_img = IFNULL(   #{profileImg},  profile_img ),
+        point       = IFNULL(   #{point},       point       ),
+        account     = IFNULL(   #{account},     account     ),
+        updated_at  = CURRENT_TIMESTAMP <!-- BaseVO를 상속 받은 테이블에 들어가는 공통 구문 -->
+        WHERE
+        member_id   = #{memberId}
+    </update>
+
+    <update id="updateBasicInfo">
+        UPDATE  member
+        SET
+        nickname    = IFNULL(   #{nickname},     nickname    ),
+        profile_img = IFNULL(   #{profileImg},   profile_img   )
+        WHERE
+        member_id = ${memberId}
+    </update>
+
+    <update id="updateEmail">
+        UPDATE  member
+        SET
+        email           = IFNULL(  #{email},        email           ),
+        email_confirm   = IFNULL( #{emailConfirm},  email_confirm   )
+        WHERE
+        member_id = ${memberId}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE  member
+        SET
+        password = IFNULL(  #{password}, password  )
+        WHERE
+        member_id = ${memberId}
+    </update>
+
+    <update id="updateMypage">
+        UPDATE  member
+        SET
+        nickname = IFNULL(  #{nickname},     nickname    ),
+        email    = IFNULL(  #{email},        email        ),
+        password = IFNULL(  #{password}, password  )
+        WHERE
+        member_id = ${memberId}
+    </update>
+
+
+    <update id="delete">
+        UPDATE  member
+        SET
+        state       = 'UNREGISTER',
+        deleted_at  = CURRENT_TIMESTAMP
+        WHERE   member_id   = #{memberId}
+    </update>
+
+    <select id="emailCheck" resultType="boolean"> <!-- 값 => 존재o:true/ 존재x:false -->
+        SELECT  CASEWHEN(COUNT(*) = 1, 1, 0)
+        FROM    member
+        WHERE   email = #{email}
+    </select>
+
+    <select id="nicknameCheck" resultType="boolean">
+        SELECT  CASEWHEN(COUNT(*) = 1, 1, 0)
+        FROM    member
+        WHERE   nickname = #{nickname}
+    </select>
+
+    <update id="updateGrade">
+        <![CDATA[
+            UPDATE  member
+            SET     grade = (
+                    SELECT  grade
+                    FROM    grade
+                    WHERE   min_payment <= #{totalPayment}
+                      AND   max_payment >= #{totalPayment})
+            WHERE   member_id = #{memberId}
+        ]]>
+    </update>
+
+    <select id="selectByEmail" resultType="MemberVO">
+        SELECT  *
+        FROM    member
+        WHERE   email = #{email}
+    </select>
+
+</mapper>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layoutFooX">
+
+<div layout:fragment="content">
+<!--컨네이터 대체 div 끝 -->
+<img src="img/background.png" class="position-relative" style="opacity: 60%;width: 100%;height: 100%;"/>
+<div class="border position-absolute start-50 translate-middle bg-white rounded-3 border-2" style="top:35%;">
+    <h3 class="fw-bold px-4 py-3">회원가입</h3>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <a href="/oauth2/authorization/naver"><img src="img/oauth-naver.png" class="oauth-btn"></a>
+            <a href="/oauth2/authorization/kakao"><img src="img/oauth-kakao.png" class="oauth-btn ms-1"></a>
+            <a href="/oauth2/authorization/facebook"><img src="img/oauth-facebook.png" class="oauth-btn ms-1"></a>
+            <a href="/oauth2/authorization/google"><img src="img/oauth-google.png" class="oauth-btn ms-1"></a>
+        </div>
+    </div>
+    <h6 class="text-center my-3" style="color:gray;">또는</h6>
+    <form name="joinForm"><!--회원가입 액션 실행할 파일이랑 연결시켜주세요-->
+        <input
+                class="form-control mb-2 rounded-3"
+                style="width:200px; margin: auto;"
+                id="nickname"
+                type="text"
+                aria-label="nickname"
+                placeholder="닉네임"
+        />
+        <input
+                class="form-control mb-2 rounded-3"
+                style="width:200px; margin: auto;"
+                id="email"
+                type="text"
+                aria-label="email"
+                placeholder="이메일"
+        />
+        <input
+                class="form-control mb-2 rounded-3"
+                style="width:200px; margin: auto;"
+                id="password"
+                type="password"
+                aria-label="password"
+                placeholder="비밀번호"
+        />
+        <div class="row d-flex justify-content-between mt-3">
+        <span class="mx-2 col-auto">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+          약관&정책에 동의합니다.
+          </label>
+        </span>
+        </div>
+        <div class="row d-flex justify-content-center my-2">
+            <input class="btn btn-primary col-auto my-2" id="joinBtn" type="submit" value="회원가입">
+        </div>
+    </form>
+
+</div>
+</div>
+<th:block layout:fragment="script">
+    <script src="/js/joinPage.js"></script>
+</th:block>
+</html>

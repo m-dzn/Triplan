@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <table>
+        <tr>
+            <td>글번호</td>
+            <td id="qno"></td>
+            <td>작성일</td>
+            <td id="createdAt"></td>
+        </tr>
+        <tr>
+            <td>제목</td>
+            <td id="questionTitle" colspan="3"></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td id="questionContent" colspan="3"></td>
+        </tr>
+    </table>
+    <button><a id="updateQuestionBtn">글 수정</a></button>
+    <button id="deleteQuestionBtn">글 삭제</button>
+</div>
+<th:block layout:fragment="script">
+    <script src="/js/qnaDetailPage.js"></script>
+</th:block>
+</html>

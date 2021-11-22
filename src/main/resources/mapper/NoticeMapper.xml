@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.cs.NoticeMapper">
+
+    <insert id="insert">
+        INSERT INTO notice(
+            title,
+            content
+        ) VALUES (
+            #{title},
+            #{content}
+        )
+    </insert>
+
+    <select id="select" resultType="NoticeVO">
+        SELECT  *
+        FROM    notice
+        WHERE   notice_id = #{noticeId}
+    </select>
+
+    <update id="update">
+        UPDATE  notice
+        SET
+                title   = IFNULL(   #{title},       title       ),
+                content = IFNULL(   #{content},     content     )
+        WHERE
+                notice_id = #{noticeId}
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM    notice
+        WHERE   notice_id = #{noticeId}
+    </delete>
+
+    <select id="noticeList" resultType="NoticeVO">
+        SELECT  *
+        FROM    notice
+        WHERE   noticeTarget = #{noticeTarget}
+        ORDER BY created_at DESC
+        LIMIT   (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="Integer">
+        SELECT  count(*)
+        FROM    notice
+        WHERE   noticeTarget = #{noticeTarget}
+    </select>
+
+</mapper>

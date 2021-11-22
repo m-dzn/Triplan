@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.item.ReservationMapper">
+
+     <insert id="insert" useGeneratedKeys="true" keyProperty="resId">
+         INSERT INTO reservation (
+            item_category,
+            total_price,
+            start_date,
+            end_date,
+            name,
+            phone,
+            total_discount_price,
+            member_id,
+            seller_id
+         ) VALUES (
+            #{itemCategory},
+            #{totalPrice},
+            #{startDate},
+            #{endDate},
+            #{name},
+            #{phone},
+            #{totalDiscountPrice},
+            #{memberId},
+            #{sellerId}
+         )
+    </insert>
+
+    <select id="select" resultType="ReservationVO">
+        SELECT  *
+        FROM    reservation
+        WHERE   res_id = #{resId}
+    </select>
+
+    <!--메인페이지 예약건수 조회-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT  count(res_id)
+        FROM    reservation
+        WHERE   seller_id = #{sellerId}
+    </select>
+
+
+    <update id="update">
+        UPDATE  reservation
+        SET
+                item_category           = IFNULL(   #{itemCategory},        item_category           ),
+                total_price             = IFNULL(   #{totalPrice},          total_price             ),
+                start_date              = IFNULL(   #{startDate},           start_date              ),
+                end_date                = IFNULL(   #{endDate},             end_date                ),
+                name                    = IFNULL(   #{name},                name                    ),
+                phone                   = IFNULL(   #{phone},               phone                   ),
+                total_discount_price    = IFNULL(   #{totalDiscountPrice},  total_discount_price    ),
+                seller_id               = IFNULL(   #{sellerId},            seller_id               ),
+                cancellation            = IFNULL(   #{cancellation},        cancellation            )
+        WHERE   res_id = #{resId}
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM    reservation
+        WHERE   res_id = #{resId}
+    </delete>
+
+    <insert id="insertResItem">
+        INSERT INTO reservation_item(
+            res_id,
+            item_schedule_id
+        ) VALUES (
+            #{resId},
+            #{itemScheduleId}
+        )
+    </insert>
+
+    <select id="checkCoupon" resultType="Integer">
+        SELECT  count(*)
+        FROM    coupon
+        WHERE   FORMATDATETIME(expired_at, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
+          AND   coupon_id = (
+                              SELECT    coupon_id
+                              FROM      member_coupon
+                              WHERE     member_coupon_id = #{memberCouponId}
+                            )
+    </select>
+
+    <select id="checkMemberCoupon" resultType="Integer">
+        SELECT  count(*)
+        FROM    member_coupon
+        WHERE   member_coupon_id = #{memberCouponId}
+          AND   usage1   != 1
+    </select>
+
+    <update id="useCoupon">
+        UPDATE  member_coupon
+        SET
+                usage1  = 1,
+                res_id  = #{resId},
+                used_at = CURRENT_TIMESTAMP
+        WHERE   member_coupon_id = #{memberCouponId}
+    </update>
+
+    <update id="cancel">
+        UPDATE  reservation
+        SET
+                cancellation = 1
+        WHERE   res_id = #{resId}
+    </update>
+
+    <select id="checkExpiredCoupon" resultType="Integer">
+        SELECT  count(*)
+        FROM    coupon
+        WHERE   FORMATDATETIME(expired_at, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
+          AND   coupon_id = (
+                              SELECT  coupon_id
+                              FROM    member_coupon
+                              WHERE   res_id = #{res_id}
+                            )
+    </select>
+
+    <update id="giveBackCoupon">
+        UPDATE  member_coupon
+        SET
+                usage1  =  0,
+                used_at = NULL,
+                res_id  = NULL
+        WHERE   res_id  = #{resId}
+          AND   member_id = #{memberId}
+    </update>
+    
+    <select id="myResList" resultType="ReservationVO">
+        SELECT      *
+        FROM        reservation
+        WHERE       member_id = #{memberId}
+          AND       cancellation != 1
+        ORDER BY    start_date desc
+    </select>
+
+<!--
+    날짜 형식 변환 비교
+    MySQL : SELECT date_format(now(),'%Y%m%d') FROM dual;
+    H2  : SELECT formatdatetime(now(), 'yyyyMMdd') FROM dual;
+-->
+    <select id="myUpcomingResList" resultType="ReservationVO">
+        SELECT      *
+        FROM        reservation
+        WHERE       member_id = #{member_id}
+          AND       FORMATDATETIME(start_date, 'yyyyMMdd') >= FORMATDATETIME(now(), 'yyyyMMdd')
+          AND       cancellation != 1
+        ORDER BY    start_date desc
+    </select>
+
+    <select id="myPastResList" resultType="ReservationVO">
+        SELECT      *
+        FROM        reservation
+        WHERE       member_id = #{member_id}
+          AND       FORMATDATETIME(now(), 'yyyyMMdd') > FORMATDATETIME(start_date, 'yyyyMMdd')
+          AND       cancellation != 1
+        ORDER BY    start_date DESC
+    </select>
+
+    <select id="myCancelledResList" resultType="ReservationVO">
+        SELECT      *
+        FROM        reservation
+        WHERE       member_id = #{member_id}
+          AND       cancellation = 1
+        ORDER BY    updated_at DESC
+    </select>
+
+    <!-- 페이징 처리-->
+    <select id="myPagedResList" resultType="com.triplan.dto.response.customer.ReservationDTO">
+        SELECT
+                r.res_id,
+                r.item_category,
+                r.total_price,
+                r.start_date,
+                r.end_date,
+                r.name,
+                r.phone,
+                r.total_discount_price,
+                r.created_at,
+                r.updated_at,
+                r.member_id,
+                r.seller_id,
+                r.cancellation,
+                p.paid_at,
+                p.state,
+                it.name as "iname",
+                ig.item_img
+        FROM    reservation r JOIN payment p            ON  (r.res_id = p.res_id)
+            JOIN reservation_item ri  ON  (r.res_id = ri.res_id)
+            JOIN item_schedule isc    ON  (isc.item_schedule_id = ri.item_schedule_id)
+            JOIN item it              ON  (isc.item_id = it.item_id)
+            JOIN item_group ig        ON  (it.item_group_id = ig.item_group_id)
+        WHERE   member_id = #{memberId}
+        ORDER BY r.start_date DESC
+        LIMIT (#{currentPage} -1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="Integer">
+        SELECT  COUNT(*)
+        FROM    reservation
+        WHERE   member_id = #{memberId}
+    </select>
+
+    <update id="updateStockByItemSchedule">
+        UPDATE  item_schedule
+        SET
+        stock = stock-1
+        WHERE   item_schedule_id  = #{itemScheduleId}
+    </update>
+
+    <update id="updateSalesVolumeByItem">
+        UPDATE item
+        SET sales_volume = sales_volume+1
+        WHERE item_id = (SELECT item_id FROM item_schedule WHERE item_schedule_id = #{itemScheduleId} )
+    </update>
+
+    <select id="getReservationByPaymentId" resultType="ReservationVO">
+        SELECT  *
+        FROM    reservation
+        WHERE   res_id = (
+                SELECT  res_id
+                FROM    payment
+                WHERE   payment_id = #{paymentId}
+        )
+    </select>
+
+</mapper>

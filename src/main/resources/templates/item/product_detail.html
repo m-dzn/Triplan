@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layoutFooX">
+
+<div layout:fragment="content">
+    <!--브레드 크럼-->
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb margin-top-8">
+            <li class="breadcrumb-item"><a href="product">예약</a></li>
+            <li class="breadcrumb-item"><a href="product">액티비티</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="itemGroupBreadCrumb">[특가 50% 진행중!] 아이티윌 강의실 입장권</li>
+        </ol>
+    </nav>
+    <!--브레드 크럼 끝-->
+
+    <div class="row">
+        <div class="col-9">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators" id="itemImgCarouselIndicator"></div>
+                <div class="carousel-inner" id="itemImgCarousel"></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="border bg-white rounded-3 border-2 margin-window-title margin-window">
+                <div class="row d-flex align-items-end">
+                    <span class="col-auto p-0 font-size-24 font-weight-bold margin-right-8">39,800원</span>
+                    <span class="col-auto p-0 color-gray">부터</span></div>
+<!--                <div class="row">(최대 13% 할인)</div>-->
+                <div class="row">
+                    <div class="row d-flex justify-content-center my-2">
+                        <div class="row">
+                            <button class="btn btn-primary col margin-bottom-8" id="button_solid">옵션 선택</button>
+                            </button>
+                        </div>
+
+                        <div class="row">
+                            <button class="btn btn-primary col" id="wishBtn">
+                                <span class="color-gray">♡</span><!--나중에 백엔드랑 연동해서 상품그룹이 위시리스트에 들어있으면 primary 컬러로 변경되게 하기-->
+                                찜하기
+                                <span id="itemGroupLikeCount">(0)</span>
+                            </button>
+                        </div>
+
+                        <form name="testForm" action="warning"><!--상품그룹id랑 회원id넘겨주는 액션 여기 매핑시켜주세요-->
+                            <input type="hidden" name="item_group_id" value="99">
+                            <input type="hidden" name="member_id" value="99">
+                        </form>
+
+                        <p id="demo"></p>
+
+                    </div>
+
+                </div>
+                <div class="row "><!--별점-->
+                    <div class="col-auto d-flex align-items-center">
+                        <img src="img/star-signature.png">
+                        <span class="margin-left-8">(3.96)</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="accordion margin-bottom-8" id="업체정보1">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="업체정보2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#업체정보3" aria-expanded="true" aria-controls="업체정보3"
+                                id="업체정보4">
+                            <div class="row m-0">아이티윌</div>
+                        </button>
+                    </h2>
+                    <div id="업체정보3" class="accordion-collapse collapse" aria-labelledby="업체정보2" data-bs-parent="#업체정보1">
+                        <div class="accordion-body">
+                            업체정보
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+<!--            <div class="border bg-white rounded-3 border-2 margin-window-title">-->
+<!--                <div class="row">업체 정보</div>-->
+<!--            </div>-->
+        </div>
+    </div>
+
+
+
+    <section class="margin-section">
+        <!--타이틀-->
+        <div class="row border-bottom">
+            <h1 class="font-size-32  col-auto" id="itemGroupTitle"></h1>
+        </div>
+
+        <!--옵션 태그-->
+        <div class="row border-bottom padding-detail-sector">
+            <div class="col-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
+                    <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path fill-rule="evenodd" d="M8 13.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
+                </svg>
+                <span>조건부 취소</span>
+            </div>
+            <div class="col-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                    <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+                </svg>
+                <span>모바일 티켓</span>
+            </div>
+        </div>
+
+
+        <!--간략 설명-->
+        <div class="row border-bottom padding-detail-sector">
+            <pre id="itemGroupSummaryExplain">요약 설명</pre>
+        </div>
+
+        <!--옵션 선택-->
+        <div class="row border-bottom padding-detail-sector d-flex justify-content-between">
+            <th:block th:replace="fragment/title :: title_3_noMargin('옵션 선택')"></th:block>
+
+            <div class="col-auto">
+                <form action="warning">
+                    <input type="text" name="prodetCalender" class="col-auto"/>
+                    <input class="btn btn-primary" id="button_outline" type="submit" value="조회">
+                </form>
+            </div>
+
+            <div id="itemCardContainer"></div>
+        </div><!--옵션 종료-->
+
+        <!--상세 설명-->
+        <div class="row border-bottom padding-detail-sector">
+            <th:block th:replace="fragment/title :: title_3_noMargin('상세 설명')"></th:block>
+            <pre id="itemGroupDetailExplain">상세 설명</pre>
+            <img src="img/광안리.jpg" id="itemGroupDetailImg">
+        </div>
+
+        <!--위치-->
+        <div class="row border-bottom padding-detail-sector">
+            <th:block th:replace="fragment/title :: title_3_noMargin('위치')"></th:block>
+
+            <!--위치 아코디언-->
+            <div class="accordion margin-bottom-8" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                id="button-accordion-location">
+                            <div class="row m-0">주소 : 부산광역시 부산진구 동천로 109 삼한골든게이트</div>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <img src="img/map.JPG" style="width: 100%;height: 100%;">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!--유의 사항-->
+        <div class="row border-bottom padding-detail-sector">
+            <th:block th:replace="fragment/title :: title_3_noMargin('유의 사항')"></th:block>
+            <pre>
+ - 예약시간 기준 최소 10분 전 방문 부탁드립니다.
+ - 기상악화로 인한 강습 취소 시 전액 환불해드립니다.</pre>
+        </div>
+
+        <!--이용 방법-->
+        <div class="row border-bottom padding-detail-sector">
+            <th:block th:replace="fragment/title :: title_3_noMargin('이용 방법')"></th:block>
+            <pre>
+- 예약이 확정되면 문자로 안내를 드립니다.
+- 예약 시간 기준 최소 10분 전 방문 부탁드립니다.</pre>
+
+        </div>
+
+        <!--취소 규정-->
+        <div class="row border-bottom padding-detail-sector">
+            <th:block th:replace="fragment/title :: title_3_noMargin('취소 규정')"></th:block>
+            <pre>
+ - 선택한 날짜로부터 7일 이전까지 취소 수수료 0% 발생
+ - 선택한 날짜로부터 0일 ~ 6일 이전 취소 수수료 20% 발생</pre>
+
+        </div>
+
+        <!--리뷰-->
+        <div class="row border-bottom padding-detail-sector">
+            <th:block th:replace="fragment/title :: title_3_noMargin('리뷰')"></th:block>
+
+            <!--리뷰 별점 보여주는 거(미완성이라 비활성화)-->
+    <!--    <div class="row mb-4 ms-2">-->
+    <!--        <div class="col-1 rounded-3 border-2 d-flex align-items-center" style="width: 56px;height: 56px;background-color: var(&#45;&#45;signature);color:white;">-->
+    <!--            <span>3.96</span>-->
+    <!--        </div>-->
+
+    <!--    </div>-->
+            <form name="reviewForm">
+                <div class="row align-items-center">
+                    <div class="form-floating col-10">
+                        <textarea name="content" class="form-control" id="Review_Content" style="height: 100px;" placeholder="리뷰를 입력해주세요"></textarea>
+                    </div>
+                    <div class="row col-auto d-flex justify-content-center">
+                    <div class="col-auto">
+                        <!--별점-->
+                        <div class="startRadio col-auto p-0" th:fragment="star_2">
+                            <label class="startRadio__box">
+                                <input type="radio" name="starScore" value="1">
+                                <span class="startRadio__img"><span class="blind">1점</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="starScore" value="2">
+                                <span class="startRadio__img"><span class="blind">2점</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="starScore" value="3">
+                                <span class="startRadio__img"><span class="blind">3점</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="starScore" value="4">
+                                <span class="startRadio__img"><span class="blind">4점</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="starScore" value="5">
+                                <span class="startRadio__img"><span class="blind">5점</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="starScore" value="6">
+                                <span class="startRadio__img"><span class="blind">6점</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="starScore" value="7">
+                                <span class="startRadio__img"><span class="blind">7점</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="starScore" value="8">
+                                <span class="startRadio__img"><span class="blind">8점</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="starScore" value="9">
+                                <span class="startRadio__img"><span class="blind">9점</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="starScore" value="10" checked>
+                                <span class="startRadio__img"><span class="blind">10점</span></span>
+                            </label>
+                        </div>
+                        <!--별점-->
+                    </div>
+                        <div class="row d-flex justify-content-center mt-2">
+                            <input class="btn btn-primary col-auto" id="button_solid" type="submit" value="작성"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="d-flex flex-column" id="reviewContainer">
+                <div class="p-5 d-flex justify-content-center">리뷰를 작성해주세요</div>
+            </div>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end" id="reviewPaginationGroup">
+                </ul>
+            </nav>
+
+        </div>
+
+        <!--추천 상품-->
+        <div class="row border-bottom padding-detail-sector">
+            <th:block th:replace="fragment/title :: title_3_noMargin('Q&A')"></th:block>
+            <table style="border: 1px;border-style: solid;text-align: center;" id="itemGroupQnaTable">
+                <thead>
+                    <tr>
+                        <td>제목</td>
+                        <td style="width: 8%;white-space: nowrap;">작성자</td>
+                        <td style="width: 10%;white-space: nowrap;">작성일</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <div class="row d-flex justify-content-end">
+                <a class="btn btn-primary col-auto margin-top-8" id="qnaWriteBtn" href="proqnawri" role="button">글 쓰기</a>
+            </div>
+
+            <nav class="margin-top-16" aria-label="Page navigation example">
+                <ul class="pagination pagination-sm justify-content-end" id="qnaPaginationGroup">
+                </ul>
+            </nav>
+
+        </div>
+
+<!--        &lt;!&ndash;추천 상품&ndash;&gt;-->
+<!--        <div class="row border-bottom padding-detail-sector">-->
+<!--            <th:block th:replace="fragment/title :: title_3_noMargin('추천 상품')"></th:block>-->
+<!--        </div>-->
+    </section>
+</div>
+<th:block layout:fragment="script">
+    <script src="/js/productDetail.js"></script>
+</th:block>
+</html>

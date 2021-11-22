@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.item.ItemScheduleMapper">
+
+    <select id="getItemScheduleBySellerId" resultType="com.triplan.dto.response.seller.ItemScheduleDTO">
+        SELECT a.item_schedule_id, b.name, a.price, a.start_date, a.end_date
+        FROM   item_schedule a JOIN item b
+        USING(item_id)
+        LEFT OUTER JOIN item_group c ON(b.item_group_id=c.item_group_id) WHERE c.seller_id = #{sellerId}
+    </select>
+
+    <select id="selectByDate" resultType="ItemScheduleVO">
+        <![CDATA[
+            SELECT  *
+            FROM    item_schedule
+            WHERE   item_id = #{itemId}
+              AND   start_date >= #{startDate}
+              AND   end_date <= #{endDate}
+        ]]>
+    </select>
+
+</mapper>

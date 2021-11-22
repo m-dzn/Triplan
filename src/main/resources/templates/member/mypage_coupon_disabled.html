@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <div class="row margin-section">
+        <section class="col-3">
+            <th:block th:replace="fragment/myPage :: mypage_top"></th:block>
+            <th:block th:replace="fragment/myPage :: mypage_nav_coupon"></th:block>
+<!--            <th:block th:replace="fragment/myPage :: mypage_bottom"></th:block>-->
+        </section>
+        <section class="col-9">
+            <th:block th:replace="fragment/myPage :: coupon_disabled"></th:block>
+        </section>
+    </div>
+
+</div>
+<th:block layout:fragment="script">
+    <!--쿠폰 등록 스크립트 -->
+    <script src="/js/getcoupon.js"></script>
+    <script>
+        // 사용한 쿠폰 리스트 로드
+        document.addEventListener("DOMContentLoaded", function() {
+            var couponTable = document.getElementById("couponTable");
+
+            fetch(`${BASE_URL}/api/membercoupons/myusedcouponlist`, {
+                method: 'GET'
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+            }).then(memberCouponList => {
+                console.log(memberCouponList)
+
+                var memberCouponTBody = couponTable.getElementsByTagName("tbody")[0];
+                memberCouponTBody.innerHTML = memberCouponList.map(memberCoupon => {
+                    return `<tr>`
+                        + `<td>${memberCoupon.name}</td>`
+                        + `<td style="width: 11%;white-space: nowrap">${memberCoupon.price}</td>`
+                        + `<td style="width: 13%;white-space: nowrap">${moment(memberCoupon.updatedAt).format(DATE_FORMAT_KOR)}</td>`
+                        + `</tr>`
+                }).join('');
+            });
+        });
+
+    </script>
+</th:block>
+</html>

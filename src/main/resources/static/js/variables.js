@@ -1,0 +1,4 @@
+var BASE_URL = "http://localhost:8080";
+var RESOURCES_COMMON_URL = "";
+var DATE_FORMAT_KOR = "YYYY-MM-DD";
+var DATETIME_FORMAT_KOR = "YYYY-MM-DD HH:mm";

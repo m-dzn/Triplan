@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.item.ReviewMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="reviewId">
+        INSERT INTO review (
+            content,
+            review_score,
+            review_img,
+            member_id,
+            item_group_id
+        ) VALUES (
+            #{content},
+            #{reviewScore},
+            #{reviewImg},
+            #{memberId},
+            #{itemGroupId}
+        )
+    </insert>
+
+    <select id="select" resultType="ReviewVO">
+        SELECT  *
+        FROM    review
+        WHERE   review_id = ${reviewId}
+    </select>
+
+    <update id="update">
+        UPDATE  review
+        SET
+                content =       IFNULL(  #{content},      content       ),
+                review_score =  IFNULL(  #{reviewScore},  review_score  ),
+                review_img =    IFNULL(  #{reviewImg},    review_img    )
+        WHERE
+                review_id = #{reviewId}
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM    review
+        WHERE   review_id = #{reviewId}
+    </delete>
+
+    <select id="list" resultType="com.triplan.domain.item.ReviewVO">
+        SELECT  *
+        FROM    review
+    </select>
+
+    <!-- 페이징 처리-->
+    <select id="listByItemGroupId" resultType="com.triplan.dto.response.customer.ReviewResponseDTO">
+        SELECT
+                r.review_id,
+                r.content,
+                r.review_score,
+                r.review_img,
+                r.item_group_id,
+                r.created_at,
+                r.updated_at,
+                m.nickname,
+                m.profile_img
+        FROM    review r JOIN member m
+        ON      r.member_id = m.member_id
+        WHERE   r.item_group_id = #{itemGroupId}
+        ORDER BY r.created_at DESC
+        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+    </select>
+
+    <select id="countByItemGroupId" resultType="int">
+        SELECT  COUNT(*)
+        FROM    review
+        WHERE   item_group_id = #{itemGroupId}
+    </select>
+
+</mapper>
