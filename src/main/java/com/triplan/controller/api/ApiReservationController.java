@@ -69,9 +69,9 @@ public class ApiReservationController {
     }
 
     // 예약하기 -> 프론트에서 쿠폰 적용 안 할 시 memberCouponId == 0 으로 넘기기
-    @PostMapping("/reserve")
+    @PostMapping("/reserve/{memberCouponId}")
     public Integer reserve(
-            @RequestParam(required = false) Integer memberCouponId,
+            @PathVariable Integer memberCouponId,
             @RequestParam Integer itemId,
             @RequestParam String startDate,
             @RequestParam String endDate,

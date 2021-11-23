@@ -308,7 +308,7 @@
 
 
                         $.ajax({ // 예약정보 db에 저장
-                            url: `/api/res/reserve?memberCouponId=${memberCouponId}&itemId=${itemId}&startDate=${startDate}&endDate=${endDate}`,
+                            url: `/api/res/reserve/${memberCouponId}?itemId=${itemId}&startDate=${startDate}&endDate=${endDate}`,
                             type: 'POST',
                             data: JSON.stringify(reservation),
                             contentType: 'application/json;charset=utf-8',
