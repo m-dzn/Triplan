@@ -63,7 +63,7 @@
                     noticeTBody.innerHTML = noticePagination.list.map(notice => {
                         return `<tr>`
                             + `<td>${notice.noticeId}</td>`
-                            + `<td><a href="/notices?noticeId=${notice.noticeId}">${notice.title}</a></td>`
+                            + `<td><a href="/notcon?noticeId=${notice.noticeId}">${notice.title}</a></td>`
                             + `<td>${moment(notice.createdAt).format(DATE_FORMAT_KOR)}</td>`
                             + `<td>관리자</td>`
                             + `</tr>`
