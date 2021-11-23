@@ -19,7 +19,7 @@ public interface NoticeMapper {
     void delete(int noticeId);
 
     List<NoticeVO> noticeList(
-            @Param("target") NoticeTarget noticeTarget,
+            @Param("target") String noticeTarget,
             @Param("startRow") Integer startRow,
             @Param("pageSize") Integer pageSize
     );
