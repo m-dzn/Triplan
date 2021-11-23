@@ -12,14 +12,16 @@ import java.util.List;
 public interface ItemSearchMapper {
     List<ItemScheduleVO> getList();
 
-    List<AccommodationCardResponseDTO> getFilterAndSort(@Param("startDate") LocalDateTime startDate,
-                                                        @Param("endDate") LocalDateTime endDate,
-                                                        @Param("underPrice") Integer underPrice,
-                                                        @Param("overPrice") Integer overPrice,
-                                                        @Param("tags") List<Integer> tags,
-                                                        @Param("sortType") String sortType,
-                                                        @Param("pageSize") Integer pageSize,
-                                                        @Param("currentPage") Integer currentPage);
+    List<AccommodationCardResponseDTO> getFilterAndSort(
+            @Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate,
+            @Param("underPrice") Integer underPrice,
+            @Param("overPrice") Integer overPrice,
+            @Param("tags") List<Integer> tags,
+            @Param("sortType") String sortType,
+            @Param("startRow") Integer startRow,
+            @Param("pageSize") Integer pageSize
+    );
 
     Integer getCount(@Param("startDate") LocalDateTime startDate,
                      @Param("endDate") LocalDateTime endDate,

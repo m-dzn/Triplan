@@ -29,7 +29,9 @@
         $('.testSlick').slick({
         infinite: true,
         slidesToShow: 6,
-        slidesToScroll: 6
+        slidesToScroll: 6,
+            prevArrow: '<a class="slick-prev" href="#"><img class="slickButton" th:src="@{/img/wblleft.png}" src="img/wblleft.png"></a>',
+            nextArrow: '<a class="slick-next" href="#"><img class="slickButton" th:src="@{/img/wblright.png}" src="img/wblright.png"></a>'
         });
         </script>
 
@@ -51,7 +53,6 @@
     <section class="margin-section">
         <th:block th:replace="fragment/title :: title_2('인기 카테고리')"></th:block>
         <div class="testSlick_2"  >
-
             <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티1')"></th:block>
             <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티2')"></th:block>
             <th:block th:replace="fragment/card :: thumbnail_Card_b('인기 액티비티3')"></th:block>
@@ -69,7 +70,9 @@
             $('.testSlick_2').slick({
                 infinite: true,
                 slidesToShow: 5,
-                slidesToScroll: 5
+                slidesToScroll: 5,
+                prevArrow: '<a class="slick-prev" href="#"><img class="slickButton" th:src="@{/img/wblleft.png}" src="img/wblleft.png"></a>',
+                nextArrow: '<a class="slick-next" href="#"><img class="slickButton" th:src="@{img/wblright.png}" src="img/wblright.png"></a>'
             });
         </script>
     </section>

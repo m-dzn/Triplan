@@ -89,7 +89,7 @@ public class AttachmentUtil {
         // 파일을 물리적으로 저장
         try {
             // 저장경로 + 파일 + 확장자 => 물리적으로 파일을 저장하기위함
-            Files.write(Paths.get(PREFIX + attachmentVO.getUrl()), file.getBytes());
+            Files.write(Paths.get(PREFIX + attachmentVO.getPathAndFileName()), file.getBytes());
             return attachmentVO;
         } catch (IOException e) {
             deleteAttachment(attachmentVO);
@@ -107,7 +107,7 @@ public class AttachmentUtil {
     }
 
     public static void deleteAttachment(AttachmentVO attachmentVO) {
-        FILE_PATH = PREFIX + attachmentVO.getUrl();
+        FILE_PATH = PREFIX + attachmentVO.getPathAndFileName();
 
         File deleteFile = new File(FILE_PATH);
         if (deleteFile.exists()) {

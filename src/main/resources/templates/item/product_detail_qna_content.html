@@ -4,24 +4,51 @@
       layout:decorator="layout/layout">
 
 <div layout:fragment="content">
-    <table>
-        <tr>
-            <td>글번호</td>
-            <td id="qno"></td>
-            <td>작성일</td>
-            <td id="createdAt"></td>
+    <table style="width: 75%;"class="table table-bordered table-margin-auto margin-y-40">
+        <tr class="text-align-center">
+            <td style="width: 13%"  class="font-size-16">글번호</td>
+            <td style="width: 12%" class="font-size-16" id="qno"></td>
+            <td style="width: 14%" class="font-size-16">작성일</td>
+            <td style="padding-left: calc(var(--unit)*16);" class="font-size-16 text-align-start padding-left-16" id="createdAt"></td>
         </tr>
         <tr>
-            <td>제목</td>
-            <td id="questionTitle" colspan="3"></td>
+            <td class="text-align-center">제목</td>
+            <td style="padding-left: calc(var(--unit)*16);" colspan="3" id="questionTitle"></td>
         </tr>
         <tr>
-            <td>내용</td>
-            <td id="questionContent" colspan="3"></td>
+            <td class="text-align-center">내용</td>
+            <td style="padding-left: calc(var(--unit)*16);" colspan="3" id="questionContent">
+                <pre></pre>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div class="d-flex justify-content-end">
+                    <a class="btn btn-primary button-outline margin-left-8" id="updateQuestionBtn">글 수정</a>
+                    <button class="btn btn-primary button-outline margin-left-8" id="deleteQuestionBtn">글 삭제</button>
+                    <button class="btn btn-primary button-solid margin-left-8" onclick="history.back();" role="button">목록으로</button>
+                    <!--                    <a class="btn btn-primary button-solid margin-right-8" href="notupd" role="button">글 수정</a>-->
+                    <!--                    <a class="btn btn-primary button-outline" href="warning" role="button">글 삭제</a>-->
+                </div>
+            </td>
         </tr>
     </table>
-    <button><a id="updateQuestionBtn">글 수정</a></button>
-    <button id="deleteQuestionBtn">글 삭제</button>
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td>글번호</td>-->
+<!--            <td id="qno"></td>-->
+<!--            <td>작성일</td>-->
+<!--            <td id="createdAt"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>제목</td>-->
+<!--            <td id="questionTitle" colspan="3"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>내용</td>-->
+<!--            <td id="questionContent" colspan="3"></td>-->
+<!--        </tr>-->
+<!--    </table>-->
 </div>
 <th:block layout:fragment="script">
     <script src="/js/qnaDetailPage.js"></script>

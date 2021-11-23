@@ -100,7 +100,8 @@ public class ReviewServiceImpl implements ReviewService {
     /* 페이징 처리 */
     @Override
     public Pagination<ReviewDTO> listByItemGroupId(Integer itemGroupId, Integer pageSize, Integer currentPage) {
-        List<ReviewDTO> reviewPage = reviewMapper.listByItemGroupId(itemGroupId, pageSize,currentPage);
+        Integer startRow = (currentPage - 1) * pageSize;
+        List<ReviewDTO> reviewPage = reviewMapper.listByItemGroupId(itemGroupId, startRow, pageSize);
         int totalReviews = reviewMapper.countByItemGroupId(itemGroupId);
 
         return new Pagination<>(pageSize,currentPage,totalReviews,reviewPage);

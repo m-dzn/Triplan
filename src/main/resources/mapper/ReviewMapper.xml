@@ -63,7 +63,7 @@
         ON      r.member_id = m.member_id
         WHERE   r.item_group_id = #{itemGroupId}
         ORDER BY r.created_at DESC
-        LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+        LIMIT #{startRow}, #{pageSize}
     </select>
 
     <select id="countByItemGroupId" resultType="int">

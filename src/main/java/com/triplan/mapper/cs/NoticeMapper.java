@@ -19,9 +19,9 @@ public interface NoticeMapper {
     void delete(int noticeId);
 
     List<NoticeVO> noticeList(
-            @Param("target") NoticeTarget noticeTarget,
-            @Param("pageSize") Integer pageSize,
-            @Param("currentPage") Integer currentPage
+            @Param("target") String noticeTarget,
+            @Param("startRow") Integer startRow,
+            @Param("pageSize") Integer pageSize
     );
 
     Integer count(NoticeTarget noticeTarget);

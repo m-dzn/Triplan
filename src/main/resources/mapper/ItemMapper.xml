@@ -105,8 +105,7 @@
                                 FROM   item_group
                                 WHERE  seller_id = #{sellerId} )
         ORDER BY created_at DESC
-         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
-
+        LIMIT #{startRow}, #{pageSize}
     </select>
 
     <select id="getItemFlightBySellerId" resultType="ItemVO">
@@ -117,7 +116,7 @@
                                 FROM   item_group
                                 WHERE  seller_id = #{sellerId} )
         ORDER BY created_at DESC
-         LIMIT (#{currentPage} - 1) * #{pageSize}, #{pageSize}
+        LIMIT #{startRow}, #{pageSize}
     </select>
 
     <select id="countRoom" resultType="Integer">
@@ -159,10 +158,10 @@
                     SUM(price) total_price,
                     SUM(discount_price) total_discount_price
                 FROM    item_schedule
-                WHERE   DATEDIFF(DAY, start_date, #{startDate}) <= 0
-                  AND   DATEDIFF(DAY, end_date, #{endDate}) >= 0
+                WHERE   TIMESTAMPDIFF(DAY, start_date, #{startDate}) <= 0
+                  AND   TIMESTAMPDIFF(DAY, end_date, #{endDate}) >= 0
                 GROUP BY item_id
-            ) USING (item_id)
+            ) item_stat USING (item_id)
             WHERE   item_group_id = #{itemGroupId}
         ]]>
     </select>

@@ -25,6 +25,7 @@
 
         // 데이터를 담을 태그를 선택자로 가져오는 영역
         var changeImg = document.getElementById("changeImg");
+        var navProfileImg = document.getElementById("navProfileImg");
 
         var nickname = document.getElementById("nickname");
         var email = document.getElementById("email");
@@ -48,7 +49,6 @@
                 return response.json();
             }
         }).then(member => {
-            console.log(changeImg);
             if (member.profileImg) {
                 changeImg.setAttribute("src", `${RESOURCES_COMMON_URL}${member.profileImg}`);
             }
@@ -220,7 +220,7 @@
                      'Content-Type': 'application/json'
                 }
             }).then(response => {
-                location.href="http://localhost:8082/mypagemember";
+                location.href="${BASE_URL}/mypagemember";
                 });
             }/*if문 끝*/
             });
@@ -228,13 +228,14 @@
             document.getElementById("profileImg").addEventListener("change", (event) => {
             var formData = new FormData();
             formData.append("files", event.target.files[0]);
-            fetch(`http://localhost:8082/member/updateProfileImg`, {
+            fetch(`${BASE_URL}/member/updateProfileImg`, {
                 method: "PATCH",
                 body: formData
             })
             .then(response => response.text())
             .then(response => {
-                changeImg.setAttribute('src', "resources" + response);
+                changeImg.setAttribute('src', response);
+                navProfileImg.setAttribute('src', response);
             });
 
         });

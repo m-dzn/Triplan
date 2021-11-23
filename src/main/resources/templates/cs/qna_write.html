@@ -4,9 +4,7 @@
       layout:decorator="layout/layout">
 
 <div layout:fragment="content">
-    <form id="qnaForm">
-        <input type="hidden" name="memberId" value="123">
-        <input type="hidden" name="type" value="CUSTOMER">
+    <form name="qnaForm">
         <table id="qnaup-table">
             <tr>
                 <td>문의종류</td>
@@ -21,8 +19,7 @@
                 <td class="test">비밀 글 여부</td>
                 <td>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="hide" value="1" id="hide">
-                        <input type="hidden" name="hide" value='0' id="hide_hidden"/>
+                        <input class="form-check-input" type="checkbox" name="hide" id="hide">
                         <label class="form-check-label" for="hide">
                             비밀 글
                         </label>
@@ -41,8 +38,8 @@
                 <td></td>
                 <td colspan="3">
                     <!-- <input type="submit" value="수정"> 밑에도 서브밋 값을 줘야하는지? -->
-                    <input class="btn col-auto margin-right-16 color-white a-button-solid" id="qnaWriteBtn" type="submit" value="글쓰기">
-                    <button type="button" class="btn col-auto " id="button_solid"><a href="qna" class="color-white a-button-solid">취소</a></button>
+                    <input class="btn col-auto margin-right-16 color-white a-button-solid button_solid" id="qnaWriteBtn" type="submit" value="글쓰기">
+                    <button type="button" class="btn col-auto button_solid"><a href="qna" class="color-white a-button-solid">취소</a></button>
                 </td>
             </tr>
         </table>
@@ -54,36 +51,38 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
-            if(document.getElementById("input_check").checked) {
-                document.getElementById("input_check_hidden").disabled = true;
-            }
-
             var qnaWriteBtn = document.getElementById("qnaWriteBtn");
 
-            qnaWriteBtn.addEventListener("click",function (){
-
-                var qnaForm = document.getElementById("qnaForm");
+            console.log(document.qnaForm);
+            document.qnaForm.addEventListener("submit", function(event) {
+                event.preventDefault();
 
                 // JS로 URL의 쿼리 파라미터 가져오기
                 var url = new URL(location.href);
                 var questionId = url.searchParams.get("questionId");
 
+                var qnaForm = {
+                    title: document.qnaForm.title.value,
+                    content: document.qnaForm.content.value,
+                    type: 'CUSTOMER',
+                    hide: document.qnaForm.hide.checked
+                }
+
                 fetch(`${BASE_URL}/api/questions`, {
                     method: 'POST',
-                    body: new FormData(document.qnaForm),
+                    body: JSON.stringify(qnaForm),
                     headers: {
                         'Content-Type': 'application/json'
                     }
+                }).then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                }).then(() => {
+                    location.href = '/qna';
                 });
 
             });
-
-
-
-
-
-
-
 
         });
     </script>

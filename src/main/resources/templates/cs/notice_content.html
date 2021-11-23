@@ -4,25 +4,42 @@
       layout:decorator="layout/layout">
 
 <div layout:fragment="content" class="margin-top-40">
-    <table style="width: 45%;"class="table table-bordered table-margin-auto">
+    <table style="width: 75%;"class="table table-bordered table-margin-auto margin-bottom-40">
         <tr class="text-align-center">
             <td style="width: 13%"  class="font-size-16">글번호</td>
             <td style="width: 12%" class="font-size-16" id="noticeId">1</td>
             <td style="width: 14%" class="font-size-16">작성일</td>
-            <td style="width: 20%"  class="font-size-16" id="noticeCreatedAt">2011-11-11</td>
+            <td style="padding-left: calc(var(--unit)*16);" class="font-size-16 text-align-start padding-left-16" id="noticeCreatedAt">2011-11-11</td>
         </tr>
         <tr>
             <td class="text-align-center">제목</td>
-            <td colspan="3" id="noticeTitle">제목 불러오는 메소드 넣어주세요</td>
+            <td style="padding-left: calc(var(--unit)*16);" colspan="3" id="noticeTitle">제목 불러오는 메소드 넣어주세요</td>
         </tr>
         <tr>
             <td class="text-align-center">내용</td>
-            <td colspan="3" id="noticeContent">내용 불러오는 메소드 넣어주세요</td>
+            <td style="padding-left: calc(var(--unit)*16);" colspan="3" id="noticeContent">
+                <pre>
+안녕하세요
+반갑습니다
+안녕하세요
+반갑습니다
+안녕하세요
+반갑습니다
+안녕하세요
+반갑습니다
+안녕하세요
+반갑습니다
+안녕하세요
+반갑습니다</pre>
+            </td>
         </tr>
         <tr>
             <td colspan="4">
-                <button><a href="notupd">글 수정</a></button>
-                <button><a href="warning">글 삭제</a></button>
+                <div class="d-flex justify-content-end">
+                    <a class="btn btn-primary button-outline" href="notice" role="button">목록으로</a>
+                    <!--                    <a class="btn btn-primary button-solid margin-right-8" href="notupd" role="button">글 수정</a>-->
+                    <!--                    <a class="btn btn-primary button-outline" href="warning" role="button">글 삭제</a>-->
+                </div>
             </td>
         </tr>
     </table>

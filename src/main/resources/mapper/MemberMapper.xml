@@ -42,10 +42,10 @@
     <update id="updateBasicInfo">
         UPDATE  member
         SET
-        nickname    = IFNULL(   #{nickname},     nickname    ),
-        profile_img = IFNULL(   #{profileImg},   profile_img   )
+                nickname    = IFNULL(   #{nickname},     nickname      ),
+                profile_img = IFNULL(   #{profileImg},   profile_img   )
         WHERE
-        member_id = ${memberId}
+                member_id = ${memberId}
     </update>
 
     <update id="updateEmail">

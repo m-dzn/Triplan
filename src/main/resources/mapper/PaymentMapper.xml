@@ -56,19 +56,19 @@
             FROM    payment p JOIN reservation r
             ON      p.res_id = r.res_id
             WHERE   r.member_id = #{memberId}
-              AND   ABS(DATEDIFF(MONTH, paid_at, current_timestamp)) <= 12;
+              AND   ABS(TIMESTAMPDIFF(MONTH, paid_at, NOW())) <= 12;
         ]]>
 
     </select>
 
     <select id="getPaymentBySellerId" resultType="PaymentVO">
-        SELECT sum(total_payment) total_payment, FORMATDATETIME(paid_at, 'yyyy-MM-dd') paid_at
+        SELECT sum(total_payment) total_payment, DATE_FORMAT(paid_at, '%Y-%m-%d') paid_at
         FROM   payment
         WHERE  paid_at > (NOW() - INTERVAL 7 DAY)
         AND    res_id IN (SELECT res_id
                           FROM reservation
                           WHERE seller_id = #{seller_id})
-        GROUP BY FORMATDATETIME(paid_at, 'yyyy-MM-dd');
+        GROUP BY DATE_FORMAT(paid_at, '%Y-%m-%d');
     </select>
 
     <select id="getNameByItem" resultType="String">

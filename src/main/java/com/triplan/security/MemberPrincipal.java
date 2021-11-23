@@ -5,6 +5,7 @@ import com.triplan.domain.member.RoleVO;
 import com.triplan.enumclass.member.MemberState;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
+@ToString
 public class MemberPrincipal implements UserDetails, OAuth2User {
 
     private Integer memberId;
