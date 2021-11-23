@@ -584,7 +584,7 @@ pre {
   background-color : #FAFAFA;
 }
 
-#qnaTable tr:nth-child(1) td {
+#qnaTable thead tr:nth-child(1) td {
   padding: calc(var(--unit)*12);
 }
 

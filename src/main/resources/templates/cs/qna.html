@@ -62,7 +62,7 @@
                     // 실제 프론트 로직이 들어갈 영역
                     // 태그 엘리먼트에 데이터를 붙여주면 됨
                     var qnaTBody = qnaTable.getElementsByTagName("tbody")[0];
-                    var commonPath = "/questions/qnaBoard";
+                    var commonPath = "/qna";
 
                     qnaTBody.innerHTML = qnaPagination.list.map(qna => {
                         return `<tr>`
