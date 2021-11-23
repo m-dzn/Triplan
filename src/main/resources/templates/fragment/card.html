@@ -1,4 +1,4 @@
-<div class="card" id="card1" th:fragment="card(text)">
+<div class="card" id="card" th:fragment="card(text)">
     <a href="product">
         <img src="img/서면.jpg" class="card-img-top" id="card-img" style="height: 240px;" alt="...">
         <div class="card-body d-flex justify-content-center align-items-center">
@@ -20,8 +20,8 @@
             <div class="row d-flex justify-content-between">
                 <div class="col-auto font-weight-bold font-size-20">메종글래드 제주</div>
                 <div class="col-auto">
-                    <input name="wish" id="heart1" type="checkbox" th:fragment="heart">
-                    <label for="heart1">🖤</label><!--찜 구현 할 테이블 따로 만들어서 연결시켜주면 될 거 같아요-->
+                    <input name="wish" id="heart" type="checkbox" th:fragment="heart">
+                    <label for="heart">🖤</label><!--찜 구현 할 테이블 따로 만들어서 연결시켜주면 될 거 같아요-->
                 </div>
             </div>
             <div class="row margin-top-16">
@@ -51,7 +51,7 @@
 <!--        </div>-->
 <!--    </div>-->
 
-<div class="card" id="card2" th:fragment="thumbnail_Card_b(text)">
+<div class="card" id="card" th:fragment="thumbnail_Card_b(text)">
     <!--상품그룹이랑 조인해서 상품 사진 가져오면 될 거 같아요-->
     <a href="prodet">
     <img src="img/서면.jpg" class="card-img-top" id="detail-card-img" alt="...">
@@ -60,8 +60,8 @@
             <div class="row m-0 p-0 d-flex justify-content-between">
                 <div class="col-auto margin-bottom-24" th:text="${text}">제목<!--상품그룹이랑 조인해서 제목 가져오면 될 거 같아요--></div>
                 <div class="col-auto">
-                    <input name="wish" id="heart2" type="checkbox" th:fragment="heart">
-                    <label for="heart2">🖤</label><!--찜 구현 할 테이블 따로 만들어서 연결시켜주면 될 거 같아요-->
+                    <input name="wish" id="heart" type="checkbox" th:fragment="heart">
+                    <label for="heart">🖤</label><!--찜 구현 할 테이블 따로 만들어서 연결시켜주면 될 거 같아요-->
                 </div>
             </div>
             <div class="row m-0 p-0">
