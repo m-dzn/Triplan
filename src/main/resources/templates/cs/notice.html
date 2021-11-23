@@ -47,7 +47,7 @@
                 var pageSize = url.searchParams.get("pageSize");
 
                 // 비동기 AJAX 통신으로 DB 데이터를 가져오는 영역
-                fetch(`${BASE_URL}/api/notices/list/member?currentPage=${currentPage || 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}`, {
+                fetch(`${BASE_URL}/api/notices?currentPage=${currentPage || 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}`, {
                     method: 'GET'
                 }).then(response => {
                     // 데이터 전처리
@@ -63,9 +63,9 @@
                     noticeTBody.innerHTML = noticePagination.list.map(notice => {
                         return `<tr>`
                             + `<td>${notice.noticeId}</td>`
-                            + `<td><a href="/notices?noticeId=${notice.noticeId}">${notice.title}</a></td>`
-                            + `<td>${moment(notice.creatdAt).format(DATE_FORMAT_KOR)}</td>`
-                            + `<td>${notice.nickname}</td>`
+                            + `<td><a href="/notcon?noticeId=${notice.noticeId}">${notice.title}</a></td>`
+                            + `<td>${moment(notice.createdAt).format(DATE_FORMAT_KOR)}</td>`
+                            + `<td>관리자</td>`
                             + `</tr>`
                     }).join('');
 

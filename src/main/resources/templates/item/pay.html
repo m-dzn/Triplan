@@ -132,7 +132,6 @@
                         <input  class="col btn btn-primary margin-top-16"
                                 id="button_solid"
                                 href="#"
-                                th:value="'50000원 결제'"
                                 type="button"/>
                     </div>
                 </div>
@@ -185,7 +184,6 @@
             }
             itemTotalPriceObj.innerHTML = totalPrice + ' 원';
 
-
             submitButton.value = totalPrice + '원 결제';
         }
 
@@ -203,6 +201,7 @@
                     staticTotalPrice = totalPrice;
                     itemPriceObj.innerHTML = totalPrice + ' 원';
                     itemTotalPriceObj.innerHTML = totalPrice + ' 원';
+                    submitButton.value = totalPrice + '원 결제';
                 }
             }); // ajax
 
@@ -334,7 +333,6 @@
                                         state: state,
                                         paidAt: paidAt
                                     }
-
 
                                     $.ajax({// 결제정보 db에 저장
                                         url: '/api/payments',

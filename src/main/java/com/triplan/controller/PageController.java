@@ -67,13 +67,23 @@ public class PageController {
     @GetMapping("/notupd")
     public String notice_update(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "cs/notice_update";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "cs/notice_update";
+        }
     }
 
     @GetMapping("/notwri")
     public String notice_write(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "cs/notice_write";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "cs/notice_write";
+        }
     }
 
     @GetMapping("/qna")
@@ -91,13 +101,23 @@ public class PageController {
     @GetMapping("/qnaupd")
     public String qnaupd(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "cs/qna_update";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "cs/qna_update";
+        }
     }
 
     @GetMapping("/qnawri")
     public String qnawri(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "cs/qna_write";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "cs/qna_write";
+        }
     }
 
 
@@ -133,13 +153,23 @@ public class PageController {
         model.addAttribute("memberId", memberId);
         // sellerId
         model.addAttribute("sellerId", sellerId);
-        return "item/pay";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "item/pay";
+        }
     }
 
     @GetMapping("/payAfter")
     public String payAfter(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "item/payAfter";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "item/payAfter";
+        }
     }
 
     @GetMapping("pay/payInfo/{paymentId}/{itemId}")
@@ -184,13 +214,23 @@ public class PageController {
     @GetMapping("/proqnaupd")
     public String proqnaupd(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "item/product_detail_qna_update";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "item/product_detail_qna_update";
+        }
     }
 
     @GetMapping("/proqnawri")
     public String proqnawri(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "item/product_detail_qna_write";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "item/product_detail_qna_write";
+        }
     }
 
 
@@ -208,43 +248,78 @@ public class PageController {
     @GetMapping("/memwithdraw")
     public String memwithdraw(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "member/member_withdraw";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "member/member_withdraw";
+        }
     }
 
     @GetMapping("/mypagecoupon")
     public String mypagecoupon(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "member/mypage_coupon";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "member/mypage_coupon";
+        }
     }
 
     @GetMapping("/mypagecoupondisabled")
     public String mypagecoupondisabled(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "member/mypage_coupon_disabled";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "member/mypage_coupon_disabled";
+        }
     }
 
     @GetMapping("/mypagecouponexpired")
     public String mypagecouponexpired(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "member/mypage_coupon_expired";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "member/mypage_coupon_expired";
+        }
     }
 
     @GetMapping("/mypagemember")
     public String mypage(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "member/mypage_modify";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "member/mypage_modify";
+        }
     }
 
     @GetMapping("/myReservation")
     public String myReservation(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "member/mypage_reservation";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "member/mypage_reservation";
+        }
     }
 
     @GetMapping("/wishlist")
     public String wishlist(@CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "member/wishlist";
+
+        if (currentMember == null) {
+            return "member/login";
+        } else {
+            return "member/wishlist";
+        }
     }
 
 }

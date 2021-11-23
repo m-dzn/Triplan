@@ -157,7 +157,7 @@ h1::before{ /* 추가요소::before */
   border-right: none;
 }
 
-#qnaTable > tr:nth-of-type(1) {
+#qnaTable thead tr:nth-of-type(1) {
   background-color : #FAFAFA;
 }
 
@@ -247,7 +247,7 @@ h1::before{ /* 추가요소::before */
 
 
 
-#noticeTable tr:nth-of-type(1) {
+#noticeTable thead tr:nth-of-type(1) {
   background-color : #FAFAFA;
 }
 
@@ -518,7 +518,7 @@ h1::before{ /* 추가요소::before */
 
 <!--지혜 테이블-->
 
-#couponTable tbody tr:nth-of-type(1) {
+#couponTable thead tr:nth-of-type(1) {
       background-color : #FAFAFA;
 }
 
@@ -527,7 +527,7 @@ pre {
 }
 
 
-#product-Table tr:nth-of-type(1) {
+#product-Table thead tr:nth-of-type(1) {
   background-color : #FAFAFA;
 }
 
@@ -566,7 +566,7 @@ pre {
   border-right: none;
 }
 
-#qnaTable tr:nth-of-type(1) {
+#qnaTable thead tr:nth-of-type(1) {
   background-color : #FAFAFA;
 }
 
@@ -656,7 +656,7 @@ pre {
 
 
 
-#noticeTable tr:nth-of-type(1) {
+#noticeTable thead tr:nth-of-type(1) {
   background-color : #FAFAFA;
 }
 
