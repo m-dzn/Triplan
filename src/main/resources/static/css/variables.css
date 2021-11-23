@@ -1,4 +1,22 @@
 /* 변수 */
+
+.slickButton{
+    width: calc(var(--unit)*48);
+}
+
+.slick-prev {
+    position: absolute;
+    z-index: 99;
+    top:120px;
+    left: -50px;
+}
+.slick-next {
+    position: absolute;
+    z-index: 99;
+    top:120px;
+    right: -50px;
+}
+
 :root {
     --unit: 0.0625rem;
 
@@ -515,12 +533,6 @@
     width: calc(var(--unit)*120);
     height: calc(var(--unit)*120);
 }
-
-
-
-
-
-
 
 .post-slider{
     border:1px solid red;

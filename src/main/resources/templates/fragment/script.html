@@ -1,68 +1,68 @@
 <th:block th:fragmnet="script">
+    <script th:src="@{/js/variables.js}"></script>
 
-<script th:fragment="boot_js"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"
-></script>
+    <script th:fragment="boot_js"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+    ></script>
 
-<!--    <script-->
-<!--            src="https://code.jquery.com/jquery-3.6.0.min.js"-->
-<!--            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="-->
-<!--            crossorigin="anonymous"-->
-<!--            th:fragment="jquery_js"/>-->
+    <!--    <script-->
+    <!--            src="https://code.jquery.com/jquery-3.6.0.min.js"-->
+    <!--            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="-->
+    <!--            crossorigin="anonymous"-->
+    <!--            th:fragment="jquery_js"/>-->
 
-<!--    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"-->
-<!--            th:fragment="slick_js"/>-->
+    <!--    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"-->
+    <!--            th:fragment="slick_js"/>-->
 
-    <!--채널톡-->
+        <!--채널톡-->
 
-    <!-- Channel Plugin Scripts -->
-    <script>
-        (function() {
-            var w = window;
-            if (w.ChannelIO) {
-                return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-            }
-            var ch = function() {
-                ch.c(arguments);
-            };
-            ch.q = [];
-            ch.c = function(args) {
-                ch.q.push(args);
-            };
-            w.ChannelIO = ch;
-            function l() {
-                if (w.ChannelIOInitialized) {
-                    return;
+        <!-- Channel Plugin Scripts -->
+        <script>
+            (function() {
+                var w = window;
+                if (w.ChannelIO) {
+                    return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
                 }
-                w.ChannelIOInitialized = true;
-                var s = document.createElement('script');
-                s.type = 'text/javascript';
-                s.async = true;
-                s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-                s.charset = 'UTF-8';
-                var x = document.getElementsByTagName('script')[0];
-                x.parentNode.insertBefore(s, x);
-            }
-            if (document.readyState === 'complete') {
-                l();
-            } else if (window.attachEvent) {
-                window.attachEvent('onload', l);
-            } else {
-                window.addEventListener('DOMContentLoaded', l, false);
-                window.addEventListener('load', l, false);
-            }
-        })();
-        ChannelIO('boot', {
-            "pluginKey": "acdee5aa-5ad8-493c-86b0-0329531161c4"
-        });
-    </script>
-    <!-- End Channel Plugin -->
-
+                var ch = function() {
+                    ch.c(arguments);
+                };
+                ch.q = [];
+                ch.c = function(args) {
+                    ch.q.push(args);
+                };
+                w.ChannelIO = ch;
+                function l() {
+                    if (w.ChannelIOInitialized) {
+                        return;
+                    }
+                    w.ChannelIOInitialized = true;
+                    var s = document.createElement('script');
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+                    s.charset = 'UTF-8';
+                    var x = document.getElementsByTagName('script')[0];
+                    x.parentNode.insertBefore(s, x);
+                }
+                if (document.readyState === 'complete') {
+                    l();
+                } else if (window.attachEvent) {
+                    window.attachEvent('onload', l);
+                } else {
+                    window.addEventListener('DOMContentLoaded', l, false);
+                    window.addEventListener('load', l, false);
+                }
+            })();
+            ChannelIO('boot', {
+                "pluginKey": "acdee5aa-5ad8-493c-86b0-0329531161c4"
+            });
+        </script>
+        <!-- End Channel Plugin -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+            th:fragment="slick_js"></script>
 </th:block>
--------------------------------------------------------------------------------------------------------------------
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
