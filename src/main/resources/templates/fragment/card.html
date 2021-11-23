@@ -1,6 +1,6 @@
 <div class="card" id="card" th:fragment="card(text)">
-    <a href="product">
-        <img src="img/서면.jpg" class="card-img-top" id="card-img" style="height: 240px;" alt="...">
+    <a href="/product">
+        <img src="/img/서면.jpg" class="card-img-top" id="card-img" style="height: 240px;" alt="...">
         <div class="card-body d-flex justify-content-center align-items-center">
             <div class="row">
                 <h5 class="card-title" style="text-align: center;" th:text="${text}"></h5>
@@ -10,7 +10,7 @@
 </div>
 
 
-<a href="prodet" th:fragment="thumbnail_Card_a">
+<a href="/prodet" th:fragment="thumbnail_Card_a">
     <div class="row border bg-white rounded-3 border-2 margin-window margin-top-16">
 
         <div class="col-auto p-0">
@@ -53,7 +53,7 @@
 
 <div class="card" id="card" th:fragment="thumbnail_Card_b(text)">
     <!--상품그룹이랑 조인해서 상품 사진 가져오면 될 거 같아요-->
-    <a href="prodet">
+    <a href="/prodet">
     <img src="img/서면.jpg" class="card-img-top" id="detail-card-img" alt="...">
     <div class="card-body p-0">
         <div class="row m-0 p-0 h-100 d-flex align-content-between">
