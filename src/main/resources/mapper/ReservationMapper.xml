@@ -76,7 +76,7 @@
     <select id="checkCoupon" resultType="Integer">
         SELECT  count(*)
         FROM    coupon
-        WHERE   DATEDIFF(DAY, expired_at, CURRENT_TIMESTAMP) >= 0
+        WHERE   DATEDIFF(expired_at, CURRENT_TIMESTAMP) >= 0
           AND   coupon_id = (
                               SELECT    coupon_id
                               FROM      member_coupon
