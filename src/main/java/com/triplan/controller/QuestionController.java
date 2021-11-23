@@ -1,6 +1,8 @@
 package com.triplan.controller;
 
 import com.triplan.domain.cs.QuestionVO;
+import com.triplan.security.CurrentMember;
+import com.triplan.security.MemberPrincipal;
 import com.triplan.service.inf.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,10 +29,20 @@ public class QuestionController {
     }
 
     @GetMapping
-    public String readQuestion(@RequestParam Integer questionId, Model model) {
-        model.addAttribute("question", questionService.getQuestion(questionId));
+    public String readQuestion(
+            @RequestParam(required = false) Integer questionId,
+            @CurrentMember MemberPrincipal currentMember,
+            Model model
+    ) {
+        model.addAttribute("member", currentMember);
 
-        return "cs/qna_content";
+        if (questionId == null) {
+            return "cs/qna";
+        } else {
+            QuestionVO questionVO = questionService.getQuestion(questionId);
+            model.addAttribute("question", questionVO);
+            return "cs/qna_content";
+        }
     }
 
     @GetMapping("/qnaBoard")

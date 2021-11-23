@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/layout">
-
 <div layout:fragment="content">
     <form>
         <table id="qnaup-table">
@@ -40,19 +39,12 @@
                     <!-- <input type="submit" value="수정"> 밑에도 서브밋 값을 줘야하는지? -->
                     <button type="button" class="btn col-auto margin-right-16" id="qnaUpdateBtn"><a href="" class="color-white a-button-solid">수정</a></button>
                     <button type="button" class="btn col-auto " id="button_solid"><a href="qna" class="color-white a-button-solid">취소</a></button>
-
-
                 </td>
             </tr>
         </table>
-
-
     </form>
 </div>
-
-
 <th:block layout:fragment="script">
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var questionTitle = document.getElementById("questionTitle");
@@ -79,17 +71,14 @@
             });
 
             qnaUpdateBtn.addEventListener("click", function() {
-
                 fetch(`${BASE_URL}/api/questions/${questionId}`, {
                     method: 'PUT'
                 }).then(response => {
                     location.href="/questions/qnaBoard";
                     });
                 });
-
             });
+        });
     </script>
 </th:block>
-
-
 </html>

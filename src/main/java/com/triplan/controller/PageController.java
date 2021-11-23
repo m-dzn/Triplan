@@ -5,6 +5,7 @@
 
 package com.triplan.controller;
 
+import com.triplan.domain.cs.QuestionVO;
 import com.triplan.domain.item.ItemGroupVO;
 import com.triplan.domain.item.PaymentVO;
 import com.triplan.dto.response.customer.ItemRoomResponseDTO;
@@ -33,6 +34,7 @@ public class PageController {
     private final ItemService itemService;
     private final PaymentService paymentService;
     private final ReservationService reservationService;
+    private final QuestionService questionService;
 
     @GetMapping("/warning")
     public String warning() {
@@ -93,9 +95,20 @@ public class PageController {
     }
 
     @GetMapping("/qnacon")
-    public String qnacon(@CurrentMember MemberPrincipal currentMember, Model model) {
+    public String qnacon(
+            @RequestParam(required = false) Integer questionId,
+            @CurrentMember MemberPrincipal currentMember,
+            Model model
+    ) {
         model.addAttribute("member", currentMember);
-        return "cs/qna_content";
+
+        if (questionId == null) {
+            return "cs/qna";
+        } else {
+            QuestionVO questionVO = questionService.getQuestion(questionId);
+            model.addAttribute("question", questionVO);
+            return "cs/qna_content";
+        }
     }
 
     @GetMapping("/qnaupd")
@@ -154,11 +167,7 @@ public class PageController {
         // sellerId
         model.addAttribute("sellerId", sellerId);
 
-        if (currentMember == null) {
-            return "member/login";
-        } else {
-            return "item/pay";
-        }
+        return "item/pay";
     }
 
     @GetMapping("/payAfter")
@@ -206,9 +215,20 @@ public class PageController {
     }
 
     @GetMapping("/proqnacon")
-    public String proqnacon(@CurrentMember MemberPrincipal currentMember, Model model) {
+    public String proqnacon(
+            @RequestParam(required = false) Integer questionId,
+            @CurrentMember MemberPrincipal currentMember, Model model) {
         model.addAttribute("member", currentMember);
-        return "item/product_detail_qna_content";
+
+        if (questionId != null) {
+            QuestionVO questionVO = questionService.getQuestion(questionId);
+            if (questionVO.getQuestionId() != null) {
+                model.addAttribute("question", questionVO);
+                return "item/product_detail_qna_content";
+            }
+        }
+
+        return "warning";
     }
 
     @GetMapping("/proqnaupd")

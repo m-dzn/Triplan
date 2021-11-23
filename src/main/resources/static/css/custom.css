@@ -13,9 +13,37 @@
   border-color: var(--primary);
 }
 
+#button_solid:hover {
+  /* 배경색만 있는 버튼 */
+  background-color: #25A1FA;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+#button_solid:active {
+  /* 배경색만 있는 버튼 */
+  background-color: #0C97FA;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
 .button_solid {
   /* 배경색이 있는 버튼 */
   background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.button_solid:hover {
+  /* 배경색만 있는 버튼 */
+  background-color: #25A1FA;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.button_solid:active {
+  /* 배경색만 있는 버튼 */
+  background-color: #0C97FA;
+  color: var(--primary);
   border-color: var(--primary);
 }
 
@@ -66,20 +94,6 @@ tdtd:last-child{
 
 #itemGroupQnaTable > * > td:last-child {
   border-right: none;
-}
-
-#button_solid:hover {
-  /* 배경색만 있는 버튼 */
-  background-color: #25A1FA;
-  color: var(--primary);
-  border-color: var(--primary);
-}
-
-#button_solid:active {
-  /* 배경색만 있는 버튼 */
-  background-color: #0C97FA;
-  color: var(--primary);
-  border-color: var(--primary);
 }
 
 #button_outline {

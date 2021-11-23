@@ -24,6 +24,7 @@ var productDetail = {
     itemGroup: null,
     itemList: null,
 
+    searchParams: null,
     itemGroupId: null,
     start: null,
     end: null,
@@ -34,6 +35,7 @@ var productDetail = {
         var _this = this;
 
         var url = new URL(location.href);
+        this.searchParams = location.search;
         this.itemGroupId = url.searchParams.get("itemGroupId");
         this.start = url.searchParams.get("startDate");
         this.end = url.searchParams.get("endDate");
@@ -304,7 +306,7 @@ var productDetail = {
 
                 pagination.list.forEach(question => qnaTBody.append($(`
                     <tr>
-                        <td><a href="proqnacon?questionId=${question.questionId}">${question.title}</a></td>
+                        <td><a href="proqnacon${this.searchParams}&questionId=${question.questionId}">${question.title}</a></td>
                         <td>${question.nickname}</td>
                         <td>${moment(question.createdAt).format(DATE_FORMAT_KOR)}</td>
                     </tr>
