@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <section class="margin-section">
+        <th:block th:replace="fragment/title :: title_2('위시 리스트')"></th:block>
+
+        <!--카테고리 탭-->
+        <ul class="nav nav-tabs margin-bottom-40">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">숙소</a>
+            </li>
+            </li>
+        </ul>
+        <!--카테고리 탭 끝-->
+
+        <!--카드 없을 때-->
+        <div id="wishNull">
+        </div>
+        <!--카드 없을 때 끝-->
+
+        <!--예시용 카드-->
+
+        <div class="d-flex flex-wrap" id="wishlist-card-container">
+        </div>
+
+        <!--예시용 카드 끝-->
+
+    </section>
+
+    <!--페이지-->
+    <nav class="margin-top-16" aria-label="Page navigation example">
+        <ul class="pagination pagination-sm justify-content-end" id="wishlistPagingBtnGroup">
+        </ul>
+    </nav>
+    <!--페이지 끝-->
+
+</div>
+<th:block layout:fragment="script">
+</th:block>
+</html>
+<script>
+    // HTML 태그가 모두 로드된 후 실행
+    document.addEventListener("DOMContentLoaded", function() {
+        var DEFAULT_PAGE_SIZE = 10;
+
+        // 데이터를 담을 태그를 선택자로 가져오는 영역
+        var wishlistTable = document.getElementById("wishlistTable");
+        var wishlistPagingBtnGroup = document.getElementById("wishlistPagingBtnGroup");
+
+        var wishNull = document.getElementById("wishNull");
+
+        var url = new URL(location.href);
+        var currentPage = url.searchParams.get("currentPage") || 1;
+        var pageSize = url.searchParams.get("pageSize") || DEFAULT_PAGE_SIZE;
+
+        fetchMemberWishlist(pageSize, currentPage);
+    });
+
+    function removeWishlist(wishlistId, pageSize, currentPage) {
+        if (confirm('정말 제거하시겠습니까?')) {
+            fetch(`${BASE_URL}/api/wishlists/${wishlistId}`, {
+                method: 'DELETE'
+            }).then(response => {
+                if (response.ok) {
+                    return;
+                }
+            }).then(() => fetchMemberWishlist(pageSize, currentPage));
+        }
+    }
+
+    function fetchMemberWishlist(pageSize, currentPage) {
+        // 비동기 AJAX 통신으로 DB 데이터를 가져오는 영역
+        fetch(`${BASE_URL}/api/wishlists?currentPage=${currentPage}&pageSize=${pageSize}`, {
+            method: 'GET'
+        }).then(response => {
+            // 데이터 전처리
+            if (response.ok) {
+                return response.json();
+            }
+        }).then(wishlistPagination => {
+            // 실제 프론트 로직이 들어갈 영역
+            // 태그 엘리먼트에 데이터를 붙여주면 됨
+
+            var totalPages = wishlistPagination.totalPages;
+
+            if (currentPage > totalPages) {
+                location.href = `${location.origin}${location.pathname}?pageSize=${pageSize}&currentPage=${totalPages}`;
+            }
+
+            var wishlistCardContainer = document.getElementById("wishlist-card-container");
+
+            var wishlistCardList = [];
+
+            if(wishlistPagination.list.length < 1){
+
+                wishNull.innerHTML =
+                    `<div class="d-flex justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor"
+                         class="color-gray bi bi-calendar-x" viewBox="0 0 16 16">
+                        <path
+                            d="M6.146 7.146a.5.5 0 0 1 .708 0L8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 0 1 0-.708z"/>
+                        <path
+                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                </div>
+
+                <div class="d-flex justify-content-center margin-top-24">
+                    <span class="color-gray font-size-20">목록이 비어 있습니다.</span>
+                </div>`;
+            }
+
+            wishlistPagination.list.forEach((wishlist) => {
+                wishlistCardList.push(`<div class="card flex-shrink-0 mb-4" id="card">
+                                    <img src="${wishlist.itemImg}" class="card-img-top" id="detail-card-img">
+                                    <div class="card-body p-2">
+                                        <div class="row m-0 p-0 h-100 d-flex align-content-between">
+                                            <div class="row m-0 p-0 d-flex justify-content-between">
+                                                <div class="col-auto">${wishlist.name}</div>
+                                            </div>
+                                            <div class="row m-0 p-0">
+                                                <div class="col-auto">${wishlist.location}</div>
+                                            </div>
+                                            <div class="row m-0 p-0 d-flex justify-content-between">
+                                                <div class="col-auto">별점</div>
+                                                <div class="col-auto">
+                                                    <button name="wish" id="heart" type="checkbox" onclick="removeWishlist(${wishlist.wishlistId}, ${pageSize}, ${currentPage})"></button>
+                                                    <label for="heart">🖤</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`);
+            });
+
+            wishlistCardContainer.innerHTML = wishlistCardList.join("");
+
+            var commonPath = "/wishlist";
+
+            // 페이지네이션 코드 들어갈 곳
+            var _html = `
+                    <li class="page-item ${wishlistPagination.hasPrev ? '' : 'disabled'}">
+                        <a class="page-link" href="${commonPath}?currentPage=${wishlistPagination.startPage - 1}&pageSize=${pageSize}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>`;
+
+            for (var i = wishlistPagination.startPage; i <= wishlistPagination.endPage; i++) {
+                _html += `<li class="page-item ${currentPage == i ? 'active' : ''}"><a class="page-link" href="${commonPath}?currentPage=${i}&pageSize=${pageSize}">${i}</a></li>`;
+            }
+
+            _html += `
+                    <li class="page-item ${wishlistPagination.hasNext ? '' : 'disabled'}">
+                        <a class="page-link" href="${commonPath}?currentPage=${wishlistPagination.endPage + 1}&pageSize=${pageSize}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>`;
+            wishlistPagingBtnGroup.innerHTML = _html;
+        });
+
+    };
+</script>

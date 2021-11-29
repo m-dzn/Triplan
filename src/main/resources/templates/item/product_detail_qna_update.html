@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <form name="qnaUpdateTable">
+    <table class="margin-y-40 mx-auto" style="width: 70%;">
+        <tr>
+            <td>제목</td>
+            <td><input type="text" name="title" style="width: 100%;" placeholder="제목을 입력하세요"></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td style="width: 97%;">
+                <textarea name="content" rows=10 style="height: 100%;width:100%;" placeholder="내용을 입력하세요"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap">비밀글</td>
+            <td><input type="checkbox" name="hide"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: end">
+                <input type="submit" class="btn button-solid" value="수정">
+                <button type="button" class="btn button-outline" onclick="history.back();">취소</button>
+            </td>
+        </tr>
+    </table>
+    </form>
+</div>
+<th:block layout:fragment="script">
+    <script src="/js/qnaUpdatePage.js"></script>
+</th:block>
+</html>

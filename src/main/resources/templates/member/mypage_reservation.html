@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+    <div class="row margin-section">
+        <section class="col-3">
+            <th:block th:replace="fragment/myPage :: mypage_top"></th:block>
+            <th:block th:replace="fragment/myPage :: mypage_nav_reservation"></th:block>
+<!--            <th:block th:replace="fragment/myPage :: mypage_bottom"></th:block>-->
+        </section>
+        <section class="col-9">
+            <div    th:fragment="myReservation"
+                    class="border bg-white rounded-3 border-2 margin-title padding-16">
+
+                <th:block th:replace="fragment/title :: title_2('나의 예약')"></th:block>
+
+                <!--reservationTable-->
+
+                <div id="resNull">
+
+                </div>
+
+                <section>
+                    <table id="reservationTable" style="width:100%;">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </section>
+                <!--reservationTable-->
+
+                <!--페이지-->
+                <section>
+                    <nav class="margin-top-16" aria-label="Page navigation example">
+                        <ul class="pagination pagination-sm justify-content-end" id="resPagingBtnGroup">
+                        </ul>
+                    </nav>
+                </section>
+                <!--페이지 끝-->
+            </div>
+        </section>
+    </div>
+</div>
+<th:block layout:fragment="script">
+    <script>
+        // HTML 태그가 모두 로드된 후 실행
+        document.addEventListener("DOMContentLoaded", function() {
+            var DEFAULT_PAGE_SIZE = 5;
+
+            // 데이터를 담을 태그를 선택자로 가져오는 영역
+            var reservationTable = document.getElementById("reservationTable");
+            var resPagingBtnGroup = document.getElementById("resPagingBtnGroup");
+
+            var resNull = document.getElementById("resNull");
+
+            var url = new URL(location.href);
+            var currentPage = url.searchParams.get("currentPage");
+            var pageSize = url.searchParams.get("pageSize");
+
+            // 비동기 AJAX 통신으로 DB 데이터를 가져오는 영역
+            fetch(`${BASE_URL}/api/res/myPagedResList?currentPage=${currentPage || 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}`, {
+                method: 'GET'
+            }).then(response => {
+                // 데이터 전처리
+                if (response.ok) {
+                    return response.json();
+                }
+            }).then(resPagination => {
+                // 실제 프론트 로직이 들어갈 영역
+                // 태그 엘리먼트에 데이터를 붙여주면 됨
+                console.log(resPagination);
+                var resTBody = reservationTable.getElementsByTagName("tbody")[0];
+                var commonPath = "/myReservation";
+
+                if(resPagination.list.length < 1){
+
+                    resNull.innerHTML =
+                        `<div class="d-flex justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor"
+                         class="color-gray bi bi-calendar-x" viewBox="0 0 16 16">
+                        <path
+                            d="M6.146 7.146a.5.5 0 0 1 .708 0L8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 0 1 0-.708z"/>
+                        <path
+                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                </div>
+
+                <div class="d-flex justify-content-center margin-top-24">
+                    <span class="color-gray font-size-20">목록이 비어 있습니다.</span>
+                </div>`;
+                }
+
+                resTBody.innerHTML = resPagination.list.map(res => {
+                    //  아이템카테고리 네이밍
+                    var itemCategory = "아이템카테고리";
+                    switch(res.itemCategory){
+                        case "ROOM" :
+                            itemCategory = "숙소";
+                            break;
+                        case "FLIGHT" :
+                            itemCategory = "항공";
+                            break;
+                        default :   // "PACKAGE"
+                            itemCategory = "상품";
+                    }
+                    // 예약완료여부 네이밍
+                    var cancellation = "예약 완료 여부";
+                    if(res.cancellation == 0) {
+                        cancellation = "완료";
+                    } else {
+                        cancellation = "취소";
+                    }
+                    // 결제완료여부 네이밍
+                    var state = "결제 완료 여부";
+                    switch (res.state) {
+                        case "FAILED" :
+                            state = "실패";
+                            break;
+                        case "PAIND" :
+                            state = "완료";
+                            break;
+                        default : // "UNPAID"
+                            state = "미완료";
+                    }
+
+                    return `<div class="row d-flex justify-content-center" style="width:100%;">`
+                        + `<div class="row col-11 p-0 border bg-white rounded-3 border-2 margin-window margin-top-16 d-flex"`
+                        + ` th:fragment="myRes_card">`
+                        + `<!--위에칸-->`
+                        + `<div class="padding-x-16 padding-y-8" style="background-color: lightgray;">`
+                        + `<div class="row d-flex justify-content-between">`
+                        + `<div class="row col-10">`
+                        + `<span class="col-4"><b>예약번호</b> : ${res.resId}</span>`
+                        + `<span class="col"><b>결제일</b> : ${res.paidAt ? moment(res.paidAt).format(DATE_FORMAT_KOR) : '-'}</span>`
+                        + `</div>`
+                        + `<div class="col-auto">`
+                        + `<span>결제여부</span> : ${state} &nbsp`
+                        + `</div>`
+                        + `</div>`
+                        + `<div class="row d-flex justify-content-between">`
+                        + `<div class="row col-10">`
+                        + `<span class="col-4"><b>예약자 이름</b> : ${res.name}</span>`
+                        + `<span class="col"><b>예약자 연락처</b> : ${res.phone}</span>`
+                        + `</div>`
+                        + `</div>`
+                        + `</div>`
+                        + `<div><!--밑에칸 전체-->`
+                        + `<div class="row padding-x-16 padding-y-8"><!--한 줄-->`
+                        + `<div class="col-auto padding-16">`
+                        + `<img src="${res.itemImg}" alt="상품 이미지 불러오기" style="width: 120px;height: 120px;">`
+                        + `</div>`
+                        + `<div class="col">`
+                        + `<div class="row justify-content-end margin-bottom-16">`
+                        + `<span class="col-auto">예약여부</span>: ${cancellation} &nbsp;`
+                        + `</div>`
+                        + `<div><!--중간묶음-->`
+                        + ` <div class="row d-flex justify-content-between">`
+                        + `<span class="col-auto">상품분류 : ${itemCategory}</span><span class="col-auto">${(res.totalPrice).toLocaleString()}원</span>`
+                        + `</div>`
+                        + `<div class="row">`
+                        + `<span>상품이름 : ${res.iname}</span>`
+                        + `</div>`
+                        + `<div class="row">`
+                        + `<span>예약날짜 : ${moment(res.createdAt).format(DATE_FORMAT_KOR)}</span>`
+                        + `</div>`
+                        + `</div>`
+                        + `</div>`
+                        + `</div>`
+                        + `</div>`
+                        + `</div>`
+                        + `</div>`
+                }).join('');
+
+                // 페이지 버튼이랑 연결
+                var _html = `
+                    <li class="page-item ${resPagination.hasPrev ? '' : 'disabled'}">
+                        <a class="page-link" href="${commonPath}?currentPage=${resPagination.startPage - 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>`;
+
+                for (var i = resPagination.startPage; i <= resPagination.endPage; i++) {
+                    _html += `<li class="page-item ${currentPage == i ? 'active' : ''}"><a class="page-link" href="${commonPath}?currentPage=${i}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}">${i}</a></li>`;
+                }
+
+                _html += `
+                    <li class="page-item ${resPagination.hasNext ? '' : 'disabled'}">
+                        <a class="page-link" href="${commonPath}?currentPage=${resPagination.endPage + 1}&pageSize=${pageSize || DEFAULT_PAGE_SIZE}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>`;
+
+                resPagingBtnGroup.innerHTML = _html;
+            });
+        });
+    </script>
+</th:block>
+</html>

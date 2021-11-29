@@ -1,0 +1,195 @@
+<!--헤더(로고,검색바,로그인,회원가입)-->
+<header th:fragment="header">
+<div class="row d-flex justify-content-between align-items-center p-3 pb-2 border-bottom"
+     th:fragment="header_top">
+    <div class="col-auto d-flex align-items-center">
+        <!--플렉스용div-->
+        <a class="col-auto me-4" href="/">
+            <img th:src="@{/img/logo.png}" style="height: 56px;"/>
+        </a>
+        <form>
+            <div class="ms-4" id="searchDiv">
+                <div id="searchIcon">
+                </div>
+            <input
+                    class="form-control"
+                    id="search"
+                    type="search"
+                    aria-label="Search"
+            />
+            </div>
+        </form>
+    </div>
+    <div class="col-auto">
+        <!--플렉스용div-->
+        <a
+                class="col-auto btn btn-primary"
+                id="button_outline"
+                href="login"
+                role="button"
+        >로그인</a>
+        <a
+                class="col-auto btn btn-primary"
+                id="button_solid"
+                href="join"
+                role="button"
+        >회원가입</a>
+    </div>
+</div>
+
+<!--헤더(네비게이션 바)-->
+<div class="row border-bottom padding-y-8" th:fragment="header_nav">
+    <nav class="navbar navbar-expand-sm navbar-light">
+        <div class="container-fluid d-flex justify-content-lg-center">
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="font-size-20 font-weight-bold color-gray margin-x-40" href="/">메인</a>
+            <a class="font-size-20 font-weight-bold color-gray margin-x-40" href="product">숙소</a>
+            <a class="font-size-20 font-weight-bold color-gray margin-x-40" href="notice">공지사항</a>
+            <a class="font-size-20 font-weight-bold color-gray margin-x-40" href="qna">문의 게시판</a>
+            <a class="font-size-20 font-weight-bold color-gray margin-x-40" href="myReservation">내 여행</a>
+<!--            <div-->
+<!--                    class="collapse navbar-collapse"-->
+<!--                    id="navbarSupportedContent"-->
+<!--                    style="flex-grow: 0;"-->
+<!--            >-->
+<!--                &lt;!&ndash;메뉴묶음 시작&ndash;&gt;-->
+<!--                <ul-->
+<!--                        class="col-auto p-0 navbar-nav d-flex justify-content-center"-->
+<!--                >-->
+<!--                    &lt;!&ndash;메누묶음 끝&ndash;&gt;-->
+<!--                    &lt;!&ndash;메뉴 시작&ndash;&gt;-->
+<!--                    <li class="nav-item dropdown mx-5">-->
+<!--                        <a-->
+<!--                                class="nav-link dropdown-toggle p-2"-->
+<!--                                href="#"-->
+<!--                                id="navbarDropdown"-->
+<!--                                role="button"-->
+<!--                                data-bs-toggle="dropdown"-->
+<!--                                aria-expanded="false"-->
+<!--                        >-->
+<!--                            예약-->
+<!--                        </a>-->
+<!--                        &lt;!&ndash;드롭다운메뉴&ndash;&gt;-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                            <li><a class="dropdown-item" href="product">숙소</a></li>-->
+<!--                            <li><a class="dropdown-item" href="product">액티비티</a></li>-->
+<!--                            <li><a class="dropdown-item" href="product">교통</a></li>-->
+<!--                            <li><a class="dropdown-item" href="product">렌터카</a></li>-->
+<!--                            <li><a class="dropdown-item" href="product">패키지</a></li>-->
+<!--                        </ul>-->
+<!--                        &lt;!&ndash;드롭다운메뉴 끝&ndash;&gt;-->
+<!--                    </li>-->
+<!--                    &lt;!&ndash;메뉴 끝&ndash;&gt;-->
+<!--                    &lt;!&ndash;메뉴 시작&ndash;&gt;-->
+<!--                    <li class="nav-item dropdown mx-5">-->
+<!--                        <a-->
+<!--                                class="nav-link dropdown-toggle p-2"-->
+<!--                                href="#"-->
+<!--                                id="navbarDropdown"-->
+<!--                                role="button"-->
+<!--                                data-bs-toggle="dropdown"-->
+<!--                                aria-expanded="false"-->
+<!--                        >-->
+<!--                            커뮤니티-->
+<!--                        </a>-->
+<!--                        &lt;!&ndash;드롭다운메뉴&ndash;&gt;-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                            <li><a class="dropdown-item" href="#">채팅</a></li>-->
+<!--                            <li><a class="dropdown-item" href="#">블로그</a></li>-->
+<!--                            <li><a class="dropdown-item" href="#">나의 블로그</a></li>-->
+<!--                        </ul>-->
+<!--                        &lt;!&ndash;드롭다운메뉴 끝&ndash;&gt;-->
+<!--                    </li>-->
+<!--                    &lt;!&ndash;메뉴 끝&ndash;&gt;-->
+<!--                    &lt;!&ndash;메뉴 시작&ndash;&gt;-->
+<!--                    <li class="nav-item dropdown mx-5">-->
+<!--                        <a-->
+<!--                                class="nav-link dropdown-toggle p-2"-->
+<!--                                href="#"-->
+<!--                                id="navbarDropdown"-->
+<!--                                role="button"-->
+<!--                                data-bs-toggle="dropdown"-->
+<!--                                aria-expanded="false"-->
+<!--                        >-->
+<!--                            여행정보-->
+<!--                        </a>-->
+<!--                        &lt;!&ndash;드롭다운메뉴&ndash;&gt;-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                            <li><a class="dropdown-item" href="#">관광지 상세</a></li>-->
+<!--                            <li><a class="dropdown-item" href="#">지도 정보</a></li>-->
+<!--                            <li>-->
+<!--                                <a class="dropdown-item" href="#">예약 가능 시설</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                        &lt;!&ndash;드롭다운메뉴 끝&ndash;&gt;-->
+<!--                    </li>-->
+<!--                    &lt;!&ndash;메뉴 끝&ndash;&gt;-->
+<!--                    &lt;!&ndash;메뉴 시작&ndash;&gt;-->
+<!--                    <li class="nav-item dropdown mx-5">-->
+<!--                        <a-->
+<!--                                class="nav-link dropdown-toggle p-2"-->
+<!--                                href="#"-->
+<!--                                id="navbarDropdown"-->
+<!--                                role="button"-->
+<!--                                data-bs-toggle="dropdown"-->
+<!--                                aria-expanded="false"-->
+<!--                        >-->
+<!--                            추천-->
+<!--                        </a>-->
+<!--                        &lt;!&ndash;드롭다운메뉴&ndash;&gt;-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                            <li>-->
+<!--                                <a class="dropdown-item" href="#">테마별 상세검색</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="dropdown-item" href="#">지역 상세페이지</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="dropdown-item" href="#"-->
+<!--                                >질문을 통한 여행지 추천</a-->
+<!--                                >-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                        &lt;!&ndash;드롭다운메뉴 끝&ndash;&gt;-->
+<!--                    </li>-->
+<!--                    &lt;!&ndash;메뉴 끝&ndash;&gt;-->
+<!--                    &lt;!&ndash;메뉴 시작&ndash;&gt;-->
+<!--                    <li class="nav-item dropdown mx-5">-->
+<!--                        <a-->
+<!--                                class="nav-link dropdown-toggle p-2"-->
+<!--                                href="#"-->
+<!--                                id="navbarDropdown"-->
+<!--                                role="button"-->
+<!--                                data-bs-toggle="dropdown"-->
+<!--                                aria-expanded="false"-->
+<!--                        >-->
+<!--                            고객센터-->
+<!--                        </a>-->
+<!--                        &lt;!&ndash;드롭다운메뉴&ndash;&gt;-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                            <li><a class="dropdown-item" href="#">공지사항</a></li>-->
+<!--                            <li><a class="dropdown-item" href="#">1:1 문의</a></li>-->
+<!--                            <li>-->
+<!--                                <a class="dropdown-item" href="#">자주 하는 질문</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                        &lt;!&ndash;드롭다운메뉴 끝&ndash;&gt;-->
+<!--                    </li>-->
+<!--                    &lt;!&ndash;메뉴 끝&ndash;&gt;-->
+<!--                </ul>-->
+<!--            </div>-->
+        </div>
+    </nav>
+</div>
+</header>

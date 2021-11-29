@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.triplan.mapper.member.RoleMapper">
+
+    <insert id="insertMemberRole">
+        INSERT INTO member_role (member_id, role_id)
+        VALUES (#{memberId}, #{roleId})
+    </insert>
+
+    <select id="selectByMemberId" resultType="RoleVO">
+        SELECT *
+        FROM role
+        WHERE role_id IN (
+            SELECT  role_id
+            FROM    member_role
+            WHERE   member_id = #{memberId}
+        )
+    </select>
+
+</mapper>
