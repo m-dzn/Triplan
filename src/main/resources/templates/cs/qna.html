@@ -12,7 +12,6 @@
         <table class="table table-bordered" id="qnaTable">
             <thead>
             <tr class="text-align-center">
-                <td class="font-size-16">글번호</td>
                 <td class="font-size-16">제목</td>
                 <td class="font-size-16">작성일</td>
                 <td class="font-size-16">문의사항 종류</td>
@@ -66,7 +65,6 @@
 
                     qnaTBody.innerHTML = qnaPagination.list.map(qna => {
                         return `<tr>`
-                            + `<td>${qna.questionId}</td>`
                             + `<td><a href="/questions?questionId=${qna.questionId}">${qna.title}</a></td>`
                             + `<td>${moment(qna.creatdAt).format(DATE_FORMAT_KOR)}</td>`
                             + `<td>${qna.type}</td>`

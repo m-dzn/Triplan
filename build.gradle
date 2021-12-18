@@ -35,8 +35,8 @@ dependencies {
 	developmentOnly "$boot:spring-boot-devtools"
 
 	// DB 관련 의존성
-	runtimeOnly "com.h2database:h2"
-//	runtimeOnly 'mysql:mysql-connector-java:5.1.49'
+//	runtimeOnly "com.h2database:h2"
+	runtimeOnly 'mysql:mysql-connector-java:5.1.49'
 	implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatisStarterVersion"
 
 	// 롬복 : 보일러플레이트 코드 자동 생성 라이브러리

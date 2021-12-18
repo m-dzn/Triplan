@@ -10,7 +10,7 @@ public enum MemberState implements BaseEnum {
 
     UNREGISTER("탈퇴"),
     REGISTER("등록"),
-    ACCOUNT_SUSPENSION("계정 정지");
+    PAUSE("계정 정지");
 
     private final String explain;
 
