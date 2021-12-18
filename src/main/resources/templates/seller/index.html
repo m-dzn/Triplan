@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="seller/layout/layout">
+<th:block layout:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <th:block th:replace="seller/fragment/info-card :: seller-info"/>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-4">
+            <th:block th:replace="seller/fragment/info-card :: item-count"/>
+        </div>
+        <div class="col-4">
+            <th:block th:replace="seller/fragment/info-card :: daily-reservation"/>
+        </div>
+        <div class="col-4">
+            <th:block th:replace="seller/fragment/info-card :: daily-sales"/>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-4">
+            <th:block th:replace="seller/fragment/info-card :: total-sales"/>
+        </div>
+        <div class="col-4">
+            <th:block th:replace="seller/fragment/info-card :: reservations"/>
+        </div>
+        <div class="col-4">
+            <th:block th:replace="seller/fragment/info-card :: notice"/>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-4">
+            <th:block th:replace="seller/fragment/info-card :: customer-questions"/>
+        </div>
+        <div class="col-4">
+            <th:block th:replace="seller/fragment/info-card :: sales-volume"/>
+        </div>
+    </div>
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script th:src="@{/js/sellerHome.js}"></script>
+</th:block>
+</html>

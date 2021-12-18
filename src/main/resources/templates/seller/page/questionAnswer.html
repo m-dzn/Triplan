@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="seller/layout/layout">
+<th:block layout:fragment="content">
+    <h2>문의 답변</h2>
+    <div class="row mt-4">
+        <div class="col-12">
+            <form>
+                <th:block th:replace="seller/fragment/input.html :: seller-customer-question"/>
+                <th:block th:replace="seller/fragment/input.html :: answer"/>
+                <button class="btn btn-primary mt-3" type="submit">등록</button>
+            </form>
+        </div>
+    </div>
+</th:block>
+</html>

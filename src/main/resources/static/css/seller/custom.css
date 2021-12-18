@@ -1,0 +1,93 @@
+.text-gray {
+    color: var(--color-font-gray);
+}
+
+/* 레이아웃 */
+#root {
+    display: flex;
+    align-items: stretch;
+}
+
+#seller-sidebar-section {
+    flex-shrink: 0;
+    width: var(--seller-sidebar-width);
+}
+
+.seller-main {
+    background: var(--color-background);
+    flex-grow: 1;
+    min-width: var(--seller-main-min-width);
+    padding: var(--seller-main-padding);
+    overflow-y: scroll;
+}
+
+/* 판매자 페이지 사이드 바 */
+#seller-sidebar {
+    background: var(--sidebar-background);
+    color: var(--sidebar-font-color);
+
+    width: var(--seller-sidebar-width);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+#seller-sidebar > * + * {
+    margin-bottom: 10px;
+}
+
+#sidebar__logo {
+    width: 100%;
+    height: var(--sidebar-logo-height);
+    margin-bottom: var(--sidebar-margin-bottom);
+    padding: var(--sidebar-logo-padding);
+    display: flex;
+    justify-content: center;
+}
+
+#sidebar__logo img {
+    height: 100%;
+}
+
+.sidebar__list-group {
+    color: var(--sidebar-list-group-color);
+}
+
+.sidebar__list-group hr {
+    margin: calc(var(--unit) * 4) 0;
+}
+
+#seller-sidebar ul li {
+    padding: var(--sidebar-item-v-padding) var(--sidebar-h-padding);
+    font-size: var(--sidebar-item-font-size);
+}
+
+#seller-sidebar ul a {
+    color: inherit;
+}
+
+#seller-sidebar .list-group__title {
+    padding-bottom: 0;
+    font-size: var(--sidebar-group-title-font-size);
+}
+
+#seller-sidebar .list-item:hover, #seller-sidebar .list-item.active {
+    background: var(--sidebar-background);
+    color:var(--sidebar-hover-font-color);
+    filter: brightness(90%);
+    transition: 0.2s;
+}
+
+/* 판매자 정보 */
+.info-card-icon {
+    background: var(--info-card-icon-background);
+    color: var(--info-card-icon-color);
+    width: var(--info-card-icon-size);
+    height: var(--info-card-icon-size);
+    border-radius: 50%;
+    font-size: var(--info-card-icon-font-size);
+}
+
+.seller-info-record div:first-child {
+    width: var(--seller-info-record-width);
+}

@@ -1,0 +1,197 @@
+<th:block th:fragment="seller-info">
+    <div class="card p-4 h-100 shadow-sm d-flex flex-row">
+        <div class="ms-2 flex-grow-1">
+            <h3>Com. Trip</h3>
+            <div class="d-flex mt-3">
+                <div class="d-flex flex-column">
+                    <th:block th:replace="seller/fragment/info-card.html :: seller-info-record('개설일', '2021-11-03')"/>
+                    <th:block th:replace="seller/fragment/info-card.html :: seller-info-record('대표', '손명진')"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="seller-info-record(key, value)">
+    <div class="d-flex seller-info-record">
+        <div th:text="${key}"></div>
+        <div th:text="${value}" class="px-2"></div>
+    </div>
+</th:block>
+
+
+
+
+<th:block th:fragment="item-count">
+    <div class="card p-4 h-100 shadow-sm d-flex flex-row flex-row align-items-center">
+        <div class="flex-shrink-1">
+            <h6>등록된 상품</h6>
+            <small id="itemCounter">0개</small>
+        </div>
+        <th:block th:replace="seller/fragment/icon.html :: seller-main-icon('fas fa-box-open')"/>
+    </div>
+</th:block>
+
+
+
+
+<th:block th:fragment="daily-reservation">
+    <div class="card p-4 h-100 shadow-sm d-flex flex-row flex-row align-items-center">
+        <div class="flex-shrink-1">
+            <h6>일간 예약 수</h6>
+            <small id="resCounter">0건</small>
+        </div>
+        <th:block th:replace="seller/fragment/icon.html :: seller-main-icon('fas fa-user-friends')"/>
+    </div>
+</th:block>
+
+
+
+
+<th:block th:fragment="daily-sales">
+    <div class="card p-4 h-100 shadow-sm d-flex flex-row align-items-center">
+        <div class="flex-shrink-1">
+            <h6>일간 매출</h6>
+            <small>350만 원</small>
+        </div>
+        <th:block th:replace="seller/fragment/icon.html :: seller-main-icon('fas fa-won-sign')"/>
+    </div>
+</th:block>
+
+
+
+
+<th:block th:fragment="total-sales">
+    <div class="card p-4 h-100 shadow-sm">
+        <h6>매출 Report</h6>
+        <small class="text-gray">Weekly</small>
+        <!--begin::Mixed Widget 10-->
+        <!--begin::Body-->
+        <div class="card-body p-0 d-flex justify-content-between flex-column overflow-hidden">
+            <!--begin::Hidden-->
+            <div class="d-flex flex-stack flex-wrap flex-grow-1 px-9 pt-9 pb-3">
+                <div class="me-2">
+                    <span class="fw-bolder text-gray-800 d-block fs-3">Sales</span>
+                    <span class="text-gray-400 fw-bold">Oct 8 - Oct 26 21</span>
+                </div>
+                <div class="fw-bolder fs-3 text-primary">$15,300</div>
+            </div>
+            <!--end::Hidden-->
+            <!--begin::Chart-->
+            <th:block th:replace="seller/fragment/chart.html :: sales-chart" />
+            <!--end::Chart-->
+        </div>
+    </div>
+</th:block>
+
+
+
+
+<th:block th:fragment="reservations">
+    <div class="card p-4 h-100 shadow-sm">
+        <h6>예약 건수 Report (판매량)</h6>
+        <small class="text-gray">Weekly</small>
+        <th:block th:replace="seller/fragment/chart.html :: reservation-chart" />
+    </div>
+</th:block>
+
+
+
+<th:block th:fragment="notice">
+    <div class="card p-4 notice h-100 shadow-sm">
+        <h6>공지사항</h6>
+        <div class="d-flex flex-column mt-3">
+            <div class="d-flex">
+                <div>판매자에게 보낼 공지사항</div>
+                <div style="margin-left: auto;"><small class="text-gray">11월 05일 11:33</small></div>
+            </div>
+            <div class="d-flex">
+                <div>환불 입금 지연 안내</div>
+                <div style="margin-left: auto;"><small class="text-gray">11월 05일 11:04</small></div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+
+
+
+<th:block th:fragment="customer-questions">
+    <div class="card p-4 h-100 shadow-sm">
+        <h6>미답변 고객 문의 목록</h6>
+    </div>
+</th:block>
+
+
+
+
+<th:block th:fragment="sales-volume">
+    <div class="card p-4 h-100 shadow-sm">
+        <h6>상품별 판매량</h6>
+        <div class="d-flex flex-column mt-3">
+            <div class="d-flex">
+                <div><small>제주 티웨이 항공 왕복권</small></div>
+                <div class="ms-auto"><small>40건</small></div>
+            </div>
+            <div class="d-flex">
+                <div><small>제주 신라 스테이 오션뷰 2인실</small></div>
+                <div class="ms-auto"><small>27건</small></div>
+            </div>
+            <div class="d-flex">
+                <div><small>제주 해양 투어 패키지</small></div>
+                <div class="ms-auto"><small>16건</small></div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+
+
+
+<th:block th:fragment="accommodation-card">
+    <div class="d-flex flex-grow-1 accommodation-card">
+        <div>
+            <img class="item-management-thumbnail" src="https://a.cdn-hotels.com/gdcs/production110/d1295/985557b1-8062-4894-9a32-0d2bc8ae0e7b.jpg" alt="숙소 이미지">
+        </div>
+        <div>
+            <strong>서귀포 퍼스트 70 호텔</strong>
+        </div>
+        <div>
+            <i class="fas fa-heart"></i><span class="ms-1">400찜</span>
+        </div>
+        <div>
+            숙소
+        </div>
+        <div>
+            2021년 11월 9일
+        </div>
+        <div>
+            5개
+        </div>
+    </div>
+</th:block>
+
+
+
+<th:block th:fragment="room-card">
+    <div class="d-flex flex-grow-1 room-card">
+        <div>
+            <img class="item-management-thumbnail" src="https://a.cdn-hotels.com/gdcs/production110/d1295/985557b1-8062-4894-9a32-0d2bc8ae0e7b.jpg" alt="숙소 이미지">
+        </div>
+        <div>
+            <strong>스위트룸 2인실</strong>
+        </div>
+        <div>
+            4실
+        </div>
+        <div>
+            71건
+        </div>
+        <div>
+            3명
+        </div>
+        <div>
+            5명
+        </div>
+    </div>
+</th:block>
